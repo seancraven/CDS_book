@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; A Guide to Radiation Modeling</title>
+    <title>Introduction &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Markdown Files" href="markdown.html" />
+    <link rel="next" title="Data Exploration Keeling Curve" href="Data_Exploration.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -96,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">A Guide to Radiation Modeling</h1>
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -114,18 +114,8 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="markdown.html">
-   Markdown Files
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="notebooks.html">
-   Content with notebooks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="markdown-notebooks.html">
-   Notebooks with MyST Markdown
+  <a class="reference internal" href="Data_Exploration.html">
+   Data Exploration Keeling Curve
   </a>
  </li>
 </ul>
@@ -309,11 +299,10 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>This book intends to provide a pedagogical guide to radiation modelling for an undergraduate. It follows the work completed in the summer of 2021 by Sean Craven. Initially, a set of Jupyter notebooks were produced inspired by the plots of Dr Robert Rode <span id="id1">[<a class="reference internal" href="markdown.html#id9" title="Robert Rhode. Clear-sky atmospheric transistion. \url https://twitter.com/RARohde/status/1196762005136392192.">Rho</a>]</span> using the PyRads package <span id="id2">[<a class="reference internal" href="markdown.html#id8" title="Daniel D. B. Koll and Timothy W. Cronin. Earth&amp;#x2019;s outgoing longwave radiation linear due to h&lt;sub&gt;2&lt;/sub&gt;o greenhouse effect. Proceedings of the National Academy of Sciences, 115(41):10293-10298, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1809868115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1809868115, doi:10.1073/pnas.1809868115.">KC18</a>]</span>.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="_images/EJvAsofWsAADxO8.jpeg"><img alt="Clear-Sky_Atmospheric_Transmission" class="bg-primary mb-1 align-center" src="_images/EJvAsofWsAADxO8.jpeg" style="width: 600px;" /></a>
-<p>The notebooks and accompanying files; were developed as a less comprehensive alternative to PyRads. The aim for the future reader is that the continuation of the project would be more easily facilitated with a comprehensive guide. The initial project provided a steep learning curve for the author. Hopefully, with this book’s help, the reader can develop their Python skills, learn about climate change mechanisms, and feel motivated to help make a change. With a slightly softened learning process. Hopefully, the state of this repository and book can be improved by future students. The basic framework of the book should form a foundation for future projects. Further chapters can be added at the end of internships, with code building off the GitHub repository.</p>
-<p>Development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to PEP-8 and PEP-484. In addition, the Google Python Style guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such practices outlined in these documents will help the reader and future contributors collaborate and maintain this and other work.</p>
-<p>The initial author hopes that their original body of work is easily accessible and can be built off with relative ease and that his effort in making a framework for continuation bears fruit.</p>
+<p>Welcome to the Durham University Climate Data Science Project Book. This book aims to build a syllabus that uses the case study of climate science to teach data-intensive science skills.</p>
+<p>This book builds off the summer project completed by Sean Craven in the summer of 2021. The project was inspired by the plots of Dr Robert Rode <span id="id1">[]</span> using the PyRads package <span id="id2">[]</span>.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/EJvAQJcXkAEm-9t.jpeg"><img alt="Clear-Sky_Atmospheric_Transmission" class="bg-primary mb-1 align-center" src="_images/EJvAQJcXkAEm-9t.jpeg" style="width: 600px;" /></a>
+<p>The above plot shows the transmission of solar radiation as a function of wavelength for multiple common greenhouse gases. This figure effectively communicates the wavelength dependence of molecular absorption, and the ceiling in absorption provided by ozone and Rayleigh scattering. However, if one were to ask what gases contribute most to warming? Is methane more problematic than CO2? The figure does not communicate this. This should highlight that the way the data is formatted and processed affects the conclusions drawn and the information recovered.</p>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -345,10 +334,10 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="markdown.html" title="next page">
+    <a class='right-next' id="next-link" href="Data_Exploration.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Markdown Files</p>
+        <p class="prev-next-title">Data Exploration Keeling Curve</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
