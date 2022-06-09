@@ -4,6 +4,7 @@
 format: jb-book
 root: Introduction
 chapters:
+- file: An_Aside_On_Puthon
 - file: Data_Exploration
 
 
