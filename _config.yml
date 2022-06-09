@@ -3,7 +3,7 @@
 
 title: Climate Data Science 
 author: Sean Craven 
-logo: /Figures/DurhamUniversityMasterLogo_RGB.png
+logo: ./Figures/DurhamUniversityMasterLogo_RGB.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
