@@ -54,6 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Bibliography" href="Bibliography.html" />
     <link rel="prev" title="An Aside On Python" href="An_Aside_On_Puthon.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -128,6 +129,11 @@ const thebe_selector_output = ".output, .cell_output"
    </span>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Bibliography.html">
+   Bibliography
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -179,35 +185,6 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Data_Exploration.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -230,7 +207,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://seancraven.github.io/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -247,7 +224,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FData_Exploration.html&body=Your%20issue%20content%20here."
+        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FData_Exploration.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -351,7 +328,7 @@ title="Print to PDF"
 </div>
 </div>
 <p>Handelling imports, is typically done at the top of the file. Best practice is to avoid having redundant imports in a file. Thus minimising the potential for a bug from incompatibility.</p>
-<p>For the first section, the data will be collected from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id1">[]</span>. On the website there are multiple different files, <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. CSV or comma separated variable files, are a very common way of storing tabular data. <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Pandas</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html">Numpy</a> both have functions which read CSVs, pandas is much faster.</p>
+<p>For the first section, the data will be collected from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id1">[<a class="reference internal" href="Bibliography.html#id4" title="Ed Dlugokencky and Pieter Tans. Trends in atmospheric carbon dioxide. \url https://gml.noaa.gov/ccgg/trends/.">DT</a>]</span>. On the website there are multiple different files, <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. CSV or comma separated variable files, are a very common way of storing tabular data. <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Pandas</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html">Numpy</a> both have functions which read CSVs, pandas is much faster.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -658,6 +635,13 @@ This makes it straightforward to plot \)</span>CO_2$ average against time.</p>
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">An Aside On Python</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="Bibliography.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

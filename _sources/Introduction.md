@@ -11,5 +11,3 @@ This book builds off the summer project completed by Sean Craven in the summer o
 ```
 The above plot shows the transmission of solar radiation as a function of wavelength for multiple common greenhouse gases. This figure effectively communicates the wavelength dependence of molecular absorption, and the ceiling in absorption provided by ozone and Rayleigh scattering. However, if one were to ask what gases contribute most to warming? Is methane more problematic than CO2? The figure does not communicate this. This should highlight how the data is formatted and processed affects the conclusions drawn and the information recovered. 
 
-```{bibliography}
-```
