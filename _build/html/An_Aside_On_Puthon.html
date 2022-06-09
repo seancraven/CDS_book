@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Exploration Keeling Curve" href="Data_Exploration.html" />
+    <link rel="next" title="Data Exploration Global \(CO_2\)" href="Data_Exploration.html" />
     <link rel="prev" title="Introduction" href="Introduction.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -121,7 +121,10 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Data_Exploration.html">
-   Data Exploration Keeling Curve
+   Data Exploration Global
+   <span class="math notranslate nohighlight">
+    \(CO_2\)
+   </span>
   </a>
  </li>
 </ul>
@@ -312,6 +315,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#git">
    Git
   </a>
@@ -346,6 +354,11 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#git">
    Git
   </a>
@@ -372,14 +385,23 @@ title="Print to PDF"
 </pre></div>
 </div>
 <p>To get python to run with these packages, to activate the environment. The enviroment name can be found in the first line of the .yml file.</p>
-<p>‘’’
-conda activate env_name
-‘’’
-In an editor(VScode, Jypter,..), select the kernel with the same name as the environment. This is editor/IDE dependant, and should be in the respective guide.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">env_name</span>
+</pre></div>
+</div>
+<p>In an editor(VScode, Jypter,..), select the kernel with the same name as the environment. This is editor/IDE dependant, and should be in the respective guide.</p>
 </section>
 <section id="readability-and-naming">
 <h2>Readability and Naming<a class="headerlink" href="#readability-and-naming" title="Permalink to this headline">#</a></h2>
-<p>The development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to <a class="reference external" href="https://peps.python.org/pep-0008/">PEP-8</a> and <a class="reference external" href="https://peps.python.org/pep-0484/">PEP-484</a>. In addition, the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a> guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such practices outlined in these documents will help the reader and future contributors collaborate and maintain this and other work.</p>
+<p>The development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to <a class="reference external" href="https://peps.python.org/pep-0008/">PEP-8</a> and <a class="reference external" href="https://peps.python.org/pep-0484/">PEP-484</a>. In addition, the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a> guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such practices outlined in these documents will help the reader and future contributors collaborate and maintain
+this and other work.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
+<p>There is an extensive documentation website for most of the packages in this project. This is an extremely useful reference. Many of the features of the libraries are implemented excellently. One should avoid writing redundant code for which there is already a built-in function. Further,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="s1">&#39;some object&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints out all of the docstrings and methods for the object. This can be very useful if recalling the exact details of an object is difficult.</p>
 </section>
 <section id="git">
 <h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">#</a></h2>
@@ -424,7 +446,7 @@ In an editor(VScode, Jypter,..), select the kernel with the same name as the env
     <a class='right-next' id="next-link" href="Data_Exploration.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Data Exploration Keeling Curve</p>
+        <p class="prev-next-title">Data Exploration Global <span class="math notranslate nohighlight">\(CO_2\)</span></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

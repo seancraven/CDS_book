@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Data Exploration Keeling Curve &#8212; Climate Data Science</title>
+    <title>Data Exploration Global \(CO_2\) &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Introduction" href="Introduction.html" />
+    <link rel="prev" title="An Aside On Python" href="An_Aside_On_Puthon.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -113,9 +115,17 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="An_Aside_On_Puthon.html">
+   An Aside On Python
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data Exploration Keeling Curve
+   Data Exploration Global
+   <span class="math notranslate nohighlight">
+    \(CO_2\)
+   </span>
   </a>
  </li>
 </ul>
@@ -169,6 +179,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/Data_Exploration.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -285,7 +324,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data Exploration Keeling Curve</h1>
+                <h1>Data Exploration Global CO_2</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -297,10 +336,293 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="data-exploration-keeling-curve">
-<h1>Data Exploration Keeling Curve<a class="headerlink" href="#data-exploration-keeling-curve" title="Permalink to this headline">#</a></h1>
-<p>Development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to PEP-8 and PEP-484. In addition, the Google Python Style guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such practices outlined in these documents will help the reader and future contributors collaborate and maintain this and other work.</p>
-<p>The initial author hopes that their original body of work is easily accessible and can be built off with relative ease and that his effort in making a framework for continuation bears fruit.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="data-exploration-global-co-2">
+<h1>Data Exploration Global <span class="math notranslate nohighlight">\(CO_2\)</span><a class="headerlink" href="#data-exploration-global-co-2" title="Permalink to this headline">#</a></h1>
+<p>Aquiring reliable data, is the foundation for any analysis project. If your data is incomplete inaccurate, any analysis will draw poor conclusions.</p>
+<p>After aqusition data which has been well formatted into a csv, or similar easy to handle file, should be explored.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span> <span class="c1">#Durham Utilities module that stores constants like colours, can be found on _githublink_</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Handelling imports, is typically done at the top of the file. Best practice is to avoid having redundant imports in a file. Thus minimising the potential for a bug from incompatibility.</p>
+<p>For the first section, the data will be collected from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id1">[]</span>. On the website there are multiple different files, <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. CSV or comma separated variable files, are a very common way of storing tabular data. <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Pandas</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html">Numpy</a> both have functions which read CSVs, pandas is much faster.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_global</span> <span class="o">=</span> <span class="s1">&#39;./Data/co2_mm_gl.csv&#39;</span> <span class="c1">#Path is machine specific. input your own</span>
+<span class="n">co2_data_global</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_global</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span class="n">null_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">co2_data_global</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">null_sum</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">co2_data_global</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Number of Null Values&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number of Null Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>year</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>decimal</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>average</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>trend</th>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Tabulating number of null entries in each column, provides quick reference to column names and the number of missing entries. In this data, there are no Null fields.
+It is notable, that none of the columns have units in their headers apart from years and months, for any of the colums. From, the website we find that the average colum, is a pseudo-unit quantity in parts per million.</p>
+<p>When Displaying the <code class="docutils literal notranslate"> <span class="pre">co2_data_global</span></code> dataframe up to the first five rows, it can be seen that the decimal column is given by:
+$<span class="math notranslate nohighlight">\(
+decimal = year + \frac{month}{12}
+\)</span><span class="math notranslate nohighlight">\(
+This makes it straightforward to plot \)</span>CO_2$ average against time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_data_global</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>month</th>
+      <th>decimal</th>
+      <th>average</th>
+      <th>trend</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1980</td>
+      <td>1</td>
+      <td>1980.042</td>
+      <td>338.55</td>
+      <td>337.93</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1980</td>
+      <td>2</td>
+      <td>1980.125</td>
+      <td>339.27</td>
+      <td>338.22</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1980</td>
+      <td>3</td>
+      <td>1980.208</td>
+      <td>339.60</td>
+      <td>338.25</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1980</td>
+      <td>4</td>
+      <td>1980.292</td>
+      <td>339.99</td>
+      <td>338.37</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1980</td>
+      <td>5</td>
+      <td>1980.375</td>
+      <td>340.43</td>
+      <td>338.91</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Plotting the monthly average against time and the trendline, provided by the data set. Shows a consistent increase in the average concentration of <span class="math notranslate nohighlight">\(CO_2\)</span> in the atmosphere over the last 40 years, with a cyclical pattern over a shorter timescale. Drawing conclusions from this data is possible, however, because there is also the weekly data from the Mauna Loa, comparing both will yeild more confidence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;trend&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$CO_2$ (ppm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Year&#39;)
+</pre></div>
+</div>
+<img alt="_images/Data_Exploration_7_1.png" src="_images/Data_Exploration_7_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;Data/co2_weekly_mlo.csv&#39;</span>              
+<span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_ml</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span class="n">null_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">co2_data_ml</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">null_sum</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">co2_data_ml</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Number of Null Values&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number of Null Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>year</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>day</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>decimal</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>average</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ndays</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1 year ago</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10 years ago</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>increase since 1800</th>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$CO_2$ (ppm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Year&#39;)
+</pre></div>
+</div>
+<img alt="_images/Data_Exploration_9_1.png" src="_images/Data_Exploration_9_1.png" />
+</div>
+</div>
+<p>The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still avalible. In this dataset, there is clear anomolous data-points. -1000 is a non physical concentration, so cleaning thr rows out which lack data for these weeks, is important before further processing goes ahead.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># dataframe[mask] the mask provides an array of bools, which makes selecting the values you want efficient and easy</span>
+<span class="c1">#plotting</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mauna Loa&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;trend&#39;</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$CO_2$ (ppm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f64e0e6eb50&gt;
+</pre></div>
+</div>
+<img alt="_images/Data_Exploration_11_1.png" src="_images/Data_Exploration_11_1.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -330,11 +652,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Introduction.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="An_Aside_On_Puthon.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Introduction</p>
+            <p class="prev-next-title">An Aside On Python</p>
         </div>
     </a>
 </div>
