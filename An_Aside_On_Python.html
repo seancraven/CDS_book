@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Climate Data Science</title>
+    <title>An Aside On Python &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="An Aside On Python" href="An_Aside_On_Python.html" />
+    <link rel="next" title="Data Exploration Global $CO_2$" href="Data_Exploration.html" />
+    <link rel="prev" title="Introduction" href="index.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -87,7 +88,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="#">
+    <a class="navbar-brand text-wrap" href="index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
@@ -106,21 +107,21 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
                     Introduction
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="An_Aside_On_Python.html">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    An Aside On Python
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Data_Exploration.html">
-   Data Exploration Global $ CO_2 $
+   Data Exploration Global $CO_2$
   </a>
  </li>
  <li class="toctree-l1">
@@ -218,7 +219,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2Findex.html&body=Your%20issue%20content%20here."
+        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FAn_Aside_On_Python.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -246,7 +247,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/index.md"
+        <a href="_sources/An_Aside_On_Python.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -283,23 +284,90 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environments-and-packages">
+   Environments and Packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readability-and-naming">
+   Readability and Naming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#git">
+   Git
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction</h1>
+                <h1>An Aside On Python</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#environments-and-packages">
+   Environments and Packages
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#readability-and-naming">
+   Readability and Naming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#git">
+   Git
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -307,14 +375,40 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>Welcome to the Durham University Climate Data Science Project Book. This book aims to build a syllabus that uses the case study of climate science to teach data-intensive science skills.</p>
-<p>This book builds off the summer project completed by Sean Craven in the summer of 2021. The project was inspired by the plots of Dr Robert Rode <span id="id1">[<a class="reference internal" href="Bibliography.html#id3" title="Robert Rhode. Clear-sky atmospheric transistion. \url https://twitter.com/RARohde/status/1196762005136392192.">Rho</a>]</span> using the PyRads package <span id="id2">[<a class="reference internal" href="Bibliography.html#id2" title="Daniel D. B. Koll and Timothy W. Cronin. Earth&amp;#x2019;s outgoing longwave radiation linear due to h&lt;sub&gt;2&lt;/sub&gt;o greenhouse effect. Proceedings of the National Academy of Sciences, 115(41):10293-10298, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1809868115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1809868115, doi:10.1073/pnas.1809868115.">KC18</a>]</span>.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="_images/EJvAQJcXkAEm-9t.jpeg"><img alt="Clear-Sky_Atmospheric_Transmission" class="bg-primary mb-1 align-center" src="_images/EJvAQJcXkAEm-9t.jpeg" style="width: 600px;" /></a>
-<p>The above plot shows the transmission of solar radiation as a function of wavelength for multiple common greenhouse gases. This figure effectively communicates the wavelength dependence of molecular absorption, and the ceiling in absorption provided by ozone and Rayleigh scattering. However, if one were to ask what gases contribute most to warming? Is methane more problematic than CO2? The figure does not communicate this. This should highlight how the data is formatted and processed affects the conclusions drawn and the information recovered.</p>
-<div class="toctree-wrapper compound">
+  <section class="tex2jax_ignore mathjax_ignore" id="an-aside-on-python">
+<h1>An Aside On Python<a class="headerlink" href="#an-aside-on-python" title="Permalink to this headline">#</a></h1>
+<p>As of writing, Python is the most popular <a class="reference external" href="https://www.tiobe.com/tiobe-index/">programming language</a> globally. It is designed to be easy to use while not forgoing functionality. Python is famous for being slow compared to many languages. For non-production code, this is often not a problem. The syntax’s ease of implementation, readability, and efficiency make it a superior choice for many scientific and industrial analysis applications, where speed is not the top priority.</p>
+<p>In previous courses at Durham, The Jupyter Notebook format has probably been used. Running code on a pre-configured server like that in Level-2 discovery skills is straightforward. However, running off a local machine can become beneficial when projects grow in complexity and with more dependencies. <a class="reference external" href="https://www.anaconda.com/">Anaconda</a> provides a straightforward way to get a Python install with lots of the commonly used scientific libraries.</p>
+<section id="environments-and-packages">
+<h2>Environments and Packages<a class="headerlink" href="#environments-and-packages" title="Permalink to this headline">#</a></h2>
+<p>Environments are designed so that when code is run somewhere else or at a different time, it still functions. Further, they contain any dependency problems one might encounter with packages. A package is a third party library for Python. For example, Tensorflow’s compatibility with the newest version of Numpy is not guaranteed. To ensure that Numpy in other projects is up to date, but Tensorflow functions correctly. An environment can be made where the required version of both packages are kept, for said project.</p>
+<p>There are multiple different options for environments. However, this text recommends anacondas <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">envs</a>. For the exercises in this book, create a new environment from this ‘link here’ .yml file. Then, navigate to the file’s location in anaconda prompt(Windows) or your shell(Linux, Mac). Finally, run this command to create an environment with the dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">cds_book</span><span class="o">.</span><span class="n">yml</span>
+</pre></div>
 </div>
+<p>To get python to run with these packages, to activate the environment. The enviroment name can be found in the first line of the .yml file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">env_name</span>
+</pre></div>
+</div>
+<p>In an editor(VScode, Jypter,..), select the kernel with the same name as the environment. This is editor/IDE dependant, and should be in the respective guide.</p>
+</section>
+<section id="readability-and-naming">
+<h2>Readability and Naming<a class="headerlink" href="#readability-and-naming" title="Permalink to this headline">#</a></h2>
+<p>The development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to <a class="reference external" href="https://peps.python.org/pep-0008/">PEP-8</a> and <a class="reference external" href="https://peps.python.org/pep-0484/">PEP-484</a>. In addition, the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a> guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such practices outlined in these documents will help the reader and future contributors collaborate and maintain
+this and other work.</p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
+<p>There is an extensive documentation website for most of the packages in this project. This is an extremely useful reference. Many of the features of the libraries are implemented excellently. One should avoid writing redundant code for which there is already a built-in function. Further,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="s1">&#39;some object&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>prints out all of the docstrings and methods for the object. This can be very useful if recalling the exact details of an object is difficult.</p>
+</section>
+<section id="git">
+<h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">#</a></h2>
+<p>Git can be used to version control code, and is almost universally used when collaborating on code projects, so that multiple people’s changes do not ruin the existing codebase. In addition, websites like <a class="reference external" href="https://github.com/">GitHub</a> provide free code repository hosting and a wealth of features. For solo projects, there is no need to use Git. However, it can be useful to work on projects from any machine anywhere.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -344,10 +438,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="An_Aside_On_Python.html" title="next page">
+    <a class='left-prev' id="prev-link" href="index.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introduction</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Data_Exploration.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">An Aside On Python</p>
+        <p class="prev-next-title">Data Exploration Global $CO_2$</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
