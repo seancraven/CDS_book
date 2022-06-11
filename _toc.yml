@@ -2,9 +2,9 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: Introduction
+root: index
 chapters:
-- file: An_Aside_On_Puthon
+- file: An_Aside_On_Python
 - file: Data_Exploration
 - file: Bibliography
 
