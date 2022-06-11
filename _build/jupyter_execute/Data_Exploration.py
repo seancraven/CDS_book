@@ -146,7 +146,7 @@ None
 # ``` 
 # Where  $y'(\vec{x},\vec{p})$  is the model function and  ${math}y(\vec{x})$  the data. 
 # 
-# For a scalar function, the fitted line  $ y'(x,\vec{p})$  is a function of the data and the free parameters of the curve $ \vec{p} \in \mathbb{R}^m $. An iterative solution to minimise the residuals can be found. Each residual in equation {eq}`Residuals`, can be considered as its own function $ r_i(\vec{p})$ . The Jacobian matrix's pseudo inverse {eq}`Pseudo` corresponds to the direction each vector must change to tend to the minimum. It can be thought of as the arrow pointing down the steepest slope line, where each residual has $m$ variable parameters.  
+# For a scalar function, the fitted line  $ y'(x,\vec{p})$  is a function of the data and the free parameters of the curve $ \vec{p} \in \mathbb{R}^m $. An iterative solution to minimise the residuals can be found for any non-linear problem. For the linear subclass of problems, an analytic solution to a set of equations can be found. Each residual in equation {eq}`Residuals`, can be considered as its own function $ r_i(\vec{p})$. The Jacobian matrix's pseudo inverse {eq}`Pseudo` corresponds to the direction each vector must change and the curvature of the error surface. The minimisation can be considered as a ball rolling down an error surface in steps. The step size is proportional to both the gradient and the curvature of the slope. A full treatment of this can be found in chapter 7 of 'Measurements and Their Uncertainties'{cite}`Hughs_Hase`. 
 # 
 # ```{math}
 # (J_r)_{ij} = \frac{\partial r_i}{\partial p_j}
@@ -161,9 +161,37 @@ None
 # \vec{p}_{t+1} = \Delta \vec{p} + \vec{p}_t
 # ```
 # ```{note}
-# The method described breifly here is the Gauss Newton algorithm. There are alternative implementations of minimising the least squarest problem depending on a multitude of factors, particularly bounds. Scipy itself uses multiple algorithms, described [here](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq).  
+# The method described breifly here is the Gauss Newton algorithm, which is not used in practice. There are alternative implementations of minimising the least squarest problem depending on a multitude of factors, particularly bounds. Scipy itself uses multiple algorithms, described [here](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq).  
 # ```
 # 
+# ### Applying Curve Fitting to $CO_2$ Data
+# In order to make predictions from the current data, performing a functional fit to the data and using this to extrapolate into the future is the most elementary predictive step we can take. The model takes historical training data and adjusts its parameters $\vec{p}$ to emulate the data best. The most elementary version of this is a constant. 
+# 
+# ```{math}
+# y' = c
+# ```
+# 
+# Intuitively one would draw a line to fit this data, a model with two free parameters. A polynomial fit is the higher freedom extension to this. Increased dimensions in $\vec{p}$ will reduce the size of residuals. An exact fit can be found by increasing the order of the polynomial. However, this comes at a cost to the generalisability of the model. For example 
+# 
+# 
+
+# In[9]:
+
+
+# Define overfit polynomial
+def p3(x, a_0, a_1, a_2, a_3):
+    return a_0 + a_1*x + a_2*x**2 + a_3*x**3
+# Define more reasonable poly 
+def p1(x, a_0, a_1):
+    return a_0 + a_1*x
+# Define underfit poly
+def p1(x, a_0,):
+    return a_0 
+
+
+# 
+# Hypothesis testing and $\Chi^2$ statistics tests quantify the validity and 'goodness of fit', respectively. Again a thorough treatment of the $\Chi^2$ statistic is presented in chapters 5 and 8 of 'Measurements and Their Uncertainties'{cite}`Hughs_Hase`. 
+#  This is .  . It is left as an exercise for the reader to plot a logarithmic graph of  
 
 # # Plan
 # - Look for the impact of covid, on global CO_2, and explore what sort of line of best fit best matches the data. 
