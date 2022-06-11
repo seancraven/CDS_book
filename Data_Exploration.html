@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Data Exploration Global $ CO_2 $ &#8212; Climate Data Science</title>
+    <title>Data Exploration Global \( CO_2 \) &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -123,7 +123,10 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Data Exploration Global $ CO_2 $
+   Data Exploration Global
+   <span class="math notranslate nohighlight">
+    \( CO_2 \)
+   </span>
   </a>
  </li>
  <li class="toctree-l1">
@@ -310,13 +313,27 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Data Exploration Global $ CO_2 $
+   Data Exploration Global
+   <span class="math notranslate nohighlight">
+    \( CO_2 \)
+   </span>
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fitting">
      Fitting
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#applying-curve-fitting-to-co-2-data">
+       Applying Curve Fitting to
+       <span class="math notranslate nohighlight">
+        \(CO_2\)
+       </span>
+       Data
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -334,7 +351,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Data Exploration Global $ CO_2 $</h1>
+                <h1>Data Exploration Global  CO_2 </h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -346,13 +363,27 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Data Exploration Global $ CO_2 $
+   Data Exploration Global
+   <span class="math notranslate nohighlight">
+    \( CO_2 \)
+   </span>
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#fitting">
      Fitting
     </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#applying-curve-fitting-to-co-2-data">
+       Applying Curve Fitting to
+       <span class="math notranslate nohighlight">
+        \(CO_2\)
+       </span>
+       Data
+      </a>
+     </li>
+    </ul>
    </li>
   </ul>
  </li>
@@ -372,7 +403,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="data-exploration-global-co-2">
-<h1>Data Exploration Global $ CO_2 $<a class="headerlink" href="#data-exploration-global-co-2" title="Permalink to this headline">#</a></h1>
+<h1>Data Exploration Global <span class="math notranslate nohighlight">\( CO_2 \)</span><a class="headerlink" href="#data-exploration-global-co-2" title="Permalink to this headline">#</a></h1>
 <p>Aquiring reliable data, is the foundation for any analysis project. If your data is incomplete inaccurate, any analysis will draw poor conclusions.</p>
 <p>After aqusition data which has been well formatted into a csv, or similar easy to handle file, should be explored.</p>
 <div class="cell docutils container">
@@ -457,12 +488,11 @@ The first section will collect data from the <a class="reference external" href=
 <p>Tabulating the number of null entries in each column provides a reference to column names and the number of missing entries. In this data, there are no Null fields.
 Notably, none of the columns has units in their headers apart from years and months. On inspection of the website, the average column is a pseudo-unit quantity in parts per million.</p>
 <p>If there were large counts of null entries, a decision on whether to use the current dataset should be made. The effect of missing data has entire fields of research dedicated to it. There are multiple different statistical methods available to repopulate your datasets. This, however, is beyond the remit of this text.</p>
-<p>When Displaying the <code class="docutils literal notranslate"> <span class="pre">co2_data_global</span></code> dataframe up to the first five rows, it can be seen that the decimal column is given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2957da02-2b0a-4211-8f75-b9669d4ff400">
-<span class="eqno">(1)<a class="headerlink" href="#equation-2957da02-2b0a-4211-8f75-b9669d4ff400" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<p>When Displaying the <code class="docutils literal notranslate"> <span class="pre">co2_data_global</span></code> dataframe up to the first five rows, it can be seen that the decimal column is given by:
+\begin{equation}
 decimal = year + \frac{month}{12}
-\end{equation}\]</div>
-<p>This makes it straightforward to plot $CO_2$ average against time.</p>
+\end{equation}
+This makes it straightforward to plot <span class="math notranslate nohighlight">\(CO_2\)</span> average against time.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_data_global</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">5</span><span class="p">,:]</span>
@@ -540,9 +570,9 @@ decimal = year + \frac{month}{12}
 </table>
 </div></div></div>
 </div>
-<p>By plotting the monthly average against time and the trendline provided shows a consistent increase in the average concentration of $CO_2$ in the atmosphere over the last 40 years. In addition, a cyclical pattern over a shorter timescale is also observed. Therefore, drawing conclusions from the data is possible.</p>
-<p>There is an additional data set from Mauna Loa <span id="id2">[<a class="reference internal" href="Bibliography.html#id8" title="Kirk W. Thoning, Pieter P. Tans, and Walter D. Komhyr. Atmospheric carbon dioxide at mauna loa observatory: 2. analysis of the noaa gmcc data, 1974–1985. Journal of Geophysical Research: Atmospheres, 94(D6):8549-8565, 1989. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549, doi:https://doi.org/10.1029/JD094iD06p08549.">TTK89</a>]</span>, which is worth comparing to global averages. Notably, these data sets are not expected to correspond precisely as $CO_2$ concentration is a function of altitude, latitude and longitude.</p>
-<p>In this case, we know that the surface average $CO_2$ is taken from multiple sea-level sites. Each site is part of the Cooperative Global Air Sampling Network{cite}`. These sites have been chosen to minimise the interference of local effects in the amount of atmospheric $CO_2$.</p>
+<p>By plotting the monthly average against time and the trendline provided shows a consistent increase in the average concentration of <span class="math notranslate nohighlight">\(CO_2\)</span> in the atmosphere over the last 40 years. In addition, a cyclical pattern over a shorter timescale is also observed. Therefore, drawing conclusions from the data is possible.</p>
+<p>There is an additional data set from Mauna Loa <span id="id2">[<a class="reference internal" href="Bibliography.html#id8" title="Kirk W. Thoning, Pieter P. Tans, and Walter D. Komhyr. Atmospheric carbon dioxide at mauna loa observatory: 2. analysis of the noaa gmcc data, 1974–1985. Journal of Geophysical Research: Atmospheres, 94(D6):8549-8565, 1989. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549, doi:https://doi.org/10.1029/JD094iD06p08549.">TTK89</a>]</span>, which is worth comparing to global averages. Notably, these data sets are not expected to correspond precisely as <span class="math notranslate nohighlight">\(CO_2\)</span> concentration is a function of altitude, latitude and longitude.</p>
+<p>In this case, we know that the surface average <span class="math notranslate nohighlight">\(CO_2\)</span> is taken from multiple sea-level sites. Each site is part of the Cooperative Global Air Sampling Network{cite}`. These sites have been chosen to minimise the interference of local effects in the amount of atmospheric <span class="math notranslate nohighlight">\(CO_2\)</span>.</p>
 <p>There can be no hard and fast rule for how many data sources are required to make predictions. However, with more independent sets of data, confidence in the generality of predictions can increase. Further, both of these datasets come from peer-reviewed sources. Thus their methodology has been independantly certified.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -701,19 +731,42 @@ decimal = year + \frac{month}{12}
 <h2>Fitting<a class="headerlink" href="#fitting" title="Permalink to this headline">#</a></h2>
 <p>When performing curve fitting, the method of non-linear least-squares fitting is typically appropriate. The principle behind least-squares fitting is reducing the residual between the data and the fit. The N point residual for a scalar function,</p>
 <div class="math notranslate nohighlight" id="equation-residuals">
-<span class="eqno">(2)<a class="headerlink" href="#equation-residuals" title="Permalink to this equation">#</a></span>\[r = \sum_{i = 0}^N(y'(\vec{x_i},\vec{p})-y(\vec{x_i}))^2.\]</div>
-<p>Where  <code class="docutils literal notranslate"><span class="pre">{math}</span> <span class="pre">y'(\vec{x},\vec{p})</span></code>  is the model function and  <code class="docutils literal notranslate"><span class="pre">{math}y(\vec{x})</span></code>  the data.</p>
-<p>For a scalar function, the fitted line  $ y’(x,\vec{p})$  is a function of the data and the free parameters of the curve $ \vec{p} \in \mathbb{R}^m $. An iterative solution to minimise the residuals can be found. Each residual in equation <a class="reference internal" href="#equation-residuals">(2)</a>, can be considered as its own function $ r_i(\vec{p})$ . The Jacobian matrix’s pseudo inverse <a class="reference internal" href="#equation-pseudo">(3)</a> corresponds to the direction each vector must change to tend to the minimum. It can be thought of as the arrow pointing down the steepest slope line, where each residual has $m$ variable parameters.</p>
+<span class="eqno">(1)<a class="headerlink" href="#equation-residuals" title="Permalink to this equation">#</a></span>\[r = \sum_{i = 0}^N(y'(\vec{x_i},\vec{p})-y(\vec{x_i}))^2.\]</div>
+<p>Where  <span class="math notranslate nohighlight">\(y'(\vec{x},\vec{p})\)</span>  is the model function and  <span class="math notranslate nohighlight">\({math}y(\vec{x})\)</span>  the data.</p>
+<p>For a scalar function, the fitted line  <span class="math notranslate nohighlight">\( y'(x,\vec{p})\)</span>  is a function of the data and the free parameters of the curve <span class="math notranslate nohighlight">\( \vec{p} \in \mathbb{R}^m \)</span>. An iterative solution to minimise the residuals can be found for any non-linear problem. For the linear subclass of problems, an analytic solution to a set of equations can be found. Each residual in equation <a class="reference internal" href="#equation-residuals">(1)</a>, can be considered as its own function <span class="math notranslate nohighlight">\( r_i(\vec{p})\)</span>. The Jacobian matrix’s pseudo inverse <a class="reference internal" href="#equation-pseudo">(2)</a> corresponds to the direction each vector must change and the curvature of the error surface. The minimisation can be considered as a ball rolling down an error surface in steps. The step size is proportional to both the gradient and the curvature of the slope. A full treatment of this can be found in chapter 7 of ‘Measurements and Their Uncertainties’<span id="id3">[]</span>.</p>
 <div class="math notranslate nohighlight">
 \[(J_r)_{ij} = \frac{\partial r_i}{\partial p_j}\]</div>
 <div class="math notranslate nohighlight" id="equation-pseudo">
-<span class="eqno">(3)<a class="headerlink" href="#equation-pseudo" title="Permalink to this equation">#</a></span>\[\Delta  = - (J_r^TJ_r)^{-1}J_r^Tr(\vec{p})\]</div>
+<span class="eqno">(2)<a class="headerlink" href="#equation-pseudo" title="Permalink to this equation">#</a></span>\[\Delta  = - (J_r^TJ_r)^{-1}J_r^Tr(\vec{p})\]</div>
 <div class="math notranslate nohighlight">
-\[\vec{p}_{t+1} = \Delta \vec{p} + vec{p}_t\]</div>
+\[\vec{p}_{t+1} = \Delta \vec{p} + \vec{p}_t\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The method described breifly here is the Gauss Newton algorithm. There are alternative implementations of minimising the least squarest problem depending on a multitude of factors, particularly bounds. Scipy itself uses multiple algorithms, described <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq">here</a>.</p>
+<p>The method described breifly here is the Gauss Newton algorithm, which is not used in practice. There are alternative implementations of minimising the least squarest problem depending on a multitude of factors, particularly bounds. Scipy itself uses multiple algorithms, described <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.leastsq.html#scipy.optimize.leastsq">here</a>.</p>
 </div>
+<section id="applying-curve-fitting-to-co-2-data">
+<h3>Applying Curve Fitting to <span class="math notranslate nohighlight">\(CO_2\)</span> Data<a class="headerlink" href="#applying-curve-fitting-to-co-2-data" title="Permalink to this headline">#</a></h3>
+<p>In order to make predictions from the current data, performing a functional fit to the data and using this to extrapolate into the future is the most elementary predictive step we can take. The model takes historical training data and adjusts its parameters <span class="math notranslate nohighlight">\(\vec{p}\)</span> to emulate the data best. The most elementary version of this is a constant.</p>
+<div class="math notranslate nohighlight">
+\[y' = c\]</div>
+<p>Intuitively one would draw a line to fit this data, a model with two free parameters. A polynomial fit is the higher freedom extension to this. Increased dimensions in <span class="math notranslate nohighlight">\(\vec{p}\)</span> will reduce the size of residuals. An exact fit can be found by increasing the order of the polynomial. However, this comes at a cost to the generalisability of the model. For example</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define overfit polynomial</span>
+<span class="k">def</span> <span class="nf">p3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">a_2</span><span class="p">,</span> <span class="n">a_3</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">a_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+<span class="c1"># Define more reasonable poly </span>
+<span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">x</span>
+<span class="c1"># Define underfit poly</span>
+<span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,):</span>
+    <span class="k">return</span> <span class="n">a_0</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id4">[]</span>.</p>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="plan">
