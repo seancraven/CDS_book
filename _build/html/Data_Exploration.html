@@ -333,6 +333,11 @@ title="Print to PDF"
        Data
       </a>
      </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hypothesis-testing-in-action">
+       Hypothesis Testing in Action
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -381,6 +386,11 @@ title="Print to PDF"
         \(CO_2\)
        </span>
        Data
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#hypothesis-testing-in-action">
+       Hypothesis Testing in Action
       </a>
      </li>
     </ul>
@@ -734,7 +744,7 @@ This makes it straightforward to plot <span class="math notranslate nohighlight"
 <div class="math notranslate nohighlight" id="equation-residuals">
 <span class="eqno">(1)<a class="headerlink" href="#equation-residuals" title="Permalink to this equation">#</a></span>\[r = \sum_{i = 0}^N(y'(\vec{x_i},\vec{p})-y(\vec{x_i}))^2.\]</div>
 <p>Where  <span class="math notranslate nohighlight">\(y'(\vec{x},\vec{p})\)</span>  is the model function and  <span class="math notranslate nohighlight">\({math}y(\vec{x})\)</span>  the data.</p>
-<p>For a scalar function, the fitted line  <span class="math notranslate nohighlight">\( y'(x,\vec{p})\)</span>  is a function of the data and the free parameters of the curve <span class="math notranslate nohighlight">\( \vec{p} \in \mathbb{R}^m \)</span>. An iterative solution to minimise the residuals can be found for any non-linear problem. For the linear subclass of problems, an analytic solution to a set of equations can be found. Each residual in equation <a class="reference internal" href="#equation-residuals">(1)</a>, can be considered as its own function <span class="math notranslate nohighlight">\( r_i(\vec{p})\)</span>. The Jacobian matrix’s pseudo inverse <a class="reference internal" href="#equation-pseudo">(2)</a> corresponds to the direction each vector must change and the curvature of the error surface. The minimisation can be considered as a ball rolling down an error surface in steps. The step size is proportional to both the gradient and the curvature of the slope. A full treatment of this can be found in chapter 7 of ‘Measurements and Their Uncertainties’<span id="id3">[]</span>.</p>
+<p>For a scalar function, the fitted line  <span class="math notranslate nohighlight">\( y'(x,\vec{p})\)</span>  is a function of the data and the free parameters of the curve <span class="math notranslate nohighlight">\( \vec{p} \in \mathbb{R}^m \)</span>. An iterative solution to minimise the residuals can be found for any non-linear problem. For the linear subclass of problems, an analytic solution to a set of equations can be found. Each residual in equation <a class="reference internal" href="#equation-residuals">(1)</a>, can be considered as its own function <span class="math notranslate nohighlight">\( r_i(\vec{p})\)</span>. The Jacobian matrix’s pseudo inverse <a class="reference internal" href="#equation-pseudo">(2)</a> corresponds to the direction each vector must change and the curvature of the error surface. The minimisation can be considered as a ball rolling down an error surface in steps. The step size is proportional to both the gradient and the curvature of the slope. A full treatment of this can be found in chapter 7 of ‘Measurements and Their Uncertainties’<span id="id3">[<a class="reference internal" href="Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>.</p>
 <div class="math notranslate nohighlight">
 \[(J_r)_{ij} = \frac{\partial r_i}{\partial p_j}\]</div>
 <div class="math notranslate nohighlight" id="equation-pseudo">
@@ -890,7 +900,10 @@ This makes it straightforward to plot <span class="math notranslate nohighlight"
 <img alt="_images/Data_Exploration_16_0.png" src="_images/Data_Exploration_16_0.png" />
 </div>
 </div>
-<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id4">[]</span>.</p>
+</section>
+<section id="hypothesis-testing-in-action">
+<h3>Hypothesis Testing in Action<a class="headerlink" href="#hypothesis-testing-in-action" title="Permalink to this headline">#</a></h3>
+<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id4">[<a class="reference internal" href="Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>.</p>
 </section>
 </section>
 </section>
