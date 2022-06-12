@@ -13,6 +13,7 @@ from dur_utils import colours #Durham Utilities module that stores constants lik
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.optimize 
 
 
 # Handling imports is typically done at the top of the file. The best practice is to avoid having redundant imports in a file. Avoiding double imports and redundant imports reduces the possibility of incompatibility errors.
@@ -178,6 +179,26 @@ None
 # In[9]:
 
 
+def compound_mask(array: pd.DataFrame, *tuples):
+    '''
+    A function which takes the product of multiple masks
+
+    Input :
+    array: pd.DataFrame, with column keys that contain 
+    *tuples: (column_key: string in array.keys(),
+        values: list of items in array[column_key]
+        )
+
+    Output:
+    pd.DataFrame, which satisfies all of the conditions 
+    provided by the tuples
+    '''
+    mask = True
+    for colum_name, values in tuples:
+        cond = array[colum_name].isin(values)
+        mask = mask & cond
+    return array[mask]
+
 # Define overfit polynomial
 def p3(x, a_0, a_1, a_2, a_3):
     return a_0 + a_1*x + a_2*x**2 + a_3*x**3
@@ -185,13 +206,105 @@ def p3(x, a_0, a_1, a_2, a_3):
 def p1(x, a_0, a_1):
     return a_0 + a_1*x
 # Define underfit poly
-def p1(x, a_0,):
-    return a_0 
+def p0(x, a_0,):
+    return [a_0 for i in x] 
+# Data For Fitting
+fit_test = compound_mask(co2_data_global, 
+    ('month',[6]),
+    ('year',[1991,1992,1993,1994])
+    )
+fit_extension = compound_mask(co2_data_global, 
+    ('month',[6]),
+    ('year',[i for i in range(1985,2000)])
+    )
+# Fit Coefs
+p0_fit, p0_error = scipy.optimize.curve_fit(p0,
+    fit_test['decimal'],
+    fit_test['average']
+    )
+
+p1_fit, p1_error = scipy.optimize.curve_fit(p1,
+    fit_test['decimal'],
+    fit_test['average']
+    )
+
+p3_fit, p3_error = scipy.optimize.curve_fit(p3,
+    fit_test['decimal'],
+    fit_test['average']
+    )
+
+
+# ```{note}
+# There are quite a few interesting subtlties brought up by this example. 
+# - The P3 polynomial, does not exactly fit the datapoints on the left hand figure. This illustrates the iterative approximate solution provided by the ```scipy.optimise.curvefit``` function.
+# - The P3 polynomial fits the data quite well above 1991. It is clear however that the polynomial is overfitting when looking at time periods before 1991, as the trendline doen't characterise the behaviour well.
+# - P3 polynomial, is the highest order polynomial for which there is one exact solution that goes through all of the data points. For P4 and above there are an infinite set of polynomials that go through 4 points. 
+# ```
+
+# In[10]:
+
+
+
+#Plotting
+fig, ax = plt.subplots(1, 2, figsize = (10,5))
+# First axis
+ax[0].plot(fit_test['decimal'],
+    p0(fit_test['decimal'], *p0_fit),
+    label = 'Underfit',
+    c = colours.durham.red
+    )
+ax[0].plot(fit_test['decimal'],
+    p1(fit_test['decimal'], *p1_fit),
+    label = 'P1 fit',
+    c = colours.durham.green
+    )
+ax[0].plot(fit_test['decimal'],
+    p3(fit_test['decimal'], *p3_fit),
+    label = 'Overfit',
+    c = colours.durham.purple
+    )
+ax[0].plot(fit_test['decimal'],
+    fit_test['average'],
+    linestyle = '',
+    marker = 'x',
+    c = 'black'
+    )
+ax[0].legend()
+ax[0].set_xticks(fit_test['decimal'])
+ax[0].set_xticklabels([i for i in range(1991,1995)])
+ax[0].set_xlabel('Years')
+ax[0].set_ylabel('$CO_2$(ppm)')
+#Extended Axis
+ax[1].plot(fit_extension['decimal'],
+    p0(fit_extension['decimal'], *p0_fit),
+    label = 'Underfit',
+    c = colours.durham.red
+    )
+ax[1].plot(fit_extension['decimal'],
+    p1(fit_extension['decimal'], *p1_fit),
+    label = 'P1 fit',
+    c = colours.durham.green
+    )
+ax[1].plot(fit_extension['decimal'],
+    p3(fit_extension['decimal'], *p3_fit),
+    label = 'Overfit',
+    c = colours.durham.purple)
+ax[1].plot(fit_extension['decimal'],
+    fit_extension['average'],
+    linestyle = '',
+    marker = 'x',
+    c = 'black'
+    )
+ax[1].legend()
+ax[1].set_xticks(fit_extension['decimal'].iloc[::2])
+ax[1].set_xticklabels([i for i in range(1985,2000,2)])
+ax[1].set_xlabel('Years')
+ax[1].set_ylabel('$CO_2$(ppm)')
+None
 
 
 # 
-# Hypothesis testing and $\Chi^2$ statistics tests quantify the validity and 'goodness of fit', respectively. Again a thorough treatment of the $\Chi^2$ statistic is presented in chapters 5 and 8 of 'Measurements and Their Uncertainties'{cite}`Hughs_Hase`. 
-#  This is .  . It is left as an exercise for the reader to plot a logarithmic graph of  
+# Hypothesis testing and $\Chi^2$ statistics tests quantify the validity and 'goodness of fit', respectively. Again a thorough treatment of the $\Chi^2$ statistic is presented in chapters 5 and 8 of 'Measurements and Their Uncertainties'{cite}`Hughs_Hase`.  
 
 # # Plan
 # - Look for the impact of covid, on global CO_2, and explore what sort of line of best fit best matches the data. 

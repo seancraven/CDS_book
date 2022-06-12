@@ -412,6 +412,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> 
 </pre></div>
 </div>
 </div>
@@ -752,21 +753,144 @@ This makes it straightforward to plot <span class="math notranslate nohighlight"
 <p>Intuitively one would draw a line to fit this data, a model with two free parameters. A polynomial fit is the higher freedom extension to this. Increased dimensions in <span class="math notranslate nohighlight">\(\vec{p}\)</span> will reduce the size of residuals. An exact fit can be found by increasing the order of the polynomial. However, this comes at a cost to the generalisability of the model. For example</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define overfit polynomial</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compound_mask</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="n">tuples</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    A function which takes the product of multiple masks</span>
+
+<span class="sd">    Input :</span>
+<span class="sd">    array: pd.DataFrame, with column keys that contain </span>
+<span class="sd">    *tuples: (column_key: string in array.keys(),</span>
+<span class="sd">        values: list of items in array[column_key]</span>
+<span class="sd">        )</span>
+
+<span class="sd">    Output:</span>
+<span class="sd">    pd.DataFrame, which satisfies all of the conditions </span>
+<span class="sd">    provided by the tuples</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">colum_name</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">tuples</span><span class="p">:</span>
+        <span class="n">cond</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">colum_name</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">&amp;</span> <span class="n">cond</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+<span class="c1"># Define overfit polynomial</span>
 <span class="k">def</span> <span class="nf">p3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">a_2</span><span class="p">,</span> <span class="n">a_3</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">a_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span>
 <span class="c1"># Define more reasonable poly </span>
 <span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">x</span>
 <span class="c1"># Define underfit poly</span>
-<span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,):</span>
-    <span class="k">return</span> <span class="n">a_0</span> 
+<span class="k">def</span> <span class="nf">p0</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">a_0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span> 
+<span class="c1"># Data For Fitting</span>
+<span class="n">fit_test</span> <span class="o">=</span> <span class="n">compound_mask</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">,</span> 
+    <span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,[</span><span class="mi">6</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,[</span><span class="mi">1991</span><span class="p">,</span><span class="mi">1992</span><span class="p">,</span><span class="mi">1993</span><span class="p">,</span><span class="mi">1994</span><span class="p">])</span>
+    <span class="p">)</span>
+<span class="n">fit_extension</span> <span class="o">=</span> <span class="n">compound_mask</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">,</span> 
+    <span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">,[</span><span class="mi">6</span><span class="p">]),</span>
+    <span class="p">(</span><span class="s1">&#39;year&#39;</span><span class="p">,[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span><span class="mi">2000</span><span class="p">)])</span>
+    <span class="p">)</span>
+<span class="c1"># Fit Coefs</span>
+<span class="n">p0_fit</span><span class="p">,</span> <span class="n">p0_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="n">p1_fit</span><span class="p">,</span> <span class="n">p1_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="n">p3_fit</span><span class="p">,</span> <span class="n">p3_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p3</span><span class="p">,</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/sean/anaconda3/lib/python3.8/site-packages/scipy/optimize/minpack.py:828: OptimizeWarning: Covariance of the parameters could not be estimated
+  warnings.warn(&#39;Covariance of the parameters could not be estimated&#39;,
 </pre></div>
 </div>
 </div>
 </div>
-<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id4">[]</span>.
-This is .  . It is left as an exercise for the reader to plot a logarithmic graph of</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are quite a few interesting subtlties brought up by this example.</p>
+<ul class="simple">
+<li><p>The P3 polynomial, does not exactly fit the datapoints on the left hand figure. This illustrates the iterative approximate solution provided by the <code class="docutils literal notranslate"><span class="pre">scipy.optimise.curvefit</span></code> function.</p></li>
+<li><p>The P3 polynomial fits the data quite well above 1991. It is clear however that the polynomial is overfitting when looking at time periods before 1991, as the trendline doen’t characterise the behaviour well.</p></li>
+<li><p>P3 polynomial, is the highest order polynomial for which there is one exact solution that goes through all of the data points. For P4 and above there are an infinite set of polynomials that go through 4 points.</p></li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="c1"># First axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p0_fit</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Underfit&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">p1</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p1_fit</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;P1 fit&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">green</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">p3</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p3_fit</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Overfit&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">fit_test</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1991</span><span class="p">,</span><span class="mi">1995</span><span class="p">)])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$CO_2$(ppm)&#39;</span><span class="p">)</span>
+<span class="c1">#Extended Axis</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p0_fit</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Underfit&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">p1</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p1_fit</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;P1 fit&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">green</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">p3</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p3_fit</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Overfit&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span><span class="mi">2000</span><span class="p">,</span><span class="mi">2</span><span class="p">)])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$CO_2$(ppm)&#39;</span><span class="p">)</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Data_Exploration_16_0.png" src="_images/Data_Exploration_16_0.png" />
+</div>
+</div>
+<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\Chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id4">[]</span>.</p>
 </section>
 </section>
 </section>
