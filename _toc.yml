@@ -5,7 +5,10 @@ format: jb-book
 root: index
 chapters:
 - file: An_Aside_On_Python
-- file: Data_Exploration
+- file: Chapter_1
+  sections:
+  - file: Chapter_1/Data_Exploration.ipynb
+  - file: Chapter_1/Fitting.ipynb
 - file: Bibliography
 
 
