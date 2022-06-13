@@ -5,6 +5,6 @@
 2. Curve fitting 
 3. Conclusion 
 ## Chapter 2
-- Global $CO_2$: Predictive Models for future emmisions
+- Global $CO_2$: Predictive Models for future emissions
 ## Chapter 3
 - Radiation Modeling: Building Packages, Large Datasets  
