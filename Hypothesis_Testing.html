@@ -646,15 +646,12 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mauna Loa&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Global Average&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Global Average&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Global Average&#39;)
-</pre></div>
-</div>
-<img alt="_images/Hypothesis_Testing_8_1.png" src="_images/Hypothesis_Testing_8_1.png" />
+<img alt="_images/Hypothesis_Testing_8_0.png" src="_images/Hypothesis_Testing_8_0.png" />
 </div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurment is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals, regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. The residuals also have a regular periodic structure. A Fourier transform can be used to determine the periodicity of the residuals. A better model can be made with the form of the periodic part of the function.</p>
@@ -667,6 +664,22 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 \[\begin{split}    \mathcal{F}[f(t)](\omega) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{-i \omega t}dt,  \\
     \mathcal{F^{-1}}[f(\omega)](t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{i \omega t}d\omega.\end{split}\]</div>
 <p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[<a class="reference internal" href="Bibliography.html#id12" title="J. Cooley, P. Lewis, and P. Welch. The finite fourier transform. IEEE Transactions on Audio and Electroacoustics, 17(2):77-85, 1969. doi:10.1109/TAU.1969.1162036.">CLW69</a>]</span> was developed to perform these calculations efficiently. Additionally,  a Discrete Cosine Transform(DCT)<span id="id3">[<a class="reference internal" href="Bibliography.html#id13" title="N. Ahmed, T. Natarajan, and K.R. Rao. Discrete cosine transform. IEEE Transactions on Computers, C-23(1):90-93, 1974. doi:10.1109/T-C.1974.223784.">ANR74</a>]</span> can be used because the data is real-valued.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show data is sampled at constant freq</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">const_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span><span class="n">timesteps</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Constant frequncy of CO_2 measurment:&#39;</span><span class="p">,</span><span class="n">const_freq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constant frequncy of CO_2 measurment: True
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
