@@ -1,4 +1,6 @@
 # Plan 
+## Landing Page
+- Gallery of best visualisations
 ## Chapter 1:
 - Global $CO_2$: Question Can we identify Global CO_2 change because of Pandemic 
 1. Data Exploration

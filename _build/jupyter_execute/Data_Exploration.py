@@ -22,7 +22,6 @@ from dur_utils import colours #Durham Utilities module that stores constants lik
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.optimize 
 
 
 # ```{tip}
@@ -59,9 +58,9 @@ pd.DataFrame(data=null_sum,
 # If there were large counts of null entries, a decision on whether to use the current dataset should be made. The effect of missing data has entire fields of research dedicated to it. There are multiple different statistical methods available to repopulate datasets. This, however, is beyond the remit of this text.  
 # 
 # When Displaying the ``` co2_data_global``` dataframe up to the first five rows, it can be seen that the decimal column is given by: 
-# \begin{equation}
+# $$
 # decimal = year + \frac{month}{12}
-# \end{equation}
+# $$
 # This makes it straightforward to plot $CO_2$ average against time. 
 
 # In[3]:

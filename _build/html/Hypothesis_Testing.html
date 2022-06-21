@@ -299,12 +299,62 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-testing">
+   Hypothesis Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-chi-2-testing-in-co-2-data">
+   Implementing
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   testing in
+   <span class="math notranslate nohighlight">
+    \(CO_2\)
+   </span>
+   data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
+   Calculating
+   <span class="math notranslate nohighlight">
+    \(P(\chi^2 \geq \chi^2_{min};\nu)\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-transforms">
+   Fourier Transforms
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -316,6 +366,45 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-testing">
+   Hypothesis Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-chi-2-testing-in-co-2-data">
+   Implementing
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   testing in
+   <span class="math notranslate nohighlight">
+    \(CO_2\)
+   </span>
+   data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
+   Calculating
+   <span class="math notranslate nohighlight">
+    \(P(\chi^2 \geq \chi^2_{min};\nu)\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-transforms">
+   Fourier Transforms
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -323,9 +412,275 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-goodness-of-fit">
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.optimize</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">fft</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-goodness-of-fit">
 <h1>Hypothesis Testing And Goodness of Fit<a class="headerlink" href="#hypothesis-testing-and-goodness-of-fit" title="Permalink to this headline">#</a></h1>
-<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id1">[<a class="reference internal" href="Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>.</p>
+<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id1">[<a class="reference internal" href="Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>. The statistic is defined as,</p>
+<div class="math notranslate nohighlight">
+\[    \chi^2 = \sum_{i=0}^N\left(\frac{y'(\vec{x_i},\vec{p})-y(\vec{x_i})}{\alpha_i}\right)^2.\]</div>
+<p>If each value in the residual sum is treated as an independent random variable. Then the sum of the values is distributed according to,</p>
+<div class="math notranslate nohighlight">
+\[    X(\chi^2:\nu) = \frac{(\chi^2)^{\frac{\nu}{2} - 1}exp(-\chi^2/2)}{2^{\nu/2}\Gamma(\nu/2)}.\]</div>
+<p>Both the PDF(probability density function) and CDF(cumulative density function) are plotted below left and right, respectively. The degrees of freedom, <span class="math notranslate nohighlight">\(\nu = N - m\)</span>, where N and m are the numbers of data points and parameters, respectively.</p>
+<p>The CDF quantifies the probability that the residuals are larger for a specific model with a <span class="math notranslate nohighlight">\(\chi^2\)</span>, <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span>. A good fit is indicated by a value close to one. Bearing in mind that the <span class="math notranslate nohighlight">\(\chi^2\)</span> considers the size of the errors present. A large value for <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span> can be an indication of overly large error.</p>
+<section id="hypothesis-testing">
+<h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h2>
+<p>Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson <span class="math notranslate nohighlight">\(\chi^2\)</span> test is as follows.</p>
+<p>Given a null hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_0 \)</span></p>
+<ol class="simple">
+<li><p>Determine the <span class="math notranslate nohighlight">\(\chi^2\)</span> value for the data</p></li>
+<li><p>Determine <span class="math notranslate nohighlight">\(\nu\)</span></p></li>
+<li><p>Select a confidence level and calculate <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
+<li><p>Compare The Value of <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span> with <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
+<li><p>Reject <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span> if <span class="math notranslate nohighlight">\(\chi^2_{min} \geq \chi^2_{crit}\)</span></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1">#Plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">spt</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>    
+    <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\nu$&#39;</span> <span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">cdf</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\nu$&#39;</span> <span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">spt</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+    <span class="n">spt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">spt</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">spt</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$ X(\chi^2:\nu) $&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$ \int_{\chi^2_</span><span class="si">{min}</span><span class="s1">}^\infty X(\chi^2:\nu) d \chi^2 $&#39;</span><span class="p">)</span>
+<span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Hypothesis_Testing_2_0.png" src="_images/Hypothesis_Testing_2_0.png" />
+</div>
+</div>
+</section>
+<section id="implementing-chi-2-testing-in-co-2-data">
+<h2>Implementing <span class="math notranslate nohighlight">\(\chi^2\)</span> testing in <span class="math notranslate nohighlight">\(CO_2\)</span> data<a class="headerlink" href="#implementing-chi-2-testing-in-co-2-data" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_global</span> <span class="o">=</span> <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv&#39;</span>
+<span class="n">co2_data_global</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_global</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv&#39;</span>              
+<span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_ml</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+<span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Probably should have defined a function that returns values.</span>
+<span class="k">def</span> <span class="nf">p3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">a_2</span><span class="p">,</span> <span class="n">a_3</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">a_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span> 
+
+<span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">x</span>
+<span class="c1"># Fit Coefs</span>
+<span class="c1">##Unweighted Least Squares Global</span>
+<span class="n">p1_global_fit</span><span class="p">,</span> <span class="n">p1_global_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span>
+    <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="c1">#chisq</span>
+<span class="n">y_p1_global</span> <span class="o">=</span> <span class="n">p1</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p1_global_fit</span><span class="p">)</span>
+<span class="n">rs_global_p1</span> <span class="o">=</span> <span class="n">y_p1_global</span><span class="o">-</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+<span class="n">chisq_global_p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">rs_global_p1</span><span class="p">)</span>
+    <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
+<span class="c1">#P3</span>
+<span class="n">p3_global_fit</span><span class="p">,</span> <span class="n">p3_global_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p3</span><span class="p">,</span>
+    <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="c1">#chisq</span>
+<span class="n">y_p3_global</span> <span class="o">=</span> <span class="n">p3</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p3_global_fit</span><span class="p">)</span>
+<span class="n">rs_global_p3</span> <span class="o">=</span> <span class="n">y_p3_global</span><span class="o">-</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+<span class="n">chisq_global_p3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">rs_global_p3</span><span class="p">)</span>
+    <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
+<span class="c1"># Weighted Least Squares Mauna Loa </span>
+<span class="n">p1_ml_fit</span><span class="p">,</span> <span class="n">p1_ml_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="n">y_p1_ml</span> <span class="o">=</span> <span class="n">p1</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p1_ml_fit</span><span class="p">)</span>
+<span class="n">rs_ml_p1</span> <span class="o">=</span> <span class="n">y_p1_ml</span><span class="o">-</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+<span class="n">chisq_ml_p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">rs_ml_p1</span><span class="p">)</span>
+    <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
+<span class="c1">#P3</span>
+<span class="n">p3_ml_fit</span><span class="p">,</span> <span class="n">p3_ml_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">p3</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="c1">#chisq</span>
+<span class="n">y_p3_ml</span> <span class="o">=</span> <span class="n">p3</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">p3_ml_fit</span><span class="p">)</span>
+<span class="n">rs_ml_p3</span> <span class="o">=</span> <span class="n">y_p3_ml</span><span class="o">-</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
+<span class="n">chisq_ml_p3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">rs_ml_p3</span><span class="p">)</span>
+    <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-p-chi-2-geq-chi-2-min-nu">
+<h2>Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span><a class="headerlink" href="#calculating-p-chi-2-geq-chi-2-min-nu" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nu_p1_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1_ml_fit</span><span class="p">)</span>
+<span class="n">nu_p3_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p3_ml_fit</span><span class="p">)</span>
+<span class="n">p_ml_p1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_ml_p1</span><span class="p">,</span><span class="n">nu_p1_ml</span><span class="p">)</span>
+<span class="n">p_ml_p3</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_ml_p3</span><span class="p">,</span><span class="n">nu_p3_ml</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;P(\chi^2 \geq \chi^2_</span><span class="se">{{</span><span class="s1">min</span><span class="se">}}</span><span class="s1">;</span><span class="si">{</span><span class="n">nu_p1_ml</span><span class="si">}</span><span class="s1">) = </span><span class="si">{</span><span class="n">p_ml_p1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;P(\chi^2 \geq \chi^2_</span><span class="se">{{</span><span class="s1">min</span><span class="se">}}</span><span class="s1">;</span><span class="si">{</span><span class="n">nu_p3_ml</span><span class="si">}</span><span class="s1">) = </span><span class="si">{</span><span class="n">p_ml_p3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(\chi^2 \geq \chi^2_{min};573) = 0.0
+P(\chi^2 \geq \chi^2_{min};571) = 0.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Building Subplot list, add axis builds from bottom left</span>
+<span class="n">total_fig_height</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">total_fig_width</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">current_fig_bottom</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span> != 0:
+        <span class="n">height</span> <span class="o">=</span> <span class="n">total_fig_height</span><span class="o">/</span><span class="mi">3</span>
+        
+        <span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">current_fig_bottom</span><span class="p">,</span> <span class="n">total_fig_width</span><span class="p">,</span> <span class="n">height</span><span class="p">]))</span>
+        <span class="n">current_fig_bottom</span> <span class="o">+=</span> <span class="n">height</span> <span class="o">+</span> <span class="n">total_fig_height</span><span class="o">/</span><span class="mi">16</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">total_fig_height</span><span class="o">/</span><span class="mi">8</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">current_fig_bottom</span><span class="p">,</span> <span class="n">total_fig_width</span><span class="p">,</span> <span class="n">height</span><span class="p">]))</span>
+        <span class="n">current_fig_bottom</span> <span class="o">+=</span> <span class="n">height</span>  
+<span class="c1"># Lists for plotting</span>
+<span class="c1">#glob</span>
+<span class="n">fits_global</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_p1_global</span><span class="p">,</span> <span class="n">y_p3_global</span><span class="p">]</span>
+<span class="n">chisq_global</span> <span class="o">=</span> <span class="p">[</span><span class="n">chisq_global_p1</span><span class="p">,</span> <span class="n">chisq_global_p3</span><span class="p">]</span>
+<span class="n">rs_glob</span> <span class="o">=</span> <span class="p">[</span><span class="n">rs_global_p1</span><span class="p">,</span><span class="n">rs_global_p3</span><span class="p">]</span>
+<span class="n">glob</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fits_global</span><span class="p">,</span> <span class="n">chisq_global</span><span class="p">,</span><span class="n">rs_glob</span><span class="p">)</span>
+<span class="c1">#ml</span>
+<span class="n">fits_ml</span> <span class="o">=</span> <span class="p">[</span><span class="n">y_p1_ml</span><span class="p">,</span> <span class="n">y_p3_ml</span><span class="p">]</span>
+<span class="n">chisq_ml</span> <span class="o">=</span> <span class="p">[</span><span class="n">chisq_ml_p1</span><span class="p">,</span> <span class="n">chisq_ml_p3</span><span class="p">]</span>
+<span class="n">rs_ml</span> <span class="o">=</span> <span class="p">[</span><span class="n">rs_ml_p1</span><span class="p">,</span> <span class="n">rs_ml_p3</span><span class="p">]</span>
+<span class="n">ml</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fits_ml</span><span class="p">,</span><span class="n">chisq_ml</span><span class="p">,</span><span class="n">rs_ml</span><span class="p">)</span>
+<span class="c1">#Plotting</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">spt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+    <span class="n">spt</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$CO_2$ (ppm)&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span> != 0:
+        <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> 
+        <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cp</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">cp</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">cp</span><span class="p">)</span>
+    
+    <span class="n">spt</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">2022</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="p">)</span>    
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
+    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">capsize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="p">)</span>   
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">((</span><span class="n">glob_f</span><span class="p">,</span> <span class="n">glob_chi</span><span class="p">,</span><span class="n">residual_global</span><span class="p">),</span> <span class="p">(</span><span class="n">ml_f</span><span class="p">,</span> <span class="n">ml_chi</span><span class="p">,</span><span class="n">residual_ml</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">glob</span><span class="p">,</span><span class="n">ml</span><span class="p">)):</span>
+    <span class="c1">#ml plot </span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span><span class="n">ml_f</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">: &#39;</span><span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\chi^2_</span><span class="si">{min}</span><span class="s1">$ = &#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ml_chi</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+    <span class="n">residual_ml</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
+    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">capsize</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="p">)</span>
+    <span class="c1">#global</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span><span class="n">glob_f</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">: &#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\chi^2_</span><span class="si">{min}</span><span class="s1">$ = &#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">glob_chi</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
+    <span class="n">residual_global</span><span class="p">,</span>
+    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span>
+    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Mauna Loa&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Global Average&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Hypothesis_Testing_8_0.png" src="_images/Hypothesis_Testing_8_0.png" />
+</div>
+</div>
+<p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurment is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals, regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. The residuals also have a regular periodic structure. A Fourier transform can be used to determine the periodicity of the residuals. A better model can be made with the form of the periodic part of the function.</p>
+</section>
+<section id="fourier-transforms">
+<h2>Fourier Transforms<a class="headerlink" href="#fourier-transforms" title="Permalink to this headline">#</a></h2>
+<p>There are whole texts dedicated to the subtleties of Fourier analysis. For an intuitive picture of how the technique works, this <a class="reference external" href="https://www.youtube.com/watch?v=spUNpyF58BY">video</a>](https://www.youtube.com/watch?v=spUNpyF58BY) is excellent.</p>
+<p>The 1D Fourier and inverse Fourier transforms are defined as integrals over all real numbers. The precise definition of the transform can vary. However, the general form of transform and its inverse are respectively</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}    \mathcal{F}[f(t)](\omega) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{-i \omega t}dt,  \\
+    \mathcal{F^{-1}}[f(\omega)](t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{i \omega t}d\omega.\end{split}\]</div>
+<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[<a class="reference internal" href="Bibliography.html#id12" title="J. Cooley, P. Lewis, and P. Welch. The finite fourier transform. IEEE Transactions on Audio and Electroacoustics, 17(2):77-85, 1969. doi:10.1109/TAU.1969.1162036.">CLW69</a>]</span> was developed to perform these calculations efficiently. Additionally,  a Discrete Cosine Transform(DCT)<span id="id3">[<a class="reference internal" href="Bibliography.html#id13" title="N. Ahmed, T. Natarajan, and K.R. Rao. Discrete cosine transform. IEEE Transactions on Computers, C-23(1):90-93, 1974. doi:10.1109/T-C.1974.223784.">ANR74</a>]</span> can be used because the data is real-valued.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show data is sampled at constant freq</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">const_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span><span class="n">timesteps</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Constant frequncy of CO_2 measurment:&#39;</span><span class="p">,</span><span class="n">const_freq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constant frequncy of CO_2 measurment: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

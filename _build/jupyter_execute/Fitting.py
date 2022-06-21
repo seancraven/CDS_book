@@ -11,7 +11,6 @@
 
 from dur_utils import colours #Durham Utilities module that stores constants like colours, can be found on _githublink_
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import scipy.optimize 
 
