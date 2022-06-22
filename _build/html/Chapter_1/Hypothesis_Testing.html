@@ -352,14 +352,16 @@ title="Print to PDF"
    </span>
    data
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
-   Calculating
-   <span class="math notranslate nohighlight">
-    \(P(\chi^2 \geq \chi^2_{min};\nu)\)
-   </span>
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
+     Calculating
+     <span class="math notranslate nohighlight">
+      \(P(\chi^2 \geq \chi^2_{min};\nu)\)
+     </span>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fourier-transforms">
@@ -409,14 +411,16 @@ title="Print to PDF"
    </span>
    data
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
-   Calculating
-   <span class="math notranslate nohighlight">
-    \(P(\chi^2 \geq \chi^2_{min};\nu)\)
-   </span>
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
+     Calculating
+     <span class="math notranslate nohighlight">
+      \(P(\chi^2 \geq \chi^2_{min};\nu)\)
+     </span>
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fourier-transforms">
@@ -453,18 +457,6 @@ title="Print to PDF"
 <p>Both the PDF(probability density function) and CDF(cumulative density function) are plotted below left and right, respectively. The degrees of freedom, <span class="math notranslate nohighlight">\(\nu = N - m\)</span>, where N and m are the numbers of data points and parameters, respectively.</p>
 <p>The CDF quantifies the probability that the residuals are larger for a specific model with a <span class="math notranslate nohighlight">\(\chi^2\)</span>, <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span>. A good fit is indicated by a value close to one. Bearing in mind that the <span class="math notranslate nohighlight">\(\chi^2\)</span> considers the size of the errors present. A small value for <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span> can be an indication of overly large error.</p>
 <p>The test is based on the ratio of the residuals to their expectations and how one would expect them distributed.</p>
-<section id="hypothesis-testing">
-<h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h2>
-<p>Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson <span class="math notranslate nohighlight">\(\chi^2\)</span> test is as follows.</p>
-<p>Given a null hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_0 \)</span></p>
-<ol class="simple">
-<li><p>Determine the <span class="math notranslate nohighlight">\(\chi^2\)</span> value for the data</p></li>
-<li><p>Determine <span class="math notranslate nohighlight">\(\nu\)</span></p></li>
-<li><p>Select a confidence level and calculate <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
-<li><p>Compare The Value of <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span> with <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
-<li><p>Reject <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span> if <span class="math notranslate nohighlight">\(\chi^2_{min} \geq \chi^2_{crit}\)</span></p></li>
-</ol>
-<p>Hypothesis testing provides a framework for quantatively assessing wheather a new model should be produced.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
@@ -490,6 +482,18 @@ title="Print to PDF"
 <img alt="../_images/Hypothesis_Testing_2_0.png" src="../_images/Hypothesis_Testing_2_0.png" />
 </div>
 </div>
+<section id="hypothesis-testing">
+<h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h2>
+<p>Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson <span class="math notranslate nohighlight">\(\chi^2\)</span> test is as follows.</p>
+<p>Given a null hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_0 \)</span></p>
+<ol class="simple">
+<li><p>Determine the <span class="math notranslate nohighlight">\(\chi^2\)</span> value for the data</p></li>
+<li><p>Determine <span class="math notranslate nohighlight">\(\nu\)</span></p></li>
+<li><p>Select a confidence level and calculate <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
+<li><p>Compare The Value of <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span> with <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
+<li><p>Reject <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span> if <span class="math notranslate nohighlight">\(\chi^2_{min} \geq \chi^2_{crit}\)</span></p></li>
+</ol>
+<p>Hypothesis testing provides a framework for quantatively assessing wheather a new model should be produced.</p>
 </section>
 <section id="implementing-chi-2-testing-in-co-2-data">
 <h2>Implementing <span class="math notranslate nohighlight">\(\chi^2\)</span> testing in <span class="math notranslate nohighlight">\(CO_2\)</span> data<a class="headerlink" href="#implementing-chi-2-testing-in-co-2-data" title="Permalink to this headline">#</a></h2>
@@ -552,9 +556,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
 <section id="calculating-p-chi-2-geq-chi-2-min-nu">
-<h2>Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span><a class="headerlink" href="#calculating-p-chi-2-geq-chi-2-min-nu" title="Permalink to this headline">#</a></h2>
+<h3>Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span><a class="headerlink" href="#calculating-p-chi-2-geq-chi-2-min-nu" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nu_p1_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1_ml_fit</span><span class="p">)</span>
@@ -666,8 +669,9 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 <p>The residuals also have a regular periodic structure. Fitting the residuals to a function of the form,</p>
 <div class="math notranslate nohighlight">
 \[\sum_i a_i \sin(\omega_i t).\]</div>
-<p>Gives periodicity to our function. Discovering the value of the <span class="math notranslate nohighlight">\(\omega\)</span> co-efficients can prove difficult.</p>
+<p>Gives periodicity to our function. Discovering the value of the <span class="math notranslate nohighlight">\(\omega\)</span> co-efficients can prove difficult using the current techniques.</p>
 <p>Least-squares fitting of <span class="math notranslate nohighlight">\(\sin(x)\)</span> and <span class="math notranslate nohighlight">\(\cos(x)\)</span> can be problematic. The presence of many local minima hinders convergence. To determine the periodicity of the residuals one can use Fourier techniques.</p>
+</section>
 </section>
 <section id="fourier-transforms">
 <h2>Fourier Transforms<a class="headerlink" href="#fourier-transforms" title="Permalink to this headline">#</a></h2>

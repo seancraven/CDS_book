@@ -30,18 +30,6 @@ from cycler import cycler
 # The CDF quantifies the probability that the residuals are larger for a specific model with a $\chi^2$, $P(\chi^2 \geq \chi^2_{min};\nu)$. A good fit is indicated by a value close to one. Bearing in mind that the $\chi^2$ considers the size of the errors present. A small value for $P(\chi^2 \geq \chi^2_{min};\nu)$ can be an indication of overly large error. 
 # 
 # The test is based on the ratio of the residuals to their expectations and how one would expect them distributed. 
-# 
-# ## Hypothesis Testing
-# Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson $\chi^2$ test is as follows. 
-# 
-# Given a null hypothesis $\mathcal{H}_0 $
-# 1. Determine the $\chi^2$ value for the data 
-# 2. Determine $\nu$
-# 3. Select a confidence level and calculate $\chi^2_{crit}$ 
-# 4. Compare The Value of $\chi^2_{min}$ with $\chi^2_{crit}$
-# 5. Reject $\mathcal{H}_0$ if $\chi^2_{min} \geq \chi^2_{crit}$
-# 
-# Hypothesis testing provides a framework for quantatively assessing wheather a new model should be produced. 
 
 # In[2]:
 
@@ -64,6 +52,18 @@ ax[0].set_title(r'$ X(\chi^2:\nu) $')
 ax[1].set_title(r'$ \int_{\chi^2_{min}}^\infty X(\chi^2:\nu) d \chi^2 $');
 
 
+# ## Hypothesis Testing
+# Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson $\chi^2$ test is as follows. 
+# 
+# Given a null hypothesis $\mathcal{H}_0 $
+# 1. Determine the $\chi^2$ value for the data 
+# 2. Determine $\nu$
+# 3. Select a confidence level and calculate $\chi^2_{crit}$ 
+# 4. Compare The Value of $\chi^2_{min}$ with $\chi^2_{crit}$
+# 5. Reject $\mathcal{H}_0$ if $\chi^2_{min} \geq \chi^2_{crit}$
+# 
+# Hypothesis testing provides a framework for quantatively assessing wheather a new model should be produced. 
+# 
 # ## Implementing $\chi^2$ testing in $CO_2$ data
 
 # In[3]:
@@ -132,7 +132,7 @@ chisq_ml_p3 = np.sum(((rs_ml_p3)
     )
 
 
-# ## Calculating $P(\chi^2 \geq \chi^2_{min};\nu)$
+# ### Calculating $P(\chi^2 \geq \chi^2_{min};\nu)$
 
 # In[5]:
 
@@ -236,7 +236,7 @@ ax[3].set_title('Global Average');
 # ```{math}
 # \sum_i a_i \sin(\omega_i t).
 # ```  
-# Gives periodicity to our function. Discovering the value of the $\omega$ co-efficients can prove difficult. 
+# Gives periodicity to our function. Discovering the value of the $\omega$ co-efficients can prove difficult using the current techniques. 
 # 
 # Least-squares fitting of $\sin(x)$ and $\cos(x)$ can be problematic. The presence of many local minima hinders convergence. To determine the periodicity of the residuals one can use Fourier techniques. 
 
