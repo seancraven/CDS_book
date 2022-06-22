@@ -1,0 +1,17 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: Global Carbon Dioxide
+    chapters:
+    - file: An_Aside_On_Python
+    - file: chaData_Exploration.ipynb
+    - file: chaFitting.ipynb
+    - file: chaHypothesis_Testing.ipynb
+    - file: chaFinal_Model.ipynb
+    - file: Bibliography
+
+
+

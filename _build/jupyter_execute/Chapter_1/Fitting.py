@@ -11,7 +11,6 @@
 
 from dur_utils import colours #Durham Utilities module that stores constants like colours, can be found on _githublink_
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 import scipy.optimize 
 
@@ -26,13 +25,13 @@ co2_data_ml = pd.read_csv(path_ml, header=0, comment='#')
 co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0] 
 
 
-# ## Fitting 
+# ## Least-Squares Fitting 
 # When performing curve fitting, the method of non-linear least-squares fitting is typically appropriate. The principle behind least-squares fitting is reducing the residual between the data and the fit. The N point residual for a scalar function, 
 # ```{math}
 # :label: Residuals
 # r = \sum_{i = 0}^N(y'(\vec{x_i},\vec{p})-y(\vec{x_i}))^2.
 # ``` 
-# Where  $y'(\vec{x},\vec{p})$  is the model function and  ${math}y(\vec{x})$  the data. 
+# Where  $y'(\vec{x},\vec{p})$  is the model function and  $y(\vec{x})$  the data. 
 # 
 # For a scalar function, the fitted line  $ y'(x,\vec{p})$  is a function of the data and the free parameters of the curve $ \vec{p} \in \mathbb{R}^m $. An iterative solution to minimise the residuals can be found for any non-linear problem. For the linear subclass of problems, an analytic solution to a set of equations can be found. Each residual in equation {eq}`Residuals`, can be considered as its own function $ r_i(\vec{p})$. The Jacobian matrix's pseudo inverse {eq}`Pseudo` corresponds to the direction each vector must change and the curvature of the error surface. The minimisation can be considered as a ball rolling down an error surface in steps. The step size is proportional to both the gradient and the curvature of the slope. A full treatment of this can be found in chapter 7 of 'Measurements and Their Uncertainties'{cite}`Hughes_Hase`. 
 # 
@@ -60,8 +59,6 @@ co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0]
 # ```
 # 
 # Intuitively one would draw a line to fit this data, a model with two free parameters. A polynomial fit is the higher freedom extension to this. Increased dimensions in $\vec{p}$ will reduce the size of residuals. An exact fit can be found by increasing the order of the polynomial. However, this comes at a cost to the generalisability of the model. For example 
-# 
-# 
 
 # In[3]:
 
@@ -85,6 +82,10 @@ def compound_mask(array: pd.DataFrame, *tuples):
         cond = array[colum_name].isin(values)
         mask = mask & cond
     return array[mask]
+
+
+# In[4]:
+
 
 # Define overfit polynomial
 def p3(x, a_0, a_1, a_2, a_3):
@@ -118,7 +119,7 @@ p1_fit, p1_error = scipy.optimize.curve_fit(p1,
 p3_fit, p3_error = scipy.optimize.curve_fit(p3,
     fit_test['decimal'],
     fit_test['average']
-    )
+    );
 
 
 # ```{note}
@@ -128,7 +129,7 @@ p3_fit, p3_error = scipy.optimize.curve_fit(p3,
 # - P3 polynomial, is the highest order polynomial for which there is one exact solution that goes through all of the data points. For P4 and above there are an infinite set of polynomials that go through 4 points. 
 # ```
 
-# In[4]:
+# In[5]:
 
 
 
@@ -190,5 +191,8 @@ ax[1].set_ylabel('$CO_2$(ppm)')
 None
 
 
-# ### Hypothesis Testing in Action
-# Hypothesis testing and $\chi^2$ statistics tests quantify the validity and 'goodness of fit', respectively. Again a thorough treatment of the $\chi^2$ statistic is presented in chapters 5 and 8 of 'Measurements and Their Uncertainties'{cite}`Hughes_Hase`.  
+# Underfitting, shown in red in the above figure is characterised by a model with too few free parameters to characterise the data well. Underfitting results in poor model performance and a considerable value for the residuals. 
+# 
+# Overfitting behaviour, shown in purple is the opposite of underfitting, where there are too many free parameters. This is limited by most software packages as there are no unique solutions for the case where there are more free parameters than data-points. The consequence of overfitting is the poor generalisability of the model. It fits the specific dataset rather than more general trends. This, makes the predictive power of the model weak.
+# 
+# Both of these concepts are not rigid and for different applications the number of free parameters for a given dataset should be adjusted. The $\chi^2$ test can determine whether a fit is acceptable for a given critical value. 

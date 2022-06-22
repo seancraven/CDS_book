@@ -115,7 +115,12 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <p class="caption">
+ <span class="caption-text">
+  Global Carbon Dioxide
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="An_Aside_On_Python.html">
    An Aside On Python
@@ -351,6 +356,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#fourier-transforms">
    Fourier Transforms
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#application-of-the-dct">
+     Application of The DCT
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -401,6 +413,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#fourier-transforms">
    Fourier Transforms
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#application-of-the-dct">
+     Application of The DCT
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -418,9 +437,12 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">fft</span>
+<span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="kn">import</span> <span class="n">GridSpec</span>
+<span class="kn">from</span> <span class="nn">cycler</span> <span class="kn">import</span> <span class="n">cycler</span>
 </pre></div>
 </div>
 </div>
@@ -432,7 +454,7 @@ title="Print to PDF"
 \[    \chi^2 = \sum_{i=0}^N\left(\frac{y'(\vec{x_i},\vec{p})-y(\vec{x_i})}{\alpha_i}\right)^2.\]</div>
 <p>If each value in the residual sum is treated as an independent random variable. Then the sum of the values is distributed according to,</p>
 <div class="math notranslate nohighlight">
-\[    X(\chi^2:\nu) = \frac{(\chi^2)^{\frac{\nu}{2} - 1}exp(-\chi^2/2)}{2^{\nu/2}\Gamma(\nu/2)}.\]</div>
+\[    X(\chi^2:\nu) = \frac{(\chi^2)^{\frac{\nu}{2} - 1}\exp(-\chi^2/2)}{2^{\nu/2}\Gamma(\nu/2)}.\]</div>
 <p>Both the PDF(probability density function) and CDF(cumulative density function) are plotted below left and right, respectively. The degrees of freedom, <span class="math notranslate nohighlight">\(\nu = N - m\)</span>, where N and m are the numbers of data points and parameters, respectively.</p>
 <p>The CDF quantifies the probability that the residuals are larger for a specific model with a <span class="math notranslate nohighlight">\(\chi^2\)</span>, <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span>. A good fit is indicated by a value close to one. Bearing in mind that the <span class="math notranslate nohighlight">\(\chi^2\)</span> considers the size of the errors present. A large value for <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span> can be an indication of overly large error.</p>
 <section id="hypothesis-testing">
@@ -455,7 +477,7 @@ title="Print to PDF"
     <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
     <span class="n">pdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
-    <span class="n">cdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\nu$&#39;</span> <span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">cdf</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;$\nu$&#39;</span> <span class="o">+</span><span class="sa">f</span><span class="s1">&#39; = </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">spt</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
@@ -567,7 +589,11 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Building Subplot list, add axis builds from bottom left</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dur_cycle</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span><span class="p">[</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
+    <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">]</span>
+    <span class="p">)</span>
+
+<span class="c1"># Building Subplot list, add axis builds from bottom left</span>
 <span class="n">total_fig_height</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">total_fig_width</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -596,50 +622,46 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 <span class="n">ml</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fits_ml</span><span class="p">,</span><span class="n">chisq_ml</span><span class="p">,</span><span class="n">rs_ml</span><span class="p">)</span>
 <span class="c1">#Plotting</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">spt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ax</span><span class="p">):</span>
+    <span class="c1">#spt.text(0.5, 0.5, &quot;ax%d&quot; % (i), va=&quot;center&quot;, ha=&quot;center&quot;)</span>
     <span class="n">spt</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$CO_2$ (ppm)&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">i</span><span class="o">%</span><span class="k">2</span> != 0:
-        <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> 
-        <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">dur_cycle</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">cp</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-        <span class="n">cp</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="n">cp</span><span class="p">)</span>
-    
+        <span class="n">cp</span> <span class="o">=</span> <span class="n">dur_cycle</span>
+        <span class="n">cp</span> <span class="o">=</span> <span class="n">cp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">spt</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
     <span class="n">spt</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">2022</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
     <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
     <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
     <span class="p">)</span>    
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
     <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="n">capsize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span>
     <span class="p">)</span>   
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">((</span><span class="n">glob_f</span><span class="p">,</span> <span class="n">glob_chi</span><span class="p">,</span><span class="n">residual_global</span><span class="p">),</span> <span class="p">(</span><span class="n">ml_f</span><span class="p">,</span> <span class="n">ml_chi</span><span class="p">,</span><span class="n">residual_ml</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">glob</span><span class="p">,</span><span class="n">ml</span><span class="p">)):</span>
     <span class="c1">#ml plot </span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span><span class="n">ml_f</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">: &#39;</span><span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\chi^2_</span><span class="si">{min}</span><span class="s1">$ = &#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ml_chi</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">: &#39;</span><span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\chi^2_</span><span class="si">{min}</span><span class="s1">$ = &#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">ml_chi</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">residual_ml</span><span class="p">,</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">capsize</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="p">)</span>
+        <span class="n">residual_ml</span><span class="p">,</span>
+        <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">capsize</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="p">)</span>
     <span class="c1">#global</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span><span class="n">glob_f</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">: &#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\chi^2_</span><span class="si">{min}</span><span class="s1">$ = &#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">glob_chi</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;P</span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1">: &#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;$\chi^2_</span><span class="si">{min}</span><span class="s1">$ = &#39;</span><span class="o">+</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">glob_chi</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
-    <span class="n">residual_global</span><span class="p">,</span>
-    <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span>
-    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="p">)</span>
+        <span class="n">residual_global</span><span class="p">,</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;+&#39;</span><span class="p">,</span>
+        <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -654,16 +676,20 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 <img alt="_images/Hypothesis_Testing_8_0.png" src="_images/Hypothesis_Testing_8_0.png" />
 </div>
 </div>
-<p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurment is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals, regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. The residuals also have a regular periodic structure. A Fourier transform can be used to determine the periodicity of the residuals. A better model can be made with the form of the periodic part of the function.</p>
+<p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurement is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. The residuals also have a regular periodic structure. Fitting the residuals to a function of the form,</p>
+<div class="math notranslate nohighlight">
+\[\sum_i a_i \sin(\omega_i t).\]</div>
+<p>Gives periodicity to our function.</p>
+<p>Least-squares fitting of <span class="math notranslate nohighlight">\(\sin(x)\)</span> and <span class="math notranslate nohighlight">\(\cos(x)\)</span> can be problematic. The presence of many local minima hinders convergence. To determine the periodicity of the residuals one can use Fourier techniques. The DCT provides binned results. So our main frequencies generated by the DCT will be limited in precision. Thus The DCT results can be used to provide starting values for the least-squares method.</p>
 </section>
 <section id="fourier-transforms">
 <h2>Fourier Transforms<a class="headerlink" href="#fourier-transforms" title="Permalink to this headline">#</a></h2>
-<p>There are whole texts dedicated to the subtleties of Fourier analysis. For an intuitive picture of how the technique works, this <a class="reference external" href="https://www.youtube.com/watch?v=spUNpyF58BY">video</a>](https://www.youtube.com/watch?v=spUNpyF58BY) is excellent.</p>
+<p>There are whole texts dedicated to the subtleties of Fourier analysis. For an intuitive picture of how the technique works, this video](https://www.youtube.com/watch?v=spUNpyF58BY) is excellent.</p>
 <p>The 1D Fourier and inverse Fourier transforms are defined as integrals over all real numbers. The precise definition of the transform can vary. However, the general form of transform and its inverse are respectively</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}    \mathcal{F}[f(t)](\omega) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{-i \omega t}dt,  \\
-    \mathcal{F^{-1}}[f(\omega)](t) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} f(t) e^{i \omega t}d\omega.\end{split}\]</div>
-<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[<a class="reference internal" href="Bibliography.html#id12" title="J. Cooley, P. Lewis, and P. Welch. The finite fourier transform. IEEE Transactions on Audio and Electroacoustics, 17(2):77-85, 1969. doi:10.1109/TAU.1969.1162036.">CLW69</a>]</span> was developed to perform these calculations efficiently. Additionally,  a Discrete Cosine Transform(DCT)<span id="id3">[<a class="reference internal" href="Bibliography.html#id13" title="N. Ahmed, T. Natarajan, and K.R. Rao. Discrete cosine transform. IEEE Transactions on Computers, C-23(1):90-93, 1974. doi:10.1109/T-C.1974.223784.">ANR74</a>]</span> can be used because the data is real-valued.</p>
+\[\begin{split}    \mathcal{F}[f(t)](\omega) = \int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt \\
+    \mathcal{F^{-1}}[f(\omega)](t) = \int_{-\infty}^{\infty}f(\omega)e^{i\omega t}d\omega\end{split}\]</div>
+<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)[CLW69] was developed to perform these calculations efficiently. Additionally, a Discrete Cosine Transform(DCT)[ANR74] can be used because the data is real-valued.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show data is sampled at constant freq</span>
@@ -671,15 +697,72 @@ P(\chi^2 \geq \chi^2_{min};571) = 0.0
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">timesteps</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">const_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">timesteps</span><span class="p">,</span><span class="n">timesteps</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Constant frequncy of CO_2 measurment:&#39;</span><span class="p">,</span><span class="n">const_freq</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Timestep:</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">timesteps</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constant frequncy of CO_2 measurment: True
+Timestep:0.083
 </pre></div>
 </div>
 </div>
 </div>
+<section id="application-of-the-dct">
+<h3>Application of The DCT<a class="headerlink" href="#application-of-the-dct" title="Permalink to this headline">#</a></h3>
+<p>Depending on the application different fomulations of the discrete cosine transform can be used. Here the default type is used, Type-2</p>
+<div class="math notranslate nohighlight">
+\[    X_k = \sum_{n = 0}^{N-1}x_n \cos\left[ \frac{\pi}{N}(n + \frac{1}{2})k\right]. \]</div>
+<p>This gives a frequency in years of</p>
+<div class="math notranslate nohighlight">
+\[    f = \frac{1}{2N*\Delta T}. \]</div>
+<p><span class="math notranslate nohighlight">\(\Delta T\)</span> is the time spacing between samples in the time series and <span class="math notranslate nohighlight">\(N\)</span> is the number of entires in the series. For different formulations of the transform the frequency of the bins is calculated from the argument of the cosine being equal to <span class="math notranslate nohighlight">\(2\pi fn\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ft_p3_res</span> <span class="o">=</span> <span class="n">fft</span><span class="o">.</span><span class="n">dct</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rs_ml_p3</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ft_p3_res</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="nb">abs</span><span class="p">(</span><span class="n">ft_p3_res</span><span class="p">),</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
+
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency in $6/(N \cdot Years)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$X_k$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$X_k$&#39;)
+</pre></div>
+</div>
+<img alt="_images/Hypothesis_Testing_13_1.png" src="_images/Hypothesis_Testing_13_1.png" />
+</div>
+</div>
+<p>The result of the DCT is reassuring in that the most significant frequency component is the yearly component. However, the prominent peak of the first bin corresponds to the parabolic shape of the mean residuals and so should not be used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The factor of 1/2 is added to the definintons of the cosine functiond, due to this being part of the definition in the inverse transform</span>
+<span class="k">def</span> <span class="nf">ft_trig</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">omega_0</span><span class="p">,</span> <span class="n">omega_1</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">a_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_0</span><span class="p">)</span> <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_1</span><span class="p">)</span>
+
+
+<span class="n">rs_ft_fit</span><span class="p">,</span> <span class="n">rs_ft_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">ft_trig</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+    <span class="n">rs_ml_p3</span><span class="p">,</span>
+    <span class="n">sigma</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Inital Parameter Guess</span>
+    <span class="p">)</span>
+<span class="c1">#chisq</span>
+<span class="n">rs_ft_ml</span> <span class="o">=</span> <span class="n">ft_trig</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">rs_ft_fit</span><span class="p">)</span>
+<span class="n">ft_residuals</span> <span class="o">=</span> <span class="p">(</span><span class="n">rs_ft_ml</span> <span class="o">-</span> <span class="n">rs_ml_p3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> 
+<span class="n">chisq_ft_res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">ft_residuals</span><span class="p">)</span>
+    <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 

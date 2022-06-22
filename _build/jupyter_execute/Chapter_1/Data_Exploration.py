@@ -22,10 +22,11 @@ from dur_utils import colours #Durham Utilities module that stores constants lik
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.optimize 
 
 
+# ```{tip}
 # Handling imports is typically done at the top of the file. The best practice is to avoid having redundant imports in a file. Avoiding double imports and redundant imports reduces the possibility of incompatibility errors.
+# ```
 # 
 # The first section will collect data from the [NOAA/GML](https://gml.noaa.gov/ccgg/trends/gl_data.html){cite}`Tans1995,Conway1994`. There are multiple files on the website; [mean monthly csv](https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv) was chosen. For this problem, greater resolution in each point is a boon. Further, in 'Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record'{cite}`Tans1995`, the approximate upper bound for the variation between Global monthly $CO_2$ is 0.5 ppm, across all measurements.  
 # 
@@ -57,9 +58,9 @@ pd.DataFrame(data=null_sum,
 # If there were large counts of null entries, a decision on whether to use the current dataset should be made. The effect of missing data has entire fields of research dedicated to it. There are multiple different statistical methods available to repopulate datasets. This, however, is beyond the remit of this text.  
 # 
 # When Displaying the ``` co2_data_global``` dataframe up to the first five rows, it can be seen that the decimal column is given by: 
-# \begin{equation}
+# ```{math}
 # decimal = year + \frac{month}{12}
-# \end{equation}
+# ```
 # This makes it straightforward to plot $CO_2$ average against time. 
 
 # In[3]:
@@ -79,8 +80,7 @@ plt.plot(co2_data_global['decimal'], co2_data_global['trend'],
         c=colours.durham.ink
         )
 plt.ylabel('$CO_2$ (ppm)')
-plt.xlabel('Year')
-None
+plt.xlabel('Year');
 
 
 # By plotting the monthly average against time and the trendline provided shows a consistent increase in the average concentration of $CO_2$ in the atmosphere over the last 40 years. In addition, a cyclical pattern over a shorter timescale is also observed. The data set is well populated over the time period for predictions on the few years scale. Thus
@@ -114,11 +114,10 @@ plt.errorbar(co2_data_ml['decimal date'], co2_data_ml['average'], co2_data_ml['s
         marker='o', markersize = 1
         )
 plt.ylabel('$CO_2$ (ppm)')
-plt.xlabel('Year')
-None
+plt.xlabel('Year');
 
 
-# The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still available. In this dataset, recordings before 1980 have unknown associated standard error. 
+# The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still available. In this dataset, recordings before 1980 have unknown associated standard error. Not using these points in the model is an option rather than estimating their ucertainty as the number of timesteps needing to be predicted into the future are not particularly large, for investigating the effects of covid. 
 
 # In[7]:
 
@@ -148,8 +147,7 @@ plt.plot(co2_data_global['decimal'], co2_data_global['trend'],
         ) 
 plt.ylabel('$CO_2$ (ppm)')
 plt.xlabel('Year')
-plt.legend()
-None
+plt.legend();
 
 
 # ### Next steps
