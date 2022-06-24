@@ -474,7 +474,9 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FittedModel</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">p0</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">fit_coefs</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">p0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fit_coefs</span><span class="o">=</span><span class="kc">None</span>
+        <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fn</span>  <span class="o">=</span> <span class="n">fn</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
@@ -534,8 +536,6 @@ title="Print to PDF"
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;= </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1"> +_ </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No error. The model was fitted on other Data&#39;</span><span class="p">)</span>
-        
-        
 </pre></div>
 </div>
 </div>
@@ -651,7 +651,7 @@ P(chi^2 &gt; chi^2_min) = 0.05537
 </section>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
-<p>The linear-regression model developed in the previous section does not account for any global effects that vary the average behaviour of the <span class="math notranslate nohighlight">\(CO_2\)</span> concentration in the previous section. When using the <span class="math notranslate nohighlight">\(\chi^2 statistic, this returns very poor fits over many years due to significant variances, exemplified by the 90s. However, a small window representing the general overall trend without high variance, like the period of 2018 and 2019, can present a good fit. Towards the end of the year 2021, the residuals of the data points are all negative. This could be the presence of Covid-19; however, the residuals are similar in size to the uncertainty, resulting in the high \)</span>\chi^2$ value.</p>
+<p>The linear-regression model developed in the previous section does not account for any global effects that vary the average behaviour of the <span class="math notranslate nohighlight">\(CO_2\)</span> concentration in the previous section. When using the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic, this returns very poor fits over many years due to significant variances, exemplified by the 90s. However, a small window representing the general overall trend without high variance, like the period of 2018 and 2019, can present a good fit. Towards the end of the year 2021, the residuals of the data points are all negative. This could be the presence of Covid-19; however, the residuals are similar in size to the uncertainty, resulting in the high <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>
 </section>
 </section>
 
