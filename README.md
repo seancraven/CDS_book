@@ -38,12 +38,12 @@ Formating:
 - Global Temperature rise, Predictive modelling. 
 - [ ] Discuss the limited scope of curve fitting. Explore the error quantification.
     - [x] Page one and solution to the previous question
-    - [] Discussion section on the results. 
+    - [ ] Discussion section on the results. 
 - [ ] Figure out how to use the Berkly Earth Data that is formatted weirdly.
 Formating:
-- [] Hide Code Cells
-- [] Standardise
-- [] Inital Proof
+- [ ] Hide Code Cells
+- [ ] Standardise
+- [ ] Inital Proof
 #### Chapter 3
 - Radiation Modeling: Building Packages, Large Datasets 
 - [ ] refactoring the code from last year. 
