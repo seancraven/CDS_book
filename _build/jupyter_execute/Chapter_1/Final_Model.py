@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # ## Final Model 
-# With the main frequencies determined from the Fourier transforms, additional degrees of freedom can be added to the model. It now takes the form,
+# With the main frequencies determined from the Fourier transforms, additional degrees of freedom can be added to the model. With precise guesses for the values of the trigonometric functions, lest-square fitting can be used. It now takes the form,
 # ```{math}
 # :label: model
 #     f(t) = t_0\cos[(\omega_0+1/2) t] + t_1\cos[(\omega_1+1/2) t] + p_1 t +p_2 t^2 +p_3 t^3 + c_0.
@@ -15,13 +15,10 @@
 import scipy.optimize
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 import pandas as pd
 from dur_utils import colours
 from scipy import stats
-from scipy import fft
 from matplotlib.gridspec import GridSpec
-from cycler import cycler
 
 
 # In[2]:
@@ -40,7 +37,7 @@ co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0]
 #The factor of 1/2 is added to the definintons of the cosine functiond, due to this being part of the definition in the inverse transform
 def model(x, a_0, a_1, omega_0, omega_1, c, p_1,p_2,p_3):
     polynomial = x*p_1 + x**2*p_2 +x**3*p_3
-    trig = a_0*np.cos((x + 1/2)*2*np.pi*omega_0) + a_1*np.cos((x + 1/2)*2*np.pi*omega_1)
+    trig = a_0*np.cos((x + 1/2)*2*np.pi*omega_0)         + a_1*np.cos((x + 1/2)*2*np.pi*omega_1)
     return c + trig + polynomial
 
 model_fit, model_error = scipy.optimize.curve_fit(model,

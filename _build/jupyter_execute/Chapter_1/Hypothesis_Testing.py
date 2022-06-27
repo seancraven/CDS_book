@@ -162,11 +162,15 @@ for i in range(4):
     if i%2 != 0:
         height = total_fig_height/3
         
-        ax.append(fig.add_axes([0,current_fig_bottom, total_fig_width, height]))
+        ax.append(fig.add_axes(
+            [0,current_fig_bottom, total_fig_width, height])
+            )
         current_fig_bottom += height + total_fig_height/16
     else:
         height = total_fig_height/8
-        ax.append(fig.add_axes([0,current_fig_bottom, total_fig_width, height]))
+        ax.append(fig.add_axes(
+            [0,current_fig_bottom, total_fig_width, height])
+            )
         current_fig_bottom += height  
 # Lists for plotting
 #glob
@@ -201,7 +205,7 @@ ax[1].errorbar(co2_data_ml['decimal date'],
     linestyle = '',
     capsize = 1,
     )   
-for i, ((glob_f, glob_chi,residual_global), (ml_f, ml_chi,residual_ml)) in enumerate(zip(glob,ml)):
+for i, ((glob_f, glob_chi,residual_global),         (ml_f, ml_chi,residual_ml)) in enumerate(zip(glob,ml)):
     #ml plot 
     ax[1].plot(co2_data_ml['decimal date'],ml_f,
         label = f'P{2*i + 1}: '+ r'$\chi^2_{min}$ = '+f'{ml_chi:.3}'
@@ -256,7 +260,7 @@ ax[3].set_title('Global Average');
 
 
 #Show data is sampled at constant freq
-timesteps = co2_data_ml['decimal date'] - np.roll(co2_data_ml['decimal date'],-1)
+timesteps = co2_data_ml['decimal date']     - np.roll(co2_data_ml['decimal date'],-1)
 timesteps = timesteps[:1]
 const_freq = np.isclose(timesteps,timesteps.iloc[0])
 print('Constant frequncy of CO_2 measurment:',const_freq[0])
@@ -294,7 +298,7 @@ plt.ylabel('$X_k$');
 
 #The factor of 1/2 is added to the definintons of the cosine functiond, due to this being part of the definition in the inverse transform
 def ft_trig(x, a_0, a_1, omega_0, omega_1, c):
-    return c + a_0*np.cos((x + 1/2)*2*np.pi*omega_0) + a_1*np.cos((x + 1/2)*2*np.pi*omega_1)
+    return c + a_0*np.cos((x + 1/2)*2*np.pi*omega_0)         + a_1*np.cos((x + 1/2)*2*np.pi*omega_1)
 
 
 rs_ft_fit, rs_ft_error = scipy.optimize.curve_fit(ft_trig,

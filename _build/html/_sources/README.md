@@ -2,6 +2,7 @@
 Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an enviroment such that one can contributre to the book easily. 
 
 ## Standards for the book
+Code cell line width: 75 Characters
 ###
 Writing style: 
 - Exclusively in 3rd person.
@@ -14,7 +15,7 @@ Writing style:
 - Consistent Font size/style for figures and text 
 - Consistent tick spacing 
     - [ ] Edit RCparams
-- Make and environment.yml file that has packages and changes to matplolib 
+- Make an environment.yml file that has packages and changes to matplolib 
     - [ ] .yml
 
 
@@ -29,14 +30,29 @@ Pages:
 - [x] Curve fitting
 - [x] Hypothesis Testing 
 - [x] Conclusion And Questions
+
 Formating:
 - [x] Hide Code Cells
-- [x] Standardise 
+- [x] Standardise
+- [x] Inital Proof
 #### Chapter 2
+
 - Global Temperature rise, Predictive modelling. 
-- [ ] Discuss limited scope of curve fitting. Explore the error quantification.
-    - Page one and solution to previous question
-- [ ] Figure out how to use the Berkly Earth Data that is formatted weirdly
+- [ ] Discuss the limited scope of curve fitting. Explore the error quantification.
+    - [x] Page one and solution to the previous question
+    - [x] Discussion section on the results.
+- [ ] Read and implement chapter 8
+
+Pages:
+- [x] Global CO_2 example
+- [ ] Global Temperature Data exploration
+ 
+- [ ] Figure out how to use the Berkly Earth Data that is formatted weirdly.
+
+Formating:
+- [ ] Hide Code Cells
+- [ ] Standardise
+- [ ] Initial Proof
 #### Chapter 3
 - Radiation Modeling: Building Packages, Large Datasets 
 - [ ] refactoring the code from last year. 

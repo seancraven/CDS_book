@@ -1,0 +1,23 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+parts:
+  - caption: 
+    chapters:
+      - file: An_Aside_On_Python
+  - caption: Global Carbon Dioxide
+    chapters:
+    - file: Chapter_1/Data_Exploration.ipynb
+    - file: Chapter_1/Fitting.ipynb
+    - file: Chapter_1/Hypothesis_Testing.ipynb
+    - file: Chapter_1/Final_Model.ipynb
+  - caption: Temperature Rise and Predictive Modelling 
+
+  - caption:
+    chapters:
+    - file: Bibliography
+
+
+

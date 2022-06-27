@@ -72,11 +72,13 @@ co2_data_global.iloc[:5,:]
 # In[4]:
 
 
-plt.plot(co2_data_global['decimal'], co2_data_global['average'],
+plt.plot(co2_data_global['decimal'],
+        co2_data_global['average'],
         c=colours.durham.red, linestyle='',
         marker='o', markersize = 1
         )
-plt.plot(co2_data_global['decimal'], co2_data_global['trend'],
+plt.plot(co2_data_global['decimal'],    
+        co2_data_global['trend'],
         c=colours.durham.ink
         )
 plt.ylabel('$CO_2$ (ppm)')
@@ -109,8 +111,10 @@ pd.DataFrame(data= np.vstack((null_sum, neg_sum)).transpose(),
 # In[6]:
 
 
-plt.errorbar(co2_data_ml['decimal date'], co2_data_ml['average'], co2_data_ml['sdev'],
-        c = colours.durham.red, linestyle='',
+plt.errorbar(co2_data_ml['decimal date'],
+        co2_data_ml['average'],
+        co2_data_ml['sdev'],
+        c = colours.durham.ink, linestyle='',
         marker='o', markersize = 1
         )
 plt.ylabel('$CO_2$ (ppm)')
