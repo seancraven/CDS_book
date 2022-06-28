@@ -362,6 +362,11 @@ title="Print to PDF"
    Predictions
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-warming-trend">
+   Current Warming trend
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -391,6 +396,11 @@ title="Print to PDF"
    Predictions
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-warming-trend">
+   Current Warming trend
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -411,6 +421,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
 <span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="kn">import</span> <span class="n">sliding_window_view</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
 </pre></div>
 </div>
 </div>
@@ -476,15 +487,9 @@ dtype: bool
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sliding window weighted average:</span>
 <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">temp_data</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">slv</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">time_midpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">[:,</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">win_ave_temp</span> <span class="o">=</span> <span class="n">slv</span><span class="p">[:,</span><span class="mi">1</span><span class="p">,:]</span>
 <span class="n">win_ave_unc</span> <span class="o">=</span>  <span class="n">slv</span><span class="p">[:,</span><span class="mi">2</span><span class="p">,:]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1873, 9, 120)
 </pre></div>
 </div>
 </div>
@@ -495,13 +500,9 @@ dtype: bool
 <span class="n">ave_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">win_ave_temp</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ave_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">win_ave_unc</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="n">lb</span> <span class="o">=</span> <span class="n">ave_temp</span> <span class="o">-</span> <span class="n">ave_unc</span>
+<span class="n">ub</span> <span class="o">=</span> <span class="n">ave_temp</span> <span class="o">+</span> <span class="n">ave_unc</span>
 
-<span class="n">lb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ave_temp</span>
-    <span class="o">-</span> <span class="n">ave_unc</span>
-    <span class="p">)</span>
-<span class="n">ub</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ave_temp</span>
-    <span class="o">+</span> <span class="n">ave_unc</span>
-    <span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_midpoint</span><span class="p">,</span>
     <span class="n">ave_temp</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
@@ -526,7 +527,77 @@ dtype: bool
 </section>
 <section id="predictions">
 <h1>Predictions<a class="headerlink" href="#predictions" title="Permalink to this headline">#</a></h1>
-<p>There i</p>
+<p>Global temperatures provide an interesting case study for a further introduction to predictive modelling. There has already been substantial warming compared to the period from <span class="math notranslate nohighlight">\(1850-1900\)</span>. This period is set as a pre-industrial baseline<span id="id1">[]</span>. Further temperature rises will continue to increase the occurrence of extreme weather events and myriad other consequences, with an etire <a class="reference external" href="https://www.ipcc.ch/sr15/">IPCC</a> report dedicated to the consequences of warming over <span class="math notranslate nohighlight">\(1.5^\circ C\)</span>. The special report on emission scenarios(SRES)<span id="id2">[]</span> produced by the IPCC in 2000, details multiple families of emission scenarios with their associated warming.</p>
+<p>These scenarios are developed using six independent models. Such models use economic driving forces and predict the consequences of changing macro-economic behaviour, for example, the percentage of fossil fuel used compared to renewables.</p>
+<p>These highly detailed models are not suitable for this section. Using <span class="math notranslate nohighlight">\(CO_2\)</span> concentration, an overly simplistic model can be formed to determine the change in temperature over the next 80 years.
+The three scenarios that will be investigated are inspired by Durham Universities’ lack-lustre commitment to a net-zero commitment.</p>
+<ol class="simple">
+<li><p>No reduction in emissions rates by 2030 and net-zero by 2050.</p></li>
+<li><p>Net-zero by 2030, no further reductions</p></li>
+<li><p>Net-zero by 2030, and then reducing total atmospheric carbon at the same rate it is currently produced.
+The relationship between <span class="math notranslate nohighlight">\(CO_2\)</span> concentration used is:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[T(C) = T_0 + S \log_2(C/C_0).\]</div>
+<p>Where <span class="math notranslate nohighlight">\(C\)</span> is the concentration of <span class="math notranslate nohighlight">\(CO_2\)</span> and <span class="math notranslate nohighlight">\(S\)</span> is a fitted sensitivity factor.</p>
+</section>
+<section id="current-warming-trend">
+<h1>Current Warming trend<a class="headerlink" href="#current-warming-trend" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## To do </span>
+<span class="c1">#- make a moving average dataframe function</span>
+<span class="k">def</span>  <span class="nf">moving_ave_frame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">):</span>
+    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ma_df</span>
+
+<span class="k">def</span> <span class="nf">lb_ub</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="n">lb</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">sigma</span>
+    <span class="n">ub</span> <span class="o">=</span> <span class="n">values</span> <span class="o">+</span> <span class="n">sigma</span>
+    <span class="k">return</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_data</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1960</span><span class="p">]</span>
+<span class="n">trend_ave</span> <span class="o">=</span> <span class="n">moving_ave_frame</span><span class="p">(</span><span class="n">trend_data</span><span class="p">,</span><span class="mi">120</span><span class="p">)</span>
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;LandAverageTemperature&#39;</span><span class="p">],</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;LandAverageTemperatureUncertainty&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">P1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span><span class="o">*</span><span class="n">x</span>
+
+
+
+<span class="n">trend_fit</span><span class="p">,</span> <span class="n">trend_error</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;LandAverageTemperature&#39;</span><span class="p">],</span> <span class="n">sigma</span><span class="o">=</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;LandAverageTemperatureUncertainty&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1960</span><span class="p">,</span> <span class="mi">2101</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;LandAverageTemperature&#39;</span><span class="p">],</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;LandAverageTemperatureUncertainty&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">P1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">trend_fit</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fcb71db1ee0&gt;]
+</pre></div>
+</div>
+<img alt="../_images/baysian_13_1.png" src="../_images/baysian_13_1.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

@@ -41,13 +41,21 @@ Formating:
 - [ ] Discuss the limited scope of curve fitting. Explore the error quantification.
     - [x] Page one and solution to the previous question
     - [x] Discussion section on the results.
-- [ ] Read and implement chapter 8
+
+Note on predictive modelling and a baysian approach to differnt scenarios,
+it is proving difficult to find a shove it in the oven dataset. This article might be of use 
+- [ ] https://iopscience.iop.org/article/10.1088/1748-9326/ac6ff6
+
 
 Pages:
 - [x] Global CO_2 example
-- [ ] Global Temperature Data exploration
+- [ ] Global Temperature Data exploration and Bayesian predictions of warming temperatures crossed.
+    - Match 3 approximate scenarios to some of those in the SRES
  
 - [ ] Figure out how to use the Berkly Earth Data that is formatted weirdly.
+```{note}
+Berkeley Earth website is down currently using kaggle data.
+```
 
 Formating:
 - [ ] Hide Code Cells
