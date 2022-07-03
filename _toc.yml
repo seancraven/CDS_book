@@ -16,7 +16,7 @@ parts:
   - caption: Temperature Rise and Predictive Modelling 
     chapters:
     - file: Chapter_2/predictive_models.ipynb
-    - file: Chapter_2/baysian.ipynb
+    - file: Chapter_2/temp_co2.ipynb
   - caption:
     chapters:
     - file: Bibliography

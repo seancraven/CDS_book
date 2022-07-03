@@ -413,7 +413,7 @@ title="Print to PDF"
                 
   <section id="global-temperature-predictions">
 <h1>Global Temperature Predictions<a class="headerlink" href="#global-temperature-predictions" title="Permalink to this headline">#</a></h1>
-<p>This section uses global temperature data in combination with global <span class="math notranslate nohighlight">\(CO_2\)</span> concentration and warming data provided by the IPCC to make Global warming estimates. Similar calculations have been done with more complex models. However, the takeaway conclusions are similar.</p>
+<p>This section uses global temperature data combined with global <span class="math notranslate nohighlight">\(CO_2\)</span> concentration and warming data provided by the IPCC to compare a simple model with Global warming estimates laid out in the Special Report on Emission Scenarios(SRES).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -440,7 +440,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the global <span class="math notranslate nohighlight">\(CO_2\)</span> data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. Thus an averaging needs to be applied because the temperature data has known uncertainties. After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.</p>
+<p>The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. A Fourier-based fit could be applied similarly to that performed in the section on Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Because this section is not looking for a functional form, an average is more straightforward to implement.</p>
+<p>After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt&quot;</span>
@@ -669,7 +670,7 @@ The relationship between <span class="math notranslate nohighlight">\(CO_2\)</sp
 <img alt="../_images/baysian_13_0.png" src="../_images/baysian_13_0.png" />
 </div>
 </div>
-<p>With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists then keeping the Global Temperature anomaly below <span class="math notranslate nohighlight">\(1.5^\circ C\)</span> is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span></p>
+<p>With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists, then keeping the Global Temperature anomaly below <span class="math notranslate nohighlight">\(1.5^\circ C\)</span> is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data the correlation of these datasets i</p>
 </section>
 
     <script type="text/x-thebe-config">

@@ -3,7 +3,7 @@
 
 # ## Global Temperature Predictions
 # 
-# This section uses global temperature data in combination with global $CO_2$ concentration and warming data provided by the IPCC to make Global warming estimates. Similar calculations have been done with more complex models. However, the takeaway conclusions are similar.
+# This section uses global temperature data combined with global $CO_2$ concentration and warming data provided by the IPCC to compare a simple model with Global warming estimates laid out in the Special Report on Emission Scenarios(SRES).
 
 # In[1]:
 
@@ -16,9 +16,11 @@ from numpy.lib.stride_tricks import sliding_window_view
 from scipy.optimize import curve_fit
 
 
-# The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the global $CO_2$ data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. Thus an averaging needs to be applied because the temperature data has known uncertainties. After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.
+# The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the Global $\text{CO}_2$ data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. A Fourier-based fit could be applied similarly to that performed in the section on Global $\text{CO}_2$ data. Because this section is not looking for a functional form, an average is more straightforward to implement.
+# 
+# After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.
 
-# In[2]:
+# In[23]:
 
 
 path = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
@@ -38,7 +40,7 @@ temp_data.drop( columns=['yearly_anomaly', 'yearly_anomaly_unc',
     )
 
 
-# In[3]:
+# In[24]:
 
 
 # Format date 
@@ -49,14 +51,14 @@ pd.DataFrame(data=null_sum,
     )
 
 
-# In[4]:
+# In[25]:
 
 
 #Drop NA
 temp_data = temp_data.dropna()
 
 
-# In[5]:
+# In[26]:
 
 
 # Sliding window weighted average:
@@ -182,7 +184,7 @@ plt.plot(x, y*2, color=colours.durham.red,
 plt.legend();
 
 
-# With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists then keeping the Global Temperature anomaly below $1.5^\circ C$ is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global $\text{CO}_2$
+# With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists, then keeping the Global Temperature anomaly below $1.5^\circ C$ is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global $\text{CO}_2$ data the correlation of these datasets i
 # 
 
 # 
