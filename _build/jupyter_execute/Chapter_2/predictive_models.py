@@ -33,7 +33,7 @@ co2_data_ml = pd.read_csv(path_ml, header=0, comment='#')
 co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0] 
 
 
-# In[2]:
+# In[98]:
 
 
 # Training Set
@@ -50,7 +50,7 @@ mask = np.isin(co2_data_ml['year'], test_years)
 test_co2_data = co2_data_ml.iloc[mask]
 
 
-# In[3]:
+# In[107]:
 
 
 
@@ -80,7 +80,7 @@ chi_crit = stats.chi2.isf(.05,nu_model)
 # [Classes](https://docs.python.org/3/tutorial/classes.html) are the staple of Object oriented programming(OOP). They are something you can call which has methods and atributes. Methods are functions of the object. Atributes are values stored inside the class. A good example of a class is a list. It has multiple functions like `__len__()` which returns the instance of the classes length. Where the instance is the specific class a list of `[1, 2, 3]` for example. The atributes of the list are its values. When implementing a class it is considered good practice to only have users interact with methods. Chapter 10 of [Python Programming: An introduction to Computer Science](https://www.google.co.uk/books/edition/Python_Programming/) covers Classes well. However, there are many guides online to their implementation. 
 # ```
 
-# In[4]:
+# In[100]:
 
 
 class FittedModel:
@@ -148,7 +148,7 @@ class FittedModel:
                 print('No error. The model was fitted on other Data')
 
 
-# In[5]:
+# In[101]:
 
 
 train  = FittedModel(model,
@@ -174,14 +174,14 @@ val  = FittedModel(model,
     )
 
 
-# In[6]:
+# In[102]:
 
 
 print('Training Model Co-efficients')
 train.print_errors()
 
 
-# In[7]:
+# In[103]:
 
 
 
@@ -198,7 +198,7 @@ for model_ in [train, val, test]:
 # 
 # In the testing regime, the $P(\chi^2 \geq \chi^2_{min};\nu) = 0.055$. This $P$ value indicates that approximately 5% of the time, the random variable normalised residuals would be distributed in such a manner. This extrapolation is pushing the bounds of the model. In this case, there is insufficient evidence to say that there has been a noticeable downwards trend in $CO_2$ production over the year $2020$. 
 
-# In[8]:
+# In[106]:
 
 
 fig, ax  = plt.subplots(3,1, figsize = (10,10))

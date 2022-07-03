@@ -50,8 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Predictive Modeling" href="../Chapter_2/predictive_models.html" />
@@ -122,7 +122,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Global Carbon Dioxide
  </span>
@@ -152,7 +152,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
 </ul>
-<p class="caption">
+<p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
   Temperature Rise and Predictive Modelling
  </span>
@@ -161,6 +161,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_2/predictive_models.html">
    Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/baysian.html">
+   Global Temperature Predictions
   </a>
  </li>
 </ul>
@@ -427,6 +432,20 @@ title="Print to PDF"
 <span class="eqno">(3)<a class="headerlink" href="#equation-model" title="Permalink to this equation">#</a></span>\[    f(t) = t_0\cos[(\omega_0+1/2) t] + t_1\cos[(\omega_1+1/2) t] + p_1 t +p_2 t^2 +p_3 t^3 + c_0.\]</div>
 <p>All the parameters in the equation <span class="math notranslate nohighlight">\(f(t)\)</span> with subscripts are constants to be fitted by the least-squares method. The Model and its residuals are plotted below.</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 5&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">matplotlib.gridspec</span> <span class="kn">import</span> <span class="n">GridSpec</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;dur_utils&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -453,7 +472,7 @@ title="Print to PDF"
     <span class="p">)</span>
 <span class="n">nu_model</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_fit</span><span class="p">)</span>
 <span class="n">p_model</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_model</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
-<span class="n">chi_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="o">.</span><span class="mi">05</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
+<span class="n">chi_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;chi^2_crit:</span><span class="si">{</span><span class="n">chi_crit</span><span class="si">:</span><span class="s1">.4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;chi^2_min:</span><span class="si">{</span><span class="n">chisq_model</span><span class="si">:</span><span class="s1">.5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;P(\chi^2 \geq \chi^2_</span><span class="se">{{</span><span class="s1">min</span><span class="se">}}</span><span class="s1">;</span><span class="si">{</span><span class="n">nu_model</span><span class="si">}</span><span class="s1">) = </span><span class="si">{</span><span class="n">p_model</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>

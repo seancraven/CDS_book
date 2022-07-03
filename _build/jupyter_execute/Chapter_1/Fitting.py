@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import scipy.optimize 
 
 
-# In[2]:
+# In[7]:
 
 
 path_global = 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv'
@@ -60,7 +60,7 @@ co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0]
 # 
 # Intuitively one would draw a line to fit this data, a model with two free parameters. A polynomial fit is the higher freedom extension to this. Increased dimensions in $\vec{p}$ will reduce the size of residuals. It follows that an exact fit can be found by increasing the order of the polynomial. However, this comes at a cost to the generalisability of the model. A small section of the data sets are shown below with polynomial fits, constituting under and overfitting of data. 
 
-# In[3]:
+# In[ ]:
 
 
 def compound_mask(array: pd.DataFrame, *tuples):
@@ -84,7 +84,7 @@ def compound_mask(array: pd.DataFrame, *tuples):
     return array[mask]
 
 
-# In[4]:
+# In[8]:
 
 
 # Define overfit polynomial
@@ -129,7 +129,7 @@ p3_fit, p3_error = scipy.optimize.curve_fit(p3,
 # - P3 polynomial, is the highest order polynomial for which there is one exact solution that goes through all of the data points. For P4 and above there are an infinite set of polynomials that go through 4 points. 
 # ```
 
-# In[5]:
+# In[9]:
 
 
 

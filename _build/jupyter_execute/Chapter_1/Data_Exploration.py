@@ -38,7 +38,7 @@ import matplotlib.pyplot as plt
 # np.loadtxt(file, delimiter = ',')
 # ```
 
-# In[2]:
+# In[23]:
 
 
 path_global = 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv'
@@ -63,13 +63,13 @@ pd.DataFrame(data=null_sum,
 # ```
 # This makes it straightforward to plot $CO_2$ average against time. 
 
-# In[3]:
+# In[4]:
 
 
 co2_data_global.iloc[:5,:]
 
 
-# In[4]:
+# In[5]:
 
 
 plt.plot(co2_data_global['decimal'],
@@ -95,7 +95,7 @@ plt.xlabel('Year');
 # 
 #  
 
-# In[5]:
+# In[18]:
 
 
 path_ml =  'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv'              
@@ -108,7 +108,7 @@ pd.DataFrame(data= np.vstack((null_sum, neg_sum)).transpose(),
     )
 
 
-# In[6]:
+# In[19]:
 
 
 plt.errorbar(co2_data_ml['decimal date'],
@@ -123,7 +123,7 @@ plt.xlabel('Year');
 
 # The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still available. In this dataset, recordings before 1980 have unknown associated standard error. Not using these points in the model is an option rather than estimating their ucertainty as the number of timesteps needing to be predicted into the future are not particularly large, for investigating the effects of covid. 
 
-# In[7]:
+# In[20]:
 
 
 invalid_values = np.sum(co2_data_ml['sdev']<0)
@@ -133,7 +133,7 @@ print(' Number of discarded data points:', invalid_values,
     )
 
 
-# In[8]:
+# In[24]:
 
 
 co2_data_ml = co2_data_ml[co2_data_ml['average']>0] 

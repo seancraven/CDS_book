@@ -16,46 +16,44 @@ from numpy.lib.stride_tricks import sliding_window_view
 from scipy.optimize import curve_fit
 
 
+# The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the global $CO_2$ data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. Thus an averaging needs to be applied because the temperature data has known uncertainties. After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.
+
 # In[2]:
 
 
+path = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
+#Formatting be data
+colnames=['year', 'month', 'monthly_anomaly', 'monthly_anomaly_unc',
+    'yearly_anomaly', 'yearly_anomaly_unc', '5yearly_anomaly',
+    '5yearly_anomaly_unc', '10yearly_anomaly', '10yearly_anomaly_unc',
+    '20yearly_anomaly', '20yearly_anomaly_unc'
+    ]
+temp_data = pd.read_fwf(path, skiprows=34, names=colnames)
+temp_data['dt'] = temp_data['month']/12 + temp_data['year']
+#remove be moving averages
+temp_data.drop( columns=['yearly_anomaly', 'yearly_anomaly_unc',
+    '5yearly_anomaly', '5yearly_anomaly_unc', '10yearly_anomaly',
+    '10yearly_anomaly_unc', '20yearly_anomaly', '20yearly_anomaly_unc'],
+    inplace=True
+    )
 
-def yymmdd(temperature_data_frame: pd.DataFrame) -> pd.DataFrame:
-    ''' inplace string date to float date'''
-    result = np.zeros_like(temperature_data_frame['dt'])
-    for ii, i in enumerate(temperature_data_frame['dt']):
-        string = i.split('-')
-        [yy, mm, dd] = [int(j) for j in string]
-        result[ii] = yy + mm/12 + dd/365
-        result = np.array(result, dtype=float)
-    temperature_data_frame['dt'] = result
-
-
-# The global Temperature data is taken from Berkley Earth. Want to write about the data collection methods from before 1950.
-# The temperature data has missing fields as with the global $CO_2$ data. Further, the date is formatted awkwardly and needs to be converted into a float for easy processing. Finally the global temperature data is seasonal. Thus an averaging needs to be applied because the temperature data has known uncertainties a moving average can be applied to remove the seasonal trends.
 
 # In[3]:
 
 
-path = '/home/sean/Downloads/GlobalTemperatures.csv'
-temp_data = pd.read_csv(path)
 # Format date 
-yymmdd(temp_data)
-# Find NA
 null_sum = (temp_data.isna()).values.sum(axis=0)
 pd.DataFrame(data=null_sum,
     index=temp_data.columns,
     columns=['Number of Null Values']
     )
-#Drop NA
-temp_data = temp_data.dropna()
-
 
 
 # In[4]:
 
 
-print('Temperatures and Uncertainties are positive:\n', temp_data.all()>0)
+#Drop NA
+temp_data = temp_data.dropna()
 
 
 # In[5]:
@@ -63,9 +61,9 @@ print('Temperatures and Uncertainties are positive:\n', temp_data.all()>0)
 
 # Sliding window weighted average:
 slv = sliding_window_view(temp_data, 120, 0)
-time_midpoint = np.mean(slv[:,0,:], axis=1)
-win_ave_temp = slv[:,1,:]
-win_ave_unc =  slv[:,2,:]
+time_midpoint = np.mean(slv[:,-1,:], axis=1)
+win_ave_temp = slv[:,2,:]
+win_ave_unc =  slv[:,3,:]
 
 
 # In[6]:
@@ -89,7 +87,7 @@ ax.fill_between(time_midpoint,
     alpha=0.2
     )
 ax.set_xlabel('Window Midpoint /Year')
-ax.set_ylabel('10 Year Moving Average of \n     Land Average Temperature / $^{\circ}C$'
+ax.set_ylabel('10 Year Moving Average of \n     Land Average Temperature Anomaly /$^{\circ}C$'
     );
 
 
@@ -114,9 +112,8 @@ ax.set_ylabel('10 Year Moving Average of \n     Land Average Temperature / $^{\c
 # In[7]:
 
 
-## To do 
-#- make a moving average dataframe function
-def  moving_ave_frame(df, window):
+def  moving_ave_frame(df:pd.DataFrame, window:int)->pd.DataFrame:
+    'Applies a moving average'
     slv = sliding_window_view(df, window, axis=0)
     moving_averages = np.mean(slv, axis=2)
     ma_df = pd.DataFrame(moving_averages,columns=df.keys())
@@ -133,31 +130,59 @@ def lb_ub(values, sigma):
 
 trend_data = temp_data[temp_data['dt'] > 1960]
 trend_ave = moving_ave_frame(trend_data,120)
-lb, ub = lb_ub(trend_ave['LandAverageTemperature'], trend_ave['LandAverageTemperatureUncertainty'])
+lb, ub = lb_ub(trend_ave['monthly_anomaly'], trend_ave['monthly_anomaly_unc'])
 
 
-# In[9]:
+# In[21]:
 
 
 def P1(x, a0, a1):
     return a0 + a1*x
 
+trend_fit, trend_error = curve_fit(P1, trend_ave['dt'],
+    trend_ave['monthly_anomaly'],
+    sigma=trend_ave['monthly_anomaly_unc']
+    )
+gradient_lb =  trend_fit[1] - trend_error[1,1]
+gradient_ub = trend_fit[1] + trend_error[1,1]
 
 
-trend_fit, trend_error = curve_fit(P1, trend_ave['dt'], trend_ave['LandAverageTemperature'], sigma=trend_ave['LandAverageTemperatureUncertainty'])
+# In[22]:
 
 
-# In[10]:
-
-
+lb, ub = lb_ub(trend_ave['monthly_anomaly'], trend_ave['monthly_anomaly_unc'])
+#Plotting
 fig, ax = plt.subplots(1,1, figsize=(10, 6))
-time = np.linspace(1960, 2101, 300)
-plt.errorbar(trend_ave['dt'], trend_ave['LandAverageTemperature'], trend_ave['LandAverageTemperatureUncertainty'])
-plt.plot(time, P1(time, *trend_fit))
+time = np.linspace(2017.3, 2055, 300)
+plt.fill_between(trend_ave['dt'], lb, ub, alpha=0.2,
+    color=colours.durham.ink)
+plt.plot(trend_ave['dt'],  trend_ave['monthly_anomaly'],
+    c=colours.durham.ink,
+    label='Data')
+plt.plot(time, P1(time, *trend_fit),
+    linestyle='--',
+    color=colours.durham.ink,
+    label='Linear Trend')
+plt.fill_between(time, P1(time, trend_fit[0], gradient_lb),
+    P1(time, trend_fit[0], gradient_ub))
+ax.set_xlabel('Window Midpoint /Year')
+ax.set_ylabel('10 Year Moving Average of \n     Land Average Temperature Anomaly /$^{\circ}C$'
+    );
+#Warming Targets
+x = np.linspace(1960,2055,100)
+y = np.ones_like(x)
+plt.plot(x, y*1.5, color=colours.durham.red,
+    label='$1.5^\circ C$ Warming',
+    linestyle='--'
+    )
+plt.plot(x, y*2, color=colours.durham.red,
+    label='$2.0^\circ C$ Warming',
+    linestyle='--'
+    )
+plt.legend();
 
 
-# In[ ]:
+# With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists then keeping the Global Temperature anomaly below $1.5^\circ C$ is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global $\text{CO}_2$
+# 
 
-
-
-
+# 

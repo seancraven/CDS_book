@@ -21,7 +21,7 @@ from scipy import stats
 from matplotlib.gridspec import GridSpec
 
 
-# In[2]:
+# In[8]:
 
 
 path_global = 'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv'
@@ -31,7 +31,7 @@ co2_data_ml = pd.read_csv(path_ml, header=0, comment='#')
 co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0] 
 
 
-# In[3]:
+# In[9]:
 
 
 #The factor of 1/2 is added to the definintons of the cosine functiond, due to this being part of the definition in the inverse transform
@@ -60,7 +60,7 @@ print(rf'chi^2_min:{chisq_model:.5}')
 print(rf'P(\chi^2 \geq \chi^2_{{min}};{nu_model}) = {p_model:.3}')
 
 
-# In[4]:
+# In[10]:
 
 
 fig = plt.figure(figsize=(10,6))
