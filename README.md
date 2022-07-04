@@ -17,7 +17,7 @@ Writing style:
     - [x] Edit RCparams
 - Make an environment.yml file that has packages and changes to matplolib 
     - [ ] .yml
-
+- [x] Fixed file tracking
 
 ## Plan 
 ### Landing Page
@@ -36,8 +36,9 @@ Formating:
 - [x] Standardise
 - [x] Inital Proof
 #### Chapter 2
+- Global Temperature rise, Predictive modelling 
 
-- Global Temperature rise, Predictive modelling. 
+
 - [ ] Discuss the limited scope of curve fitting. Explore the error quantification.
     - [x] Page one and solution to the previous question
     - [x] Discussion section on the results.
@@ -49,6 +50,8 @@ it is proving difficult to find a shove it in the oven dataset. This article mig
 
 Pages:
 - [x] Global CO_2 example
+- [x] Comparison of moving average of CO_2 and Temp
+- [ ] testing simple model
 - [ ] Global Temperature Data exploration and Bayesian predictions of warming temperatures crossed.
     - Match 3 approximate scenarios to some of those in the SRES
  
