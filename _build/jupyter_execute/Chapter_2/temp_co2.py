@@ -17,11 +17,20 @@ from scipy.optimize import curve_fit
 from scipy import stats
 
 
+# In[2]:
+
+
+import matplotlib as mpl
+print(mpl.get_configdir())
+import os 
+print(os.getcwd())
+
+
 # The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the Global $\text{CO}_2$ data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. A Fourier-based fit could be applied similarly to that performed in the section on Global $\text{CO}_2$ data. Because this section is not looking for a functional form, an average is more straightforward to implement.
 # 
 # After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.
 
-# In[2]:
+# In[3]:
 
 
 path = "http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt"
@@ -41,7 +50,7 @@ temp_data.drop( columns=['yearly_anomaly', 'yearly_anomaly_unc',
     )
 
 
-# In[3]:
+# In[4]:
 
 
 # Format date 
@@ -52,14 +61,14 @@ pd.DataFrame(data=null_sum,
     )
 
 
-# In[4]:
+# In[5]:
 
 
 #Drop NA
 temp_data = temp_data.dropna()
 
 
-# In[5]:
+# In[6]:
 
 
 # Sliding window weighted average:
@@ -69,7 +78,7 @@ win_ave_temp = slv[:,2,:]
 win_ave_unc =  slv[:,3,:]
 
 
-# In[6]:
+# In[7]:
 
 
 fig, ax = plt.subplots(1, 1, figsize = (10, 6))
@@ -114,7 +123,7 @@ ax.set_ylabel('10 Year Moving Average of \n     Land Average Temperature Anomaly
 
 # ## Current Warming trend 
 
-# In[7]:
+# In[8]:
 
 
 def  moving_ave_frame(df:pd.DataFrame, window:int)->pd.DataFrame:
@@ -136,7 +145,7 @@ def lb_ub(values, sigma, factor=1):
     return lb, ub
 
 
-# In[8]:
+# In[9]:
 
 
 WINDOW = 120
@@ -145,7 +154,7 @@ trend_ave = moving_ave_frame(trend_data,WINDOW)
 lb, ub = lb_ub(trend_ave['monthly_anomaly'], trend_ave['monthly_anomaly_unc'])
 
 
-# In[9]:
+# In[10]:
 
 
 def P1(x, a0, a1):
@@ -159,7 +168,7 @@ gradient_lb = trend_fit[1] - trend_error[1,1]
 gradient_ub = trend_fit[1] + trend_error[1,1]
 
 
-# In[10]:
+# In[11]:
 
 
 lb, ub = lb_ub(trend_ave['monthly_anomaly'],
@@ -204,7 +213,7 @@ plt.legend();
 # The error bars on the $\text{CO_2}$ concentration are two times the standard error on the mean. However, the error bars on the temperature is the mean of the uncertainty over the window. This is because the uncertainty corresponds to 95\% of recorded percentages.  
 # ```
 
-# In[ ]:
+# In[12]:
 
 
 path_ml =  'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv'              
@@ -212,7 +221,7 @@ co2_data = pd.read_csv(path_ml, header=0, comment='#')
 #co2_data_ml = co2_data_ml[co2_data_ml['sdev']>0] 
 
 
-# In[ ]:
+# In[13]:
 
 
 trend_co2_data = co2_data[co2_data['decimal'] > 1960]
@@ -221,7 +230,7 @@ trend_co2_std = moving_std_frame(co2_data, WINDOW)
 co2_lb, co2_ub = lb_ub(trend_co2_ave['average'], trend_co2_std['average'], factor=2)
 
 
-# In[ ]:
+# In[14]:
 
 
 fig, ax = plt.subplots(1, 1,figsize=(10, 6))
@@ -236,7 +245,7 @@ ax.fill_between(trend_ave['dt'], lb, ub, alpha=0.2,
     color=colours.durham.red
     )
 
-ax.set_ylabel('10 Year Moving Average of \n     Land Average Temperature Anomaly /$^{\circ}C$')
+ax.set_ylabel('10 Year Moving Average of \n'     r'Land Average Temperature Anomaly /$^{\circ}\textrm{{C}}$')
 ax.set_yticks(np.arange(-.2,1.4, .2), np.round(np.arange(-.2,1.4, .2), 2),
     color=colours.durham.red
     )
@@ -250,12 +259,12 @@ ax1.fill_between(trend_co2_ave['decimal'], co2_lb, co2_ub,
     alpha=0.2,
     color=colours.durham.ink
     )
-ax1.set_ylabel(r'10 Year Moving Average of ${CO}_2$ (ppm)')
+ax1.set_ylabel(r'10 Year Moving Average of $ \textrm{{CO}}_2$ (ppm)')
 
 plt.xlim(1985, 2017);
 
 
-# In[ ]:
+# In[15]:
 
 
 co2_slice = np.where((1985 < trend_co2_ave['decimal']) &     (trend_co2_ave['decimal'] < 2016)
