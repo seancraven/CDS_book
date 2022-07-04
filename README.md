@@ -11,10 +11,10 @@ Writing style:
 - Colours:
     - [x] Dur_utils module that contains colours.
     - [ ] Decide on a gradient colour scheme for 3d/many line plots
-- Consistent Figure sizes (10,6) for single depth Page Wide Plots
-- Consistent Font size/style for figures and text 
-- Consistent tick spacing 
-    - [ ] Edit RCparams
+- [x] Consistent Figure sizes (10,6) for single depth Page Wide Plots
+- [x] Consistent Font size/style for figures and text 
+- [x] Consistent tick spacing 
+    - [x] Edit RCparams
 - Make an environment.yml file that has packages and changes to matplolib 
     - [ ] .yml
 
@@ -52,7 +52,7 @@ Pages:
 - [ ] Global Temperature Data exploration and Bayesian predictions of warming temperatures crossed.
     - Match 3 approximate scenarios to some of those in the SRES
  
-- [ ] Figure out how to use the Berkly Earth Data that is formatted weirdly.
+- [x] Figure out how to use the Berkly Earth Data that is formatted weirdly.
 ```{note}
 Berkeley Earth website is down currently using kaggle data.
 ```
