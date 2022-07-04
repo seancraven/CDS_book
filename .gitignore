@@ -1,5 +1,4 @@
 gpg_key.txt
 Data
-/home/sean/dur_rads_book/_build/*
-/home/sean/dur_rads_book/_build
-*.key
+/home/sean/Documents/Work/CDS_book/_build
+/home/sean/Documents/Work/CDS_book/.history

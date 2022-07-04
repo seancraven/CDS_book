@@ -1,0 +1,68 @@
+Traceback (most recent call last):
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 1112, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/sean/anaconda3/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+    return future.result()
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 553, in async_execute
+    await self.async_execute_cell(
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 857, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/sean/anaconda3/lib/python3.8/site-packages/nbclient/client.py", line 760, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def per(x, a_1, a_2, omega_1, omega_2, C):
+    return a_1*np.cos(omega_1*x) + a_2*np.sin(omega_2*x) + C
+    
+
+# Fit Coefs
+lower_bound = [-10,-10, 0, 0, -10]
+upper_bound = 10
+p0 = [5,5,100,100,0]
+##Unweighted Least Squares Global
+p1_res_fit, p1_res_error = scipy.optimize.curve_fit(per,
+    co2_data_ml['decimal date']-co2_data_ml['decimal date'].iloc[0],
+    rs_ml_p1,
+    sigma=co2_data_ml['sdev'],
+    p0=p0,
+    #bounds=(lower_bound, upper_bound)
+    )
+#chisq
+y_p1_res = per(co2_data_ml['decimal date'], *p1_res_fit)
+rs_ml_res_p1 = y_p1_res-rs_ml_p1
+chisq_res_p1 = np.sum(((rs_ml_res_p1)
+    / np.mean(co2_data_ml['sdev']))**2
+    )
+#P3
+p3_res_fit, p3_res_error = scipy.optimize.curve_fit(per,
+    co2_data_ml['decimal date']-co2_data_ml['decimal date'].iloc[0],
+    rs_ml_p3,
+    sigma= co2_data_ml['sdev'], 
+    #bounds=(lower_bound, upper_bound),
+    p0=p0
+    )
+#chisq
+y_p3_res = per(co2_data_ml['decimal date'], *p3_res_fit)
+rs_ml_res_p3 = y_p3_res-rs_ml_p3
+chisq_res_p3 = np.sum(((rs_ml_res_p3)
+    / np.mean(co2_data_ml['sdev']))**2
+    )
+print(p3_res_fit)
+plt.plot(co2_data_ml['decimal date'], rs_ml_p3)
+plt.plot(co2_data_ml['decimal date'], y_p3_res)
+However, as can be seen in the figure abvoe of an  
+------------------
+
+[0;36m  Input [0;32mIn [1][0;36m[0m
+[0;31m    However, as can be seen in the figure abvoe of an[0m
+[0m             ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m invalid syntax
+
+SyntaxError: invalid syntax (927495352.py, line 40)
+

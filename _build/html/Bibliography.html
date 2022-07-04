@@ -1,0 +1,445 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Bibliography &#8212; Climate Data Science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Global Temperature Predictions" href="Chapter_2/temp_co2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="An_Aside_On_Python.html">
+   An Aside On Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Global Carbon Dioxide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_1/Data_Exploration.html">
+   Global
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2 \)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_1/Fitting.html">
+   Fitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_1/Hypothesis_Testing.html">
+   Hypothesis Testing And Goodness of Fit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_1/Final_Model.html">
+   Final Model
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Temperature Rise and Predictive Modelling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/predictive_models.html">
+   Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/temp_co2.html">
+   Global Temperature Predictions
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://seancraven.github.io/CDS_book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FBibliography.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/Bibliography.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Bibliography</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="bibliography">
+<h1>Bibliography<a class="headerlink" href="#bibliography" title="Permalink to this headline">#</a></h1>
+<div class="docutils container" id="id1">
+<dl class="citation">
+<dt class="label" id="id6"><span class="brackets">CTW+94</span></dt>
+<dd><p>Thomas J. Conway, Pieter P. Tans, Lee S. Waterman, Kirk W. Thoning, Duane R. Kitzis, Kenneth A. Masarie, and Ni Zhang. Evidence for interannual variability of the carbon cycle from the national oceanic and atmospheric administration/climate monitoring and diagnostics laboratory global air sampling network. <em>Journal of Geophysical Research: Atmospheres</em>, 99(D11):22831–22855, 1994. URL: <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951">https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951</a>, <a class="reference external" href="https://arxiv.org/abs/https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951">arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1029/94JD01951">doi:https://doi.org/10.1029/94JD01951</a>.</p>
+</dd>
+<dt class="label" id="id14"><span class="brackets">GKP+13</span></dt>
+<dd><p>H. D. Graven, R. F. Keeling, S. C. Piper, P. K. Patra, B. B. Stephens, S. C. Wofsy, L. R. Welp, C. Sweeney, P. P. Tans, J. J. Kelley, B. C. Daube, E. A. Kort, G. W. Santoni, and J. D. Bent. Enhanced seasonal exchange of co&lt;sub&gt;2&lt;/sub&gt; by northern ecosystems since 1960. <em>Science</em>, 341(6150):1085–1089, 2013. URL: <a class="reference external" href="https://www.science.org/doi/abs/10.1126/science.1239207">https://www.science.org/doi/abs/10.1126/science.1239207</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.science.org/doi/pdf/10.1126/science.1239207">arXiv:https://www.science.org/doi/pdf/10.1126/science.1239207</a>, <a class="reference external" href="https://doi.org/10.1126/science.1239207">doi:10.1126/science.1239207</a>.</p>
+</dd>
+<dt class="label" id="id10"><span class="brackets">HH10</span></dt>
+<dd><p>Ifan Hughes and Thomas Hase. <em>Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis</em>. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: <a class="reference external" href="http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562">http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562</a>.</p>
+</dd>
+<dt class="label" id="id2"><span class="brackets">KC18</span></dt>
+<dd><p>Daniel D. B. Koll and Timothy W. Cronin. Earth&amp;#x2019;s outgoing longwave radiation linear due to h&lt;sub&gt;2&lt;/sub&gt;o greenhouse effect. <em>Proceedings of the National Academy of Sciences</em>, 115(41):10293–10298, 2018. URL: <a class="reference external" href="https://www.pnas.org/doi/abs/10.1073/pnas.1809868115">https://www.pnas.org/doi/abs/10.1073/pnas.1809868115</a>, <a class="reference external" href="https://arxiv.org/abs/https://www.pnas.org/doi/pdf/10.1073/pnas.1809868115">arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1809868115</a>, <a class="reference external" href="https://doi.org/10.1073/pnas.1809868115">doi:10.1073/pnas.1809868115</a>.</p>
+</dd>
+<dt class="label" id="id11"><span class="brackets">LCD+20</span></dt>
+<dd><p>Zhu Liu, Philippe Ciais, Zhu Deng, Ruixue Lei, Steven J. Davis, Sha Feng, Bo Zheng, Duo Cui, Xinyu Dou, Biqing Zhu, Rui Guo, Piyu Ke, Taochun Sun, Chenxi Lu, Pan He, Yuan Wang, Xu Yue, Yilong Wang, Yadong Lei, Hao Zhou, Zhaonan Cai, Yuhui Wu, Runtao Guo, Tingxuan Han, Jinjun Xue, Olivier Boucher, Eulalie Boucher, Frédéric Chevallier, Katsumasa Tanaka, Yiming Wei, Haiwang Zhong, Chongqing Kang, Ning Zhang, Bin Chen, Fengming Xi, Miaomiao Liu, François-Marie Bréon, Yonglong Lu, Qiang Zhang, Dabo Guan, Peng Gong, Daniel M. Kammen, Kebin He, and Hans Joachim Schellnhuber. Near-real-time monitoring of global co2 emissions reveals the effects of the covid-19 pandemic. <em>Nature Communications</em>, 11(1):5172, Oct 2020. URL: <a class="reference external" href="https://doi.org/10.1038/s41467-020-18922-7">https://doi.org/10.1038/s41467-020-18922-7</a>, <a class="reference external" href="https://doi.org/10.1038/s41467-020-18922-7">doi:10.1038/s41467-020-18922-7</a>.</p>
+</dd>
+<dt class="label" id="id7"><span class="brackets">MT95</span></dt>
+<dd><p>Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. <em>Journal of Geophysical Research: Atmospheres</em>, 100(D6):11593–11610, 1995. URL: <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859">https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859</a>, <a class="reference external" href="https://arxiv.org/abs/https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859">arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1029/95JD00859">doi:https://doi.org/10.1029/95JD00859</a>.</p>
+</dd>
+<dt class="label" id="id3"><span class="brackets">Rho</span></dt>
+<dd><p>Robert Rhode. Clear-sky atmospheric transistion. <a class="reference external" href="https://twitter.com/RARohde/status/1196762005136392192">https://twitter.com/RARohde/status/1196762005136392192</a>.</p>
+</dd>
+<dt class="label" id="id8"><span class="brackets">TTK89</span></dt>
+<dd><p>Kirk W. Thoning, Pieter P. Tans, and Walter D. Komhyr. Atmospheric carbon dioxide at mauna loa observatory: 2. analysis of the noaa gmcc data, 1974–1985. <em>Journal of Geophysical Research: Atmospheres</em>, 94(D6):8549–8565, 1989. URL: <a class="reference external" href="https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549">https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549</a>, <a class="reference external" href="https://arxiv.org/abs/https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549">arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549</a>, <a class="reference external" href="https://doi.org/https://doi.org/10.1029/JD094iD06p08549">doi:https://doi.org/10.1029/JD094iD06p08549</a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Chapter_2/temp_co2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Global Temperature Predictions</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sean Craven<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
