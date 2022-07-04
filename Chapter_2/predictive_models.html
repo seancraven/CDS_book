@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Global Temperature Predictions" href="baysian.html" />
+    <link rel="next" title="Global Temperature Predictions" href="temp_co2.html" />
     <link rel="prev" title="Final Model" href="../Chapter_1/Final_Model.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -132,7 +132,7 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="../Chapter_1/Data_Exploration.html">
    Global
    <span class="math notranslate nohighlight">
-    \( CO_2 \)
+    \(\textrm{CO}_2 \)
    </span>
   </a>
  </li>
@@ -164,7 +164,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="baysian.html">
+  <a class="reference internal" href="temp_co2.html">
    Global Temperature Predictions
   </a>
  </li>
@@ -405,9 +405,9 @@ title="Print to PDF"
 <h1>Predictive Modeling<a class="headerlink" href="#predictive-modeling" title="Permalink to this headline">#</a></h1>
 <p>One of the critical uses of data recorded in the past is to attempt to make inferences about the future. Making predictions about future events on time series data can be done by forming a model on historical data.</p>
 <p>An introductory example of the general methodology of data-driven predictions using partitioning data into; training, validation and testing sections is explored. These sections are used as follows; the data is used to derive a model from the training data. Next, this model is tested on available validation data. Finally, the model is applied to the testing data to predict its behaviour.</p>
-<p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(CO_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(3)</a>. In this example, the free co-efficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from to avoid lacking generalisation while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
-<p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In such an example, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomaly. However, the modelling of <span class="math notranslate nohighlight">\(CO_2\)</span> concentration, <span class="math notranslate nohighlight">\(CO_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For linear regression, this constitutes determining the form of the function and evaluating the free coefficients.</p>
-<p>Using this model, the validation data is then investigated. This must not overlap with the training data. In the global <span class="math notranslate nohighlight">\(CO_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
+<p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(3)</a>. In this example, the free co-efficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from to avoid lacking generalisation while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
+<p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In such an example, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomaly. However, the modelling of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For linear regression, this constitutes determining the form of the function and evaluating the free coefficients.</p>
+<p>Using this model, the validation data is then investigated. This must not overlap with the training data. In the global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
 <p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(3)</a> in 2020, then the presence of the pandemic can be shown.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -640,7 +640,7 @@ P(chi^2 &gt; chi^2_min) = 0.05537
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
 <p>The output <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics for the training model are to be desired, with a very low probability that the model demonstrates a good fit. However, This is not particularly important for the current test. Inspecting the performance of the model on the validation period, the model provides a good fit. This is exemplified by the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.63\)</span>, well inside a significance level of 5 percent. This strong agreement between the validation data and the model suggests that the model is extended into the testing regime.</p>
-<p>In the testing regime, the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.055\)</span>. This <span class="math notranslate nohighlight">\(P\)</span> value indicates that approximately 5% of the time, the random variable normalised residuals would be distributed in such a manner. This extrapolation is pushing the bounds of the model. In this case, there is insufficient evidence to say that there has been a noticeable downwards trend in <span class="math notranslate nohighlight">\(CO_2\)</span> production over the year <span class="math notranslate nohighlight">\(2020\)</span>.</p>
+<p>In the testing regime, the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.055\)</span>. This <span class="math notranslate nohighlight">\(P\)</span> value indicates that approximately 5% of the time, the random variable normalised residuals would be distributed in such a manner. This extrapolation is pushing the bounds of the model. In this case, there is insufficient evidence to say that there has been a noticeable downwards trend in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production over the year <span class="math notranslate nohighlight">\(2020\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
@@ -652,7 +652,7 @@ P(chi^2 &gt; chi^2_min) = 0.05537
     <span class="c1">#Formatting</span>
     
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$CO_2$ (ppm)&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm</span><span class="si">{CO}</span><span class="s1">_2$ (ppm)&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">dur_cycle</span><span class="p">)</span>
     <span class="c1">#Data</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">fit_data</span><span class="p">(),</span> <span class="n">label</span> <span class="o">=</span> <span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -670,11 +670,11 @@ P(chi^2 &gt; chi^2_min) = 0.05537
 </section>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
-<p>The linear-regression model developed in the previous section does not account for any global effects that vary the average behaviour of the <span class="math notranslate nohighlight">\(CO_2\)</span> concentration in the previous section. When using the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic, this returns very poor fits over many years due to significant variances, exemplified by the 90s. However, a small window representing the general overall trend without high variance, like the period of 2018 and 2019, can present a good fit. Towards the end of the year 2021, the residuals of the data points are all negative. This could be the presence of Covid-19; however, the residuals are similar in size to the uncertainty, resulting in the high <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>
-<p>More can be read about using the <span class="math notranslate nohighlight">\(CO_2\)</span> concentration in the atmosphere to detect the <a class="reference external" href="https://gml.noaa.gov/ccgg/covid2.html">pandemic</a>.</p>
+<p>The linear-regression model developed in the previous section does not account for any global effects that vary the average behaviour of the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in the previous section. When using the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic, this returns very poor fits over many years due to significant variances, exemplified by the 90s. However, a small window representing the general overall trend without high variance, like the period of 2018 and 2019, can present a good fit. Towards the end of the year 2021, the residuals of the data points are all negative. This could be the presence of Covid-19; however, the residuals are similar in size to the uncertainty, resulting in the high <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>
+<p>More can be read about using the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in the atmosphere to detect the <a class="reference external" href="https://gml.noaa.gov/ccgg/covid2.html">pandemic</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The TLDR of the article from the NOAA, is that global <span class="math notranslate nohighlight">\(CO_2\)</span> concentrations are buffered by release from the ocean and that fires in the southern hemisphere, could have offset the <span class="math notranslate nohighlight">\(CO_2\)</span> emission decrease.</p>
+<p>The TLDR of the article from the NOAA, is that global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentrations are buffered by release from the ocean and that fires in the southern hemisphere, could have offset the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> emission decrease.</p>
 </div>
 </section>
 </section>
@@ -713,7 +713,7 @@ P(chi^2 &gt; chi^2_min) = 0.05537
             <p class="prev-next-title">Final Model</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="baysian.html" title="next page">
+    <a class='right-next' id="next-link" href="temp_co2.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Global Temperature Predictions</p>
