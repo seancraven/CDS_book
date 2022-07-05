@@ -409,27 +409,17 @@ title="Print to PDF"
 <p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In such an example, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomaly. However, the modelling of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For linear regression, this constitutes determining the form of the function and evaluating the free coefficients.</p>
 <p>Using this model, the validation data is then investigated. This must not overlap with the training data. In the global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
 <p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(3)</a> in 2020, then the presence of the pandemic can be shown.</p>
-<div class="cell docutils container">
+<div class="cell tag_remove-input docutils container">
+</div>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cycler</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">omega_0</span><span class="p">,</span> <span class="n">omega_1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span><span class="n">p_2</span><span class="p">,</span><span class="n">p_3</span><span class="p">):</span>
+    <span class="n">polynomial</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">p_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">p_2</span> <span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">p_3</span>
+    <span class="n">trig</span> <span class="o">=</span> <span class="n">a_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_0</span><span class="p">)</span> \
+        <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">trig</span> <span class="o">+</span> <span class="n">polynomial</span>
 
-<span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv&#39;</span>              
-<span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_ml</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
-<span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> 
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Training Set</span>
+<span class="c1"># Training Set</span>
 <span class="n">test_years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)]</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">test_years</span><span class="p">)</span>
 <span class="n">train_co2_data</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
@@ -441,18 +431,7 @@ title="Print to PDF"
 <span class="n">test_years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">)]</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">test_years</span><span class="p">)</span>
 <span class="n">test_co2_data</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">omega_0</span><span class="p">,</span> <span class="n">omega_1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span><span class="n">p_2</span><span class="p">,</span><span class="n">p_3</span><span class="p">):</span>
-    <span class="n">polynomial</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">p_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">p_2</span> <span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">p_3</span>
-    <span class="n">trig</span> <span class="o">=</span> <span class="n">a_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_0</span><span class="p">)</span> \
-        <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_1</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">trig</span> <span class="o">+</span> <span class="n">polynomial</span>
-
+<span class="c1"># Fitting</span>
 <span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
@@ -474,9 +453,9 @@ title="Print to PDF"
 </div>
 <aside class="margin sidebar">
 <p class="sidebar-title">Classes</p>
-<p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">Classes</a> are the staple of Object oriented programming(OOP). They are something you can call which has methods and atributes. Methods are functions of the object. Atributes are values stored inside the class. A good example of a class is a list. It has multiple functions like <code class="docutils literal notranslate"><span class="pre">__len__()</span></code> which returns the instance of the classes length. Where the instance is the specific class a list of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code> for example. The atributes of the list are its values. When implementing a class it is considered good practice to only have users interact with methods. Chapter 10 of <a class="reference external" href="https://www.google.co.uk/books/edition/Python_Programming/">Python Programming: An introduction to Computer Science</a> covers Classes well. However, there are many guides online to their implementation.</p>
+<p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">Classes</a> are the staple of Object oriented programming(OOP). An example is the <code class="docutils literal notranslate"><span class="pre">FittedModel</span></code> class. A class can be called and has methods and atributes. Methods are functions of the object. Atributes are values stored inside the class. A good example of a class is a list. It has multiple functions like <code class="docutils literal notranslate"><span class="pre">__len__()</span></code> which returns the instance of the classes length. The <code class="docutils literal notranslate"> <span class="pre">__init__()</span></code> dunder method initialises the class, creating an instance. The instance here is the specific object, a list of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.  The atributes of the list are its values. When implementing a class it is considered good practice to only have users interact with methods. Chapter 10 of <a class="reference external" href="https://www.google.co.uk/books/edition/Python_Programming/">Python Programming: An introduction to Computer Science</a> covers Classes well. However, there are many guides online to their implementation.</p>
 </aside>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FittedModel</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -568,13 +547,8 @@ title="Print to PDF"
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Validation Model&#39;</span><span class="p">,</span>
     <span class="n">fit_coefs</span><span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
     <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Model Co-efficients&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Model Co-efficients&#39;</span><span class="p">)</span>
 <span class="n">train</span><span class="o">.</span><span class="n">print_errors</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -593,7 +567,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">model_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -627,9 +601,10 @@ P(chi^2 &gt; chi^2_min) = 0.05537
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
 <p>The output <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics for the training model are to be desired, with a very low probability that the model demonstrates a good fit. However, This is not particularly important for the current test. Inspecting the performance of the model on the validation period, the model provides a good fit. This is exemplified by the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.63\)</span>, well inside a significance level of 5 percent. This strong agreement between the validation data and the model suggests that the model is extended into the testing regime.</p>
 <p>In the testing regime, the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.055\)</span>. This <span class="math notranslate nohighlight">\(P\)</span> value indicates that approximately 5% of the time, the random variable normalised residuals would be distributed in such a manner. This extrapolation is pushing the bounds of the model. In this case, there is insufficient evidence to say that there has been a noticeable downwards trend in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production over the year <span class="math notranslate nohighlight">\(2020\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 <span class="n">dur_cycle</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span><span class="p">[</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
     <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">]</span>
     <span class="p">)</span>
@@ -650,7 +625,7 @@ P(chi^2 &gt; chi^2_min) = 0.05537
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/predictive_models_10_0.png" src="../_images/predictive_models_10_0.png" />
+<img alt="../_images/predictive_models_8_0.png" src="../_images/predictive_models_8_0.png" />
 </div>
 </div>
 </section>

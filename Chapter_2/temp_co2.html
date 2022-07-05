@@ -414,53 +414,12 @@ title="Print to PDF"
   <section id="global-temperature-predictions">
 <h1>Global Temperature Predictions<a class="headerlink" href="#global-temperature-predictions" title="Permalink to this headline">#</a></h1>
 <p>This section uses global temperature data combined with global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration and warming data provided by the IPCC to compare a simple model with Global warming estimates laid out in the Special Report on Emission Scenarios(SRES).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
-<span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="kn">import</span> <span class="n">sliding_window_view</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-</pre></div>
+<div class="cell tag_remove-input docutils container">
 </div>
-</div>
-</div>
-<p>The global Temperature data is taken from Berkley Earth. The temperature data has missing fields as with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. A Fourier-based fit could be applied similarly to that performed in the section on Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Because this section is not looking for a functional form, an average is more straightforward to implement.</p>
+<p>The global Temperature data is taken from <a class="reference external" href="http://berkeleyearth.org/data/">Berkley Earth</a>. The temperature data has missing fields as with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. Thus some data cleaning and formatting is required.</p>
+<p>When ananlysing the data, a Fourier-based fit could be applied similarly to that performed in the section on Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Because this section is not looking for a functional form, an average is more straightforward to implement.</p>
 <p>After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt&quot;</span>
-<span class="c1">#Formatting be data</span>
-<span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;5yearly_anomaly&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;5yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;10yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;10yearly_anomaly_unc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;20yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;20yearly_anomaly_unc&#39;</span>
-    <span class="p">]</span>
-<span class="n">temp_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">34</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
-<span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">12</span> <span class="o">+</span> <span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
-<span class="c1">#remove be moving averages</span>
-<span class="n">temp_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;yearly_anomaly_unc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;5yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;5yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;10yearly_anomaly&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;10yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;20yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;20yearly_anomaly_unc&#39;</span><span class="p">],</span>
-    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Format date </span>
-<span class="n">null_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">temp_data</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">null_sum</span><span class="p">,</span>
-    <span class="n">index</span><span class="o">=</span><span class="n">temp_data</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Number of Null Values&#39;</span><span class="p">]</span>
-    <span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -508,17 +467,11 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Drop NA</span>
 <span class="n">temp_data</span> <span class="o">=</span> <span class="n">temp_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">WINDOW</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="n">WINDOW</span> <span class="o">=</span> <span class="mi">120</span>
 <span class="c1"># Sliding window weighted average:</span>
 <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">temp_data</span><span class="p">,</span> <span class="n">WINDOW</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 <span class="n">time_midpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -530,13 +483,37 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span>  <span class="nf">moving_ave_frame</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="s1">&#39;Applies a moving average&#39;</span>
+    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ma_df</span>
+<span class="k">def</span>  <span class="nf">moving_std_frame</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="s1">&#39;Applies a moving average&#39;</span>
+    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ma_df</span>
+
+<span class="k">def</span> <span class="nf">lb_ub</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">lb</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
+    <span class="n">ub</span> <span class="o">=</span> <span class="n">values</span> <span class="o">+</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
+    <span class="k">return</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span>
+
+<span class="k">def</span> <span class="nf">P1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">ave_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">win_ave_temp</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ave_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">win_ave_unc</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-<span class="n">lb</span> <span class="o">=</span> <span class="n">ave_temp</span> <span class="o">-</span> <span class="n">ave_unc</span>
-<span class="n">ub</span> <span class="o">=</span> <span class="n">ave_temp</span> <span class="o">+</span> <span class="n">ave_unc</span>
-
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">ave_temp</span><span class="p">,</span> <span class="n">ave_unc</span><span class="p">)</span>
+<span class="c1">#Plotting</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_midpoint</span><span class="p">,</span>
     <span class="n">ave_temp</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
@@ -555,7 +532,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/temp_co2_7_0.png" src="../_images/temp_co2_7_0.png" />
+<img alt="../_images/temp_co2_6_0.png" src="../_images/temp_co2_6_0.png" />
 </div>
 </div>
 </section>
@@ -578,30 +555,7 @@ The relationship between <span class="math notranslate nohighlight">\(\text{CO}_
 </section>
 <section id="current-warming-trend">
 <h1>Current Warming trend<a class="headerlink" href="#current-warming-trend" title="Permalink to this headline">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span>  <span class="nf">moving_ave_frame</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="s1">&#39;Applies a moving average&#39;</span>
-    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">ma_df</span>
-<span class="k">def</span>  <span class="nf">moving_std_frame</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="s1">&#39;Applies a moving average&#39;</span>
-    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
-    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-    <span class="k">return</span> <span class="n">ma_df</span>
-
-<span class="k">def</span> <span class="nf">lb_ub</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">lb</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
-    <span class="n">ub</span> <span class="o">=</span> <span class="n">values</span> <span class="o">+</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
-    <span class="k">return</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_data</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1960</span><span class="p">]</span>
 <span class="n">trend_ave</span> <span class="o">=</span> <span class="n">moving_ave_frame</span><span class="p">(</span><span class="n">trend_data</span><span class="p">,</span><span class="n">WINDOW</span><span class="p">)</span>
@@ -611,28 +565,12 @@ The relationship between <span class="math notranslate nohighlight">\(\text{CO}_
 <span class="n">trend_ave</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../output_files/temperature_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>\
     <span class="s1">&#39;_moving_average.csv&#39;</span>
     <span class="p">)</span>      
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">P1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span><span class="o">*</span><span class="n">x</span>
-
 <span class="n">trend_fit</span><span class="p">,</span> <span class="n">trend_error</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span>
     <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
     <span class="n">sigma</span><span class="o">=</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">]</span>
     <span class="p">)</span>
-<span class="n">gradient_lb</span> <span class="o">=</span> <span class="n">trend_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">trend_error</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">gradient_ub</span> <span class="o">=</span> <span class="n">trend_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">trend_error</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
+<span class="n">gradient_lb</span><span class="p">,</span> <span class="n">gradient_ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">trend_error</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> 
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
     <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">]</span>
     <span class="p">)</span>
 <span class="c1">#Plotting</span>
@@ -667,7 +605,7 @@ The relationship between <span class="math notranslate nohighlight">\(\text{CO}_
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/temp_co2_13_0.png" src="../_images/temp_co2_13_0.png" />
+<img alt="../_images/temp_co2_9_0.png" src="../_images/temp_co2_9_0.png" />
 </div>
 </div>
 <p>With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists, then keeping the Global Temperature anomaly below <span class="math notranslate nohighlight">\(1.5^\circ C\)</span> is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data, the correlation of these datasets can be examined.  Both of the datasets’ moving averages are plotted below for a visual comparison. Further, the Pearson correlation co-efficient <span class="math notranslate nohighlight">\((r)\)</span> can be calculated for the datasets. <span class="math notranslate nohighlight">\(r\)</span> is given by,</p>
@@ -678,69 +616,12 @@ The relationship between <span class="math notranslate nohighlight">\(\text{CO}_
 <p class="admonition-title">Note</p>
 <p>The error bars on the <span class="math notranslate nohighlight">\(\text{CO_2}\)</span> concentration are two times the standard error on the mean. However, the error bars on the temperature is the mean of the uncertainty over the window. This is because the uncertainty corresponds to 95% of recorded percentages.</p>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv&#39;</span>              
-<span class="n">co2_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_ml</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
-<span class="c1">#co2_data_ml = co2_data_ml[co2_data_ml[&#39;sdev&#39;]&gt;0] </span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_co2_data</span> <span class="o">=</span> <span class="n">co2_data</span><span class="p">[</span><span class="n">co2_data</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1960</span><span class="p">]</span>
-<span class="n">trend_co2_ave</span> <span class="o">=</span> <span class="n">moving_ave_frame</span><span class="p">(</span><span class="n">co2_data</span><span class="p">,</span> <span class="n">WINDOW</span><span class="p">)</span>
-<span class="n">trend_co2_std</span> <span class="o">=</span> <span class="n">moving_std_frame</span><span class="p">(</span><span class="n">co2_data</span><span class="p">,</span> <span class="n">WINDOW</span><span class="p">)</span>
-<span class="n">co2_lb</span><span class="p">,</span> <span class="n">co2_ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">trend_co2_std</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">trend_co2_ave</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../output_files/co2_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>\
-    <span class="s1">&#39;_moving_average.csv&#39;</span>
-    <span class="p">)</span>      
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-
-<span class="c1">#Temp</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span>  <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
-    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Moving Average&#39;</span>
-    <span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span>
-    <span class="p">)</span>
-
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1"> Year Moving Average of </span><span class="se">\n</span><span class="s1">&#39;</span> \
-    <span class="sa">r</span><span class="s1">&#39;Land Average Temperature Anomaly $(^{\circ}\textrm{{C}})$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.2</span><span class="p">,</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">.2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">.2</span><span class="p">,</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">.2</span><span class="p">),</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span>
-    <span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Window Midpoint (Year)&#39;</span><span class="p">)</span>
-<span class="c1">#CO2</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
-    <span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
-    <span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_lb</span><span class="p">,</span> <span class="n">co2_ub</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
-    <span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1"> Year Moving Average of&#39;</span>  \
-    <span class="sa">r</span><span class="s1">&#39; $\textrm{{CO}}_2$ (ppm)&#39;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">2017</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/temp_co2_17_0.png" src="../_images/temp_co2_17_0.png" />
+<img alt="../_images/temp_co2_11_0.png" src="../_images/temp_co2_11_0.png" />
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_slice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="mi">1985</span> <span class="o">&lt;</span> <span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">])</span> <span class="o">&amp;</span> \
     <span class="p">(</span><span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2016</span><span class="p">)</span>

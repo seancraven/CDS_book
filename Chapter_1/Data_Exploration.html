@@ -431,6 +431,8 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -722,13 +724,14 @@ Notably, none of the columns has units in their headers apart from years and mon
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">invalid_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">iv_fraction</span> <span class="o">=</span> <span class="n">invalid_values</span> <span class="o">/</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Number of discarded data points:&#39;</span><span class="p">,</span> <span class="n">invalid_values</span><span class="p">,</span>
-    <span class="s1">&#39;, Fraction of Total Values:&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">iv_fraction</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">&#39;</span>
+    <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Fraction of Total Values:&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">iv_fraction</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">&#39;</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Number of discarded data points: 196 , Fraction of Total Values: 0.25
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Number of discarded data points: 196 
+ Fraction of Total Values: 0.25
 </pre></div>
 </div>
 </div>
