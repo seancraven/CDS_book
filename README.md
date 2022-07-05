@@ -66,3 +66,6 @@ Formating:
 
 ### Journal of Reading/ Personal Skills Development
 - 05.07.22: Bayesian Methods and bootstrapping covered in ESL
+
+### Notes About Setup
+- Currently, Jupyter Book uses a different kernel to execute the notebooks. The matplotlibrc file has to be copied into the specific directories where all of the 
