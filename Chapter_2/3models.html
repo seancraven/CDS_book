@@ -356,9 +356,19 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#determining-the-sensitivity-coefficient">
-   Determining the sensitivity coefficient
+  <a class="reference internal nav-link" href="#textrm-co-2-concentration-models">
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2\)
+   </span>
+   Concentration Models
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a1b">
+     A1B
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -385,9 +395,19 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#determining-the-sensitivity-coefficient">
-   Determining the sensitivity coefficient
+  <a class="reference internal nav-link" href="#textrm-co-2-concentration-models">
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2\)
+   </span>
+   Concentration Models
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a1b">
+     A1B
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -401,10 +421,16 @@ title="Print to PDF"
                 
   <section id="implementation-of-the-three-models">
 <h1>Implementation of the Three Models<a class="headerlink" href="#implementation-of-the-three-models" title="Permalink to this headline">#</a></h1>
-<p>The three approximate SRES scenarios chosen will be used to develop Bayesian temperature change prediction. The model eq.<code class="xref eq docutils literal notranslate"><span class="pre">temp_co2_model</span></code>, which relates <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, has a sensitivity parameter <span class="math notranslate nohighlight">\(S\)</span>. When a fit is performed and the model extended, this parameter has some associated probability distribution, which can be used to infer the probability of temperature changes through Bayes’ theorem,</p>
+<p>The three approximate SRES scenarios chosen will be used to develop Bayesian temperature change prediction. The model of global temperatures <span class="math notranslate nohighlight">\(T\)</span> as a function of <span class="math notranslate nohighlight">\(\textrm{CO}_2 (C)\)</span> is,</p>
+<p><span class="math notranslate nohighlight">\(S\)</span> describes the sensitivity of the global temperature to doubling in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration. This parameter has proved challenging to estimate given the complexity of the systems influencing global temperature Change. A PDF of <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(P(S)\)</span> was produced by Sherwood et al.<span class="xref std std-ref">S20</span> and will be used for our future temperature predictions and approximations of the SRES scenarios. The PDF of temperature change can be written as</p>
 <div class="math notranslate nohighlight">
 \[P(\Delta T) = \int P(\Delta T|S) P(S) dS.\]</div>
-<p>A similar process with radiative forcing is described in <span class="xref std std-ref">probabilityofwarming</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this model Radiative Forcing is neglected, this id the phenomenon which describes the global flux inbalance. Where more enenrgy is being let out than let in. This is a key part of the global temperature rise equation as this is not a constant factor when global temperatures rise. For a more thourough predictive with radiative forcing see <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1748-9326/ac6ff6">Sherwood2022</a><span class="xref std std-ref">probabilityofwarming</span>.</p>
+</div>
+<p>The quantity <span class="math notranslate nohighlight">\(P(\Delta T|S)\)</span> can be calculated using our simple climate model eq.<code class="xref eq docutils literal notranslate"><span class="pre">temp_co2_model</span></code>.</p>
+<p>The model will have three separate cases. As discussed before they are as follows:</p>
 <ul class="simple">
 <li><p>A1B) Continued growth in emission Rates.</p></li>
 <li><p>A1T) Net-zero by 2030, no further reductions.</p></li>
@@ -459,29 +485,38 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="determining-the-sensitivity-coefficient">
-<h1>Determining the sensitivity coefficient<a class="headerlink" href="#determining-the-sensitivity-coefficient" title="Permalink to this headline">#</a></h1>
-<p>The functional form of the model</p>
-<p>Only has one free parameter. This corresponds to the sensitivity of the model. Because the equation is linear in <span class="math notranslate nohighlight">\(\log(C)\)</span> an analytic solution can be found using the least-squares method.</p>
-<p>The seasonal trends of the data are not relevant for this form of approximate modelling and as in the previous section a 10 year moving average of the form described on the previous <span class="xref myst">page</span>.</p>
+<section id="textrm-co-2-concentration-models">
+<h1><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> Concentration Models<a class="headerlink" href="#textrm-co-2-concentration-models" title="Permalink to this headline">#</a></h1>
+<p>In the final part of <span class="xref myst">Chapter 1</span>, a polynomial model with a trigonometric addition was developed to characterize the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, which closely follows the global average trend. Using the model without the trigonometric terms will be the basis for this section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">TofC</span><span class="p">(</span><span class="n">C</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C_0</span><span class="p">,</span> <span class="n">T_0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading fits</span>
+<span class="n">model_fit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output_files/co2_model_parameters.csv&#39;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+<span class="n">model_error</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output_files/co2_model_parameters_error.csv&#39;</span><span class="p">,</span>
+    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">header</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+<span class="c1"># Loading Moving average Data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="a1b">
+<h2>A1B<a class="headerlink" href="#a1b" title="Permalink to this headline">#</a></h2>
+<p>This scenario describes no global change in response to warming and continuing to use a mix of renewable energy and fossil fuel sources.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_climate_model</span><span class="p">(</span><span class="n">C</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">T_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39; Model fuction for Temperature and CO_2 relationship.&#39;&#39;&#39;</span>
      <span class="c1">#Placeholder till I figure out what I am going to </span>
     <span class="k">return</span> <span class="n">T_0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">C_0</span><span class="p">)</span><span class="o">*</span><span class="n">S</span> 
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">C_0</span> <span class="o">=</span>
-          <span class="o">^</span>
-<span class="ne">SyntaxError</span>: invalid syntax
-</pre></div>
 </div>
-</div>
-</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

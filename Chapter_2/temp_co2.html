@@ -619,7 +619,12 @@ The relationship between <span class="math notranslate nohighlight">\(\text{CO}_
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_data</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1960</span><span class="p">]</span>
 <span class="n">trend_ave</span> <span class="o">=</span> <span class="n">moving_ave_frame</span><span class="p">(</span><span class="n">trend_data</span><span class="p">,</span><span class="n">WINDOW</span><span class="p">)</span>
-<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">])</span>
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
+    <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="n">trend_ave</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../output_files/temperature_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>\
+    <span class="s1">&#39;_moving_average.csv&#39;</span>
+    <span class="p">)</span>      
 </pre></div>
 </div>
 </div>
@@ -702,6 +707,9 @@ The relationship between <span class="math notranslate nohighlight">\(\text{CO}_
 <span class="n">trend_co2_ave</span> <span class="o">=</span> <span class="n">moving_ave_frame</span><span class="p">(</span><span class="n">co2_data</span><span class="p">,</span> <span class="n">WINDOW</span><span class="p">)</span>
 <span class="n">trend_co2_std</span> <span class="o">=</span> <span class="n">moving_std_frame</span><span class="p">(</span><span class="n">co2_data</span><span class="p">,</span> <span class="n">WINDOW</span><span class="p">)</span>
 <span class="n">co2_lb</span><span class="p">,</span> <span class="n">co2_ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">trend_co2_std</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">trend_co2_ave</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../output_files/co2_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>\
+    <span class="s1">&#39;_moving_average.csv&#39;</span>
+    <span class="p">)</span>      
 </pre></div>
 </div>
 </div>
