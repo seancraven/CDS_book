@@ -168,6 +168,11 @@ const thebe_selector_output = ".output, .cell_output"
    Global Temperature Predictions
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3models.html">
+   Implementation of the Three SRES Approximation Models
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -353,6 +358,18 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problems-with-error-on-p-0-and-p-1">
+   Problems with error on
+   <span class="math notranslate nohighlight">
+    \(P_0\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(P_1\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
    Results
   </a>
@@ -381,6 +398,18 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#problems-with-error-on-p-0-and-p-1">
+   Problems with error on
+   <span class="math notranslate nohighlight">
+    \(P_0\)
+   </span>
+   and
+   <span class="math notranslate nohighlight">
+    \(P_1\)
+   </span>
+  </a>
+ </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#results">
    Results
@@ -436,7 +465,7 @@ title="Print to PDF"
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
     <span class="n">sigma</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Inital Parameter Guess</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Inital Parameter Guess</span>
     <span class="p">)</span>
 <span class="c1">#chisq</span>
 <span class="n">model_ml</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">model_fit</span><span class="p">)</span>
@@ -471,7 +500,8 @@ title="Print to PDF"
             <span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="n">fit_coefs</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="kc">None</span> 
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_cov</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
     
     <span class="k">def</span> <span class="nf">get_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Applies scipy.optimize.curve_fit() to the passed args.</span>
@@ -514,10 +544,10 @@ title="Print to PDF"
     
     <span class="k">def</span> <span class="nf">print_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="s1">&#39;Prints the models co-efficient</span><span class="se">\&#39;</span><span class="s1">s associated errors &#39;</span>
-        <span class="n">diagonal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span><span class="n">diagonal</span><span class="p">)):</span>
+        <span class="n">coef_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">)):</span>
             <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;= </span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1"> +_ </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">coef_names</span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1"> +_ </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No error. The model was fitted on other Data&#39;</span><span class="p">)</span>
 </pre></div>
@@ -530,7 +560,7 @@ title="Print to PDF"
     <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
     <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
     <span class="n">sigma</span><span class="o">=</span><span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Training Model&#39;</span>
     <span class="p">)</span>
 <span class="n">test</span>  <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
@@ -555,14 +585,64 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Model Co-efficients
-= 1 = 2.9 +_ 0.002
-= 2 = 0.82 +_ 0.002
-= 3 = 1.0 +_ 1e-12
-= 4 = 2.0 +_ 2e-11
-= 5 = -2e+06 +_ 3e+10
-= 6 = 3.1e+03 +_ 7e+04
-= 7 = -1.5 +_ 0.02
-= 8 = 0.00026 +_ 5e-10
+a_0 = 2.9 +_ 0.04
+a_1 = 0.82 +_ 0.04
+omega_0 = 1.0 +_ 1e-06
+omega_1 = 2.0 +_ 4e-06
+c = -2e+06 +_ 2e+05
+p_1 = 3.1e+03 +_ 3e+02
+p_2 = -1.5 +_ 0.1
+p_3 = 0.00026 +_ 2e-05
+</pre></div>
+</div>
+</div>
+</div>
+<section id="problems-with-error-on-p-0-and-p-1">
+<h2>Problems with error on <span class="math notranslate nohighlight">\(P_0\)</span> and <span class="math notranslate nohighlight">\(P_1\)</span><a class="headerlink" href="#problems-with-error-on-p-0-and-p-1" title="Permalink to this headline">#</a></h2>
+<p>The error on both quantities is astronomically high, around 10%. Further, it can be shown that it is an inaccurate measurement. If one changes the starting position for these quantities, the <code class="docutils literal notranslate"><span class="pre">p0</span></code> <code class="docutils literal notranslate"><span class="pre">kwarg</span></code> for <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, the results do not oscillate around the obtained values indicating that the distribution of possible values is much tighter than the actual result. A better estimate of such errors can be determined by performing the fit with random start values centered around the obtained value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c_mean</span><span class="p">,</span> <span class="n">p_mean</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">coef_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">length</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;p_1&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coef_df</span><span class="p">):</span>
+    <span class="n">c_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">c_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">c_mean</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">p_1_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">p_mean</span><span class="o">/</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">error_train</span>  <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
+    <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+    <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="n">c_0</span><span class="p">,</span><span class="n">p_1_0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Training Model&#39;</span>
+    <span class="p">)</span>
+    <span class="n">coef_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,]</span> <span class="o">=</span> <span class="n">error_train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span>
+<span class="n">coef_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">coef_df</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">coef_ste</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">coef_df</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;C coefficent:</span><span class="si">{</span><span class="n">coef_mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1"> +_ </span><span class="si">{</span><span class="n">coef_ste</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="sa">F</span><span class="s1">&#39;P_1 coefficient:</span><span class="si">{</span><span class="n">coef_mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1"> +_ </span><span class="si">{</span><span class="n">coef_ste</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]]</span> <span class="o">=</span> <span class="n">coef_ste</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficent:-2e+06 +_ 4e-08 
+P_1 coefficient:3e+03 +_ 6e-11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#params</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a_0&#39;</span><span class="p">,</span> <span class="s1">&#39;a_1&#39;</span><span class="p">,</span> <span class="s1">&#39;omega_0&#39;</span><span class="p">,</span> <span class="s1">&#39;omega_1&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;p_1&#39;</span><span class="p">,</span> <span class="s1">&#39;p_2&#39;</span><span class="p">,</span> <span class="s1">&#39;p_3&#39;</span><span class="p">]</span>
+<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../output_files/co2_model_parameters.csv&#39;</span>
+<span class="n">model_fit_params</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="c1">#errors</span>
+<span class="n">model_cov_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../output_files/co2_model_parameters_errors.csv&#39;</span>
+
+<span class="n">model_cov_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -582,21 +662,22 @@ title="Print to PDF"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Model
 chi^2 = 1.005e+03
 chi^2/nu = 2.134
-P(chi^2 &gt; chi^2_min) = 7.967e-41
+P(chi^2 &gt; chi^2_min) = 7.963e-41
 
 Validation Model
-chi^2 = 13.64
-chi^2/nu = 0.8522
-P(chi^2 &gt; chi^2_min) = 0.6259
+chi^2 = 13.55
+chi^2/nu = 0.8466
+P(chi^2 &gt; chi^2_min) = 0.6325
 
 Test Model
-chi^2 = 9.24
-chi^2/nu = 2.31
-P(chi^2 &gt; chi^2_min) = 0.05537
+chi^2 = 9.096
+chi^2/nu = 2.274
+P(chi^2 &gt; chi^2_min) = 0.05874
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
 <p>The output <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics for the training model are to be desired, with a very low probability that the model demonstrates a good fit. However, This is not particularly important for the current test. Inspecting the performance of the model on the validation period, the model provides a good fit. This is exemplified by the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.63\)</span>, well inside a significance level of 5 percent. This strong agreement between the validation data and the model suggests that the model is extended into the testing regime.</p>
@@ -625,7 +706,7 @@ P(chi^2 &gt; chi^2_min) = 0.05537
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/predictive_models_8_0.png" src="../_images/predictive_models_8_0.png" />
+<img alt="../_images/predictive_models_11_0.png" src="../_images/predictive_models_11_0.png" />
 </div>
 </div>
 </section>

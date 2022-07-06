@@ -38,11 +38,10 @@ Formating:
 #### Chapter 2
 - Global Temperature rise, Predictive modelling 
 
-
 - [x] Discuss the limited scope of curve fitting. Explore the error quantification.
     - [x] Page one and solution to the previous question
     - [x] Discussion section on the results.
-
+- [ ] The errors on the constant and the value of the X parameter are huge. Understand This.
 Pages:
 - [x] Global CO_2 example
 - [x] Comparison of moving average of CO_2 and Temp

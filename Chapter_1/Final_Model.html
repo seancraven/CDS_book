@@ -168,6 +168,11 @@ const thebe_selector_output = ".output, .cell_output"
    Global Temperature Predictions
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/3models.html">
+   Implementation of the Three SRES Approximation Models
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -473,24 +478,6 @@ P(\chi^2 \geq \chi^2_{min};567) = 9.05e-49
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#params</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a_0&#39;</span><span class="p">,</span> <span class="s1">&#39;a_1&#39;</span><span class="p">,</span> <span class="s1">&#39;omega_0&#39;</span><span class="p">,</span> <span class="s1">&#39;omega_1&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;p_1&#39;</span><span class="p">,</span> <span class="s1">&#39;p_2&#39;</span><span class="p">,</span> <span class="s1">&#39;p_3&#39;</span><span class="p">]</span>
-<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">model_fit</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../output_files/co2_model_parameters.csv&#39;</span>
-<span class="n">model_fit_params</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="c1">#errors</span>
-<span class="n">model_error_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model_error</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
-    <span class="n">columns</span><span class="o">=</span><span class="n">labels</span>
-    <span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../output_files/co2_model_parameters_error.csv&#39;</span>
-
-<span class="n">model_error_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
@@ -528,7 +515,7 @@ P(\chi^2 \geq \chi^2_{min};567) = 9.05e-49
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Final_Model_5_0.png" src="../_images/Final_Model_5_0.png" />
+<img alt="../_images/Final_Model_4_0.png" src="../_images/Final_Model_4_0.png" />
 </div>
 </div>
 </section>
