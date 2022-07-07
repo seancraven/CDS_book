@@ -47,9 +47,9 @@ Pages:
 - [x] Comparison of moving average of CO_2 and Temp
     - [x] The errors on the constant and the value of the X parameter are huge. Understand This.
     - Still not sure why; however, a more accurate quantification of the errors has been implemented.
-- [x] Three SRES scenarios plotted and discussed
+- [x] Three SRES scenarios, plotted and discussed
     - [x] Have approximately matched and found literature doing similar analysis.
-    - [ ] Implementation on natural cubic spline for CO_2 on [scipy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html) 
+    - [ ] Implementation of natural cubic spline for CO_2 on [scipy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html) 
 - [ ] Bayesian Random Variables S & C
 
 - [ ] Comparison and evaluation of final model
