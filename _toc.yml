@@ -17,6 +17,7 @@ parts:
     chapters:
     - file: Chapter_2/predictive_models.ipynb
     - file: Chapter_2/temp_co2.ipynb
+    - file: Chapter_2/3models.ipynb
   - caption:
     chapters:
     - file: Bibliography
