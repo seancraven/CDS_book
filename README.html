@@ -399,8 +399,8 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#journal-of-reading-personal-skills-development">
-     Journal of Reading/ Personal Skills Development
+    <a class="reference internal nav-link" href="#journal-of-reading-personal-skills-development-implementation-challenges">
+     Journal of Reading/ Personal Skills Development/ Implementation Challenges
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -473,8 +473,8 @@ title="Print to PDF"
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#journal-of-reading-personal-skills-development">
-     Journal of Reading/ Personal Skills Development
+    <a class="reference internal nav-link" href="#journal-of-reading-personal-skills-development-implementation-challenges">
+     Journal of Reading/ Personal Skills Development/ Implementation Challenges
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -496,7 +496,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="welcome">
 <h1>Welcome<a class="headerlink" href="#welcome" title="Permalink to this headline">#</a></h1>
-<p>Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an enviroment such that one can contributre to the book easily.</p>
+<p>Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an enviroment such that one can contribute to the book easily.</p>
 <section id="standards-for-the-book">
 <h2>Standards for the book<a class="headerlink" href="#standards-for-the-book" title="Permalink to this headline">#</a></h2>
 <p>Code cell line width: 75 Characters</p>
@@ -562,37 +562,38 @@ title="Print to PDF"
 <section id="chapter-2">
 <h4>Chapter 2<a class="headerlink" href="#chapter-2" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
-<li><p>Global Temperature rise, Predictive modelling</p></li>
-<li><p>[x] Discuss the limited scope of curve fitting. Explore the error quantification.</p>
+<li><p>Global Temperature rise, Predictive modelling
+Using Bayesian methods podudce distributions on the probability of warming targets being crossed</p></li>
+</ul>
+<p>Pages:</p>
+<ul class="simple">
+<li><p>[x] Global CO_2 example</p>
 <ul>
+<li><p>[x] Discuss the limited scope of curve fitting. Explore the error quantification.</p></li>
 <li><p>[x] Page one and solution to the previous question</p></li>
 <li><p>[x] Discussion section on the results.</p></li>
 </ul>
 </li>
-<li><p>[ ] The errors on the constant and the value of the X parameter are huge. Understand This.
-Pages:</p></li>
-<li><p>[x] Global CO_2 example</p></li>
-<li><p>[x] Comparison of moving average of CO_2 and Temp</p></li>
-<li><p>[ ] testing simple model</p></li>
-<li><p>[ ] Global Temperature Data exploration and Bayesian predictions of warming temperatures crossed.</p>
+<li><p>[x] Comparison of moving average of CO_2 and Temp</p>
 <ul>
-<li><p>Match 3 approximate scenarios to some of those in the SRES</p>
-<ul>
-<li><p>[x] Have approximately matched and found literature doing similar analysis. Implementation is probably not that difficult now as of 05.07.22.</p></li>
+<li><p>[x] The errors on the constant and the value of the X parameter are huge. Understand This.</p></li>
+<li><p>Still not sure why; however, a more accurate quantification of the errors has been implemented.</p></li>
 </ul>
 </li>
+<li><p>[x] Three SRES scenarios, plotted and discussed</p>
+<ul>
+<li><p>[x] Have approximately matched and found literature doing similar analysis.</p></li>
+<li><p>[ ] Implementation of natural cubic spline for CO_2 on <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.CubicSpline.html">scipy</a></p></li>
 </ul>
 </li>
-<li><p>[x] Figure out how to use the Berkly Earth Data that is formatted weirdly.</p></li>
+<li><p>[ ] Bayesian Random Variables S &amp; C</p></li>
+<li><p>[ ] Comparison and evaluation of final model</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Berkeley Earth website is down currently using kaggle data.</p>
-</div>
 <p>Formating:</p>
 <ul class="simple">
 <li><p>[ ] Hide Code Cells</p></li>
 <li><p>[ ] Standardise</p></li>
+<li><p>[x] matplotlibrc edited</p></li>
 <li><p>[ ] Initial Proof</p></li>
 </ul>
 </section>
@@ -600,14 +601,15 @@ Pages:</p></li>
 <h4>Chapter 3<a class="headerlink" href="#chapter-3" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Radiation Modeling: Building Packages, Large Datasets</p></li>
-<li><p>[ ] refactoring the code from last year.</p></li>
+<li><p>[ ] Refactoring the code from last year.</p></li>
 </ul>
 </section>
 </section>
-<section id="journal-of-reading-personal-skills-development">
-<h3>Journal of Reading/ Personal Skills Development<a class="headerlink" href="#journal-of-reading-personal-skills-development" title="Permalink to this headline">#</a></h3>
+<section id="journal-of-reading-personal-skills-development-implementation-challenges">
+<h3>Journal of Reading/ Personal Skills Development/ Implementation Challenges<a class="headerlink" href="#journal-of-reading-personal-skills-development-implementation-challenges" title="Permalink to this headline">#</a></h3>
 <ul class="simple">
 <li><p>05.07.22: Bayesian Methods and bootstrapping covered in ESL</p></li>
+<li><p>[x] 03.07.22: Figure out how to use the Berkly Earth Data.</p></li>
 </ul>
 </section>
 <section id="notes-about-setup">

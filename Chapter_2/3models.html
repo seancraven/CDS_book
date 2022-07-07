@@ -375,6 +375,11 @@ title="Print to PDF"
      The Problem with Polynomials
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-natural-cubic-spline">
+     The Natural Cubic Spline
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -414,6 +419,11 @@ title="Print to PDF"
      The Problem with Polynomials
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-natural-cubic-spline">
+     The Natural Cubic Spline
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -433,7 +443,8 @@ title="Print to PDF"
 <span class="eqno">(4)<a class="headerlink" href="#equation-temp-co2-model" title="Permalink to this equation">#</a></span>\[T(C) = T_0 + S \log_2(C/C_0).\]</div>
 <p><span class="math notranslate nohighlight">\(S\)</span> describes the sensitivity of the global temperature to doubling in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration. This parameter has proved challenging to estimate given the complexity of the systems influencing global temperature Change. A PDF of <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(P(S)\)</span> was produced by Sherwood et al.<span class="xref std std-ref">S20</span> and will be used for our future temperature predictions and approximations of the SRES scenarios. The PDF of temperature change can be written as</p>
 <div class="math notranslate nohighlight">
-\[P(\Delta T) = \int P(\Delta T|S) P(S) dS.\]</div>
+\[P(\Delta T) = \int P(\Delta T|S) P(S) dS.
+\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this model Radiative Forcing is neglected, this id the phenomenon which describes the global flux inbalance. Where more enenrgy is being let out than let in. This is a key part of the global temperature rise equation as this is not a constant factor when global temperatures rise. For a more thourough predictive with radiative forcing see <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1748-9326/ac6ff6">Sherwood2022</a><span class="xref std std-ref">probabilityofwarming</span>.</p>
@@ -453,6 +464,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">LSQUnivariateSpline</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -528,8 +540,7 @@ title="Print to PDF"
 </div>
 <section id="the-problem-with-polynomials">
 <h2>The Problem with Polynomials<a class="headerlink" href="#the-problem-with-polynomials" title="Permalink to this headline">#</a></h2>
-<p>Problems arise when fitting polynomials of order greater than one, minor parameter tweaks to the higher powers’ constants cause large deviations in the value of the function. This can be seen below in the figure, where adjusting the fit parameters by one sigma provides a huge variance in the output of the function.</p>
-<p>By translating the data so that the midpoint is approximately zero, the two sigma confidence interval does not deviate as quickly. Alternatively, a natural spline fit could be used to model the behavior of the moving average. This is a polynomial fit, often of the third order, in which different polynomial coefficients are used for different dependent variable ranges. Further, in a natural spline fit beyond the range of the data, the fitted function is a line fit, with a continuous gradient and value at the training data boundary.</p>
+<p>Problems arise when fitting polynomials of order greater than one, minor parameter tweaks to the higher powers’ constants cause large deviations in the value of the function. This can be seen below in the figure, where adjusting the fit parameters by one sigma provides a huge variance in the output of the function.  This problem is especially apparent as the data is rather linear, and thus there is a moderate uncertainty on the <span class="math notranslate nohighlight">\(x^2, x^3\)</span> terms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">poly_fit</span><span class="o">/</span><span class="n">poly_error</span><span class="p">))</span>
@@ -602,6 +613,8 @@ title="Print to PDF"
 <img alt="../_images/3models_7_0.png" src="../_images/3models_7_0.png" />
 </div>
 </div>
+<p>To solve this problem, the <span class="math notranslate nohighlight">\(x\)</span> values of the training data, years, can be translated so that they center about zero. Thus the deviations due to small parameter changes are not as large.</p>
+<p>Alternatively, a natural spline fit could be used, treating the extrapolation as linear, and thus the range of values inside the <span class="math notranslate nohighlight">\(2 \cdot \sigma\)</span> interval would not diverge as rapidly.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>The Plot on the left-hand side is a quantitive representation of the simplified SRES Scenarios detailed earlier. It shows three possible future pathways and the current 10-year moving average from which the A1B fit was performed. It should be noted that these are in no way linked to anything more than common sense. And the predictive power they bring to bear is incredibly small. The purpose of these plots is to aid in the Bayesian analysis.</p>
@@ -639,13 +652,13 @@ Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T sc
     <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">a1t</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">-</span> <span class="n">sigma</span><span class="p">,</span>
     <span class="n">a1t</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span><span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;A1T&#39;</span>
     <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">B1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">-</span> <span class="n">sigma</span><span class="p">,</span>
     <span class="n">B1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">stone</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">pink</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;B1&#39;</span>
     <span class="p">)</span>
@@ -665,7 +678,59 @@ Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T sc
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3models_9_0.png" src="../_images/3models_9_0.png" />
+<img alt="../_images/3models_10_0.png" src="../_images/3models_10_0.png" />
+</div>
+</div>
+</section>
+<section id="the-natural-cubic-spline">
+<h2>The Natural Cubic Spline<a class="headerlink" href="#the-natural-cubic-spline" title="Permalink to this headline">#</a></h2>
+<p>This section is a mild detour because this technique is not used in the model. Nevertheless, a spline fit can be helpful in scenarios where smoothing is particularly needed or a trend is difficult to visualize. Albeit, the traditional cubic splines extrapolation power is slightly lacking.</p>
+<p>As defined in <span class="xref std std-ref">splines</span>, a spline is piecewise polynomials of order <span class="math notranslate nohighlight">\(m\)</span> with <span class="math notranslate nohighlight">\(m-2\)</span> continuous derivatives. The order-<span class="math notranslate nohighlight">\(m\)</span> spline provides a function which, if defined by the degrees of freedom, has a fixed number of knots, points at which the polynomial changes. In the plot below, spline fits of <span class="math notranslate nohighlight">\(\cos(x)\)</span> with Gaussian noise are plotted. There are two knots for all of the splines. A dashed grey line indicates the position of the knots. The degrees of freedom for a spline</p>
+<div class="math notranslate nohighlight">
+\[\nu =  (knots+1)\cdot m-(knots)\cdot 3 \]</div>
+<p>The <span class="math notranslate nohighlight">\(knots+1\)</span> term comes from the number of separate polynomials. The number of constraints is 3 per knot; where <span class="math notranslate nohighlight">\(x_k\)</span> is the knot postition, the constraints are as follows</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}    \begin{aligned}
+        f(x_k^-) &amp; = f(x_k^+), \\
+        f'(x_k^-) &amp; = f'(x_k^+), \\
+        f''(x_k^-) &amp; = f''(x_k^+).
+    \end{aligned}\end{split}\]</div>
+<p>The implementation of the splines below is using a least-squares fitting method. A natural spline extension can be used if the spline fit is used as a predictive model for data in unseen regions. A natural spline has a first-degree polynomial applied to regions outside the training data range. These lines are continuous and have continuous first derivatives.</p>
+<p>Typically order-<span class="math notranslate nohighlight">\(4\)</span> splines are used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">spline_knots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="mf">.4</span>
+<span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">spline</span> <span class="o">=</span> <span class="n">LSQUnivariateSpline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">spline_knots</span><span class="p">,</span> 
+        <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">spline</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>  <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Order </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> Spline&#39;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">}</span><span class="s1">$\pi$&#39;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">spline_knots</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">l</span><span class="p">,</span><span class="n">l</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Knot&#39;</span>
+            <span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Knots&#39;</span><span class="p">],</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.59</span><span class="p">,</span> <span class="mf">.98</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3models_12_0.png" src="../_images/3models_12_0.png" />
 </div>
 </div>
 </section>

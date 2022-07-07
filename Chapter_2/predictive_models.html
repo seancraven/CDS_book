@@ -560,7 +560,7 @@ title="Print to PDF"
     <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
     <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
     <span class="n">sigma</span><span class="o">=</span><span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
     <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Training Model&#39;</span>
     <span class="p">)</span>
 <span class="n">test</span>  <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
@@ -625,8 +625,8 @@ p_3 = 0.00026 +_ 2e-05
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficent:-2e+06 +_ 4e-08 
-P_1 coefficient:3e+03 +_ 6e-11
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficent:-1.9e+06 +_ 4e-08 
+P_1 coefficient:2.9e+03 +_ 1e-11
 </pre></div>
 </div>
 </div>
@@ -662,17 +662,17 @@ P_1 coefficient:3e+03 +_ 6e-11
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Model
 chi^2 = 1.005e+03
 chi^2/nu = 2.134
-P(chi^2 &gt; chi^2_min) = 7.963e-41
+P(chi^2 &gt; chi^2_min) = 7.967e-41
 
 Validation Model
-chi^2 = 13.55
-chi^2/nu = 0.8466
-P(chi^2 &gt; chi^2_min) = 0.6325
+chi^2 = 13.64
+chi^2/nu = 0.8522
+P(chi^2 &gt; chi^2_min) = 0.6259
 
 Test Model
-chi^2 = 9.096
-chi^2/nu = 2.274
-P(chi^2 &gt; chi^2_min) = 0.05874
+chi^2 = 9.24
+chi^2/nu = 2.31
+P(chi^2 &gt; chi^2_min) = 0.05537
 </pre></div>
 </div>
 </div>
