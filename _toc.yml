@@ -18,6 +18,7 @@ parts:
     - file: Chapter_2/predictive_models.ipynb
     - file: Chapter_2/temp_co2.ipynb
     - file: Chapter_2/3models.ipynb
+    - file: Chapter_2/bayesian_inference.ipynb
   - caption:
     chapters:
     - file: Bibliography
