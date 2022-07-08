@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Introduction &#8212; Climate Data Science</title>
+    <title>Using Bayesian Inteference to Determine \(\Delta T\) &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,8 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bibliography" href="../Bibliography.html" />
+    <link rel="prev" title="Implementation of the Three SRES Approximation Models" href="3models.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -153,24 +157,24 @@ const thebe_selector_output = ".output, .cell_output"
   Temperature Rise and Predictive Modelling
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/predictive_models.html">
+  <a class="reference internal" href="predictive_models.html">
    Predictive Modeling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/temp_co2.html">
+  <a class="reference internal" href="temp_co2.html">
    Global Temperature Predictions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/3models.html">
+  <a class="reference internal" href="3models.html">
    Implementation of the Three SRES Approximation Models
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/bayesian_inference.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Using Bayesian Inteference to Determine
    <span class="math notranslate nohighlight">
     \(\Delta T\)
@@ -274,7 +278,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2F.history/index_20220622153113.html&body=Your%20issue%20content%20here."
+        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_2/bayesian_inference.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -302,7 +306,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/.history/index_20220622153113.md"
+        <a href="../_sources/Chapter_2/bayesian_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -313,7 +317,7 @@ title="Download source file"
 <span class="headerbtn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="headerbtn__text-container">.md</span>
+<span class="headerbtn__text-container">.ipynb</span>
 </a>
 
       </li>
@@ -351,7 +355,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Introduction</h1>
+                <h1>Using Bayesian Inteference to Determine \Delta T</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -363,13 +367,45 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="introduction">
-<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">#</a></h1>
-<p>Welcome to the Durham University Climate Data Science Project Book. This book aims to build a syllabus that uses the case study of climate science to teach data-intensive science skills.</p>
-<p>The book comprises multiple Jupyter notebooks following multiple case studies focused on the effects of climate change. It is mainly intende</p>
-<p>This book builds off the summer project completed by Sean Craven in the summer of 2021. The project was inspired by the plots of Dr Robert Rode <span id="id1">[<a class="reference internal" href="../Bibliography.html#id3" title="Robert Rhode. Clear-sky atmospheric transistion. \url https://twitter.com/RARohde/status/1196762005136392192.">Rho</a>]</span> using the PyRads package <span id="id2">[<a class="reference internal" href="../Bibliography.html#id2" title="Daniel D. B. Koll and Timothy W. Cronin. Earth&amp;#x2019;s outgoing longwave radiation linear due to h&lt;sub&gt;2&lt;/sub&gt;o greenhouse effect. Proceedings of the National Academy of Sciences, 115(41):10293-10298, 2018. URL: https://www.pnas.org/doi/abs/10.1073/pnas.1809868115, arXiv:https://www.pnas.org/doi/pdf/10.1073/pnas.1809868115, doi:10.1073/pnas.1809868115.">KC18</a>]</span>.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href=".history/Figures/EJvAQJcXkAEm-9t.jpeg"><img alt="Clear-Sky_Atmospheric_Transmission" class="bg-primary mb-1 align-center" src=".history/Figures/EJvAQJcXkAEm-9t.jpeg" style="width: 600px;" /></a>
-<p>The above plot shows the transmission of solar radiation as a function of wavelength for multiple common greenhouse gases. This figure effectively communicates the wavelength dependence of molecular absorption, and the ceiling in absorption provided by ozone and Rayleigh scattering. However, if one were to ask what gases contribute most to warming? Is methane more problematic than CO2? The figure does not communicate this. This should highlight how the data is formatted and processed affects the conclusions drawn and the information recovered.</p>
+  <section id="using-bayesian-inteference-to-determine-delta-t">
+<h1>Using Bayesian Inteference to Determine <span class="math notranslate nohighlight">\(\Delta T\)</span><a class="headerlink" href="#using-bayesian-inteference-to-determine-delta-t" title="Permalink to this headline">#</a></h1>
+<p>Bayes’ theorem describes a systematic fashion to update one’s beliefs. It describes how independent evidence updates the probability of a given outcome. This is incredibly useful in the context of climate models, as multiple factors contribute to macro processes like warming.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">lam</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">loc</span><span class="o">=-</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.44</span><span class="p">)</span>
+<span class="n">del_f</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mf">4.00</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">clim_sensitivity</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lam</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">loc</span><span class="o">=-</span><span class="mf">1.3</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.44</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">del_f</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="mf">4.00</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">clim_sensitivity</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;clim_sensitivity&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -385,7 +421,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./.history"
+            path: "./Chapter_2"
         },
         predefinedOutput: true
     }
@@ -399,6 +435,20 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="3models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Implementation of the Three SRES Approximation Models</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../Bibliography.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bibliography</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
