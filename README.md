@@ -54,6 +54,22 @@ Pages:
 
 - [ ] Comparison and evaluation of final model
 
+### Chapter 3
+- Pyrads 
+
+- [ ] Reformatting code 
+    - [ ] Split Functions file into multiple sensible little files
+    - [ ] Add docstrings
+    - [ ] Remove Redudant Functions
+    - [ ] Type Hints
+- [ ] Profile expensive functions 
+- [ ] Improve expensive functions
+- [ ] Lorentzian Broadening 
+- [ ] Atomic Crossections
+- [ ] Absorbtion
+- [ ] Short Wave
+    
+
 
 Formating:
 - [ ] Hide Code Cells
