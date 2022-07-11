@@ -58,12 +58,25 @@ Pages:
 - Pyrads 
 
 - [ ] Reformatting code 
-    - [ ] Split Functions file into multiple sensible little files
+    - [x] Split Functions file into multiple sensible little files
     - [ ] Add docstrings
     - [ ] Remove Redudant Functions
     - [ ] Type Hints
+Files That Have Been Formatted:
+- [x] plank.py
+- [x] gas.py
+    - apart from two functions
+- [ ] isa.py is not my file could format it properly
+- [x] lorenzian.py 
+    - apart from the function that is the one that needs to be rewritten
+- [x] plank.py
+- [x] radation.py
+- [x] reighligh.py
+
+Optimization:
 - [ ] Profile expensive functions 
 - [ ] Improve expensive functions
+Pages:
 - [ ] Lorentzian Broadening 
 - [ ] Atomic Crossections
 - [ ] Absorbtion
