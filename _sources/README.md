@@ -35,6 +35,10 @@ Formating:
 - [x] Hide Code Cells
 - [x] Standardise
 - [x] Inital Proof
+- [ ] Have all inline math go as follows
+```{math}
+:label:
+```
 #### Chapter 2
 - Global Temperature rise, Predictive modelling 
 Using Bayesian methods podudce distributions on the probability of warming targets being crossed
@@ -53,6 +57,40 @@ Pages:
 - [ ] Bayesian Random Variables S & C
 
 - [ ] Comparison and evaluation of final model
+
+### Chapter 3
+- Pyrads 
+
+- [ ] Reformatting code 
+    - [x] Split Functions file into multiple sensible little files
+    - [ ] Add docstrings
+    - [ ] Remove Redudant Functions
+    - [ ] Type Hints
+Files That Have Been Formatted:
+- [x] plank.py
+- [x] gas.py
+    - apart from two functions
+- [ ] isa.py is not my file could format it properly
+- [x] lorenzian.py 
+    - apart from the function that is the one that needs to be rewritten
+- [x] plank.py
+- [x] radation.py
+- [x] reighligh.py
+
+Optimization:
+- [ ] Profile expensive functions 
+- [ ] Improve expensive functions
+Pages:
+- [ ] Lorentzian Broadening 
+    - [ ] rewrite the broadening function
+    - [ ] write an overview of where line broadening comes from.
+    - [ ] write an overview of how vibrational transitions work
+    - [ ] write an overview of how electronic transitions work
+    - [ ] look at the effect of how $S_{ij}$ is effected by [temperature](https://hitran.org/docs/definitions-and-units/)
+- [ ] Atomic Crossections
+- [ ] Absorbtion
+- [ ] Short Wave
+    
 
 
 Formating:

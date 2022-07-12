@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>What Happens To Incoming radiation &#8212; Climate Data Science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../An_Aside_On_Python.html">
+   An Aside On Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Global Carbon Dioxide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Data_Exploration.html">
+   Global
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2 \)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Fitting.html">
+   Fitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Hypothesis_Testing.html">
+   Hypothesis Testing And Goodness of Fit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Final_Model.html">
+   Final Model
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Temperature Rise and Predictive Modelling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/predictive_models.html">
+   Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/temp_co2.html">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/3models.html">
+   Implementation of the Three SRES Approximation Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/bayesian_inference.html">
+   Using Bayesian Inference to Determine
+   <span class="math notranslate nohighlight">
+    \(S\)
+   </span>
+   Left as Work in progress
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Radiation Modelling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
+   Radiation Modelling
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://seancraven.github.io/CDS_book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2Fdur_rads_to_be_removed_wip/Spectral Absorbtion.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/dur_rads_to_be_removed_wip/Spectral Absorbtion.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   What Happens To Incoming radiation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ozone-and-water">
+   Ozone and Water
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outgoing-radiation">
+   Outgoing Radiation
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>What Happens To Incoming radiation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   What Happens To Incoming radiation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ozone-and-water">
+   Ozone and Water
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outgoing-radiation">
+   Outgoing Radiation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.constants</span> <span class="k">as</span> <span class="nn">cst</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">Functions</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">isa</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">find_peaks</span>
+<span class="kn">import</span> <span class="nn">physicsbasics</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span> 
+<span class="n">CO2</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/CO2.csv&#39;</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mf">415.16</span> <span class="p">)</span>
+<span class="n">CH4</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/CH4.csv&#39;</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mf">1.8505</span> <span class="p">)</span>
+<span class="n">N2O</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/N2O.csv&#39;</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mf">0.331</span><span class="p">)</span>
+<span class="n">H2O</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua/H2O.csv&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">H2O_</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/H2O.csv&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">O3</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua/O3.csv&#39;</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mf">0.08</span> <span class="p">)</span>
+<span class="n">O3_corssection</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas_with_crossection</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua/Ozone Cross Sections/&#39;</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mf">0.08</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">Functions</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">isa</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;Functions&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_resolution</span> <span class="o">=</span> <span class="mi">100000</span><span class="c1">#um</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###Defining X axis for plots </span>
+<span class="n">plot_resolution</span> <span class="o">=</span> <span class="mi">100000</span><span class="c1">#um</span>
+<span class="n">nu_sun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">plot_resolution</span><span class="p">)</span>
+<span class="n">nu_to_E</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">c</span><span class="o">*</span><span class="n">cst</span><span class="o">.</span><span class="n">h</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="o">/</span><span class="p">(</span><span class="mf">1.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">19</span><span class="p">)</span>
+<span class="n">E_sun</span> <span class="o">=</span> <span class="n">nu_sun</span><span class="o">*</span><span class="n">nu_to_E</span>
+<span class="n">max_E_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">plot_resolution</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">lambda_sun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">plot_resolution</span><span class="p">)</span>
+
+<span class="c1">###Defining Y axis for plots </span>
+<span class="n">I_inc</span><span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">plank_nu</span><span class="p">(</span><span class="n">nu_sun</span><span class="p">,</span><span class="mi">5770</span><span class="p">,</span><span class="n">Flux</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;um&#39;</span><span class="p">,)</span>
+<span class="n">I_out</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">plank_nu</span><span class="p">(</span><span class="n">nu_sun</span><span class="p">,</span><span class="mi">252</span><span class="p">,</span><span class="n">Flux</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;um&#39;</span><span class="p">,)</span>
+<span class="n">I_inc_lambda</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">plank</span><span class="p">(</span><span class="n">lambda_sun</span><span class="p">,</span><span class="mi">5770</span><span class="p">,</span><span class="n">units</span><span class="o">=</span><span class="s1">&#39;um&#39;</span><span class="p">)</span>
+<span class="n">I_inc_E</span> <span class="o">=</span> <span class="n">I_inc</span><span class="o">*</span><span class="n">nu_to_E</span>
+<span class="n">I_out_E</span> <span class="o">=</span> <span class="n">I_out</span><span class="o">*</span><span class="n">nu_to_E</span>
+
+
+
+
+
+<span class="c1">###Rainbow Colour </span>
+<span class="n">rgb_tup</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">127</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">46</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">43</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">95</span><span class="o">/</span><span class="mi">255</span><span class="p">],[</span><span class="mi">139</span><span class="o">/</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="n">rainbow_nu</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">rainbow_E</span> <span class="o">=</span> <span class="n">rainbow_nu</span><span class="o">*</span><span class="mf">1.24</span>
+
+
+<span class="c1">###Plotting </span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span> <span class="c1">##Size and Shape </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">E_sun</span><span class="p">,</span><span class="n">I_out_E</span><span class="p">,</span><span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;T= 252 K&#39;</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span><span class="c1">##Sun</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">E_sun</span><span class="p">,</span><span class="n">I_inc_E</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;T = 5770 K&#39;</span><span class="p">)</span><span class="c1">##Earth</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">E_sun</span><span class="p">,</span><span class="n">I_out_E</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.2</span><span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">I_inc_E</span><span class="p">,</span><span class="n">I_inc_E</span><span class="p">,</span><span class="n">I_inc_E</span><span class="o">/</span><span class="n">E_sun</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span><span class="c1">###Rainbow</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nu_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_nu</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nu_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_nu</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">plot</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">E_sun</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">Y</span><span class="p">[</span><span class="n">plot</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">color</span> <span class="o">=</span><span class="n">rgb_tup</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">plot</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="n">ax</span><span class="p">[</span><span class="n">plot</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">E_sun</span><span class="p">[:</span><span class="n">max_E_index</span><span class="p">],</span><span class="n">Y</span><span class="p">[</span><span class="n">plot</span><span class="p">][:</span><span class="n">max_E_index</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+        
+
+<span class="n">fig1</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lambda_sun</span><span class="p">,</span><span class="n">I_inc_lambda</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">rainbow_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lambda_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_lambda</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lambda_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_lambda</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">axs</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">lambda_sun</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">I_inc_lambda</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">color</span> <span class="o">=</span><span class="n">rgb_tup</span><span class="p">[</span><span class="mi">7</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="p">)</span>
+        
+<span class="c1">###Labels </span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.002</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>      
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">5</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>   
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectral Radiance $(W\cdot m^{-2} \cdot str^{-1} \cdot eV^{-1})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectral Radiance $(W\cdot m^{-2} \cdot str^{-1} \cdot eV^{-1})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectral Radiance / Photon Energy &#39;&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="sa">r</span><span class="s1">&#39;$(W\cdot m^{-2} \cdot str^{-1} \cdot eV^{-2})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Photon Energy $(eV)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Photon Energy $(eV)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Photon Energy $(eV)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;sci&#39;</span><span class="p">,</span><span class="n">scilimits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;sci&#39;</span><span class="p">,</span><span class="n">scilimits</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Figure &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;FIgure 4&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wavelegth $(\mu m$)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectral Radiance $(W\cdot m^{-2} \cdot \mu m^{-1})$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\seanp\OneDrive\Documents\Work\Summer Project\Durham-Radiation\Functions.py:50: RuntimeWarning: invalid value encountered in true_divide
+  return pifac*c1*nu**3/(np.exp(c2*nu/temperature)-1)*10**6
+c:\Users\seanp\OneDrive\Documents\Work\Summer Project\Durham-Radiation\Functions.py:27: RuntimeWarning: divide by zero encountered in true_divide
+  return c1/wavelength**5*(1/(np.exp(c2/(wavelength*temperature))-1))
+c:\Users\seanp\OneDrive\Documents\Work\Summer Project\Durham-Radiation\Functions.py:27: RuntimeWarning: overflow encountered in exp
+  return c1/wavelength**5*(1/(np.exp(c2/(wavelength*temperature))-1))
+c:\Users\seanp\OneDrive\Documents\Work\Summer Project\Durham-Radiation\Functions.py:27: RuntimeWarning: invalid value encountered in multiply
+  return c1/wavelength**5*(1/(np.exp(c2/(wavelength*temperature))-1))
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Spectral Radiance $(W\\cdot m^{-2} \\cdot \\mu m^{-1})$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_2_2.png" src="../_images/Spectral Absorbtion_2_2.png" />
+<img alt="../_images/Spectral Absorbtion_2_3.png" src="../_images/Spectral Absorbtion_2_3.png" />
+</div>
+</div>
+<p>The sun is tha main source of energy arriving on earth. The mechanism for energy transfer is radiation, of photos. The total flux produced by a black body at a given temperature is given by the Stefan-Boltzmann Law.
+$<span class="math notranslate nohighlight">\(j = \sigma T^4\)</span><span class="math notranslate nohighlight">\( 
+Flux is in \)</span>W \cdot m^{-2}<span class="math notranslate nohighlight">\( and \)</span>\sigma = 5.670374419x0^{-8} W \cdot m^{-2}K^{-4}$.</p>
+<p>The sun can be very well approximated as a black body emitting at 5770k, which is the mean surface temperature of the sun. In Figure 1 and 2 The Plank Function, which describes the Spectral Radiance, flux per wavelength per steradian:
+$<span class="math notranslate nohighlight">\(B(\nu,T) = {2hc^2\nu^3}\frac{1}{exp(\frac{hc \nu}{K_bT})}\)</span>$
+at 5770k is plotted against wavenumber. Figure 1 is a log log plot, which highlights the vast energy differential between the total radiative output as the area enclosed is proportional to the power radiated. The Black body spectrum for energy equilibrium temperature (252k) for earth is also included. This is investigated further in the next section.</p>
+<p>Inspection of Figure 2 and 4, shows that there is a discrepancy between the peak values, of the graphs. With the peaks being associated to different energy Photons, <span class="math notranslate nohighlight">\(B_{max}(\lambda_max,5770); 1E_{\lambda max} = 2.47 eV\)</span>  <span class="math notranslate nohighlight">\(B_max(\nu,5770); E_{\nu max} = 1.4 eV\)</span>. This is noted however, the total flux from the sun is irrespective of the measure, This is because the function is a distribution and the transformation between independent variables is non linear.
+$<span class="math notranslate nohighlight">\(B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda \)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\( \frac{d \lambda}{d\nu} = - \lambda^2 \)</span>$
+This adds to a common misconception that the photons arriving from the sun is peaked in green wavelengths, this is where the spectral peak is, which is not true and can be seen in Figure 3, where the Y axis is proportional to the number of photons per second at a given wavenumber, which is peaked in the infrared. As an aside, The colour of the sun is white, because the relative magnitudes across the visible spectrum are close to zero.</p>
+<p>An appproximate temperature for the Earths surface can be determined using the stefan-Boltzmann Law.
+$<span class="math notranslate nohighlight">\( F = 4 \sigma T^4 = \pi \int^\infty _0 d \nu B_{\nu}(\nu, T) \)</span>$<br />
+Using the Stephan Boltzman law, the Temperature of an atmosphereless Earth can be estimated. The Earth is not matte black it has an alebdo value which is mostly due to the clouds. This has an average value of 0.3</p>
+<ul class="simple">
+<li><p>Ratio of Flux arriving at earth:</p>
+<ul>
+<li><p>Radius of The Sun <span class="math notranslate nohighlight">\(R_{Sun} = 696340km\)</span></p></li>
+<li><p>Distance of Earth From Sun  <span class="math notranslate nohighlight">\(D_{es}= 151.56\cdot 10^6km\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( R = \frac{R_{Sun}^2}{D_{es}^2}\)</span></p></li>
+</ul>
+</li>
+<li><p>Total Incident flux from Sun:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( F_{incident} = \pi \int_0^\infty d\nu(B(\nu,5770k))\cdot R \)</span></p></li>
+</ul>
+</li>
+<li><p>Total Flux Incident:</p>
+<ul>
+<li><p>Albedo of Earth is <span class="math notranslate nohighlight">\(\approx 0.3\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F_{absorbed} = (1-A)*F_{incident}\)</span></p></li>
+</ul>
+</li>
+<li><p>Temperature of Earth</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(T_{Earth} = (\frac{F_{absorbed}}{4 \sigma})^{\frac{1}{4}}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_Earth</span> <span class="o">=</span> <span class="mi">6371</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">R_Sun</span> <span class="o">=</span> <span class="mi">696340</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">D_Earth_Sun</span> <span class="o">=</span> <span class="mf">1.5154</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">11</span>
+<span class="n">Flat_Earth_Surface_Area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R_Earth</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">5.67</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">8</span>
+<span class="n">T_sun</span> <span class="o">=</span> <span class="mi">5770</span>
+<span class="n">Albedo</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">Flux_to_Earth</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">*</span><span class="n">T_sun</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">R_Sun</span><span class="o">/</span><span class="n">D_Earth_Sun</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">Power_to_earth</span> <span class="o">=</span> <span class="n">Flat_Earth_Surface_Area</span><span class="o">*</span><span class="n">Flux_to_Earth</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Albedo</span><span class="p">)</span>
+<span class="n">T_Earth</span> <span class="o">=</span> <span class="p">(</span><span class="n">Power_to_earth</span><span class="o">/</span><span class="n">Flat_Earth_Surface_Area</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span><span class="o">**</span><span class="mf">0.25</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">physicsbasics</span><span class="o">.</span><span class="n">standard_form</span><span class="p">([</span><span class="n">T_Earth</span><span class="p">],</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>252.99999999999997
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###Peak Values</span>
+
+<span class="n">index_E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">I_inc_E</span><span class="p">))</span>
+<span class="n">index_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan_to_num</span><span class="p">(</span><span class="n">I_inc_lambda</span><span class="p">))</span>
+<span class="n">peak_wavelegth</span> <span class="o">=</span> <span class="n">lambda_sun</span><span class="p">[</span><span class="n">index_lambda</span><span class="p">]</span>
+<span class="n">peak_E</span> <span class="o">=</span> <span class="n">E_sun</span><span class="p">[</span><span class="n">index_E</span><span class="p">]</span>
+<span class="n">peak_wavelegth_in_e</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">h</span><span class="o">*</span><span class="n">cst</span><span class="o">.</span><span class="n">c</span><span class="o">/</span><span class="p">(</span><span class="n">peak_wavelegth</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">6</span><span class="o">*</span><span class="mf">1.6</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">19</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">peak_E</span><span class="p">,</span><span class="n">peak_wavelegth_in_e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4048037276397844 2.4721550088241204
+</pre></div>
+</div>
+</div>
+</div>
+<p>By using the stefan-Boltzmann law, with the alebedo of the earth you can show that the mean temperature of earth is, for our assumptions= -<span class="math notranslate nohighlight">\(20^\circ C\)</span> Which is clearly much colder than the Earth’s measured mean temperature of <span class="math notranslate nohighlight">\(14^\circ C\)</span>. This leads us to the greenhouse effect, where, short wave radiation absorbed by the earth ,from the sun, is re emitted as long wave radiation from the Earth. It is re absorbed by gases in the atmosphere and ‘trapped’. Thus total Flux from the earth is Lower than that predicted.</p>
+<p>Molecules in the air posses a characteristic set of absorption peaks such as those shown below for water. Absorption Peaks, correspond to excitation of molecules vibrational and rotational modes, which are quantised. This gives them a discrete nature. The energy difference between the excitation, corresponds to the energy of the photon.
+For the molecules to interact with light they must be polar, thus have an electric dipole. The main constituents of the atmosphere <span class="math notranslate nohighlight">\(N_2\)</span> and <span class="math notranslate nohighlight">\(O_2\)</span> do not contribute to warming effects as they are mostly em transparent.</p>
+<p>When interacting with polar molecues such as <span class="math notranslate nohighlight">\(CO_2\)</span> and <span class="math notranslate nohighlight">\(H_2O\)</span>, the rotations and vibrational modes have different energies. Leading to the differing absorption of radiation of different wavenumbers(energies). The absorption lines have characteristic peaks around certain vibrational modes, however, because these molecules are complex there are multiple different transitions available. The finer energy level splitting gives a more continuous appearance to the profile, it is important to note that there are multiple possible transitions that are still discrete.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">nu</span><span class="p">,</span><span class="n">CO2</span><span class="o">.</span><span class="n">absorbtion_coeff</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral line intensity ($cm^{-1}/(molecule \cdot cm^{-2}))$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber ($cm^{-1})$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Absorption Lines up to $5000cm^{-1}$ for $H_2O$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Absorption Lines up to $5000cm^{-1}$ for $H_2O$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_7_1.png" src="../_images/Spectral Absorbtion_7_1.png" />
+</div>
+</div>
+<p>Th discrete nature, of the peaks, is approximate when the molecule is in a sea of other molecules, the constant collisions change energy eigenvalues of the transition due to collision times being smaller than the emission processes, the shortened characteristic time gives higher energy uncertainty. This is well described by a lorentzian function withe HWHM(Half Width Half Max) = <span class="math notranslate nohighlight">\( \gamma_{air} \)</span>. In addition, self broadening of the emission occurs due to shorter lived excited states having higher uncertainty on the energy of the decay,which is also of a lorentzian, HWHM = <span class="math notranslate nohighlight">\( \gamma_{self} \)</span>.<br />
+$<span class="math notranslate nohighlight">\( \gamma(p,T) = (\frac{T_{ref}}{T})^{n_{air}}(\gamma_{air}(p_{ref},T_{ref})(p-p_{self})+\gamma_{self}(p_{ref},T_{ref})p_{self})\)</span><span class="math notranslate nohighlight">\(
+The pressure and temperature dependant HWHM \)</span>\gamma<span class="math notranslate nohighlight">\(, is also dependant on \)</span>p_{self}<span class="math notranslate nohighlight">\( which is the partial pressure of the gas in question. The data was from the HITRAN Database, and \)</span>p_{ref},T_{ref} = 1atm,\space 296k<span class="math notranslate nohighlight">\(.  
+The lorentzian profile modelled: 
+\)</span><span class="math notranslate nohighlight">\( f(\gamma,\nu,\nu_0) = \frac{1}{\pi}\frac{\gamma}{\gamma^2 +(\nu- \nu_0)^2}\)</span>$
+Aside, doppler shifts can also be added, however, they have not been implemented.
+An example Lorenzian profile has been plotted below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span>  <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">lorenzian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span> <span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">,</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Area Under Lorentizan:S&#39;</span><span class="p">)</span>
+<span class="n">hm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+<span class="n">intersect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">hm</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="n">intersect</span><span class="p">]],[</span><span class="n">hm</span><span class="p">,</span><span class="n">hm</span><span class="p">],</span><span class="n">Label</span> <span class="o">=</span> <span class="s1">&#39;Half Width Half Max:$\gamma$&#39;</span><span class="p">,</span><span class="n">linestyle</span> <span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="c1">#plt.plot([5,5],[0,np.max(y)],c = &#39;black&#39;,linestyle =&#39;-.&#39;,label =&#39;Maximum&#39;)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./Figures/Lorentzian&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-377a8ee0117f&gt;:8: MatplotlibDeprecationWarning: Case-insensitive properties were deprecated in 3.3 and support will be removed two minor releases later
+  ax.plot([5,x[intersect]],[hm,hm],Label = &#39;Half Width Half Max:$\gamma$&#39;,linestyle =&#39;--&#39;,c = &#39;black&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_9_1.png" src="../_images/Spectral Absorbtion_9_1.png" />
+</div>
+</div>
+<p>In order to calculate the optical thickness of a gas, which is how absorption is calculated. The Monochromatic Absorption Coefficient is obtained,<span class="math notranslate nohighlight">\(\kappa\)</span> (<span class="math notranslate nohighlight">\(cm^{-1}/molecule\cdot cm^{-2}\)</span>) :
+$<span class="math notranslate nohighlight">\( \kappa(\nu,T,p) = S(\nu)\cdot f(\gamma,\nu,\nu_0)\)</span><span class="math notranslate nohighlight">\(
+Where S (\)</span>cm^{-1}/molecule\cdot cm^{-2}<span class="math notranslate nohighlight">\() is the Spectral Line Intensity and \)</span>f<span class="math notranslate nohighlight">\( is the lorentzian.
+When the Monochromatic Absorption Coefficient, is calculated, a lorentzian broadening is also applied to the top percentile of peaks. This may seem like a small sample but there is a lot of noise, and this retains the functional form of the distribution, without too much processing time. An example of this broadening is shown below. 
+The Monochromatic absorption coefficient is related to the optical thickness by: 
+\)</span><span class="math notranslate nohighlight">\( \Tau_{\nu} = \kappa\cdot \int[X]dl\)</span>$
+Where [X] is the volume number density of particles.</p>
+<p>For all absorption spectra, calculated, the blue line is used, to reduce computation time, however, the black line is an example of how, the profiles would look if a higher resolution was used.
+The narrow broadening widths increase the total height of the peaks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##Code Showing fine resolution Lorenzian Broadening</span>
+<span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="mi">140</span><span class="p">,</span><span class="mi">180</span>
+<span class="c1">###To increase the resolution a gas is defined with a much finer nu interval</span>
+<span class="n">coarse_coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">absorbtion_coeff</span><span class="p">)[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+<span class="n">coarse_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">nu</span><span class="p">)[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+<span class="n">coarse_gamma_self</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">gamma_self</span><span class="p">)[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+<span class="n">coarse_gamma_air</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">gamma_air</span><span class="p">)[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+<span class="n">coarse_nair</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">n_air</span><span class="p">)[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span>
+
+<span class="c1">#find the absorbtion_peak for the CO2 in the range start stop</span>
+<span class="n">absorbtion_peaks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="n">coarse_coef</span><span class="p">)</span>
+
+<span class="c1">##I make a newn gas object with nu values and a much higher resolution</span>
+<span class="n">CO2_prime</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">CO2</span><span class="p">)</span>
+
+
+<span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">305</span><span class="p">,</span><span class="mi">319</span><span class="p">,</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">peaks</span> <span class="o">=</span> <span class="n">nair</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+<span class="n">gamma_self</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+<span class="n">gamma_air</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+<span class="n">coef</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
+
+<span class="c1"># What are the values of gamma,absorbtion_coeff,etc at the peak</span>
+<span class="n">coarse_peak_height</span> <span class="o">=</span> <span class="n">coarse_coef</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">]</span>
+<span class="n">coarse_nu_peaks</span>  <span class="o">=</span> <span class="n">coarse_nu</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">]</span>
+<span class="n">coarse_gamma_self_peaks</span> <span class="o">=</span> <span class="n">coarse_gamma_self</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">]</span>
+<span class="n">coarse_gamma_air_peaks</span> <span class="o">=</span> <span class="n">coarse_gamma_air</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">]</span>
+<span class="n">coarse_nair_peaks</span> <span class="o">=</span><span class="n">coarse_nair</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">]</span>
+<span class="c1">#assign only the peak values of gamma,absorbtion_coeff,etc.They are placed in the array at the closest match of nu ie min(nu[peak]-nu_coarse[peak]) </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coarse_nu_peaks</span><span class="p">)):</span>
+    <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nu</span> <span class="o">&gt;</span> <span class="n">coarse_nu_peaks</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">coef</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">coarse_peak_height</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">gamma_air</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">coarse_gamma_air_peaks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">gamma_self</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">coarse_gamma_self_peaks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">nair</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">coarse_nair_peaks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<span class="c1">#The arrays with only values at the peaks are then assigned as gas.parameter</span>
+<span class="n">CO2_prime</span><span class="o">.</span><span class="n">absorbtion_coeff</span>  <span class="o">=</span> <span class="n">coef</span>
+<span class="n">CO2_prime</span><span class="o">.</span><span class="n">gamma_self</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma_self</span><span class="p">)</span>
+<span class="n">CO2_prime</span><span class="o">.</span><span class="n">gamma_air</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma_air</span><span class="p">)</span>
+<span class="n">CO2_prime</span><span class="o">.</span><span class="n">n_air</span> <span class="o">=</span> <span class="p">(</span><span class="n">nair</span><span class="p">)</span>
+<span class="n">CO2_prime</span><span class="o">.</span><span class="n">nu</span> <span class="o">=</span> <span class="n">nu</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="c1">#this removes the small peaks which can be seen but added clutter </span>
+<span class="n">no_broad_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">nu</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">])</span>
+<span class="n">no_broad_coef</span> <span class="o">=</span> <span class="p">(</span><span class="n">coarse_coef</span><span class="p">[</span><span class="n">absorbtion_peaks</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CO2</span><span class="o">.</span><span class="n">nu</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">Functions</span><span class="o">.</span><span class="n">lorentzain_fit</span><span class="p">(</span><span class="n">CO2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span> <span class="n">start</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span> <span class="n">stop</span><span class="p">),</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Lorentzian broadening&#39;</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">CO2_prime</span><span class="o">.</span><span class="n">nu</span><span class="p">,</span><span class="n">Functions</span><span class="o">.</span><span class="n">lorentzain_fit</span><span class="p">(</span><span class="n">CO2_prime</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">threshold</span><span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="n">Quantile</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span><span class="n">Dataframe</span><span class="o">=</span> <span class="kc">False</span> <span class="p">),</span><span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Incresed Resolution Lorentzian broadening&#39;</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">no_broad_nu</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="n">no_broad_coef</span><span class="p">[</span><span class="n">index</span><span class="p">],</span><span class="n">Label</span> <span class="o">=</span> <span class="s1">&#39;Spectral Line Intesity(SW)&#39;</span><span class="p">,</span><span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">marker</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;purple&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $/cm^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Monochromatic Absorbtion Coefficient $cm^{-1}/molecule\cdot cm^{-2}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;./Figures/High_Resolution_Broadening&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-9-ad300c0c7e1d&gt;:8: MatplotlibDeprecationWarning: Case-insensitive properties were deprecated in 3.3 and support will be removed two minor releases later
+  plt.plot(no_broad_nu[index],no_broad_coef[index],Label = &#39;Spectral Line Intesity(SW)&#39;,linestyle = &#39;&#39;,marker = &#39;x&#39;, c = &#39;purple&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_12_1.png" src="../_images/Spectral Absorbtion_12_1.png" />
+</div>
+</div>
+<section id="what-happens-to-incoming-radiation">
+<h1>What Happens To Incoming radiation<a class="headerlink" href="#what-happens-to-incoming-radiation" title="Permalink to this headline">#</a></h1>
+<p>For incoming radiation, the main obstacle, to transmission through the atmosphere is Rayleigh scattering, by causing the particle to oscillate at the same frequency as the incoming wave. The particle becomes an electric dipole and proceededs to oscillate itself. This scatters the incoming Radiation. This effect dominates when the particles are much smaller than the wavelength of the molecules. The scattering effect is <span class="math notranslate nohighlight">\( \propto \nu^4\)</span>.
+An empirical form for the optical depth is used. https://journals.ametsoc.org/view/journals/atot/16/11/1520-0426_1999_016_1854_orodc_2_0_co_2.xml
+$<span class="math notranslate nohighlight">\( \tau_R = \sigma \frac{PA}{m_ag}\)</span><span class="math notranslate nohighlight">\(
+\)</span>$ \sigma  = \frac{1.045 599 6 - 341.290 61 \lambda^{-2} -0.902 308 50\lambda^{2}}{1 + 0.002 705 988 9 \lambda^{-2} -85.968 563\lambda^{2}}</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">40000</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">stop</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">tau_r</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">Rayligh_optical_depth</span><span class="p">(</span><span class="n">nu</span><span class="p">[:</span><span class="n">stop</span><span class="p">])</span>
+<span class="n">flux</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">plank_nu</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="mi">5770</span><span class="p">,</span><span class="n">Flux</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">R_Sun</span><span class="o">/</span><span class="n">D_Earth_Sun</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">I_surf</span> <span class="o">=</span>  <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">tau_r</span><span class="p">)</span><span class="o">*</span><span class="n">flux</span><span class="p">[:</span><span class="n">stop</span><span class="p">]</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">[:</span><span class="n">stop</span><span class="p">],</span><span class="n">I_surf</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Radiation After Scattering&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">flux</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Incident Atmospheric Radiation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber ($\mu m^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40000</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">.07</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral Flux Density $(mW \cdot m^-2 \cdot \mu m^{-1})$&#39;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1dcb6938a90&gt;
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_14_1.png" src="../_images/Spectral Absorbtion_14_1.png" />
+</div>
+</div>
+<p>As can be seen in the figure above,The effect of Rayleigh scattering dominates at higher wavenumbers. This highlights the reason that only Short Wave Radiation needs to be included in scattering calculations.<br />
+$<span class="math notranslate nohighlight">\(\frac{Flux\ arriving\ at\ Earth's\ Surface}{Incident\ atmospheric\ Flux} = 0.891 \)</span><span class="math notranslate nohighlight">\( 
+This is not the complete story as Molecules absorb in the higher wavenumbers. In particular \)</span>O_3<span class="math notranslate nohighlight">\( and \)</span>H_2O$ have substantial absorption cross sections.</p>
+</section>
+<section id="ozone-and-water">
+<h1>Ozone and Water<a class="headerlink" href="#ozone-and-water" title="Permalink to this headline">#</a></h1>
+<p>Ozone is a particularly important gas in our atmosphere as its main cross section is at high wavenumbers. Which gives it the property of blocking high energy cancer causing photons.
+The HITRAN database currently, has the absorption lines for <span class="math notranslate nohighlight">\(O_3\)</span> up to <span class="math notranslate nohighlight">\(0 &lt;\nu &lt; 7000 cm^{-1}\)</span> and absorption cross section from <span class="math notranslate nohighlight">\(41000 &lt;\nu &lt; 330000 cm^{-1}\)</span>. This Provides a large window, in which the transmission is not effected in this report. The plot below, is the continuous section of <span class="math notranslate nohighlight">\(O_3\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">O3</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas_with_crossection</span><span class="p">(</span><span class="s2">&quot;./Absorbtion Continua/Ozone Cross Sections/&quot;</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mf">0.08</span><span class="p">)</span>
+<span class="n">wavenumber</span> <span class="o">=</span> <span class="n">O3</span><span class="o">.</span><span class="n">nu</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">O3</span><span class="o">.</span><span class="n">corossection</span><span class="p">(</span><span class="mi">298</span><span class="p">)</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">kappa</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavenumber</span><span class="p">,</span><span class="n">tau</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;wavenumber $um^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$ \kappa_\nu$ ($1/(molecule \cdot cm^{-2})$)&#39;</span><span class="p">)</span>    
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">40000</span><span class="p">,</span><span class="mi">350000</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">physicsbasics</span><span class="o">.</span><span class="n">standard_form</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="mi">1</span><span class="p">))</span>
+            
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([&lt;matplotlib.axis.XTick at 0x1dcb71146d0&gt;,
+  &lt;matplotlib.axis.XTick at 0x1dcb7114190&gt;,
+  &lt;matplotlib.axis.XTick at 0x1dcbac944f0&gt;,
+  &lt;matplotlib.axis.XTick at 0x1dcbacb9670&gt;,
+  &lt;matplotlib.axis.XTick at 0x1dcbacb9b80&gt;],
+ [Text(40000.0, 0, &#39;4.0&#39;),
+  Text(117500.0, 0, &#39;12.0&#39;),
+  Text(195000.0, 0, &#39;20.0&#39;),
+  Text(272500.0, 0, &#39;27.0&#39;),
+  Text(350000.0, 0, &#39;35.0&#39;)])
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_16_1.png" src="../_images/Spectral Absorbtion_16_1.png" />
+</div>
+</div>
+<p>Water vapour, in comparison to other common greenhouse gas has a larger range in which there are significant absorption peaks, which in conjunction to its high abundance in the atmosphere, means that its effect on incoming radiation, is important to note.</p>
+<p>The plot below, combineds both the absorption peaks from water vapour and the effect of Rayleigh scattering. This produces a net transmission of flux of 84%, which is higher than expected, The plots produced by Robert Rohde https://twitter.com/rarohde/status/1197147289229385728?lang=en, give this value to be at 70% with a full compliment of atmospheric gases.
+Further gases could be introduced on the incoming profile, with relative ease, however, the main gases I have tried have vastly limited line by line absorption ranges, and so their profiles for incoming radiation are only in the infrared which is the beginning tail of the curve. The HITRAN Database has a small part of the database called HITEMP, which has the line by line cross section data for a few molecules up to very high wavenumbers. This is the next step to make a more complete incoming radiation code.  Note: These data files are rather large and I had some difficulties trying to do this in a short space of time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tau_r</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">Rayligh_optical_depth</span><span class="p">(</span><span class="n">H2O</span><span class="o">.</span><span class="n">nu</span><span class="p">)</span>
+<span class="n">tau</span> <span class="o">=</span> <span class="n">H2O</span><span class="o">.</span><span class="n">Tau_for_whole_atmosphere</span><span class="p">(</span><span class="mi">30000</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">tau_t</span> <span class="o">=</span> <span class="n">tau</span><span class="o">+</span><span class="n">tau_r</span>
+<span class="n">flux</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">plank_nu</span><span class="p">(</span><span class="n">H2O</span><span class="o">.</span><span class="n">nu</span><span class="p">,</span><span class="mi">5770</span><span class="p">,</span><span class="n">Flux</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">R_Sun</span><span class="o">/</span><span class="n">D_Earth_Sun</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">I_surf</span> <span class="o">=</span> <span class="n">flux</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">tau_t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">H2O</span><span class="o">.</span><span class="n">nu</span><span class="p">,</span><span class="n">I_surf</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber ($\mu m^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">40000</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">.07</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">70</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral Flux Density $(mW \cdot m^-2 \cdot \mu m^{-1})$&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Spectral Flux Density $(mW \\cdot m^-2 \\cdot \\mu m^{-1})$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_18_1.png" src="../_images/Spectral Absorbtion_18_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trans</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">Flux_Int</span><span class="p">(</span><span class="n">I_surf</span><span class="p">,</span><span class="n">H2O</span><span class="o">.</span><span class="n">nu</span><span class="p">)</span><span class="o">/</span><span class="n">Functions</span><span class="o">.</span><span class="n">Flux_Int</span><span class="p">(</span><span class="n">flux</span><span class="p">,</span><span class="n">H2O</span><span class="o">.</span><span class="n">nu</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8409343480331634
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="outgoing-radiation">
+<h1>Outgoing Radiation<a class="headerlink" href="#outgoing-radiation" title="Permalink to this headline">#</a></h1>
+<p>The main aim of the project was to plot the Figures similar to those produced by Robert Rohde in his twitter posts, these provide a visual communication of the role that different gases play in the atmosphere. However Dr. Rhode’s graphs are all against wavelength. This is the more common way for plank spectrums to be displayed. When plotted against wavenumber, the photon energy increases to the right.
+The plot below, includes the three molecules of interest, H2O, CO2 and CH4.
+The Total absorption of these three gases using this method is 37% of total flux from the surface is retained in the atmosphere, again this is lower than that acquired by alternative methods. The Profiles shown in the reslts from Robert Rhode show a lower resolution and smoother curve. If the absorption lines were increased in width this would drastically alter the energy transmission. However, there is no motivation for this as the line by line cross sections are implemented according to the HITRAN database.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;red&quot;</span><span class="p">,</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">]</span>
+<span class="n">gases</span> <span class="o">=</span> <span class="p">[</span><span class="n">H2O_</span><span class="p">,</span><span class="n">CO2</span><span class="p">,</span><span class="n">CH4</span><span class="p">,</span><span class="n">N2O</span><span class="p">]</span>
+<span class="n">gn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H2O&#39;</span><span class="p">,</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span><span class="s1">&#39;CH4&#39;</span><span class="p">,</span><span class="s1">&#39;N2O&#39;</span><span class="p">]</span>
+<span class="n">flux</span> <span class="p">,</span> <span class="n">nu</span> <span class="p">,</span><span class="n">inc</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">multigas</span><span class="p">(</span><span class="n">gases</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Ground</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">c</span> <span class="o">=</span> <span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="n">gn</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2750</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Spectral Flux Density $(W \cdot m^-2 \cdot \mu m^{-1})$&#39;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber ($cm^{-1}$)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0, &#39;Wavenumber ($cm^{-1}$)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/Spectral Absorbtion_21_1.png" src="../_images/Spectral Absorbtion_21_1.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./dur_rads_to_be_removed_wip"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sean Craven<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

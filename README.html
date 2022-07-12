@@ -171,6 +171,27 @@ const thebe_selector_output = ".output, .cell_output"
    Implementation of the Three SRES Approximation Models
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/bayesian_inference.html">
+   Using Bayesian Inference to Determine
+   <span class="math notranslate nohighlight">
+    \(S\)
+   </span>
+   Left as Work in progress
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Radiation Modelling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_3/lorentzian_broadening.html">
+   Radiation Modelling
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -391,8 +412,15 @@ title="Print to PDF"
        Chapter 2
       </a>
      </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chapter-3">
+     Chapter 3
+    </a>
+    <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#chapter-3">
+      <a class="reference internal nav-link" href="#id2">
        Chapter 3
       </a>
      </li>
@@ -465,8 +493,15 @@ title="Print to PDF"
        Chapter 2
       </a>
      </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chapter-3">
+     Chapter 3
+    </a>
+    <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#chapter-3">
+      <a class="reference internal nav-link" href="#id2">
        Chapter 3
       </a>
      </li>
@@ -557,7 +592,10 @@ title="Print to PDF"
 <li><p>[x] Hide Code Cells</p></li>
 <li><p>[x] Standardise</p></li>
 <li><p>[x] Inital Proof</p></li>
+<li><p>[ ] Have all inline math go as follows</p></li>
 </ul>
+<div class="math notranslate nohighlight" id="equation-readme-0">
+<span class="eqno">()<a class="headerlink" href="#equation-readme-0" title="Permalink to this equation">#</a></span>\[\]</div>
 </section>
 <section id="chapter-2">
 <h4>Chapter 2<a class="headerlink" href="#chapter-2" title="Permalink to this headline">#</a></h4>
@@ -589,6 +627,55 @@ Using Bayesian methods podudce distributions on the probability of warming targe
 <li><p>[ ] Bayesian Random Variables S &amp; C</p></li>
 <li><p>[ ] Comparison and evaluation of final model</p></li>
 </ul>
+</section>
+</section>
+<section id="chapter-3">
+<h3>Chapter 3<a class="headerlink" href="#chapter-3" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Pyrads</p></li>
+<li><p>[ ] Reformatting code</p>
+<ul>
+<li><p>[x] Split Functions file into multiple sensible little files</p></li>
+<li><p>[ ] Add docstrings</p></li>
+<li><p>[ ] Remove Redudant Functions</p></li>
+<li><p>[ ] Type Hints
+Files That Have Been Formatted:</p></li>
+</ul>
+</li>
+<li><p>[x] plank.py</p></li>
+<li><p>[x] gas.py</p>
+<ul>
+<li><p>apart from two functions</p></li>
+</ul>
+</li>
+<li><p>[ ] isa.py is not my file could format it properly</p></li>
+<li><p>[x] lorenzian.py</p>
+<ul>
+<li><p>apart from the function that is the one that needs to be rewritten</p></li>
+</ul>
+</li>
+<li><p>[x] plank.py</p></li>
+<li><p>[x] radation.py</p></li>
+<li><p>[x] reighligh.py</p></li>
+</ul>
+<p>Optimization:</p>
+<ul class="simple">
+<li><p>[ ] Profile expensive functions</p></li>
+<li><p>[ ] Improve expensive functions
+Pages:</p></li>
+<li><p>[ ] Lorentzian Broadening</p>
+<ul>
+<li><p>[ ] rewrite the broadening function</p></li>
+<li><p>[ ] write an overview of where line broadening comes from.</p></li>
+<li><p>[ ] write an overview of how vibrational transitions work</p></li>
+<li><p>[ ] write an overview of how electronic transitions work</p></li>
+<li><p>[ ] look at the effect of how <span class="math notranslate nohighlight">\(S_{ij}\)</span> is effected by <a class="reference external" href="https://hitran.org/docs/definitions-and-units/">temperature</a></p></li>
+</ul>
+</li>
+<li><p>[ ] Atomic Crossections</p></li>
+<li><p>[ ] Absorbtion</p></li>
+<li><p>[ ] Short Wave</p></li>
+</ul>
 <p>Formating:</p>
 <ul class="simple">
 <li><p>[ ] Hide Code Cells</p></li>
@@ -596,9 +683,8 @@ Using Bayesian methods podudce distributions on the probability of warming targe
 <li><p>[x] matplotlibrc edited</p></li>
 <li><p>[ ] Initial Proof</p></li>
 </ul>
-</section>
-<section id="chapter-3">
-<h4>Chapter 3<a class="headerlink" href="#chapter-3" title="Permalink to this headline">#</a></h4>
+<section id="id2">
+<h4>Chapter 3<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h4>
 <ul class="simple">
 <li><p>Radiation Modeling: Building Packages, Large Datasets</p></li>
 <li><p>[ ] Refactoring the code from last year.</p></li>
