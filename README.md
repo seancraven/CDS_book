@@ -78,6 +78,11 @@ Optimization:
 - [ ] Improve expensive functions
 Pages:
 - [ ] Lorentzian Broadening 
+    - [ ] rewrite the broadening function
+    - [ ] write an overview of where line broadening comes from.
+    - [ ] write an overview of how vibrational transitions work
+    - [ ] write an overview of how electronic transitions work
+    - [ ] look at the effect of how $S_{ij}$ is effected by [temperature](https://hitran.org/docs/definitions-and-units/)
 - [ ] Atomic Crossections
 - [ ] Absorbtion
 - [ ] Short Wave
