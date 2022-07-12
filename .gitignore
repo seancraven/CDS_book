@@ -4,3 +4,4 @@ _build/
 .history/
 References/
 output_files/
+*.pyc

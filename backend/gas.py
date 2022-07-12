@@ -6,7 +6,7 @@ import isa
 import numpy as np
 from scipy import constants as cst
 import pandas as pd
-from lorentzian import lorentzain_fit
+import lorentzian
 class Gas():
     ''' Gas Class which takes hitran files from CSV to Dataframe'''
     ### The Path is to the 'somegas'.csv file
@@ -41,10 +41,10 @@ class Gas():
         altitudes = np.linspace(alt_1,alt_2,steps)
         delta_alt = abs(altitudes[0] - altitudes[1])*100
         tau = np.zeros_like(self.nu_)
-        for i , _ in enumerate(altitudes):
-            no_mol = isa.get_density(altitudes[i]) / 1000 * self.p_v / \
+        for i , alt in enumerate(altitudes):
+            no_mol = isa.get_density(alt) / 1000 * self.p_v / \
                 (self.relative_atomic_mass) * cst.N_A * delta_alt
-            tau += lorentzain_fit(self,altitudes[i],Dataframe= False) * no_mol
+            tau += lorentzian.lorentzain_fit(self, alt) * no_mol
         return tau
 
 class GasCrossection():
@@ -52,9 +52,9 @@ class GasCrossection():
     def __init__(self, path: str, relative_atomic_mass, ppm):
         self.relative_atomic_mass = relative_atomic_mass ### relative atomic mass g/mol
         self.path = path
-        self.entries  = len(crossection_from_csv(glob.glob(path+'*')[0])) 
-        self.nu_ = hitran_crossection_nu(glob.glob(path+'*')[0], self.entries) 
-        self.temps = list(crossections_temp_dataframe(self.path).columns) 
+        self.entries  = len(crossection_from_csv(glob.glob(path+'*')[0]))
+        self.nu_ = hitran_crossection_nu(glob.glob(path+'*')[0], self.entries)
+        self.temps = list(crossections_temp_dataframe(self.path).columns)
         self.ppm = ppm ### parts per million of the gas
 
     def get_corossection_at_t(self,temp):

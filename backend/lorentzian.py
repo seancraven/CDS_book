@@ -1,12 +1,14 @@
-''' Functions for implementation of broadening.'''
+'''
+    File with functions for implementation of broadening.
+'''
 import numpy as np
 import pandas as pd
 from scipy.signal import find_peaks
 from scipy.stats import cauchy
-from gas import Gas
 import isa
+import gas
 
-def main_peaks(gas: Gas, quantile: float=0.99, start: int=0, stop: int=None):
+def main_peaks(gas: 'gas.Gas', quantile: float=0.99, start: int=0, stop: int=None):
     ''' Finds the main peaks of a gas's absorbtion spectra
         by default returns the top one percent of peaks.
         Arguments:
@@ -28,7 +30,7 @@ def main_peaks(gas: Gas, quantile: float=0.99, start: int=0, stop: int=None):
     peaks = peaks[peaks != 0]
     return peaks
 
-def gamma(gas: Gas,altitude: float):
+def gamma(gas: 'gas.Gas',altitude: float):
     ''' Implementation of broadening factor gamma
         Arguments:
             gas: gas class from ../gas.py
@@ -36,7 +38,6 @@ def gamma(gas: Gas,altitude: float):
         Returns:
             gamma array
     '''
-
     t_ref = 296 ###K
     pressure = isa.get_pressure(altitude,atm = True)
     temperature = isa.get_temperature(altitude)
@@ -45,7 +46,7 @@ def gamma(gas: Gas,altitude: float):
     t_frac = (t_ref/temperature)**n_air
     return t_frac*(gas.gamma_air*(pressure-p_self)+gas.gamma_self*p_self)
 
-def lorentzain_fit(gas: Gas,altitude: float,threshold: float=0.99, start: int=None, stop: int=None):
+def lorentzain_fit(gas: 'gas.Gas',altitude: float,threshold: float=0.99, start: int=None, stop: int=None):
     ''' Fuction to apply lorentzian lineshape to the main peaks
         I think this might have the larges perf overhead and might need to be redesigned
     '''
