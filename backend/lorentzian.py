@@ -46,9 +46,15 @@ def gamma(gas: 'gas.Gas',altitude: float):
     t_frac = (t_ref/temperature)**n_air
     return t_frac*(gas.gamma_air*(pressure-p_self)+gas.gamma_self*p_self)
 
-def lorentzain_fit(gas: 'gas.Gas',altitude: float,threshold: float=0.99, start: int=None, stop: int=None):
+def lorentzian_fit(gas: 'gas.Gas',altitude: float,threshold: float=0.99, start: int=None, stop: int=None):
     ''' Fuction to apply lorentzian lineshape to the main peaks
         I think this might have the larges perf overhead and might need to be redesigned
+
+
+        Notes Sean Craven:
+        I want to additionalyl add temperature doppeler broadening. 
+        Further rather than defining a new
+        instance of main_peaks in the file just pass an array of peaks if not wanting the default config.
     '''
     peaks = main_peaks(gas,start=start, stop=stop, quantile=threshold)#find peaks for gas
     n_peak = np.shape(peaks)[0]#number of peaks

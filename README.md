@@ -35,6 +35,10 @@ Formating:
 - [x] Hide Code Cells
 - [x] Standardise
 - [x] Inital Proof
+- [ ] Have all inline math go as follows
+```{math}
+:label:
+```
 #### Chapter 2
 - Global Temperature rise, Predictive modelling 
 Using Bayesian methods podudce distributions on the probability of warming targets being crossed
