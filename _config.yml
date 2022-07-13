@@ -17,11 +17,12 @@ latex:
 
 # Add a bibtex file so that we can create citations
 bibtex_bibfiles:
-  - ./references.bib
+  - ./References/references.bib
+  - /home/sean/Documents/Work/CDS_book/References/Chapeter_3/Chapter_3.bib
 
 # Information about where the book exists on the web
 repository:
-  url: https://seancraven.github.io/CDS_book  # Online location of your book
+  url: https://github.com/seancraven/CDS_book   # Online location of your book
   path_to_book: docs  # Optional path to your book, relative to the repository root
   branch: master  # Which branch of the repository should be used when creating links (optional)
 
