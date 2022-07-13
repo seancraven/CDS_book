@@ -37,8 +37,8 @@ parse:
     # including those that are enabled by default!
     - amsmath
     - colon_fence
-    - deflist
     - dollarmath
+    - deflist
     - fieldlist
     - html_admonition
     - html_image

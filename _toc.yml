@@ -19,6 +19,9 @@ parts:
     - file: Chapter_2/temp_co2.ipynb
     - file: Chapter_2/3models.ipynb
     - file: Chapter_2/bayesian_inference.ipynb
+  - caption: Radiation Modelling
+    chapters:
+    - file: Chapter_3/lorentzian_broadening.ipynb
   - caption:
     chapters:
     - file: Bibliography
