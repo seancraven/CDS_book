@@ -108,3 +108,17 @@ Formating:
 
 ### Notes About Setup
 - Currently, Jupyter Book uses a different kernel to execute the notebooks. The matplotlibrc file has to be copied into the specific directories where all of the 
+
+### Important HITRAN links
+- Remember key gen 
+- [HITRAN](https://hitran.org/docs/definitions-and-units/)
+    - HITRAN definitions and explanation
+- [hapi docs](https://hitran.org/static/hapi/hapi_manual.pdf)
+    - HITRAN api docs
+- [hapi paper](https://www.sciencedirect.com/science/article/pii/S0022407315302466?via%3Dihub)
+- [2020 Paper](https://www.sciencedirect.com/science/article/pii/S0022407321004416?via%3Dihub)
+    - HITRAN paper
+- [2017 TIPS](https://www.sciencedirect.com/science/article/pii/S0022407321002065)
+    - Partition sum Paper
+- [bytran](http://www.bytran.org/howtolbl.htm)
+    - bytran is a phone app that implements HITRAN, link is to the physics documentation 
