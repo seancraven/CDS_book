@@ -6,3 +6,4 @@ References/
 output_files/
 *.pyc
 *.ipynb_checkpoints
+hapi_db/

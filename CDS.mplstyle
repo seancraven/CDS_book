@@ -227,12 +227,12 @@
 ## relative to font.size, using the following values: xx-small, x-small,
 ## small, medium, large, x-large, xx-large, larger, or smaller
 
-#font.family:  Computer Modern Serif
-#font.style:   normal
-#font.variant: normal
-#font.weight:  normal
-#font.stretch: normal
-#font.size:    24.0
+font.family:  Computer Modern Serif
+font.style:   normal
+font.variant: normal
+font.weight:  normal
+font.stretch: normal
+font.size:    24.0
 
 #font.serif:      DejaVu Serif, Bitstream Vera Serif, Computer Modern Roman, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
 #font.sans-serif: DejaVu Sans, Bitstream Vera Sans, Computer Modern Sans Serif, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
@@ -276,7 +276,7 @@
 ## ***************************************************************************
 ## For more information on LaTeX properties, see
 ## https://matplotlib.org/tutorials/text/usetex.html
-#text.usetex: True  # use latex for all text handling. The following fonts
+text.usetex: True  # use latex for all text handling. The following fonts
                      # are supported through the usual rc parameter settings:
                      # new century schoolbook, bookman, times, palatino,
                      # zapf chancery, charter, serif, sans-serif, helvetica,
@@ -299,7 +299,7 @@
                         # loaded, depending on your font settings.
 
 ## The following settings allow you to select the fonts in math mode.
-#mathtext.fontset: cm  # Should be 'dejavusans' (default),
+mathtext.fontset: cm  # Should be 'dejavusans' (default),
                                # 'dejavuserif', 'cm' (Computer Modern), 'stix',
                                # 'stixsans' or 'custom' (unsupported, may go
                                # away in the future)
@@ -330,18 +330,18 @@
 ## https://matplotlib.org/api/axes_api.html#module-matplotlib.axes
 #axes.facecolor:     white   # axes background color
 #axes.edgecolor:     black   # axes edge color
-#axes.linewidth:     2     # edge line width
+axes.linewidth:     2     # edge line width
 #axes.grid:          False   # display grid or not
 #axes.grid.axis:     both    # which axis the grid should apply to
 #axes.grid.which:    major   # grid lines at {major, minor, both} ticks
 #axes.titlelocation: center  # alignment of the title: {left, right, center}
-#axes.titlesize:     22   # font size of the axes title
-#axes.titleweight:   normal  # font weight of title
+axes.titlesize:     22   # font size of the axes title
+axes.titleweight:   normal  # font weight of title
 #axes.titlecolor:    auto    # color of the axes title, auto falls back to
                              # text.color as default value
 #axes.titley:        None    # position title (axes relative units).  None implies auto
 #axes.titlepad:      6.0     # pad between axes and title in points
-#axes.labelsize:     18  # font size of the x and y labels
+axes.labelsize:     18  # font size of the x and y labels
 #axes.labelpad:      4.0     # space between label and axis
 #axes.labelweight:   normal  # weight of the x and y labels
 #axes.labelcolor:    black
@@ -433,47 +433,47 @@
 ## * TICKS                                                                   *
 ## ***************************************************************************
 ## See https://matplotlib.org/api/axis_api.html#matplotlib.axis.Tick
-#xtick.top:           True   # draw ticks on the top side
-#xtick.bottom:        True    # draw ticks on the bottom side
-#xtick.labeltop:      False   # draw label on the top
-#xtick.labelbottom:   True    # draw label on the bottom
-#xtick.major.size:    10     # major tick size in points
-#xtick.minor.size:    3       # minor tick size in points
-#xtick.major.width:   0.8     # major tick width in points
-#xtick.minor.width:   0.6     # minor tick width in points
-#xtick.major.pad:     3.5     # distance to major tick label in points
-#xtick.minor.pad:     3.4     # distance to the minor tick label in points
-#xtick.color:         black   # color of the ticks
-#xtick.labelcolor:    inherit # color of the tick labels or inherit from xtick.color
-#xtick.labelsize:     18  # font size of the tick labels
-#xtick.direction:     in     # direction: {in, out, inout}
-#xtick.minor.visible: False   # visibility of minor ticks on x-axis
-#xtick.major.top:     True    # draw x axis top major ticks
-#xtick.major.bottom:  True    # draw x axis bottom major ticks
-#xtick.minor.top:     True    # draw x axis top minor ticks
-#xtick.minor.bottom:  True    # draw x axis bottom minor ticks
-#xtick.alignment:     center  # alignment of xticks
+xtick.top:           True   # draw ticks on the top side
+xtick.bottom:        True    # draw ticks on the bottom side
+xtick.labeltop:      False   # draw label on the top
+xtick.labelbottom:   True    # draw label on the bottom
+xtick.major.size:    10     # major tick size in points
+xtick.minor.size:    3       # minor tick size in points
+xtick.major.width:   0.8     # major tick width in points
+xtick.minor.width:   0.6     # minor tick width in points
+xtick.major.pad:     3.5     # distance to major tick label in points
+xtick.minor.pad:     3.4     # distance to the minor tick label in points
+xtick.color:         black   # color of the ticks
+xtick.labelcolor:    inherit # color of the tick labels or inherit from xtick.color
+xtick.labelsize:     18  # font size of the tick labels
+xtick.direction:     in     # direction: {in, out, inout}
+xtick.minor.visible: False   # visibility of minor ticks on x-axis
+xtick.major.top:     True    # draw x axis top major ticks
+xtick.major.bottom:  True    # draw x axis bottom major ticks
+xtick.minor.top:     True    # draw x axis top minor ticks
+xtick.minor.bottom:  True    # draw x axis bottom minor ticks
+xtick.alignment:     center  # alignment of xticks
 
-#ytick.left:          True    # draw ticks on the left side
-#ytick.right:         True   # draw ticks on the right side
-#ytick.labelleft:     True    # draw tick labels on the left side
-#ytick.labelright:    False   # draw tick labels on the right side
-#ytick.major.size:    10     # major tick size in points
-#ytick.minor.size:    3       # minor tick size in points
-#ytick.major.width:   0.8     # major tick width in points
-#ytick.minor.width:   0.6     # minor tick width in points
-#ytick.major.pad:     3.5     # distance to major tick label in points
-#ytick.minor.pad:     3.4     # distance to the minor tick label in points
-#ytick.color:         black   # color of the ticks
-#ytick.labelcolor:    inherit # color of the tick labels or inherit from ytick.color
-#ytick.labelsize:     18  # font size of the tick labels
-#ytick.direction:     in     # direction: {in, out, inout}
-#ytick.minor.visible: False   # visibility of minor ticks on y-axis
-#ytick.major.left:    True    # draw y axis left major ticks
-#ytick.major.right:   True    # draw y axis right major ticks
-#ytick.minor.left:    True    # draw y axis left minor ticks
-#ytick.minor.right:   True    # draw y axis right minor ticks
-#ytick.alignment:     center_baseline  # alignment of yticks
+ytick.left:          True    # draw ticks on the left side
+ytick.right:         True   # draw ticks on the right side
+ytick.labelleft:     True    # draw tick labels on the left side
+ytick.labelright:    False   # draw tick labels on the right side
+ytick.major.size:    10     # major tick size in points
+ytick.minor.size:    3       # minor tick size in points
+ytick.major.width:   0.8     # major tick width in points
+ytick.minor.width:   0.6     # minor tick width in points
+ytick.major.pad:     3.5     # distance to major tick label in points
+ytick.minor.pad:     3.4     # distance to the minor tick label in points
+ytick.color:         black   # color of the ticks
+ytick.labelcolor:    inherit # color of the tick labels or inherit from ytick.color
+ytick.labelsize:     18  # font size of the tick labels
+ytick.direction:     in     # direction: {in, out, inout}
+ytick.minor.visible: False   # visibility of minor ticks on y-axis
+ytick.major.left:    True    # draw y axis left major ticks
+ytick.major.right:   True    # draw y axis right major ticks
+ytick.minor.left:    True    # draw y axis left minor ticks
+ytick.minor.right:   True    # draw y axis right minor ticks
+ytick.alignment:     center_baseline  # alignment of yticks
 
 
 ## ***************************************************************************
@@ -499,7 +499,7 @@
 #legend.numpoints:     1        # the number of marker points in the legend line
 #legend.scatterpoints: 1        # number of scatter points
 #legend.markerscale:   1.0      # the relative size of legend markers vs. original
-#legend.fontsize:      18
+legend.fontsize:      18
 #legend.labelcolor:    None
 #legend.title_fontsize: None    # None sets to the same as the default axes.
 
@@ -517,9 +517,9 @@
 ## * FIGURE                                                                  *
 ## ***************************************************************************
 ## See https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure
-#figure.titlesize:   26        # size of the figure title (``Figure.suptitle()``)
+figure.titlesize:   26        # size of the figure title (``Figure.suptitle()``)
 #figure.titleweight: normal    # weight of the figure title
-#figure.figsize:     10.0, 6.0 # figure size in inches
+figure.figsize:     10.0, 6.0 # figure size in inches
 #figure.dpi:         300       # figure dots per inch
 #figure.facecolor:   white     # figure face color
 #figure.edgecolor:   white     # figure edge color
@@ -540,7 +540,7 @@
                                # expressed as a fraction of the average axis height
 
 ## Figure layout
-#figure.autolayout: True  # When True, automatically adjust subplot
+figure.autolayout: True  # When True, automatically adjust subplot
                            # parameters to make the plot fit the figure
                            # using `tight_layout`
 #figure.constrained_layout.use: False  # When True, automatically make plot
@@ -580,19 +580,19 @@
 ## ***************************************************************************
 ## * ERRORBAR PLOTS                                                          *
 ## ***************************************************************************
-#errorbar.capsize: 2  # length of end cap on error bars in pixels
+errorbar.capsize: 2  # length of end cap on error bars in pixels
 
 
 ## ***************************************************************************
 ## * HISTOGRAM PLOTS                                                         *
 ## ***************************************************************************
-#hist.bins: 100  # The default number of histogram bins or 'auto'.
+hist.bins: 100  # The default number of histogram bins or 'auto'.
 
 
 ## ***************************************************************************
 ## * SCATTER PLOTS                                                           *
 ## ***************************************************************************
-#scatter.marker: +         # The default marker type for scatter plots.
+scatter.marker: +         # The default marker type for scatter plots.
 #scatter.edgecolors: face  # The default edge colors for scatter plots.
 
 

@@ -1,9 +1,9 @@
 '''
-    File with reigligh utilities.
+    File with rayleigh utilities.
 '''
 import numpy as np
 import gas 
-def reigligh_crossection(wavenumber):
+def rayleigh_crossection(wavenumber):
 ###Note that this crossection is accurate for 0.25 to 1 *10^-6um##1000-4000 cm^-1
     ''' Calculates religh crossection for different wavenumber.'''
     wavenumber = wavenumber/10000
@@ -11,9 +11,9 @@ def reigligh_crossection(wavenumber):
     denominator = 1+0.0027059889*(wavenumber)**2- 85.968563*wavenumber**(-2)
     return numerator/denominator
 
-def rayligh_optical_depth(wavenumber):
+def rayleigh_optical_depth(wavenumber):
     ''' Returns religh optical depth for different wavenumber.'''
-    sigma = reigligh_crossection(wavenumber)
+    sigma = rayleigh_crossection(wavenumber)
     return 0.0021520*sigma
 
 # Wavenumber thingy not sure when used
