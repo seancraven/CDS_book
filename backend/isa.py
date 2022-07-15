@@ -9,7 +9,7 @@ def get_temperature(h):
 	 	https://en.wikipedia.org/wiki/Barometric_formula#Pressure_equations
         If array calls recursively, stupid but oh well 
 	'''
-    if isinstance(h,float):
+    if isinstance(h, float) or isinstance(h,int):
         if h < 11000:
             hb = 0
             Tb = 288.15
@@ -64,7 +64,7 @@ def get_density(h):
     R_star = 8.3144598  # J/(mol·K)
     g0 = 9.80665
     M = 0.0289644
-    if isinstance(h, float):
+    if isinstance(h, float) or isinstance(h,int):
         if h < 11000:
             hb = 0
             rhob = 1.225

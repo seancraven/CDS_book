@@ -14,9 +14,14 @@ import hapi
 if __name__ == '__main__':
     data_base_path = 'hapi_db'
     hapi.db_begin(data_base_path)
-    gas_id_dict = {'CO2': 2, 'H2O':1 , 'CH4': 6, 
-                   'NH3': 11, 'N2O': 4, 'O2': 7,
-                   'N2': 22}
+    gas_id_dict = {
+        'CO2': 2,
+        'H2O': 1,
+        'CH4': 6,
+        'NH3': 11,
+        'N2O': 4,
+        'O2': 7,
+        'N2': 22
+    }
     for gas, id in gas_id_dict.items():
-        hapi.fetch(gas, id, 1,0,4000)
-    
+        hapi.fetch(gas, id, 1, 0, 4000)
