@@ -14,7 +14,12 @@ As an exercise, you may want to estimate the photon density per meter squared, g
 Hint: the plank functions units are $W/m^2$. 
 ```
 ### Electron Transitions
-- [ ]qm primer of this
+
+One of the early achievements of quantum mechanics and the Bohr model was the prediction of Hydrogen's emission lines. As a result from the electronic shell model. With the advent of the Schrodinger equation solutions to Hydrogen, which describes electron orbitals in terms of 3 quantum numbers of n, l, m the principle, angular momentum, and magnetic quantum numbers. The notation for a specific wavefunction denoting a state n, l, m 
+```{math}
+\Phi_{n, l, m}(\textbm{r}, t) = R_{n, l}(r)Y_{l, m}(\theta, \phi)\exp(-i E_{n, l}t/\hbar).
+``` 
+
 ### Vibrational Transition 
 - [ ]qm primer of this
 
