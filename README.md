@@ -78,8 +78,8 @@ Plan Possibly to change...
     - [ ] Vibrational Transitions
     - [x] Line Shapes 
 - [ ] Temperature Dependence and HITRAN-api
-- [ ] optical thickness and atmospheric profile
 - [ ] Radiation Balance 
+- [ ] Two Stream
 - [ ] Final Outgoing Model
 
 - [ ] Absorption
