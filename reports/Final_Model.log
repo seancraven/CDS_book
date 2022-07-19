@@ -24,6 +24,8 @@ import pandas as pd
 from dur_utils import colours
 from scipy import stats
 from matplotlib.gridspec import GridSpec
+import matplotlib as mpl
+mpl.style.use('../matplotlibrc')
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m

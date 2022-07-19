@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
-   Radiation Modelling
+   The Variance of Absorption Spectra
   </a>
  </li>
 </ul>
@@ -250,6 +250,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/dur_rads_to_be_removed_wip/Longwave Tutorial.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -272,7 +301,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://seancraven.github.io/CDS_book"
+        <a href="https://github.com/seancraven/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -289,7 +318,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2Fdur_rads_to_be_removed_wip/Longwave Tutorial.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2Fdur_rads_to_be_removed_wip/Longwave Tutorial.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -430,26 +459,26 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.constants</span> <span class="k">as</span> <span class="nn">cst</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">Functions</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">from</span> <span class="nn">gas</span> <span class="kn">import</span> <span class="n">Gas</span>
 <span class="kn">import</span> <span class="nn">isa</span>
 <span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">find_peaks</span>
-<span class="n">CO2</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/CO2.csv&#39;</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mf">415.16</span> <span class="p">)</span>
-<span class="n">CH4</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/CH4.csv&#39;</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mf">1.8505</span> <span class="p">)</span>
-<span class="n">H2O</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/H2O.csv&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
-<span class="n">O3</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua/O3.csv&#39;</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mf">0.08</span> <span class="p">)</span>
+<span class="n">CO2</span> <span class="o">=</span> <span class="n">Gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/CO2.csv&#39;</span><span class="p">,</span><span class="mi">44</span><span class="p">,</span><span class="mf">415.16</span> <span class="p">)</span>
+<span class="n">CH4</span> <span class="o">=</span> <span class="n">Gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/CH4.csv&#39;</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mf">1.8505</span> <span class="p">)</span>
+<span class="n">H2O</span> <span class="o">=</span> <span class="n">Gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/H2O.csv&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+<span class="n">O3</span> <span class="o">=</span> <span class="n">Gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua/O3.csv&#39;</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mf">0.08</span> <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">Functions</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">isa</span>
+<span class="nn">/home/sean/Documents/Work/CDS_book/dur_rads_to_be_removed_wip/Longwave Tutorial.ipynb Cell 1</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/sean/Documents/Work/CDS_book/dur_rads_to_be_removed_wip/Longwave%20Tutorial.ipynb#ch0000000?line=1&#39;</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/sean/Documents/Work/CDS_book/dur_rads_to_be_removed_wip/Longwave%20Tutorial.ipynb#ch0000000?line=2&#39;</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">----&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/sean/Documents/Work/CDS_book/dur_rads_to_be_removed_wip/Longwave%20Tutorial.ipynb#ch0000000?line=3&#39;</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">Functions</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/sean/Documents/Work/CDS_book/dur_rads_to_be_removed_wip/Longwave%20Tutorial.ipynb#ch0000000?line=4&#39;</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/home/sean/Documents/Work/CDS_book/dur_rads_to_be_removed_wip/Longwave%20Tutorial.ipynb#ch0000000?line=5&#39;</span><span class="o">&gt;</span><span class="mi">6</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">isa</span>
 
 <span class="ne">ModuleNotFoundError</span>: No module named &#39;Functions&#39;
 </pre></div>
@@ -483,6 +512,15 @@ ppm: parts per million</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H2O</span> <span class="o">=</span> <span class="n">Functions</span><span class="o">.</span><span class="n">gas</span><span class="p">(</span><span class="s1">&#39;./Absorbtion Continua up to 5000cm^-1/H2O.csv&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">2500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">cells</span> <span class="k">with</span> <span class="s1">&#39;Python 3.10.4 64-bit&#39;</span> <span class="n">requires</span> <span class="n">ipykernel</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="n">Run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">to</span> <span class="n">install</span> <span class="s1">&#39;ipykernel&#39;</span> <span class="n">into</span> <span class="n">the</span> <span class="n">Python</span> <span class="n">environment</span><span class="o">.</span> 
+
+<span class="ne">Command</span>: &#39;/bin/python3 -m pip install ipykernel -U --user --force-reinstall&#39;
 </pre></div>
 </div>
 </div>
@@ -535,7 +573,13 @@ This function implements the pressure and temperature dependence of the molecula
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/Longwave Tutorial_6_0.png" src="../_images/Longwave Tutorial_6_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">cells</span> <span class="k">with</span> <span class="s1">&#39;Python 3.10.4 64-bit&#39;</span> <span class="n">requires</span> <span class="n">ipykernel</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="n">Run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">to</span> <span class="n">install</span> <span class="s1">&#39;ipykernel&#39;</span> <span class="n">into</span> <span class="n">the</span> <span class="n">Python</span> <span class="n">environment</span><span class="o">.</span> 
+
+<span class="ne">Command</span>: &#39;/bin/python3 -m pip install ipykernel -U --user --force-reinstall&#39;
+</pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -567,10 +611,13 @@ This implementation is a good start however, the line by line cross sections for
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x204d9c81dc0&gt;
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Running</span> <span class="n">cells</span> <span class="k">with</span> <span class="s1">&#39;Python 3.10.4 64-bit&#39;</span> <span class="n">requires</span> <span class="n">ipykernel</span> <span class="n">package</span><span class="o">.</span>
+
+<span class="n">Run</span> <span class="n">the</span> <span class="n">following</span> <span class="n">command</span> <span class="n">to</span> <span class="n">install</span> <span class="s1">&#39;ipykernel&#39;</span> <span class="n">into</span> <span class="n">the</span> <span class="n">Python</span> <span class="n">environment</span><span class="o">.</span> 
+
+<span class="ne">Command</span>: &#39;/bin/python3 -m pip install ipykernel -U --user --force-reinstall&#39;
 </pre></div>
 </div>
-<img alt="../_images/Longwave Tutorial_8_1.png" src="../_images/Longwave Tutorial_8_1.png" />
 </div>
 </div>
 </section>

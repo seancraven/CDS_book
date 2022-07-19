@@ -191,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
-   Radiation Modelling
+   The Variance of Absorption Spectra
   </a>
  </li>
 </ul>
@@ -252,6 +252,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/Data_Exploration.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -274,7 +303,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://seancraven.github.io/CDS_book"
+        <a href="https://github.com/seancraven/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -291,7 +320,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_1/Data_Exploration.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_1/Data_Exploration.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -457,8 +486,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../CDS.mplstyle&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

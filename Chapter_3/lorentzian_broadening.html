@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Radiation Modelling &#8212; Climate Data Science</title>
+    <title>The Variance of Absorption Spectra &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Bibliography" href="../Bibliography.html" />
-    <link rel="prev" title="Using Bayesian Inference to Determine \(S\) Left as Work in progress" href="../Chapter_2/bayesian_inference.html" />
+    <link rel="prev" title="Radiation Modelling" href="atmospheric_primer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -189,9 +189,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Radiation Modelling
+   The Variance of Absorption Spectra
   </a>
  </li>
 </ul>
@@ -252,6 +257,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_3/lorentzian_broadening.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -274,7 +308,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://seancraven.github.io/CDS_book"
+        <a href="https://github.com/seancraven/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -291,7 +325,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_3/lorentzian_broadening.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_3/lorentzian_broadening.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -378,47 +412,44 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#absorption-spectra">
-   Absorption Spectra
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The Variance of Absorption Spectra
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#electron-transitions">
-     Electron Transitions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vibrational-transition">
-     Vibrational Transition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-shapes">
-     Line Shapes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-broadening-pressure">
-     Line Broadening: Pressure
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-broadening-doppeler">
-     Line Broadening: Doppeler
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-voigt-profile">
-     The Voigt Profile
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-hitran">
-     Using HITRAN
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-atmosphere-model">
+   Standard Atmosphere Model
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-variation-of-the-absorbtion-cross-section-of-textrm-co-2">
+   The Variation of the Absorbtion Cross-section of
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optical-density-of-textrm-co-2">
+   Optical Density of
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#increasing-altitude-s-effect-on-absorption">
+   Increasing Altitude’s effect on Absorption
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logarithmic-plot-of-optical-depth-tau">
+   Logarithmic Plot of Optical Depth,
+   <span class="math notranslate nohighlight">
+    \(\tau\)
+   </span>
+  </a>
  </li>
 </ul>
 
@@ -429,7 +460,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Radiation Modelling</h1>
+                <h1>The Variance of Absorption Spectra</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -439,47 +470,44 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#absorption-spectra">
-   Absorption Spectra
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   The Variance of Absorption Spectra
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#electron-transitions">
-     Electron Transitions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#vibrational-transition">
-     Vibrational Transition
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-shapes">
-     Line Shapes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-broadening-pressure">
-     Line Broadening: Pressure
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#line-broadening-doppeler">
-     Line Broadening: Doppeler
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-voigt-profile">
-     The Voigt Profile
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#using-hitran">
-     Using HITRAN
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-atmosphere-model">
+   Standard Atmosphere Model
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-variation-of-the-absorbtion-cross-section-of-textrm-co-2">
+   The Variation of the Absorbtion Cross-section of
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optical-density-of-textrm-co-2">
+   Optical Density of
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#increasing-altitude-s-effect-on-absorption">
+   Increasing Altitude’s effect on Absorption
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logarithmic-plot-of-optical-depth-tau">
+   Logarithmic Plot of Optical Depth,
+   <span class="math notranslate nohighlight">
+    \(\tau\)
+   </span>
+  </a>
  </li>
 </ul>
 
@@ -491,126 +519,348 @@ title="Print to PDF"
                 
               <div>
                 
-  <div class="cell docutils container">
+  <section id="the-variance-of-absorption-spectra">
+<h1>The Variance of Absorption Spectra<a class="headerlink" href="#the-variance-of-absorption-spectra" title="Permalink to this headline">#</a></h1>
+<p>From discussing the mechanics of absorption spectra, it was clear that absorption lines themselves do not have a constant magnitude for all temperatures and pressures. This section uses an approximate global atmosphere model to reproduce the environment at different altitudes.</p>
+<p>The nature of climate models is that they have many interlinked parameters. These relationships must be modelled when the goal is to produce the most accurate model possible. However, this project’s scope is to build a reasonable approximation for pedagogy. So by separating the variables and assessing their impact on the model, the most vital parts of the model can be retained.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">gas</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">cauchy</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simpson</span><span class="p">,</span> <span class="n">quad</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">import</span> <span class="nn">isa</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../CDS.mplstyle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HiddenPrints</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_original_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_stdout</span>
+<span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>
+    <span class="kn">import</span> <span class="nn">hapi</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-atmosphere-model">
+<h1>Standard Atmosphere Model<a class="headerlink" href="#standard-atmosphere-model" title="Permalink to this headline">#</a></h1>
+<p>The “US Standard Atmosphere, 1976”<span id="id1">[<a class="reference internal" href="../Bibliography.html#id30" title="United States. National Oceanic, Atmospheric Administration, United States. National Aeronautics, Space Administration, United States. Department of the Air Force, and United States Committee on Extension to the Standard Atmosphere. U.S. Standard Atmosphere: 1976. NOAA - SIT 76-1562. Department of Commerce, National Oceanic and Atmospheric Administration, 1976. URL: https://books.google.co.uk/books?id=5WdTAAAAMAAJ.">OAA+76</a>]</span> provides pressure, temperature, and density vertical profiles. The model takes values which are roughly representative of year-round mid-latitude conditions. The density profile is calculated using the temperature and pressure profiles through the ideal gas equation</p>
+<div class="math notranslate nohighlight">
+\[pV = n K_b T.\]</div>
+<p>Where, <span class="math notranslate nohighlight">\(p\)</span> is pressure, <span class="math notranslate nohighlight">\(V\)</span> volume and <span class="math notranslate nohighlight">\(T\)</span> temperature, n gives the number density of the gas and <span class="math notranslate nohighlight">\(K_b\)</span> is Boltzmann’s constant.</p>
+<p>An approximate atmospheric profile is used to calculate molecule concentrations and cross-section broadening. A reasonable assumption in the troposphere is that the relative fractional abundances stay the same. Thus the decrease in atmospheric density provides the main trail off for total absorption. However, the constant relative fraction of greenhouse gases assumption breaks down, particularly for water and ozone fractional abundances above the 10km mark. This is because water forms clouds and precipitates down, becoming much less abundant, and ozone is produced more rapidly at higher altitudes and its concentration peaks in the stratosphere.</p>
+<p>Despite falling density and pressure, there is an increase in temperature after <span class="math notranslate nohighlight">\(20 km\)</span>. This temperature increase is due primarily to Ozone absorbing Shortwave UV-radiation, which is incoming from the sun. This temperature increase is not accounted for in our model as we look at longwave radiation exiting the atmosphere.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atlittudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">80000</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_pressure</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>  
+<span class="n">density</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span><span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Temperature $(K)$&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure $(Pa)$&#39;</span><span class="p">,</span> <span class="s1">&#39;Density $(kg/m^3)$&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">profile</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">density</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">profile</span><span class="p">,</span> <span class="n">atlittudes</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">profile</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">profile</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">],</span>
+               <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+               <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Troposphere&#39;</span><span class="p">,</span>
+               <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">(),</span><span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">()</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">80000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Altitude $(km)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;ISA Vertical Profile up to $10km$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 5&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">gas</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">cauchy</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">import</span> <span class="nn">isa</span>
+<img alt="../_images/lorentzian_broadening_4_0.png" src="../_images/lorentzian_broadening_4_0.png" />
+</div>
+</div>
+</section>
+<section id="the-variation-of-the-absorbtion-cross-section-of-textrm-co-2">
+<h1>The Variation of the Absorbtion Cross-section of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span><a class="headerlink" href="#the-variation-of-the-absorbtion-cross-section-of-textrm-co-2" title="Permalink to this headline">#</a></h1>
+<p>The HITRAN Database provides the line-by-line intensities for more than 55 molecules. Using the IPCC reports data on the most potent greenhouse gases, the most impactful 3, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{N}_2 \textrm{O}\)</span>, and <span class="math notranslate nohighlight">\(\textrm{CH_4}\)</span>. Additionally, water plays a significant role in the greenhouse effect. However, the variance in its concentration due to anthropogenic factors does not significantly drive global temperature rise. However, it does provide a large amount of radiation scattering and should be included<span id="id2">[<a class="reference internal" href="../Bibliography.html#id31" title="IPCC Working Group I. Ipcc sixth assessment report (ar6): climate change 2021 - the physical science basis - summary for policymakers. Aug 2021. URL: https://policycommons.net/artifacts/1804182/ipcc_ar6_wgi_spm/.">I21</a>]</span>.</p>
+<p>Further, the changes in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s absorption profile can be used as a litmus test for simplifying assumptions and observing the effects of broadening and gas rarefaction.</p>
+<p>Additionally, to temperature and pressure dependence on the broadening, there is a further temperature dependence on the line intensity due to the accessibility of a given transition. At low temperatures, high-energy transistions, those of low wavelength, are heavily suppressed as the molecules lack the energy to access either the excitation or vibrational mode. A Bose-Einstein distribution quantifies the availability of a transition. When the intensity of a transition is known for one temperature, the ratio of the probabilities gives the intensity</p>
+<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-0">
+<span class="eqno">(19)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[S_{a \rightarrow b}(T) = S_{a \rightarrow b, T_ref}\frac{\exp(-h\nu_{a \rightarrow b} /cK_bT)}{exp(-h\nu_{a \rightarrow b} /cK_b T_{ref})} \frac{Q(T_{ref})}{Q(T)}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T)\)</span> is the line intensity as a function of temperature for some transition <span class="math notranslate nohighlight">\(a \rightarrow b\)</span>, <span class="math notranslate nohighlight">\(\nu_{a \rightarrow b}\)</span> is the wavenumber for the transition, and <span class="math notranslate nohighlight">\(Q(T)\)</span> is the partition sum over all states. The values for <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T_{ref})\)</span> are recorded on the hitran data-base.</p>
+<p><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s line intensity variation is plotted at 3 km intervals up to 10km using the ISA model, around the most significant absorption lines, around <span class="math notranslate nohighlight">\(650 cm^{-1}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>    
+    <span class="n">hapi</span><span class="o">.</span><span class="n">db_begin</span><span class="p">(</span><span class="s1">&#39;../hapi_db&#39;</span><span class="p">)</span>
+    <span class="n">hapi</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
+<span class="c1">#Altitude Bands</span>
+<span class="n">start_alt</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">stop_alt</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="mi">1000</span>
+<span class="n">alt_band_size</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">midpt_altitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start_alt</span> <span class="o">+</span> <span class="n">alt_band_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                       <span class="n">stop_alt</span> <span class="o">+</span> <span class="n">alt_band_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                       <span class="n">alt_band_size</span><span class="p">,</span>
+                       <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+<span class="p">)</span>
+<span class="n">altitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start_alt</span><span class="p">,</span> <span class="n">stop_alt</span><span class="o">+</span> <span class="n">alt_band_size</span><span class="p">,</span> <span class="n">alt_band_size</span><span class="p">)</span>
+<span class="c1"># Initalise Outputs </span>
+<span class="n">abs_coef_alt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">integrals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_pressure</span><span class="p">(</span><span class="n">midpt_altitudes</span><span class="p">)</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">midpt_altitudes</span><span class="p">)</span>
+<span class="c1">#plotting</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">color_cycle</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">pres</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span><span class="n">pressure</span><span class="p">)):</span>
+    <span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>
+        <span class="n">nu</span><span class="p">,</span> <span class="n">abs_coef</span> <span class="o">=</span> <span class="n">hapi</span><span class="o">.</span><span class="n">absorptionCoefficient_Voigt</span><span class="p">(</span><span class="n">SourceTables</span><span class="o">=</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span>
+                    <span class="n">Environment</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;T&#39;</span><span class="p">:</span><span class="n">temp</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span><span class="n">pres</span><span class="o">/</span><span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
+                    <span class="n">Diluent</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;air&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span><span class="c1">#p in atm</span>
+                    <span class="p">)</span>
+    <span class="n">abs_coef_alt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abs_coef</span><span class="p">)</span>
+    <span class="n">abs_area</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">abs_coef</span><span class="p">,</span> <span class="n">nu</span><span class="p">,)</span>
+    <span class="n">integrals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abs_area</span><span class="p">)</span>
+    
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">abs_coef</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;gas&#39;
+<span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Altitude (m)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">635</span><span class="p">,</span><span class="mi">700</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Absorption Coefficient $(cm^2/molecule)$&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lorentzian_broadening_6_0.png" src="../_images/lorentzian_broadening_6_0.png" />
+</div>
+</div>
+</section>
+<section id="optical-density-of-textrm-co-2">
+<h1>Optical Density of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span><a class="headerlink" href="#optical-density-of-textrm-co-2" title="Permalink to this headline">#</a></h1>
+<p>The absorption coefficient,<span class="math notranslate nohighlight">\(k\)</span>, is related to the optical depth at a wavenumber,<span class="math notranslate nohighlight">\(\nu\)</span>, by</p>
+<div class="math notranslate nohighlight">
+\[\tau(\nu, \Delta l, T, p) = \int_{l}^{l+\Delta l} n(z) dz \cdot k(\nu, T, p).\]</div>
+<p>Where n(z) is the number density per unit volume. Then we plot the optical depth, <span class="math notranslate nohighlight">\(I/I_0\)</span>, of each atmosphere block up to <span class="math notranslate nohighlight">\(30km\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_density</span><span class="p">(</span><span class="n">alt</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Returns Number of particles per m^3</span>
+<span class="sd">    assuming ideal gas.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        alt (float): Altitude in meters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: n(alt) in molecules/m^3</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mass_of_air</span> <span class="o">=</span> <span class="mf">28.9647</span> <span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_A</span> <span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span> <span class="c1">#conver kg/m^3 to mol/m^3</span>
+    <span class="k">return</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">alt</span><span class="p">)</span><span class="o">/</span><span class="n">mass_of_air</span>
+<span class="k">def</span> <span class="nf">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    returns number of particles per square meter</span>
+<span class="sd">    between two altitudes</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        alt_0 (float):</span>
+<span class="sd">        alt_1 (float): </span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">quad</span><span class="p">(</span><span class="n">number_density</span><span class="p">,</span> <span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">optical_depth</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">,</span> <span class="n">ppm_conc</span><span class="p">,</span> <span class="n">abs_coef</span><span class="p">):</span>
+    <span class="n">particles</span> <span class="o">=</span> <span class="n">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)</span><span class="o">*</span><span class="n">ppm_conc</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">6</span>
+    <span class="k">return</span> <span class="n">particles</span><span class="o">*</span><span class="n">abs_coef</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#10^-4 factor from cm^2-&gt;m^2 conv</span>
 </pre></div>
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="radiation-modelling">
-<h1>Radiation Modelling<a class="headerlink" href="#radiation-modelling" title="Permalink to this headline">#</a></h1>
-<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, these phenomena are highly interdependant. This interdependency does not lend them to simple models. However, this section is hopefully easily parsable.</p>
-<section id="absorption-spectra">
-<h2>Absorption Spectra<a class="headerlink" href="#absorption-spectra" title="Permalink to this headline">#</a></h2>
-<p>Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.</p>
-<p>Molecular absorption, if you have met it in early quantum mechanics courses, is often described as a discrete phenomenon. However, this is not the case. Despite the mechanism for their occurrence being quantised.</p>
-<p>Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy collide with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition’s probability. The different strength interactions provide differing intensities of line shapes.</p>
-<p>This section will not deal with photon molecule interactions as the photonic densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>As an exercise, you may want to estimate the photon density per meter squared, given that the temperature of Earth is <span class="math notranslate nohighlight">\(\approx 300K\)</span>.
-Hint: the plank functions units are <span class="math notranslate nohighlight">\(W/m^2\)</span>.</p>
+</section>
+<section id="increasing-altitude-s-effect-on-absorption">
+<h1>Increasing Altitude’s effect on Absorption<a class="headerlink" href="#increasing-altitude-s-effect-on-absorption" title="Permalink to this headline">#</a></h1>
+<p>As the Greenhouse Gas molecules become more rarefied, the amount of radiation they absorb decreases. Further, when calculating the fraction of flux absorbed, the most computationally intensive part is the calculation of line-by-line absorption cross-sections. Therefore, if the contribution from the broadening does not provide a significant decrease in flux, an Assumption could be made that cross-section broadening was not necessary. However, we show below that broadening significantly reduces the atmosphere’s opacity.</p>
+<p>The figure below plots the ratio of spectral radiance transmitted over the outgoing longwave wavenumber spectrum. The lines are filled between their values and one, such that if no radiance is let through in a region <span class="math notranslate nohighlight">\(\Delta \nu\)</span>, it will be opaque. The colour bar shows the colour gradient associated with increasing altitude. The dark outlines around the pale areas indicate that temperature and pressure broadening with increased altitude corresponds to a narrowing. This effect can also be seen above plot of the absorption coefficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flux_ratios</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">optical_depths</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="n">relative_area</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1">#</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">alt</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">midpt_altitudes</span><span class="p">,</span><span class="n">abs_coef_alt</span><span class="p">)):</span>
+    <span class="n">o_d_const_coef</span> <span class="o">=</span> <span class="n">optical_depth</span><span class="p">(</span>
+        <span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+        <span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+        <span class="mi">400</span><span class="p">,</span>
+        <span class="n">abs_coef_alt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="p">)</span>
+    <span class="n">o_d</span> <span class="o">=</span> <span class="n">optical_depth</span><span class="p">(</span><span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">400</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
+    <span class="n">flux_ratios</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">o_d</span><span class="o">*</span><span class="n">alt_band_size</span><span class="p">),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">o_d_const_coef</span><span class="o">*</span><span class="n">alt_band_size</span><span class="p">)]</span>
+<span class="p">)</span>
+    <span class="n">optical_depths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o_d</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="k">for</span> <span class="n">f_r</span><span class="p">,</span> <span class="n">f_const</span> <span class="ow">in</span> <span class="n">flux_ratios</span><span class="p">:</span>
+    <span class="n">relative_area</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">simpson</span><span class="p">(</span><span class="n">f_r</span><span class="p">,</span> <span class="n">nu</span><span class="p">),</span> <span class="n">simpson</span><span class="p">(</span><span class="n">f_const</span><span class="p">,</span> <span class="n">nu</span><span class="p">)])</span>
+<span class="n">relative_area</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">relative_area</span><span class="p">)</span><span class="o">/</span><span class="n">simpson</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">nu</span><span class="p">),</span><span class="n">nu</span><span class="p">)</span>
+<span class="c1">#result</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">relative_area</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fraction of Total Flux Absorbed&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fraction of Total Flux Absorbed with Constant Absorption Coefficient&#39;</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">2</span><span class="si">}</span><span class="s1">km&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">midpt_altitudes</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
 </div>
-<section id="electron-transitions">
-<h3>Electron Transitions<a class="headerlink" href="#electron-transitions" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>[ ]qm primer of this</p></li>
-</ul>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fraction of Total Flux Absorbed</th>
+      <th>Fraction of Total Flux Absorbed with Constant Absorption Coefficient</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.5km</th>
+      <td>0.31</td>
+      <td>0.31</td>
+    </tr>
+    <tr>
+      <th>1.5km</th>
+      <td>0.29</td>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>2.5km</th>
+      <td>0.28</td>
+      <td>0.30</td>
+    </tr>
+    <tr>
+      <th>3.5km</th>
+      <td>0.26</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <th>4.5km</th>
+      <td>0.25</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <th>5.5km</th>
+      <td>0.23</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <th>6.5km</th>
+      <td>0.22</td>
+      <td>0.28</td>
+    </tr>
+    <tr>
+      <th>7.5km</th>
+      <td>0.21</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>8.5km</th>
+      <td>0.20</td>
+      <td>0.27</td>
+    </tr>
+    <tr>
+      <th>9.5km</th>
+      <td>0.18</td>
+      <td>0.26</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span>
+                           <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+                           <span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">color_cycle</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">flux_ratio</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">flux_ratios</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">flux_ratio</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$I(z)/I(z+1km)$&#39;</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;z (Altitude)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lorentzian_broadening_11_0.png" src="../_images/lorentzian_broadening_11_0.png" />
+</div>
+</div>
 </section>
-<section id="vibrational-transition">
-<h3>Vibrational Transition<a class="headerlink" href="#vibrational-transition" title="Permalink to this headline">#</a></h3>
-<ul class="simple">
-<li><p>[ ]qm primer of this</p></li>
-</ul>
-</section>
-<section id="line-shapes">
-<h3>Line Shapes<a class="headerlink" href="#line-shapes" title="Permalink to this headline">#</a></h3>
-<p>Spectral lines may not have a finite width due to the uncertainty principle. Excited states have a defined lifetime <span class="math notranslate nohighlight">\( 2\tau\)</span>, corresponding to the characteristic decay time for the excited state. This time is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is <a class="reference external" href="http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf">derived</a> from ensuring equilibrium during stimulated emission.</p>
-<p>If the time component of the wavefunction of state b is <span class="math notranslate nohighlight">\(c_b(t) = \exp(-1/ 2\tau)\)</span>. This derivation is taken from {<a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a><span class="xref std std-ref">bransden_joachain</span>.</p>
-<p>Now formulating the Schrodinger equation for the stationary state</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-0">
-<span class="eqno">(5)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[    i \hbar \phi_b(\textbf{r}, t) = E_b \phi_b(\textbf{r},t).\]</div>
-<p>When the spontaneous emission is taken into account, and coupling to the field is added. The Schrodinger equation for the non steady state <span class="math notranslate nohighlight">\(\Psi(\textbf{r},t) = \phi_b(\textbf{r},t) c_b(t)\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-1">
-<span class="eqno">(6)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-1" title="Permalink to this equation">#</a></span>\[    i \hbar \Psi_b(\textbf{r}, t) = \left(E_b - i \frac{\hbar}{ 2\tau}\right)\Psi_b(\textbf{r},t).\]</div>
-<p>Thus the time component is;</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-2">
-<span class="eqno">(7)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-2" title="Permalink to this equation">#</a></span>\[\Psi(\textbf{r}, t) = \psi(\textbf{r}) \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\]</div>
-<p>Noting that this can be written as the fourier transform of some function <span class="math notranslate nohighlight">\(a(E)\)</span></p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-3">
-<span class="eqno">(8)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-3" title="Permalink to this equation">#</a></span>\[ \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right] = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty} a(E')\exp(-iE't/\hbar)dE'.\]</div>
-<p>Inverting the transform solves for <span class="math notranslate nohighlight">\(a(E)\)</span> and bounding the function such that <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-4">
-<span class="eqno">(9)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-4" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\exp(iEt/\hbar)dt.\]</div>
-<p>Thus,</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-5">
-<span class="eqno">(10)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-5" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2\tau}.\]</div>
-<p>Thus the PDF of finding the state in state <span class="math notranslate nohighlight">\(b\)</span> with some energy that is equal to <span class="math notranslate nohighlight">\(E = E_a + \hbar \omega\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-prop">
-<span class="eqno">(11)<a class="headerlink" href="#equation-prop" title="Permalink to this equation">#</a></span>\[|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4\tau^2}.\]</div>
-<p>This then determines the intensity distribution of a transistion down from <span class="math notranslate nohighlight">\(b \rightarrow a\)</span>. This is proportional to a Lorentzian distribution</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-6">
-<span class="eqno">(12)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-6" title="Permalink to this equation">#</a></span>\[f(\omega) = \frac{\Gamma^2/(4\hbar^2)}{(\omega-\omega_{ba})^2 + \Gamma^2/(4\hbar^2)}.\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\Gamma = \hbar / \tau\)</span> and <span class="math notranslate nohighlight">\( \omega_{ba} = (E_b - E_a)/\hbar\)</span>. The parameter <span class="math notranslate nohighlight">\(\Gamma/\hbar\)</span> is the full width half maximum of the distribution.</p>
-</section>
-<section id="line-broadening-pressure">
-<h3>Line Broadening: Pressure<a class="headerlink" href="#line-broadening-pressure" title="Permalink to this headline">#</a></h3>
-<p>There is an additional component which increases the value of <span class="math notranslate nohighlight">\(\tau\)</span>. Transitions induce the broadening from pressure due to collisions with other neighbouring molecules. The rate of collisions is a function of the number density of the molecules(<span class="math notranslate nohighlight">\(n\)</span>), the molecule’s cross-section(<span class="math notranslate nohighlight">\(\sigma\)</span>), and the relative velocity(<span class="math notranslate nohighlight">\(v\)</span>).</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-7">
-<span class="eqno">(13)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-7" title="Permalink to this equation">#</a></span>\[W_c = \sigma vn.\]</div>
-<p>The rates are summed from both the natural decay and the collisions, and their reciprocal gives <span class="math notranslate nohighlight">\(\tau\)</span>. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. These are both still pressure-broadening phenomena.</p>
-</section>
-<section id="line-broadening-doppeler">
-<h3>Line Broadening: Doppeler<a class="headerlink" href="#line-broadening-doppeler" title="Permalink to this headline">#</a></h3>
-<p>The Doppler shift due to the relative motion of the atom and the photons additionally increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution. The derivation for this is also taken from <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a> <span class="xref std std-ref">bransden_joachain</span>.</p>
-<p>The Doppler shift in angular frequency is</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-8">
-<span class="eqno">(14)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-8" title="Permalink to this equation">#</a></span>\[\omega = \omega_0\left(1 \mp \frac{v}{c}\right).\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\omega_0\)</span> is the unshifted angular frequency and <span class="math notranslate nohighlight">\(v, c\)</span> are the particles and lights speed, respectively. The <span class="math notranslate nohighlight">\(+\)</span> case corresponds to an atom travelling away from the observer. Because the intensity in a region <span class="math notranslate nohighlight">\(\delta \omega \propto \delta N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> isnumber of with atoms with a given velocity given by the Boltzmann distribution</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-9">
-<span class="eqno">(15)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-9" title="Permalink to this equation">#</a></span>\[\frac{dN}{dv} = N_0 \exp(-Mv^2/2kT).\]</div>
-<p>The expression for the intensity as a function of <span class="math notranslate nohighlight">\(\omega\)</span>,</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-10">
-<span class="eqno">(16)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-10" title="Permalink to this equation">#</a></span>\[\mathcal{I}(\omega) = \mathcal{I}(\omega_0) \exp\left[\frac{-Mc^2}{2kT}\left(\frac{\omega - \omega_0}{\omega_0}\right)\right].\]</div>
-<p>Thus the intensity of the broadening due to the Doppler effect is of a gaussian form. In these expressions <span class="math notranslate nohighlight">\(M, K, T\)</span> are the atomic mass, Boltzmann’s constant, and temperature in <span class="math notranslate nohighlight">\(K\)</span>, respectively.</p>
-</section>
-<section id="the-voigt-profile">
-<h3>The Voigt Profile<a class="headerlink" href="#the-voigt-profile" title="Permalink to this headline">#</a></h3>
-<p>Because these broadening effects do not change the amount of emitted light, their area must stay constant. Thus the combination of the profiles is a convolution of Lorentzian and Gaussian distribution functions.</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-11">
-<span class="eqno">(17)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-11" title="Permalink to this equation">#</a></span>\[[f_l(\omega; \Gamma) * f_g(\omega;\sigma)] (\omega; \Gamma, \sigma) = \frac{Re[w(z)]}{\sigma \sqrt{2\pi}}\]</div>
-<p>Where</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-12">
-<span class="eqno">(18)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-12" title="Permalink to this equation">#</a></span>\[w(z) = \frac{\omega -\omega_0 + i\Gamma}{\sigma \sqrt{2}}\]</div>
-<p>For the line widths <span class="math notranslate nohighlight">\(\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}\)</span>.</p>
-</section>
-<section id="using-hitran">
-<h3>Using HITRAN<a class="headerlink" href="#using-hitran" title="Permalink to this headline">#</a></h3>
-<p>With the function for our line profile defined, the area of the profile, from eq.<a class="reference internal" href="#equation-prop">(11)</a> is found on the HITRAN database, along with the central values for the emission spectra and the</p>
-</section>
-</section>
+<section id="logarithmic-plot-of-optical-depth-tau">
+<h1>Logarithmic Plot of Optical Depth, <span class="math notranslate nohighlight">\(\tau\)</span><a class="headerlink" href="#logarithmic-plot-of-optical-depth-tau" title="Permalink to this headline">#</a></h1>
+<p>The previous figure displays clear windows of opacity which decrease in size with increasing altitude. Plotting a semilog plot of the optical depth <span class="math notranslate nohighlight">\(\tau\)</span> shows the large range for which absorption coefficients can meaningfully impact flux transmitted through a block of atmosphere.</p>
+<p><span class="math notranslate nohighlight">\(\Tau\)</span> values that appear to contribute, by eye, span a range <span class="math notranslate nohighlight">\([10^{-1}, 10^5]\)</span>. The range is raised because typical efforts to reduce the amount of computation, such as an absolute value cut off of the form <code class="docutils literal notranslate"><span class="pre">values[values&lt;</span> <span class="pre">max_value*0.001]</span> <span class="pre">=</span> <span class="pre">0</span></code>, would produce severe discrepancies in the output of the previous figure.</p>
+<p>A common technique used in radiation codes, is to smooth the absorption lines.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span>
+                           <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+                           <span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">color_cycle</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">o_d</span> <span class="ow">in</span> <span class="n">optical_depths</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">o_d</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Optical Thickness from CO$_2$ </span><span class="se">\n</span><span class="s1">  between $z, z+1km$ of Atmosphere&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">10</span><span class="o">**-</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;z (Altitude)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/lorentzian_broadening_13_0.png" src="../_images/lorentzian_broadening_13_0.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -640,11 +890,11 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../Chapter_2/bayesian_inference.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="atmospheric_primer.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Using Bayesian Inference to Determine <span class="math notranslate nohighlight">\(S\)</span> Left as Work in progress</p>
+            <p class="prev-next-title">Radiation Modelling</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../Bibliography.html" title="next page">

@@ -18,6 +18,8 @@ Writing style:
 - Make an environment.yml file that has packages and changes to matplolib 
     - [ ] .yml
 - [x] Fixed file tracking
+- Fix matplotlib latex use
+- fix durutils
 
 ## Plan 
 ### Landing Page
@@ -59,38 +61,30 @@ Pages:
 - [ ] Comparison and evaluation of final model
 
 ### Chapter 3
-- Pyrads 
-
-- [ ] Reformatting code 
-    - [x] Split Functions file into multiple sensible little files
-    - [ ] Add docstrings
-    - [ ] Remove Redudant Functions
-    - [ ] Type Hints
-Files That Have Been Formatted:
-- [x] plank.py
-- [x] gas.py
-    - apart from two functions
-- [ ] isa.py is not my file could format it properly
-- [x] lorenzian.py 
-    - apart from the function that is the one that needs to be rewritten
-- [x] plank.py
-- [x] radation.py
-- [x] reighligh.py
-
-Optimization:
-- [ ] Profile expensive functions 
-- [ ] Improve expensive functions
+DUR_Rads: 
+- Much of the Pyrdas functionality is made obsolete by the HITRAN-api
+Now irrelevant parts:
+- gas.py
+- lorentzian.py
+- plank.py
+Conceptually Similar but implementations differ:
+- radiation.py
+- rayleigh.py
+** Implementation of radiation and rayleigh needs to be planned as the ap is slow to evaluate the crossections especially for multiple species of gas.**
 Pages:
-- [ ] Lorentzian Broadening 
-    - [ ] rewrite the broadening function
-    - [ ] write an overview of where line broadening comes from.
-    - [ ] write an overview of how vibrational transitions work
-    - [ ] write an overview of how electronic transitions work
-    - [ ] look at the effect of how $S_{ij}$ is effected by [temperature](https://hitran.org/docs/definitions-and-units/)
-- [ ] Atomic Crossections
-- [ ] Absorbtion
+Plan Possibly to change...
+- [ ] Atmospheric Physics Primer
+    - [ ] Electronic Transitions and matrix elements
+    - [ ] Vibrational Transitions
+    - [x] Line Shapes 
+- [ ] Temperature Dependence and HITRAN-api
+- [ ] Radiation Balance 
+- [ ] Two Stream
+- [ ] Final Outgoing Model
+
+- [ ] Absorption
 - [ ] Short Wave
-    
+- [ ] 
 
 
 Formating:
@@ -98,9 +92,6 @@ Formating:
 - [ ] Standardise
  - [x] matplotlibrc edited
 - [ ] Initial Proof
-#### Chapter 3
-- Radiation Modeling: Building Packages, Large Datasets 
-- [ ] Refactoring the code from last year. 
 
 ### Journal of Reading/ Personal Skills Development/ Implementation Challenges
 - 05.07.22: Bayesian Methods and bootstrapping covered in ESL
@@ -108,3 +99,17 @@ Formating:
 
 ### Notes About Setup
 - Currently, Jupyter Book uses a different kernel to execute the notebooks. The matplotlibrc file has to be copied into the specific directories where all of the 
+
+### Important HITRAN links
+- Remember key gen 
+- [HITRAN](https://hitran.org/docs/definitions-and-units/)
+    - HITRAN definitions and explanation
+- [hapi docs](https://hitran.org/static/hapi/hapi_manual.pdf)
+    - HITRAN api docs
+- [hapi paper](https://www.sciencedirect.com/science/article/pii/S0022407315302466?via%3Dihub)
+- [2020 Paper](https://www.sciencedirect.com/science/article/pii/S0022407321004416?via%3Dihub)
+    - HITRAN paper
+- [2017 TIPS](https://www.sciencedirect.com/science/article/pii/S0022407321002065)
+    - Partition sum Paper
+- [bytran](http://www.bytran.org/howtolbl.htm)
+    - bytran is a phone app that implements HITRAN, link is to the physics documentation 

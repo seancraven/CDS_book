@@ -21,6 +21,8 @@ from dur_utils import colours #Durham Utilities module that stores constants lik
 import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.optimize 
+import matplotlib as mpl
+mpl.style.use('../matplotlibrc')
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m

@@ -191,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
-   Radiation Modelling
+   The Variance of Absorption Spectra
   </a>
  </li>
 </ul>
@@ -252,6 +252,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_2/temp_co2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -274,7 +303,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://seancraven.github.io/CDS_book"
+        <a href="https://github.com/seancraven/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -291,7 +320,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_2/temp_co2.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_2/temp_co2.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -439,7 +468,7 @@ title="Print to PDF"
                 
   <section id="global-temperature-predictions">
 <h1>Global Temperature Predictions<a class="headerlink" href="#global-temperature-predictions" title="Permalink to this headline">#</a></h1>
-<p>This section uses global temperature data combined with global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration and warming data provided by the IPCC to compare a simple model with Global warming estimates laid out in the Special Report on Emission Scenarios(SRES).</p>
+<p>This section uses global temperature data combined with global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration and warming data provided by the IPCC to compare a simple model with Global warming estimates laid out in the Special Report on Emission Scenarios(SRES)<span id="id1">[<a class="reference internal" href="../Bibliography.html#id15">NAD+00</a>]</span>.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <p>The global Temperature data is taken from <a class="reference external" href="http://berkeleyearth.org/data/">Berkley Earth</a>. The temperature data has missing fields as with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. Thus some data cleaning and formatting is required.</p>
@@ -565,7 +594,7 @@ title="Print to PDF"
 <section id="predictions">
 <h1>Predictions<a class="headerlink" href="#predictions" title="Permalink to this headline">#</a></h1>
 <p>Global temperatures provide an interesting case study for a further introduction to predictive modeling.</p>
-<p>There has already been substantial warming compared to the period from <span class="math notranslate nohighlight">\(1850-1900\)</span>. This period is set as a pre-industrial baseline<span id="id1">[]</span>. Further temperature rises will continue to increase the occurrence of extreme weather events and myriad other consequences, with an entire <a class="reference external" href="https://www.ipcc.ch/sr15/">IPCC</a> report dedicated to the consequences of warming over <span class="math notranslate nohighlight">\(1.5^\circ C\)</span>. The special report on emission scenarios(SRES)<span id="id2">[]</span> produced by the IPCC in 2000, details multiple families of emission scenarios with their associated warming.</p>
+<p>There has already been substantial warming compared to the period from <span class="math notranslate nohighlight">\(1850-1900\)</span>. This period is set as a pre-industrial baseline<span id="id2">[<a class="reference internal" href="../Bibliography.html#id16" title="Andrew P Schurer, Michael E Mann, Ed Hawkins, Simon F B Tett, and Gabriele C Hegerl. Importance of the Pre-Industrial baseline in determining the likelihood of exceeding the paris limits. Nat Clim Chang, 7(8):563–567, July 2017.">SMH+17</a>]</span>. Further temperature rises will continue to increase the occurrence of extreme weather events and myriad other consequences, with an entire <a class="reference external" href="https://www.ipcc.ch/sr15/">IPCC</a> report dedicated to the consequences of warming over <span class="math notranslate nohighlight">\(1.5^\circ C\)</span>. The special report on emission scenarios(SRES)<span id="id3">[<a class="reference internal" href="../Bibliography.html#id15">NAD+00</a>]</span> produced by the IPCC in 2000, details multiple families of emission scenarios with their associated warming.</p>
 <p>These scenarios are developed using six independent models. Such models use economic driving forces and predict the consequences of changing macro-economic behavior, for example, the percentage of fossil fuel used compared to renewables.</p>
 <p>These highly detailed models are not suitable for this section. Using <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration, a simple model can be formed to determine the change in temperature over the next 30 years.
 The three scenarios that will be investigated are approximations of the A1 and B1 storylines described from page 247 onwards in the <a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2018/03/emissions_scenarios-1.pdf">SRES</a>.</p>

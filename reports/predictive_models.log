@@ -25,6 +25,9 @@ import pandas as pd
 from dur_utils import colours
 from scipy import stats
 from matplotlib import cycler
+import matplotlib as mpl
+import inspect
+mpl.style.use('../matplotlibrc')
 
 path_ml =  'https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv'              
 co2_data_ml = pd.read_csv(path_ml, header=0, comment='#')

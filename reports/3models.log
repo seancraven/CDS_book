@@ -17,77 +17,25 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-co2_ave = pd.read_csv('../output_files/co2_10_moving_average.csv',
-    header=0,index_col=0
-    )
-co2_std = pd.read_csv('../output_files/co2_10_moving_std.csv', header=0,
-    index_col=0
-    )
-co2_mov_fit, co2_mov_cov = curve_fit(P3, co2_ave['decimal']-2000,
-    co2_ave['average'], sigma=co2_std['average']
-    )
-co2_mov_error = np.diagonal(co2_mov_cov)**0.5
-co2_lb_mov, co2_ub_mov = lb_ub(co2_mov_fit, co2_mov_error, factor=2)
-sigma = P3(time, *co2_ub_mov) - P3(time, *co2_mov_fit)
-time = np.linspace(1985, 2050)-2000
-plt.figure(figsize=(10, 6))
-plt.fill_between(time, P3(time, *co2_lb_mov), P3(time, *co2_ub_mov),
-    color=colours.durham.ink,
-    alpha=0.6,
-    label='A1B'
-    )
-plt.fill_between(time, a1t(time, *co2_mov_fit, translation=2000) - sigma,
-    a1t(time, *co2_mov_fit,translation=2000) + sigma,
-    color=colours.durham.red,
-    alpha=0.6,
-    label='A1T'
-    )
-plt.fill_between(time, B1(time, *co2_mov_fit, translation=2000)- sigma,
-    B1(time, *co2_mov_fit, translation=2000) + sigma,
-    color=colours.durham.stone,
-    alpha=0.6,
-    label='B1'
-    )
-plt.plot(co2_ave['decimal']-2000, co2_ave['average'],
-    linestyle='',
-    marker='+',
-    color=colours.durham.purple,
-    label=r'$\textrm{{CO}}_2$ Moving Average'
-    )
-plt.xticks(range(-10, 60, 10), range(1990, 2060, 10))
-plt.legend(loc = 'upper left')
-plt.xlabel('Years')
-plt.ylabel(r'$\textrm{{CO}}_2$ (ppm)');
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from dur_utils import colours
+from scipy.optimize import curve_fit
+import matplotlib as mpl
+from scipy.interpolate import LSQUnivariateSpline
+mpl.style.use('../matplotlibrc')
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mValueError[0m                                Traceback (most recent call last)
-Input [0;32mIn [6][0m, in [0;36m<cell line: 20>[0;34m()[0m
-[1;32m     14[0m plt[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m10[39m, [38;5;241m6[39m))
-[1;32m     15[0m plt[38;5;241m.[39mfill_between(time, P3(time, [38;5;241m*[39mco2_lb_mov), P3(time, [38;5;241m*[39mco2_ub_mov),
-[1;32m     16[0m     color[38;5;241m=[39mcolours[38;5;241m.[39mdurham[38;5;241m.[39mink,
-[1;32m     17[0m     alpha[38;5;241m=[39m[38;5;241m0.6[39m,
-[1;32m     18[0m     label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mA1B[39m[38;5;124m'[39m
-[1;32m     19[0m     )
-[0;32m---> 20[0m plt[38;5;241m.[39mfill_between(time, [43ma1t[49m[43m([49m[43mtime[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43mco2_mov_fit[49m[43m,[49m[43m [49m[43mtranslation[49m[38;5;241;43m=[39;49m[38;5;241;43m2000[39;49m[43m)[49m[43m [49m[38;5;241;43m-[39;49m[43m [49m[43msigma[49m,
-[1;32m     21[0m     a1t(time, [38;5;241m*[39mco2_mov_fit,translation[38;5;241m=[39m[38;5;241m2000[39m) [38;5;241m+[39m sigma,
-[1;32m     22[0m     color[38;5;241m=[39mcolours[38;5;241m.[39mdurham[38;5;241m.[39mred,
-[1;32m     23[0m     alpha[38;5;241m=[39m[38;5;241m0.6[39m,
-[1;32m     24[0m     label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mA1T[39m[38;5;124m'[39m
-[1;32m     25[0m     )
-[1;32m     26[0m plt[38;5;241m.[39mfill_between(time, B1(time, [38;5;241m*[39mco2_mov_fit, translation[38;5;241m=[39m[38;5;241m2000[39m)[38;5;241m-[39m sigma,
-[1;32m     27[0m     B1(time, [38;5;241m*[39mco2_mov_fit, translation[38;5;241m=[39m[38;5;241m2000[39m) [38;5;241m+[39m sigma,
-[1;32m     28[0m     color[38;5;241m=[39mcolours[38;5;241m.[39mdurham[38;5;241m.[39mstone,
-[1;32m     29[0m     alpha[38;5;241m=[39m[38;5;241m0.6[39m,
-[1;32m     30[0m     label[38;5;241m=[39m[38;5;124m'[39m[38;5;124mB1[39m[38;5;124m'[39m
-[1;32m     31[0m     )
-[1;32m     32[0m plt[38;5;241m.[39mplot(co2_ave[[38;5;124m'[39m[38;5;124mdecimal[39m[38;5;124m'[39m][38;5;241m-[39m[38;5;241m2000[39m, co2_ave[[38;5;124m'[39m[38;5;124maverage[39m[38;5;124m'[39m],
-[1;32m     33[0m     linestyle[38;5;241m=[39m[38;5;124m'[39m[38;5;124m'[39m,
-[1;32m     34[0m     marker[38;5;241m=[39m[38;5;124m'[39m[38;5;124m+[39m[38;5;124m'[39m,
-[1;32m     35[0m     color[38;5;241m=[39mcolours[38;5;241m.[39mdurham[38;5;241m.[39mpurple,
-[1;32m     36[0m     label[38;5;241m=[39m[38;5;124mr[39m[38;5;124m'[39m[38;5;124m$[39m[38;5;124m\[39m[38;5;124mtextrm[39m[38;5;124m{{[39m[38;5;124mCO}}_2$ Moving Average[39m[38;5;124m'[39m
-[1;32m     37[0m     )
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Input [0;32mIn [1][0m, in [0;36m<cell line: 4>[0;34m()[0m
+[1;32m      2[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      3[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m[38;5;21;01m.[39;00m[38;5;21;01mpyplot[39;00m [38;5;28;01mas[39;00m [38;5;21;01mplt[39;00m
+[0;32m----> 4[0m [38;5;28;01mfrom[39;00m [38;5;21;01mdur_utils[39;00m [38;5;28;01mimport[39;00m colours
+[1;32m      5[0m [38;5;28;01mfrom[39;00m [38;5;21;01mscipy[39;00m[38;5;21;01m.[39;00m[38;5;21;01moptimize[39;00m [38;5;28;01mimport[39;00m curve_fit
+[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mmatplotlib[39;00m [38;5;28;01mas[39;00m [38;5;21;01mmpl[39;00m
 
-[0;31mValueError[0m: operands could not be broadcast together with shapes (50,) (1000,) 
-ValueError: operands could not be broadcast together with shapes (50,) (1000,) 
+[0;31mModuleNotFoundError[0m: No module named 'dur_utils'
+ModuleNotFoundError: No module named 'dur_utils'
 

@@ -191,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
-   Radiation Modelling
+   The Variance of Absorption Spectra
   </a>
  </li>
 </ul>
@@ -252,6 +252,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/Hypothesis_Testing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -274,7 +303,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://seancraven.github.io/CDS_book"
+        <a href="https://github.com/seancraven/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -291,7 +320,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_1/Hypothesis_Testing.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_1/Hypothesis_Testing.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -629,6 +658,7 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 <span class="n">total_fig_height</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">total_fig_width</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">set_tight_layout</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">current_fig_bottom</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
@@ -723,12 +753,12 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 </section>
 <section id="fourier-transforms">
 <h2>Fourier Transforms<a class="headerlink" href="#fourier-transforms" title="Permalink to this headline">#</a></h2>
-<p>There are whole texts dedicated to the subtleties of Fourier analysis. For an intuitive picture of how the technique works, this video](https://www.youtube.com/watch?v=spUNpyF58BY) is excellent.</p>
+<p>There are whole texts dedicated to the subtleties of Fourier analysis. For an intuitive picture of how the technique works, this <a class="reference external" href="https://www.youtube.com/watch?v=spUNpyF58BY">video</a> is excellent.</p>
 <p>The 1D Fourier and inverse Fourier transforms are defined as integrals over all real numbers. The precise definition of the transform can vary. However, the general form of transform and its inverse are respectively</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}    \mathcal{F}[f(t)](\omega) = \int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt \\
     \mathcal{F^{-1}}[f(\omega)](t) = \int_{-\infty}^{\infty}f(\omega)e^{i\omega t}d\omega\end{split}\]</div>
-<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)[CLW69] was developed to perform these calculations efficiently. Additionally, a Discrete Cosine Transform(DCT)[ANR74] can be used because the data is real-valued, and sampled at a constant frequency.</p>
+<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[<a class="reference internal" href="../Bibliography.html#id12" title="J. Cooley, P. Lewis, and P. Welch. The finite fourier transform. IEEE Transactions on Audio and Electroacoustics, 17(2):77-85, 1969. doi:10.1109/TAU.1969.1162036.">CLW69</a>]</span> was developed to perform these calculations efficiently. Additionally, a Discrete Cosine Transform(DCT)<span id="id3">[<a class="reference internal" href="../Bibliography.html#id13" title="N. Ahmed, T. Natarajan, and K.R. Rao. Discrete cosine transform. IEEE Transactions on Computers, C-23(1):90-93, 1974. doi:10.1109/T-C.1974.223784.">ANR74</a>]</span> can be used because the data is real-valued, and sampled at a constant frequency.</p>
 <p>The DCT provides binned results. So our main frequencies generated by the DCT will be limited in precision. Thus The DCT results can be used to provide starting values for the least-squares method.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">

@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Radiation Modelling" href="../Chapter_3/lorentzian_broadening.html" />
+    <link rel="next" title="The Variance of Absorption Spectra" href="../Chapter_3/lorentzian_broadening.html" />
     <link rel="prev" title="Implementation of the Three SRES Approximation Models" href="3models.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -191,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
-   Radiation Modelling
+   The Variance of Absorption Spectra
   </a>
  </li>
 </ul>
@@ -252,6 +252,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_2/bayesian_inference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -274,7 +303,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://seancraven.github.io/CDS_book"
+        <a href="https://github.com/seancraven/CDS_book"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -291,7 +320,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://seancraven.github.io/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_2/bayesian_inference.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2FChapter_2/bayesian_inference.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -451,9 +480,9 @@ title="Print to PDF"
 <p>This formulation is preferable going forward.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>Basic probability theory is covered well in <a class="reference external" href="https://www.cambridge.org/core/books/abs/mathematical-methods-for-physics-and-engineering/probability/48318E242E4E8B0C0F4B8628ECFF0A44">Mathmatical Methods for Physics and Engineering</a><span class="xref std std-ref">RHB_stats</span>, if this feels unfamiliar.</p>
+<p>Basic probability theory is covered well in <a class="reference external" href="https://www.cambridge.org/core/books/abs/mathematical-methods-for-physics-and-engineering/probability/48318E242E4E8B0C0F4B8628ECFF0A44">Mathmatical Methods for Physics and Engineering</a><span id="id1">[<a class="reference internal" href="../Bibliography.html#id21" title="K. F. Riley, M. P. Hobson, and S. J. Bence. Probability, pages 961–1063. Cambridge University Press, 2 edition, 2002. doi:10.1017/CBO9781139164979.028.">RHB02</a>]</span>, if this feels unfamiliar.</p>
 </div>
-<p>It might not be apparent how random variables are associated with measurement, however when one takes a measurement this is just sampeling a parent distribution of a random variable. By virtue of sampeling a random variable described by a PDF. The valued of the samples are generally normally distributed, around the mean of the parent distribution, due to the central limit theorem(CLT). However, there are some cases where CLT does not hold, when the parent distribution from which the sample is taken lacks a well-defined mean and standard deviation, or the random variables are not independent. A brief and functional treatment can be found in <span class="xref std std-ref">Hughes_Hase</span>.</p>
+<p>It might not be apparent how random variables are associated with measurement, however when one takes a measurement this is just sampeling a parent distribution of a random variable. By virtue of sampeling a random variable described by a PDF. The valued of the samples are generally normally distributed, around the mean of the parent distribution, due to the central limit theorem(CLT). However, there are some cases where CLT does not hold, when the parent distribution from which the sample is taken lacks a well-defined mean and standard deviation, or the random variables are not independent. A brief and functional treatment can be found in <span id="id2">[<a class="reference internal" href="../Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>.</p>
 </section>
 <section id="bayesian-inference">
 <h1>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this headline">#</a></h1>
@@ -467,8 +496,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../CDS.mplstyle&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -480,7 +508,7 @@ f_{C_i(t)}(c) =  \exp(\frac{(c-\bar{c}(t))^2}{2\cdot \sigma_c(t)^2}), \textrm{fo
 Where \)</span>\bar{c}(t)<span class="math notranslate nohighlight">\( is the predicted value of concentration at time \)</span>t<span class="math notranslate nohighlight">\(, and \)</span>\sigma_c(t)<span class="math notranslate nohighlight">\( is the unctertainty on the fit at that time. Using the dubious assuption that climate sensitivity \)</span>S<span class="math notranslate nohighlight">\( and concentration \)</span>c$ are independent a joint probability distribution of both quantities can be formed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The climate sensitivity <span class="math notranslate nohighlight">\(S\)</span> is not the random varuable but a value of the random variable. The capitalisation is kept for consitency with the literature<span class="xref std std-ref">S20, probabilityofwarming</span> despite it being confusing. The random variable that governs the value of <span class="math notranslate nohighlight">\(s\)</span> is denoted as <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
+<p>The climate sensitivity <span class="math notranslate nohighlight">\(S\)</span> is not the random varuable but a value of the random variable. The capitalisation is kept for consitency with the literature<span id="id3">[<a class="reference internal" href="../Bibliography.html#id18" title="S. Sherwood, M. J. Webb, J. D. Annan, K. C. Armour, P. M. Forster, J. Hargreaves, G. Hegerl, S. A. Klein, K. D. Marvel, E. J. Rohling, M. Watanabe, T. Andrews, P. Braconnot, C. Bretherton, G. L. Foster, Z. Hausfather, A. S. von der Heydt, R. Knutti, T. Mauritsen, J. R. Norris, C. Proistosescu, M. Rugenstein, G. A. Schmidt, K. B. Tokarska, and M. D. Zelinka. An assessment of earth's climate sensitivity using multiple lines of evidence. Rev. Geophys., 58(4):e2019RG000678, 2020. doi:10.1029/2019RG000678.">SWA+20</a>, <a class="reference internal" href="../Bibliography.html#id17" title="Steven C Sherwood, Alex Sen Gupta, and Stephen E Schwartz. Probability of committed warming exceeding 1.5 $\less $sup$\greater $$\vysmwhtcircle $$\less $/sup$\greater $c and 2.0 $\less $sup$\greater $$\vysmwhtcircle $$\less $/sup$\greater $c paris targets. Environmental Research Letters, 17(6):064022, may 2022. URL: https://doi.org/10.1088/1748-9326/ac6ff6, doi:10.1088/1748-9326/ac6ff6.">SGS22</a>]</span> despite it being confusing. The random variable that governs the value of <span class="math notranslate nohighlight">\(s\)</span> is denoted as <span class="math notranslate nohighlight">\(\mathcal{S}\)</span>.</p>
 </div>
 <p>Having prevously determined a moving average trend for Temperature, and an associated error, with a function that relates the
 $<span class="math notranslate nohighlight">\(
@@ -488,7 +516,7 @@ f_{ T, C_i, \mathcal{S}}(\Delta T, S, c) = f_{T, C_i(t)}(c)f_{\mathcal{S}}, \tex
 \)</span><span class="math notranslate nohighlight">\(
 In order to calculate the rise in temperature given an emmisions pathway the distribuiton of possible temperatures
 \)</span><span class="math notranslate nohighlight">\(
-f_{ T|C_i,\mathcal{S}}(T|S, c) = \frac{}
+f_{ T|C_i,\mathcal{S}}(T|S, c) = 
 \)</span>$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -501,7 +529,7 @@ f_{ T|C_i,\mathcal{S}}(T|S, c) = \frac{}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f60aeac0280&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7f07671c88d0&gt;]
 </pre></div>
 </div>
 <img alt="../_images/bayesian_inference_5_1.png" src="../_images/bayesian_inference_5_1.png" />
@@ -546,7 +574,7 @@ f_{ T|C_i,\mathcal{S}}(T|S, c) = \frac{}
     <a class='right-next' id="next-link" href="../Chapter_3/lorentzian_broadening.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Radiation Modelling</p>
+        <p class="prev-next-title">The Variance of Absorption Spectra</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
