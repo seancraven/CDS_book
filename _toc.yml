@@ -21,8 +21,9 @@ parts:
     - file: Chapter_2/bayesian_inference.ipynb
   - caption: Radiation Modelling
     chapters:
-    - file: atmospheric_primer.md
+    - file: Chapter_3/atmospheric_primer.md
     - file: Chapter_3/lorentzian_broadening.ipynb
+    - file: Chapter_3/radiative_transfer.md
   - caption:
     chapters:
     - file: Bibliography
