@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bibliography" href="../Bibliography.html" />
+    <link rel="next" title="Radiative transfer" href="radiative_transfer.html" />
     <link rel="prev" title="Radiation Modelling" href="atmospheric_primer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -138,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_1/Fitting.html">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1">
@@ -197,6 +197,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
 </ul>
@@ -602,7 +607,7 @@ title="Print to PDF"
 <p>Further, the changes in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s absorption profile can be used as a litmus test for simplifying assumptions and observing the effects of broadening and gas rarefaction.</p>
 <p>Additionally, to temperature and pressure dependence on the broadening, there is a further temperature dependence on the line intensity due to the accessibility of a given transition. At low temperatures, high-energy transistions, those of low wavelength, are heavily suppressed as the molecules lack the energy to access either the excitation or vibrational mode. A Bose-Einstein distribution quantifies the availability of a transition. When the intensity of a transition is known for one temperature, the ratio of the probabilities gives the intensity</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-0">
-<span class="eqno">(19)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[S_{a \rightarrow b}(T) = S_{a \rightarrow b, T_ref}\frac{\exp(-h\nu_{a \rightarrow b} /cK_bT)}{exp(-h\nu_{a \rightarrow b} /cK_b T_{ref})} \frac{Q(T_{ref})}{Q(T)}\]</div>
+<span class="eqno">(27)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[S_{a \rightarrow b}(T) = S_{a \rightarrow b, T_ref}\frac{\exp(-h\nu_{a \rightarrow b} /cK_bT)}{exp(-h\nu_{a \rightarrow b} /cK_b T_{ref})} \frac{Q(T_{ref})}{Q(T)}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T)\)</span> is the line intensity as a function of temperature for some transition <span class="math notranslate nohighlight">\(a \rightarrow b\)</span>, <span class="math notranslate nohighlight">\(\nu_{a \rightarrow b}\)</span> is the wavenumber for the transition, and <span class="math notranslate nohighlight">\(Q(T)\)</span> is the partition sum over all states. The values for <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T_{ref})\)</span> are recorded on the hitran data-base.</p>
 <p><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s line intensity variation is plotted at 3 km intervals up to 10km using the ISA model, around the most significant absorption lines, around <span class="math notranslate nohighlight">\(650 cm^{-1}\)</span>.</p>
 <div class="cell docutils container">
@@ -675,7 +680,7 @@ title="Print to PDF"
 <span class="sd">    Returns:</span>
 <span class="sd">        float: n(alt) in molecules/m^3</span>
 <span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">mass_of_air</span> <span class="o">=</span> <span class="mf">28.9647</span> <span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_A</span> <span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span> <span class="c1">#conver kg/m^3 to mol/m^3</span>
+    <span class="n">mass_of_air</span> <span class="o">=</span> <span class="mf">28.9647</span> <span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span><span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_A</span>  <span class="c1">#conver kg/m^3 to molecule/m^3</span>
     <span class="k">return</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">alt</span><span class="p">)</span><span class="o">/</span><span class="n">mass_of_air</span>
 <span class="k">def</span> <span class="nf">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
@@ -683,8 +688,8 @@ title="Print to PDF"
 <span class="sd">    between two altitudes</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        alt_0 (float):</span>
-<span class="sd">        alt_1 (float): </span>
+<span class="sd">        alt_0 (float): altitude in meters</span>
+<span class="sd">        alt_1 (float): altitude in meters</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        float: </span>
@@ -692,7 +697,7 @@ title="Print to PDF"
     <span class="k">return</span> <span class="n">quad</span><span class="p">(</span><span class="n">number_density</span><span class="p">,</span> <span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">optical_depth</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">,</span> <span class="n">ppm_conc</span><span class="p">,</span> <span class="n">abs_coef</span><span class="p">):</span>
-    <span class="n">particles</span> <span class="o">=</span> <span class="n">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)</span><span class="o">*</span><span class="n">ppm_conc</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">6</span>
+    <span class="n">particles</span> <span class="o">=</span> <span class="n">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)</span><span class="o">*</span><span class="n">ppm_conc</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">particles</span><span class="o">*</span><span class="n">abs_coef</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#10^-4 factor from cm^2-&gt;m^2 conv</span>
 </pre></div>
 </div>
@@ -760,53 +765,53 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>0.5km</th>
-      <td>0.31</td>
-      <td>0.31</td>
+      <td>0.11</td>
+      <td>0.11</td>
     </tr>
     <tr>
       <th>1.5km</th>
-      <td>0.29</td>
-      <td>0.30</td>
+      <td>0.10</td>
+      <td>0.11</td>
     </tr>
     <tr>
       <th>2.5km</th>
-      <td>0.28</td>
-      <td>0.30</td>
+      <td>0.10</td>
+      <td>0.10</td>
     </tr>
     <tr>
       <th>3.5km</th>
-      <td>0.26</td>
-      <td>0.29</td>
+      <td>0.09</td>
+      <td>0.10</td>
     </tr>
     <tr>
       <th>4.5km</th>
-      <td>0.25</td>
-      <td>0.29</td>
+      <td>0.09</td>
+      <td>0.10</td>
     </tr>
     <tr>
       <th>5.5km</th>
-      <td>0.23</td>
-      <td>0.28</td>
+      <td>0.08</td>
+      <td>0.10</td>
     </tr>
     <tr>
       <th>6.5km</th>
-      <td>0.22</td>
-      <td>0.28</td>
+      <td>0.08</td>
+      <td>0.10</td>
     </tr>
     <tr>
       <th>7.5km</th>
-      <td>0.21</td>
-      <td>0.27</td>
+      <td>0.08</td>
+      <td>0.09</td>
     </tr>
     <tr>
       <th>8.5km</th>
-      <td>0.20</td>
-      <td>0.27</td>
+      <td>0.07</td>
+      <td>0.09</td>
     </tr>
     <tr>
       <th>9.5km</th>
-      <td>0.18</td>
-      <td>0.26</td>
+      <td>0.07</td>
+      <td>0.09</td>
     </tr>
   </tbody>
 </table>
@@ -824,7 +829,7 @@ title="Print to PDF"
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">flux_ratio</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$I(z)/I(z+1km)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$I(z+1km)/I(z)$&#39;</span><span class="p">)</span>
 <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;z (Altitude)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -837,8 +842,8 @@ title="Print to PDF"
 <section id="logarithmic-plot-of-optical-depth-tau">
 <h1>Logarithmic Plot of Optical Depth, <span class="math notranslate nohighlight">\(\tau\)</span><a class="headerlink" href="#logarithmic-plot-of-optical-depth-tau" title="Permalink to this headline">#</a></h1>
 <p>The previous figure displays clear windows of opacity which decrease in size with increasing altitude. Plotting a semilog plot of the optical depth <span class="math notranslate nohighlight">\(\tau\)</span> shows the large range for which absorption coefficients can meaningfully impact flux transmitted through a block of atmosphere.</p>
-<p><span class="math notranslate nohighlight">\(\Tau\)</span> values that appear to contribute, by eye, span a range <span class="math notranslate nohighlight">\([10^{-1}, 10^5]\)</span>. The range is raised because typical efforts to reduce the amount of computation, such as an absolute value cut off of the form <code class="docutils literal notranslate"><span class="pre">values[values&lt;</span> <span class="pre">max_value*0.001]</span> <span class="pre">=</span> <span class="pre">0</span></code>, would produce severe discrepancies in the output of the previous figure.</p>
-<p>A common technique used in radiation codes, is to smooth the absorption lines.</p>
+<p><span class="math notranslate nohighlight">\(\tau\)</span> values that appear to contribute, by eye, span a range <span class="math notranslate nohighlight">\([10^{-1}, 10^5]\)</span>. The range is raised because typical efforts to reduce the amount of computation, such as an absolute value cut off of the form <code class="docutils literal notranslate"><span class="pre">values[values&lt;</span> <span class="pre">max_value*0.001]</span> <span class="pre">=</span> <span class="pre">0</span></code>, would produce severe discrepancies in the output of the previous figure.</p>
+<p>A common technique used in radiation codes is to smooth the absorption lines and define windows of no absorption to reduce the computational cost.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -859,6 +864,34 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/lorentzian_broadening_13_0.png" src="../_images/lorentzian_broadening_13_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">particle_per_sq_m</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2005597838221947e+28
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">flux_ratios</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;wavenumber $cm^{-1}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Transmittance&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Transmittance&#39;)
+</pre></div>
+</div>
+<img alt="../_images/lorentzian_broadening_15_1.png" src="../_images/lorentzian_broadening_15_1.png" />
 </div>
 </div>
 </section>
@@ -897,10 +930,10 @@ title="Print to PDF"
             <p class="prev-next-title">Radiation Modelling</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Bibliography.html" title="next page">
+    <a class='right-next' id="next-link" href="radiative_transfer.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliography</p>
+        <p class="prev-next-title">Radiative transfer</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

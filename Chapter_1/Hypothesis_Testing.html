@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Final Model" href="Final_Model.html" />
-    <link rel="prev" title="Fitting" href="Fitting.html" />
+    <link rel="prev" title="Curve Fitting" href="Fitting.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -138,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Fitting.html">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1 current active">
@@ -190,8 +190,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
    The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
 </ul>
@@ -521,14 +531,17 @@ title="Print to PDF"
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-goodness-of-fit">
 <h1>Hypothesis Testing And Goodness of Fit<a class="headerlink" href="#hypothesis-testing-and-goodness-of-fit" title="Permalink to this headline">#</a></h1>
 <p>Hypothesis testing and <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id1">[<a class="reference internal" href="../Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>. The statistic is defined as,</p>
-<div class="math notranslate nohighlight">
-\[    \chi^2 = \sum_{i=0}^N\left(\frac{y'(\vec{x_i},\vec{p})-y(\vec{x_i})}{\alpha_i}\right)^2.\]</div>
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-0">
+<span class="eqno">(4)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-0" title="Permalink to this equation">#</a></span>\[    \chi^2 = \sum_{i=0}^N\left(\frac{y'(\vec{x_i},\vec{p})-y(\vec{x_i})}{\alpha_i}\right)^2.\]</div>
 <p>If each value in the residual sum is treated as an independent random variable. Then the sum of the values is distributed according to,</p>
-<div class="math notranslate nohighlight">
-\[    X(\chi^2:\nu) = \frac{(\chi^2)^{\frac{\nu}{2} - 1}\exp(-\chi^2/2)}{2^{\nu/2}\Gamma(\nu/2)}.\]</div>
-<p>Both the PDF(probability density function) and CDF(cumulative density function) are plotted below left and right, respectively. The degrees of freedom, <span class="math notranslate nohighlight">\(\nu = N - m\)</span>, where N and m are the numbers of data points and parameters, respectively.</p>
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-1">
+<span class="eqno">(5)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-1" title="Permalink to this equation">#</a></span>\[    X(\chi^2:\nu) = \frac{(\chi^2)^{\frac{\nu}{2} - 1}\exp(-\chi^2/2)}{2^{\nu/2}\Gamma(\nu/2)}.\]</div>
+<p>Both the PDF(probability density function) and CDF(cumulative density function) are plotted below left and right, respectively, for <span class="math notranslate nohighlight">\(\nu\)</span> up to ten. The degrees of freedom, <span class="math notranslate nohighlight">\(\nu = N - m\)</span>, where N and m are the numbers of data points and parameters, respectively.</p>
 <p>The CDF quantifies the probability that the residuals are larger for a specific model with a <span class="math notranslate nohighlight">\(\chi^2\)</span>, <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span>. A good fit is indicated by a value close to one. Bearing in mind that the <span class="math notranslate nohighlight">\(\chi^2\)</span> considers the size of the errors present. A small value for <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span> can be an indication of overly large error.</p>
-<p>The test is based on the ratio of the residuals to their expectations and how one would expect them distributed.</p>
+<p>The test is based on the ratio of the residuals to their expectations and how one would expect them distributed. The expectation value for the PDF is <span class="math notranslate nohighlight">\(\nu\)</span> and so the reduced statistic</p>
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-2" title="Permalink to this equation">#</a></span>\[\chi^2_{\nu} = \chi^2/\nu\]</div>
+<p>Should be close to one for a good fit.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
@@ -556,19 +569,19 @@ title="Print to PDF"
 </div>
 <section id="hypothesis-testing">
 <h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h2>
-<p>Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson <span class="math notranslate nohighlight">\(\chi^2\)</span> test is as follows.</p>
-<p>Given a null hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_0 \)</span></p>
+<p>Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson <span class="math notranslate nohighlight">\(\chi^2\)</span> test is as follows. Given a null hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span>, in which the model describes the data. Additionally, define an alternate hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_1\)</span></p>
 <ol class="simple">
 <li><p>Determine the <span class="math notranslate nohighlight">\(\chi^2\)</span> value for the data</p></li>
 <li><p>Determine <span class="math notranslate nohighlight">\(\nu\)</span></p></li>
 <li><p>Select a confidence level and calculate <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
 <li><p>Compare The Value of <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span> with <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
-<li><p>Reject <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span> if <span class="math notranslate nohighlight">\(\chi^2_{min} \geq \chi^2_{crit}\)</span></p></li>
+<li><p>Reject <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span> if <span class="math notranslate nohighlight">\(\chi^2_{min} \geq \chi^2_{crit}\)</span> in favour of <span class="math notranslate nohighlight">\(\mathcal{H}_1\)</span></p></li>
 </ol>
 <p>Hypothesis testing provides a framework for quantatively assessing wheather a new model should be produced.</p>
 </section>
 <section id="implementing-chi-2-testing-in-text-co-2-data">
 <h2>Implementing <span class="math notranslate nohighlight">\(\chi^2\)</span> testing in <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data<a class="headerlink" href="#implementing-chi-2-testing-in-text-co-2-data" title="Permalink to this headline">#</a></h2>
+<p>Below, behind the toggles are a set of functions used to fit the data and calculate <span class="math notranslate nohighlight">\(\chi^2\)</span>.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -743,10 +756,10 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 <img alt="../_images/Hypothesis_Testing_8_0.png" src="../_images/Hypothesis_Testing_8_0.png" />
 </div>
 </div>
-<p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurement is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. The third order polynomial across both global and Mauna Loa data-sets provides much better agreement. This will be the model taken forward.</p>
+<p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurement is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. Nevertheless, the third order polynomial across both global and Mauna Loa data sets provides much better agreement. This will be the model taken forward.</p>
 <p>The residuals also have a regular periodic structure. Fitting the residuals to a function of the form,</p>
-<div class="math notranslate nohighlight">
-\[\sum_i a_i \sin(\omega_i t).\]</div>
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-3">
+<span class="eqno">(7)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-3" title="Permalink to this equation">#</a></span>\[\sum_i a_i \sin(\omega_i t).\]</div>
 <p>Gives periodicity to our function. Discovering the value of the <span class="math notranslate nohighlight">\(\omega\)</span> co-efficients can prove difficult using the current techniques.</p>
 <p>Least-squares fitting of <span class="math notranslate nohighlight">\(\sin(x)\)</span> and <span class="math notranslate nohighlight">\(\cos(x)\)</span> can be problematic. The presence of many local minima hinders convergence. To determine the periodicity of the residuals one can use Fourier techniques.</p>
 </section>
@@ -755,8 +768,8 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 <h2>Fourier Transforms<a class="headerlink" href="#fourier-transforms" title="Permalink to this headline">#</a></h2>
 <p>There are whole texts dedicated to the subtleties of Fourier analysis. For an intuitive picture of how the technique works, this <a class="reference external" href="https://www.youtube.com/watch?v=spUNpyF58BY">video</a> is excellent.</p>
 <p>The 1D Fourier and inverse Fourier transforms are defined as integrals over all real numbers. The precise definition of the transform can vary. However, the general form of transform and its inverse are respectively</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}    \mathcal{F}[f(t)](\omega) = \int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt \\
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-4">
+<span class="eqno">(8)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-4" title="Permalink to this equation">#</a></span>\[\begin{split}    \mathcal{F}[f(t)](\omega) = \int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt \\
     \mathcal{F^{-1}}[f(\omega)](t) = \int_{-\infty}^{\infty}f(\omega)e^{i\omega t}d\omega\end{split}\]</div>
 <p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[<a class="reference internal" href="../Bibliography.html#id12" title="J. Cooley, P. Lewis, and P. Welch. The finite fourier transform. IEEE Transactions on Audio and Electroacoustics, 17(2):77-85, 1969. doi:10.1109/TAU.1969.1162036.">CLW69</a>]</span> was developed to perform these calculations efficiently. Additionally, a Discrete Cosine Transform(DCT)<span id="id3">[<a class="reference internal" href="../Bibliography.html#id13" title="N. Ahmed, T. Natarajan, and K.R. Rao. Discrete cosine transform. IEEE Transactions on Computers, C-23(1):90-93, 1974. doi:10.1109/T-C.1974.223784.">ANR74</a>]</span> can be used because the data is real-valued, and sampled at a constant frequency.</p>
 <p>The DCT provides binned results. So our main frequencies generated by the DCT will be limited in precision. Thus The DCT results can be used to provide starting values for the least-squares method.</p>
@@ -782,11 +795,11 @@ Timestep:0.083
 <section id="application-of-the-dct">
 <h3>Application of The DCT<a class="headerlink" href="#application-of-the-dct" title="Permalink to this headline">#</a></h3>
 <p>Depending on the application different fomulations of the discrete cosine transform can be used. Here the default type is used, Type-2</p>
-<div class="math notranslate nohighlight">
-\[    X_k = \sum_{n = 0}^{N-1}x_n \cos\left[ \frac{\pi}{N}(n + \frac{1}{2})k\right]. \]</div>
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-5">
+<span class="eqno">(9)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-5" title="Permalink to this equation">#</a></span>\[    X_k = \sum_{n = 0}^{N-1}x_n \cos\left[ \frac{\pi}{N}(n + \frac{1}{2})k\right]. \]</div>
 <p>This gives a frequency in years of</p>
-<div class="math notranslate nohighlight">
-\[    f = \frac{1}{2N*\Delta T}. \]</div>
+<div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-6">
+<span class="eqno">(10)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-6" title="Permalink to this equation">#</a></span>\[    f = \frac{1}{2N*\Delta T}. \]</div>
 <p><span class="math notranslate nohighlight">\(\Delta T\)</span> is the time spacing between samples in the time series and <span class="math notranslate nohighlight">\(N\)</span> is the number of entires in the series. For different formulations of the transform the frequency of the bins is calculated from the argument of the cosine being equal to <span class="math notranslate nohighlight">\(2\pi fn\)</span>. The output spectra is plotted below.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
@@ -843,7 +856,7 @@ Timestep:0.083
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Fitting</p>
+            <p class="prev-next-title">Curve Fitting</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Final_Model.html" title="next page">

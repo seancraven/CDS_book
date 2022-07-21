@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Fitting &#8212; Climate Data Science</title>
+    <title>Curve Fitting &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -138,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1">
@@ -190,8 +190,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
    The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
 </ul>
@@ -432,7 +442,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Fitting</h1>
+                <h1>Curve Fitting</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -468,8 +478,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="fitting">
-<h1>Fitting<a class="headerlink" href="#fitting" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="curve-fitting">
+<h1>Curve Fitting<a class="headerlink" href="#curve-fitting" title="Permalink to this headline">#</a></h1>
 <p>Fitting enables the identification of trends and behaviours in datasets. A fit describes a model of the data matched to the dataset. The fit produced can then be used to identify outliers or predict future behaviour. Much effort has been applied to modelling and exotic numerical techniques like neural networks and gradient trees are widely used today. This Section will focus on least-squares fitting of curves and goodness of fit metrics.</p>
 <p>In the context of the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, this chapter is interested in the behaviour of the year 2020 in comparison to previous years.</p>
 <div class="cell tag_remove-input docutils container">
@@ -496,22 +506,23 @@ title="Print to PDF"
 <section id="applying-curve-fitting-to-textrm-co-2-data">
 <h3>Applying Curve Fitting to <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> Data<a class="headerlink" href="#applying-curve-fitting-to-textrm-co-2-data" title="Permalink to this headline">#</a></h3>
 <p>In order to make predictions from the current data, performing a functional fit to the data and using this to extrapolate into the future is the most elementary predictive step we can take. The model takes historical training data and adjusts its parameters <span class="math notranslate nohighlight">\(\vec{p}\)</span> to emulate the data best. The simplest solution is a constant.</p>
-<div class="math notranslate nohighlight">
-\[y' = c\]</div>
+<div class="math notranslate nohighlight" id="equation-chapter-1-fitting-0">
+<span class="eqno">(3)<a class="headerlink" href="#equation-chapter-1-fitting-0" title="Permalink to this equation">#</a></span>\[y' = c\]</div>
 <p>Intuitively one would draw a line to fit this data, a model with two free parameters. A polynomial fit is the higher freedom extension to this. Increased dimensions in <span class="math notranslate nohighlight">\(\vec{p}\)</span> will reduce the size of residuals. It follows that an exact fit can be found by increasing the order of the polynomial. However, this comes at a cost to the generalisability of the model. A small section of the data sets are shown below with polynomial fits, constituting under and overfitting of data.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compound_mask</span><span class="p">(</span><span class="n">array</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="o">*</span><span class="n">tuples</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    A function which takes the product of multiple masks</span>
+<span class="sd">    Enables multiple selection criteria, for example selecting both;</span>
+<span class="sd">    only month 8, and year 1993.</span>
 
-<span class="sd">    Input :</span>
+<span class="sd">    Arguments :</span>
 <span class="sd">    array: pd.DataFrame, with column keys that contain </span>
-<span class="sd">    *tuples: (column_key: string in array.keys(),</span>
+<span class="sd">    *tuples: (column_key: string which is found in array.keys(),</span>
 <span class="sd">        values: list of items in array[column_key]</span>
 <span class="sd">        )</span>
 
-<span class="sd">    Output:</span>
+<span class="sd">    Returns:</span>
 <span class="sd">    pd.DataFrame, which satisfies all of the conditions </span>
 <span class="sd">    provided by the tuples</span>
 <span class="sd">    &#39;&#39;&#39;</span>

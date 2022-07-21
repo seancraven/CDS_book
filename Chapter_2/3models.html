@@ -138,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_1/Fitting.html">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1">
@@ -190,8 +190,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
    The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
 </ul>
@@ -490,7 +500,7 @@ title="Print to PDF"
 <h1>Implementation of the Three SRES Approximation Models<a class="headerlink" href="#implementation-of-the-three-sres-approximation-models" title="Permalink to this headline">#</a></h1>
 <p>The three approximate SRES scenarios chosen will be used to develop Bayesian temperature change prediction. The model of global temperatures <span class="math notranslate nohighlight">\(T\)</span> as a function of <span class="math notranslate nohighlight">\(\textrm{CO}_2 (C)\)</span> is,</p>
 <div class="math notranslate nohighlight" id="equation-temp-co2-model">
-<span class="eqno">(4)<a class="headerlink" href="#equation-temp-co2-model" title="Permalink to this equation">#</a></span>\[T(C) = T_0 + S \log_2(C/C_0).\]</div>
+<span class="eqno">(12)<a class="headerlink" href="#equation-temp-co2-model" title="Permalink to this equation">#</a></span>\[T(C) = T_0 + S \log_2(C/C_0).\]</div>
 <p><span class="math notranslate nohighlight">\(S\)</span> describes the sensitivity of the global temperature to doubling in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration. This parameter has proved challenging to estimate given the complexity of the systems influencing global temperature Change. A PDF of <span class="math notranslate nohighlight">\(S\)</span>, <span class="math notranslate nohighlight">\(P(S)\)</span> was produced by Sherwood et al.<span id="id1">[<a class="reference internal" href="../Bibliography.html#id18" title="S. Sherwood, M. J. Webb, J. D. Annan, K. C. Armour, P. M. Forster, J. Hargreaves, G. Hegerl, S. A. Klein, K. D. Marvel, E. J. Rohling, M. Watanabe, T. Andrews, P. Braconnot, C. Bretherton, G. L. Foster, Z. Hausfather, A. S. von der Heydt, R. Knutti, T. Mauritsen, J. R. Norris, C. Proistosescu, M. Rugenstein, G. A. Schmidt, K. B. Tokarska, and M. D. Zelinka. An assessment of earth's climate sensitivity using multiple lines of evidence. Rev. Geophys., 58(4):e2019RG000678, 2020. doi:10.1029/2019RG000678.">SWA+20</a>]</span> and will be used for our future temperature predictions and approximations of the SRES scenarios. The PDF of temperature change can be written as</p>
 <div class="math notranslate nohighlight">
 \[P(\Delta T) = \int P(\Delta T|S) P(S) dS.
@@ -499,7 +509,7 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>In this model Radiative Forcing is neglected, this id the phenomenon which describes the global flux inbalance. Where more enenrgy is being let out than let in. This is a key part of the global temperature rise equation as this is not a constant factor when global temperatures rise. For a more thourough predictive with radiative forcing see <a class="reference external" href="https://iopscience.iop.org/article/10.1088/1748-9326/ac6ff6">Sherwood2022</a><span id="id2">[<a class="reference internal" href="../Bibliography.html#id17" title="Steven C Sherwood, Alex Sen Gupta, and Stephen E Schwartz. Probability of committed warming exceeding 1.5 $\less $sup$\greater $$\vysmwhtcircle $$\less $/sup$\greater $c and 2.0 $\less $sup$\greater $$\vysmwhtcircle $$\less $/sup$\greater $c paris targets. Environmental Research Letters, 17(6):064022, may 2022. URL: https://doi.org/10.1088/1748-9326/ac6ff6, doi:10.1088/1748-9326/ac6ff6.">SGS22</a>]</span>.</p>
 </div>
-<p>The quantity <span class="math notranslate nohighlight">\(P(\Delta T|S)\)</span> can be calculated using our simple climate model eq.<a class="reference internal" href="#equation-temp-co2-model">(4)</a>.</p>
+<p>The quantity <span class="math notranslate nohighlight">\(P(\Delta T|S)\)</span> can be calculated using our simple climate model eq.<a class="reference internal" href="#equation-temp-co2-model">(12)</a>.</p>
 <p>The model will have three separate cases. As discussed before they are as follows:</p>
 <ul class="simple">
 <li><p>A1B) Continued growth in emission Rates.</p></li>

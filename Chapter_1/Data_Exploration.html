@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Fitting" href="Fitting.html" />
+    <link rel="next" title="Curve Fitting" href="Fitting.html" />
     <link rel="prev" title="An Aside On Python" href="../An_Aside_On_Python.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -138,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Fitting.html">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1">
@@ -190,8 +190,18 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
    The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
 </ul>
@@ -495,14 +505,12 @@ title="Print to PDF"
 <p class="admonition-title">Tip</p>
 <p>Handling imports is typically done at the top of the file. The best practice is to avoid having redundant imports in a file. Avoiding double imports and redundant imports reduces the possibility of incompatibility errors.</p>
 </div>
-<p>The first section will collect data from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id2">[<a class="reference internal" href="../Bibliography.html#id6" title="Thomas J. Conway, Pieter P. Tans, Lee S. Waterman, Kirk W. Thoning, Duane R. Kitzis, Kenneth A. Masarie, and Ni Zhang. Evidence for interannual variability of the carbon cycle from the national oceanic and atmospheric administration/climate monitoring and diagnostics laboratory global air sampling network. Journal of Geophysical Research: Atmospheres, 99(D11):22831-22855, 1994. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951, doi:https://doi.org/10.1029/94JD01951.">CTW+94</a>, <a class="reference internal" href="../Bibliography.html#id7" title="Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. Journal of Geophysical Research: Atmospheres, 100(D6):11593-11610, 1995. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859, doi:https://doi.org/10.1029/95JD00859.">MT95</a>]</span>. There are multiple files on the website; <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. For this problem, greater resolution in each point is a boon. Further, in ‘Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record’<span id="id3">[<a class="reference internal" href="../Bibliography.html#id7" title="Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. Journal of Geophysical Research: Atmospheres, 100(D6):11593-11610, 1995. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859, doi:https://doi.org/10.1029/95JD00859.">MT95</a>]</span>, the approximate upper bound for the variation between Global monthly <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is 0.5 ppm, across all measurements.</p>
+<p>The first section will collect data from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id2">[<a class="reference internal" href="../Bibliography.html#id6" title="Thomas J. Conway, Pieter P. Tans, Lee S. Waterman, Kirk W. Thoning, Duane R. Kitzis, Kenneth A. Masarie, and Ni Zhang. Evidence for interannual variability of the carbon cycle from the national oceanic and atmospheric administration/climate monitoring and diagnostics laboratory global air sampling network. Journal of Geophysical Research: Atmospheres, 99(D11):22831-22855, 1994. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951, doi:https://doi.org/10.1029/94JD01951.">CTW+94</a>, <a class="reference internal" href="../Bibliography.html#id7" title="Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. Journal of Geophysical Research: Atmospheres, 100(D6):11593-11610, 1995. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859, doi:https://doi.org/10.1029/95JD00859.">MT95</a>]</span>. There are multiple sets of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data on the website; <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. For this problem, greater resolution in each point is a boon. Further, in ‘Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record’<span id="id3">[<a class="reference internal" href="../Bibliography.html#id7" title="Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. Journal of Geophysical Research: Atmospheres, 100(D6):11593-11610, 1995. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859, doi:https://doi.org/10.1029/95JD00859.">MT95</a>]</span>, the approximate upper bound for the variation between Global monthly <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is 0.5 ppm, across all measurements.</p>
 <p>CSV or comma-separated variable files are a common way of storing tabular data. <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Pandas</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html">Numpy</a> both have functions which read CSVs. Pandas is much faster.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-</pre></div>
-</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>To load the data, the URL of the CSV is given to <code class="docutils literal notranslate"><span class="pre">pd.read_csv()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_global</span> <span class="o">=</span> <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv&#39;</span>
@@ -669,10 +677,11 @@ Notably, none of the columns has units in their headers apart from years and mon
 <img alt="../_images/Data_Exploration_7_0.png" src="../_images/Data_Exploration_7_0.png" />
 </div>
 </div>
-<p>By plotting the monthly average against time and the trendline provided shows a consistent increase in the average concentration of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> in the atmosphere over the last 40 years. In addition, a cyclical pattern over a shorter timescale is also observed. The data set is well populated over the time period for predictions on the few years scale. Thus</p>
-<p>There is an additional data set from Mauna Loa <span id="id4">[<a class="reference internal" href="../Bibliography.html#id8" title="Kirk W. Thoning, Pieter P. Tans, and Walter D. Komhyr. Atmospheric carbon dioxide at mauna loa observatory: 2. analysis of the noaa gmcc data, 1974–1985. Journal of Geophysical Research: Atmospheres, 94(D6):8549-8565, 1989. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549, doi:https://doi.org/10.1029/JD094iD06p08549.">TTK89</a>]</span>, which is worth comparing to global averages. Notably, these data sets are not expected to correspond precisely as <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration is a function of altitude, latitude and longitude.</p>
-<p>In this case, we know that the surface average <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is taken from multiple sea-level sites. Each site is part of the Cooperative Global Air Sampling Network{cite}`. These sites have been chosen to minimise the interference of local effects in the amount of atmospheric <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>.</p>
-<p>There can be no hard and fast rule for how many data sources are required to make predictions. However, with more independent sets of data, confidence in the generality of predictions can increase. Further, both of these datasets come from peer-reviewed sources. Thus their methodology has been independantly certified.</p>
+<p>By plotting the monthly average against time and the trendline provided shows a consistent increase in the average concentration of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> in the atmosphere over the last 40 years. In addition, a cyclical pattern over a shorter timescale is also observed. The data set is well populated over the time period for predictions on the few years scale.</p>
+<p>There is an additional data set from Mauna Loa <span id="id4">[<a class="reference internal" href="../Bibliography.html#id8" title="Kirk W. Thoning, Pieter P. Tans, and Walter D. Komhyr. Atmospheric carbon dioxide at mauna loa observatory: 2. analysis of the noaa gmcc data, 1974–1985. Journal of Geophysical Research: Atmospheres, 94(D6):8549-8565, 1989. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549, doi:https://doi.org/10.1029/JD094iD06p08549.">TTK89</a>]</span>, which is worth comparing to global averages. Notably, these data sets are not expected to correspond precisely as <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration is a function of altitude, latitude and longitude. Investigating another reputable data source can provide additional confidence in the quality of the data sets.</p>
+<p>In this case, we know that the surface average <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is taken from multiple sea-level sites. Each site is part of the Cooperative Global Air Sampling Network<span id="id5">[<a class="reference internal" href="../Bibliography.html#id6" title="Thomas J. Conway, Pieter P. Tans, Lee S. Waterman, Kirk W. Thoning, Duane R. Kitzis, Kenneth A. Masarie, and Ni Zhang. Evidence for interannual variability of the carbon cycle from the national oceanic and atmospheric administration/climate monitoring and diagnostics laboratory global air sampling network. Journal of Geophysical Research: Atmospheres, 99(D11):22831-22855, 1994. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951, doi:https://doi.org/10.1029/94JD01951.">CTW+94</a>]</span>. These sites have been chosen to minimise the interference of local effects in the amount of atmospheric <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>.</p>
+<p>There can be no hard and fast rule for how many data sources are required to make predictions. However, with more independent sets of data, confidence in the generality of predictions can increase. Further, both of these datasets come from peer-reviewed sources. Thus their methodology has been independently certified.</p>
+<p>The same search for null and invalid values is performed on this dataset.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv&#39;</span>              
@@ -772,7 +781,8 @@ Notably, none of the columns has units in their headers apart from years and mon
 <img alt="../_images/Data_Exploration_10_0.png" src="../_images/Data_Exploration_10_0.png" />
 </div>
 </div>
-<p>The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still available. In this dataset, recordings before 1980 have unknown associated standard error. Not using these points in the model is an option rather than estimating their ucertainty as the number of timesteps needing to be predicted into the future are not particularly large, for investigating the effects of covid.</p>
+<p>The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still available. In this dataset, recordings before 1980 have unknown associated standard error. Not using these points in the model is an option rather than estimating their uncertainty as the number of timesteps needing to be predicted into the future are not particularly large, for investigating the effects of covid.</p>
+<p>Finally, both data sets are plotted, for a quick informal check that they agree and that progressing with them makes sense.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">invalid_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
@@ -804,9 +814,6 @@ Notably, none of the columns has units in their headers apart from years and mon
         <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span>
         <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span> <span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;trend&#39;</span><span class="p">],</span> 
-        <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
-        <span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm{{CO}}_2$ (ppm)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
@@ -821,7 +828,7 @@ Notably, none of the columns has units in their headers apart from years and mon
 <h3>Next steps<a class="headerlink" href="#next-steps" title="Permalink to this headline">#</a></h3>
 <p>After acquiring both data sets, non-physical values and missing fields were removed. On brief inspection, both datasets follow a similar trend and describe an increase in global <span class="math notranslate nohighlight">\(\textrm{{CO}}_2\)</span>, with a consistent oscillation. Finally, both datasets include the time period of interest, 2020-2021.</p>
 <p>Regarding dataset reliability, these datasets are averages over time series fits from data collected hourly. This data is challenging to determine sensible standard errors on the monthly mean values. Daily variance is of the order of a few ppm due to a variety of factors. An example day and data collection process are documented <a class="reference external" href="https://gml.noaa.gov/ccgg/about/co2_measurements.html">here</a>. However, the standard deviations of the measurements for Mauna Loa are provided. These are obtained from weekly and daily fits. Such quantification of the data’s precision is required to determine the significance of any events, enabling observation of a trend change indicative of Covid-19.</p>
-<p>The global data lacks a standard error. There is an expected variance between testing sites in both the timing and magnitude of oscilations, which can be read further about <a class="reference external" href="https://gml.noaa.gov/ccgg/about/global_means.html">here</a>. Due to the nature of the global data, using the monthly Mauna Loa data for the main analysis and having the global data as a touchstone seems prudent. At this point, the author is sufficiently convinced that they have obtained a dataset that is fit for purpose in the Mauna Loa dataset.</p>
+<p>The global data lacks a standard error for each point. There is an expected variance between testing sites in both the timing and magnitude of oscilations, which can be read further about <a class="reference external" href="https://gml.noaa.gov/ccgg/about/global_means.html">here</a>. Due to the nature of the global data, using the monthly Mauna Loa data for the main analysis and having the global data as a touchstone seems prudent. At this point, the author is sufficiently convinced that they have obtained a dataset that is fit for purpose in the Mauna Loa dataset.</p>
 </section>
 </section>
 </section>
@@ -863,7 +870,7 @@ Notably, none of the columns has units in their headers apart from years and mon
     <a class='right-next' id="next-link" href="Fitting.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Fitting</p>
+        <p class="prev-next-title">Curve Fitting</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
