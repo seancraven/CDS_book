@@ -3,6 +3,7 @@ Welcome to the readme.md of the CDS Book. Currently, this contains the plan for 
 
 ## Standards for the book
 Code cell line width: 75 Characters
+Black Formatter. 
 ###
 Writing style: 
 - Exclusively in 3rd person.
@@ -74,18 +75,14 @@ Conceptually Similar but implementations differ:
 Pages:
 Plan Possibly to change...
 - [ ] Atmospheric Physics Primer
-    - [ ] Electronic Transitions and matrix elements
-    - [ ] Vibrational Transitions
+    - [ ] Vibrational Transitions: Charles
     - [x] Line Shapes 
-- [ ] Temperature Dependence and HITRAN-api
+- [x] Temperature Dependence and HITRAN-api
 - [ ] Radiation Balance 
 - [ ] Two Stream
 - [ ] Final Outgoing Model
 
 - [ ] Absorption
-- [ ] Short Wave
-- [ ] 
-
 
 Formating:
 - [ ] Hide Code Cells

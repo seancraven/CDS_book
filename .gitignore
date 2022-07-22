@@ -7,3 +7,9 @@ output_files/
 *.pyc
 *.ipynb_checkpoints
 hapi_db/
+book/
+backend/__pycache__/
+absorption_coef_database_utitlites/optical_depth.db
+absorption_coef_database_utitlites/.vscode
+absorption_coef_database_utitlites/spectral_line.db/
+/.idea
