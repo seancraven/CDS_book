@@ -199,11 +199,6 @@ const thebe_selector_output = ".output, .cell_output"
    The Variance of Absorption Spectra
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
-  </a>
- </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -564,7 +559,7 @@ title="Print to PDF"
 </section>
 <section id="textrm-co-2-concentration-models">
 <h1><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> Concentration Models<a class="headerlink" href="#textrm-co-2-concentration-models" title="Permalink to this headline">#</a></h1>
-<p>In the final part of <span class="xref myst">Chapter 1</span>, a polynomial model with a trigonometric addition was developed to characterise the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, which closely follows the global average trend. Using the model without the trigonometric terms will be the basis for this section.</p>
+<p>In the final part of <a class="reference internal" href="../Chapter_1/Final_Model.html"><span class="doc std std-doc">Chapter 1</span></a>, a polynomial model with a trigonometric addition was developed to characterise the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, which closely follows the global average trend. Using the model without the trigonometric terms will be the basis for this section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_climate_model</span><span class="p">(</span><span class="n">C</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">T_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -637,7 +632,7 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>p_1</th>
-      <td>3.373409e+15</td>
+      <td>6.746818e+15</td>
     </tr>
     <tr>
       <th>p_2</th>
@@ -743,11 +738,11 @@ Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T sc
 </section>
 <section id="the-natural-cubic-spline">
 <h2>The Natural Cubic Spline<a class="headerlink" href="#the-natural-cubic-spline" title="Permalink to this headline">#</a></h2>
-<p>This section is a mild detour because this technique is not used in the model. Nevertheless, a spline fit can be helpful in scenarios where smoothing is particularly needed or a trend is difficult to visualize. Albeit, the traditional cubic splines extrapolation power is slightly lacking.</p>
-<p>As defined in <span id="id3">[]</span>, a spline is piecewise polynomials of order <span class="math notranslate nohighlight">\(m\)</span> with <span class="math notranslate nohighlight">\(m-2\)</span> continuous derivatives. The order-<span class="math notranslate nohighlight">\(m\)</span> spline provides a function which, if defined by the degrees of freedom, has a fixed number of knots, points at which the polynomial changes. In the plot below, spline fits of <span class="math notranslate nohighlight">\(\cos(x)\)</span> with Gaussian noise are plotted. There are two knots for all of the splines. A dashed grey line indicates the position of the knots. The degrees of freedom for a spline</p>
+<p>This section is a mild detour because this technique is not used in the model. Nevertheless, a spline fit can be helpful in scenarios where smoothing is particularly needed, or a trend is difficult to visualize. Albeit, the traditional cubic splines’ extrapolation power is slightly lacking.</p>
+<p>As defined in <span id="id3">[<a class="reference internal" href="../Bibliography.html#id19" title="Trevor Hastie, Robert Tibshirani, and Jerome Friedman. Basis Expansions and Regularization, pages 139–189. Springer New York, New York, NY, 2009. URL: https://doi.org/10.1007/978-0-387-84858-7_5, doi:10.1007/978-0-387-84858-7_5.">HTF09</a>]</span>, a spline is piecewise polynomials of order <span class="math notranslate nohighlight">\(m\)</span> with <span class="math notranslate nohighlight">\(m-2\)</span> continuous derivatives. The order-<span class="math notranslate nohighlight">\(m\)</span> spline provides a function, which if defined by the degrees of freedom, has a fixed number of knots, points at which the polynomial changes. In the plot below, spline fits of <span class="math notranslate nohighlight">\(\cos(x)\)</span> with Gaussian noise are plotted. There are two knots for all splines. A dashed grey line indicates the position of the knots. The degrees of freedom for a spline</p>
 <div class="math notranslate nohighlight">
 \[\nu =  (knots+1)\cdot m-(knots)\cdot 3 \]</div>
-<p>The <span class="math notranslate nohighlight">\(knots+1\)</span> term comes from the number of separate polynomials. The number of constraints is 3 per knot; where <span class="math notranslate nohighlight">\(x_k\)</span> is the knot postition, the constraints are as follows</p>
+<p>The <span class="math notranslate nohighlight">\(knots+1\)</span> term comes from the number of separate polynomials. There are 3 constraints per knot; where <span class="math notranslate nohighlight">\(x_k\)</span> is the knot postition, the constraints are as follows</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}    \begin{aligned}
         f(x_k^-) &amp; = f(x_k^+), \\

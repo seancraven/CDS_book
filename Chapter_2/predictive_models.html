@@ -138,7 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_1/Fitting.html">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1">
@@ -189,6 +189,11 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
    The Variance of Absorption Spectra
@@ -484,10 +489,10 @@ title="Print to PDF"
 <h1>Predictive Modeling<a class="headerlink" href="#predictive-modeling" title="Permalink to this headline">#</a></h1>
 <p>One of the critical uses of data recorded in the past is to attempt to make inferences about the future. Making predictions about future events on time series data can be done by forming a model on historical data.</p>
 <p>An introductory example of the general methodology of data-driven predictions using partitioning data into; training, validation and testing sections is explored. These sections are used as follows; the data is used to derive a model from the training data. Next, this model is tested on available validation data. Finally, the model is applied to the testing data to predict its behaviour.</p>
-<p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(3)</a>. In this example, the free co-efficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from to avoid lacking generalisation while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
+<p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(11)</a>. In this example, the free co-efficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from to avoid lacking generalisation while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
 <p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In such an example, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomaly. However, the modelling of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For linear regression, this constitutes determining the form of the function and evaluating the free coefficients.</p>
 <p>Using this model, the validation data is then investigated. This must not overlap with the training data. In the global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
-<p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(3)</a> in 2020, then the presence of the pandemic can be shown.</p>
+<p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(11)</a> in 2020, then the presence of the pandemic can be shown.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell tag_hide-input docutils container">

@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Radiative transfer" href="radiative_transfer.html" />
+    <link rel="next" title="Bibliography" href="../Bibliography.html" />
     <link rel="prev" title="Radiation Modelling" href="atmospheric_primer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -197,11 +197,6 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    The Variance of Absorption Spectra
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -530,34 +525,22 @@ title="Print to PDF"
 <p>The nature of climate models is that they have many interlinked parameters. These relationships must be modelled when the goal is to produce the most accurate model possible. However, this project’s scope is to build a reasonable approximation for pedagogy. So by separating the variables and assessing their impact on the model, the most vital parts of the model can be retained.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">simpson</span><span class="p">,</span> <span class="n">quad</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">isa</span>
-<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../CDS.mplstyle&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">HiddenPrints</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_original_stdout</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">devnull</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">scipy.integrate</span> <span class="kn">import</span> <span class="n">quad</span>
 
-    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_val</span><span class="p">,</span> <span class="n">exc_tb</span><span class="p">):</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_original_stdout</span>
-<span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>
-    <span class="kn">import</span> <span class="nn">hapi</span>
+<span class="kn">import</span> <span class="nn">isa</span>
+
+<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -573,91 +556,128 @@ title="Print to PDF"
 <p>Despite falling density and pressure, there is an increase in temperature after <span class="math notranslate nohighlight">\(20 km\)</span>. This temperature increase is due primarily to Ozone absorbing Shortwave UV-radiation, which is incoming from the sun. This temperature increase is not accounted for in our model as we look at longwave radiation exiting the atmosphere.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atlittudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">80000</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atlittudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
-<span class="n">pressure</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_pressure</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>  
+<span class="n">pressure</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_pressure</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
 <span class="n">density</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span><span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Temperature $(K)$&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure $(Pa)$&#39;</span><span class="p">,</span> <span class="s1">&#39;Density $(kg/m^3)$&#39;</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Temperature $(K)$&quot;</span><span class="p">,</span> <span class="s2">&quot;Pressure $(Pa)$&quot;</span><span class="p">,</span> <span class="s2">&quot;Density $(kg/m^3)$&quot;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">profile</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">density</span><span class="p">]):</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">profile</span><span class="p">,</span> <span class="n">atlittudes</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">profile</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">profile</span><span class="p">)],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">],</span>
-               <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
-               <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
-               <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Troposphere&#39;</span><span class="p">,</span>
-               <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">profile</span><span class="p">,</span> <span class="n">atlittudes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">profile</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">profile</span><span class="p">)],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="mi">4</span><span class="p">],</span>
+        <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Troposphere&quot;</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">(),</span><span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">()</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">80000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">(),</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_yticks</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80000</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Altitude $(km)$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;ISA Vertical Profile up to $10km$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Altitude $(km)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;ISA Vertical Profile up to $10km$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lorentzian_broadening_4_0.png" src="../_images/lorentzian_broadening_4_0.png" />
+<img alt="../_images/lorentzian_broadening_3_0.png" src="../_images/lorentzian_broadening_3_0.png" />
 </div>
 </div>
 </section>
 <section id="the-variation-of-the-absorbtion-cross-section-of-textrm-co-2">
 <h1>The Variation of the Absorbtion Cross-section of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span><a class="headerlink" href="#the-variation-of-the-absorbtion-cross-section-of-textrm-co-2" title="Permalink to this headline">#</a></h1>
-<p>The HITRAN Database provides the line-by-line intensities for more than 55 molecules. Using the IPCC reports data on the most potent greenhouse gases, the most impactful 3, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{N}_2 \textrm{O}\)</span>, and <span class="math notranslate nohighlight">\(\textrm{CH_4}\)</span>. Additionally, water plays a significant role in the greenhouse effect. However, the variance in its concentration due to anthropogenic factors does not significantly drive global temperature rise. However, it does provide a large amount of radiation scattering and should be included<span id="id2">[<a class="reference internal" href="../Bibliography.html#id31" title="IPCC Working Group I. Ipcc sixth assessment report (ar6): climate change 2021 - the physical science basis - summary for policymakers. Aug 2021. URL: https://policycommons.net/artifacts/1804182/ipcc_ar6_wgi_spm/.">I21</a>]</span>.</p>
-<p>Further, the changes in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s absorption profile can be used as a litmus test for simplifying assumptions and observing the effects of broadening and gas rarefaction.</p>
-<p>Additionally, to temperature and pressure dependence on the broadening, there is a further temperature dependence on the line intensity due to the accessibility of a given transition. At low temperatures, high-energy transistions, those of low wavelength, are heavily suppressed as the molecules lack the energy to access either the excitation or vibrational mode. A Bose-Einstein distribution quantifies the availability of a transition. When the intensity of a transition is known for one temperature, the ratio of the probabilities gives the intensity</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-0">
-<span class="eqno">(27)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[S_{a \rightarrow b}(T) = S_{a \rightarrow b, T_ref}\frac{\exp(-h\nu_{a \rightarrow b} /cK_bT)}{exp(-h\nu_{a \rightarrow b} /cK_b T_{ref})} \frac{Q(T_{ref})}{Q(T)}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T)\)</span> is the line intensity as a function of temperature for some transition <span class="math notranslate nohighlight">\(a \rightarrow b\)</span>, <span class="math notranslate nohighlight">\(\nu_{a \rightarrow b}\)</span> is the wavenumber for the transition, and <span class="math notranslate nohighlight">\(Q(T)\)</span> is the partition sum over all states. The values for <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T_{ref})\)</span> are recorded on the hitran data-base.</p>
-<p><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s line intensity variation is plotted at 3 km intervals up to 10km using the ISA model, around the most significant absorption lines, around <span class="math notranslate nohighlight">\(650 cm^{-1}\)</span>.</p>
+<p>The HITRAN Database provides the line-by-line intensities for more than 55 molecules. Using the IPCC reports data on the most potent greenhouse gases, the most impactful 3, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{N}_2 \textrm{O}\)</span>, and <span class="math notranslate nohighlight">\(\textrm{CH}_4\)</span>. Additionally, water plays a significant role in the greenhouse effect. However, the variance in its concentration due to anthropogenic factors does not significantly drive global temperature rise. However, it does provide a large amount of radiation scattering and should be included<span id="id2">[<a class="reference internal" href="../Bibliography.html#id31" title="IPCC Working Group I. Ipcc sixth assessment report (ar6): climate change 2021 - the physical science basis - summary for policymakers. Aug 2021. URL: https://policycommons.net/artifacts/1804182/ipcc_ar6_wgi_spm/.">I21</a>]</span>.</p>
+<p>Further, the changes in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s absorption profile can be used as a litmus test for simplifying assumptions and observing the effects of broadening and gas rarefaction.
+Additionally, to temperature and pressure dependence on the broadening, there is a further temperature dependence on the line intensity due to the accessibility of a given transition. At low temperatures, high-energy transitions, those of low wavelength, are heavily suppressed as the molecules lack the energy to access either the excitation or vibrational mode. A Bose-Einstein distribution quantifies the availability of a transition. When the intensity of a transition is known for one temperature, the ratio of the probabilities gives the intensity</p>
+<div class="math notranslate nohighlight" id="equation-s-a-rightarrow-b-t-s-a-rightarrow-b-t-ref-frac-exp-h-nu-a-rightarrow-b-ck-bt-exp-h-nu-a-rightarrow-b-ck-b-t-ref-frac-t-ref-t">
+<span class="eqno">(27)<a class="headerlink" href="#equation-s-a-rightarrow-b-t-s-a-rightarrow-b-t-ref-frac-exp-h-nu-a-rightarrow-b-ck-bt-exp-h-nu-a-rightarrow-b-ck-b-t-ref-frac-t-ref-t" title="Permalink to this equation">#</a></span>\[\]</div>
+<p>Where <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T)\)</span> is the line intensity as a function of temperature for some transition <span class="math notranslate nohighlight">\(a \rightarrow b\)</span>, <span class="math notranslate nohighlight">\(\nu_{a \rightarrow b}\)</span> is the wavenumber for the transition, and <span class="math notranslate nohighlight">\(Q(T)\)</span> is the partition sum over all states. The values for <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T_{ref})\)</span> are recorded on the HITRAN database. <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s line intensity variation is plotted at 3 km intervals up to 10km using the ISA model, around the most significant absorption lines, around <span class="math notranslate nohighlight">\(650 cm^{-1}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>    
-    <span class="n">hapi</span><span class="o">.</span><span class="n">db_begin</span><span class="p">(</span><span class="s1">&#39;../hapi_db&#39;</span><span class="p">)</span>
-    <span class="n">hapi</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">4000</span><span class="p">)</span>
-<span class="c1">#Altitude Bands</span>
-<span class="n">start_alt</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">stop_alt</span> <span class="o">=</span> <span class="mi">10</span><span class="o">*</span><span class="mi">1000</span>
-<span class="n">alt_band_size</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">midpt_altitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start_alt</span> <span class="o">+</span> <span class="n">alt_band_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
-                       <span class="n">stop_alt</span> <span class="o">+</span> <span class="n">alt_band_size</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
-                       <span class="n">alt_band_size</span><span class="p">,</span>
-                       <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_density</span><span class="p">(</span><span class="n">alt</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns Number of particles per m^3</span>
+<span class="sd">    assuming ideal gas.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        alt (float): Altitude in meters.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float: n(alt) in molecules/m^3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mass_of_air</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mf">28.9647</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">3</span> <span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_A</span>
+    <span class="p">)</span>  <span class="c1"># conver kg/m^3 to molecule/m^3</span>
+    <span class="k">return</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">alt</span><span class="p">)</span> <span class="o">/</span> <span class="n">mass_of_air</span>
+
+
+<span class="k">def</span> <span class="nf">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    returns number of particles per square meter</span>
+<span class="sd">    between two altitudes</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        alt_0 (float): altitude in meters</span>
+<span class="sd">        alt_1 (float): altitude in meters</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        float:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">quad</span><span class="p">(</span><span class="n">number_density</span><span class="p">,</span> <span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">optical_depth</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">,</span> <span class="n">ppm_conc</span><span class="p">,</span> <span class="n">abs_coef</span><span class="p">):</span>
+    <span class="n">particles</span> <span class="o">=</span> <span class="n">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ppm_conc</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">particles</span> <span class="o">*</span> <span class="n">abs_coef</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+    <span class="p">)</span>  <span class="c1"># 10^-4 factor from cm^2-&gt;m^2 conv</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SQL query</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../absorption_coef_database_utitlites/optical_depth.db&quot;</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="n">sql_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM optical_depths WHERE mol_id = 2&quot;</span>
+<span class="n">co2_optical_depth</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">sql_query</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="n">sql_query</span> <span class="o">=</span> <span class="s2">&quot;SELECT * FROM gases&quot;</span>
+<span class="n">gases</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">sql_query</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="n">alts</span> <span class="o">=</span> <span class="n">co2_optical_depth</span><span class="p">[</span><span class="s2">&quot;altitude&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise Outputs</span>
+<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
 <span class="p">)</span>
-<span class="n">altitudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start_alt</span><span class="p">,</span> <span class="n">stop_alt</span><span class="o">+</span> <span class="n">alt_band_size</span><span class="p">,</span> <span class="n">alt_band_size</span><span class="p">)</span>
-<span class="c1"># Initalise Outputs </span>
-<span class="n">abs_coef_alt</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">integrals</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">pressure</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_pressure</span><span class="p">(</span><span class="n">midpt_altitudes</span><span class="p">)</span>
-<span class="n">temperature</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">midpt_altitudes</span><span class="p">)</span>
-<span class="c1">#plotting</span>
-<span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">))</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">color_cycle</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="n">pres</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span><span class="n">pressure</span><span class="p">)):</span>
-    <span class="k">with</span> <span class="n">HiddenPrints</span><span class="p">():</span>
-        <span class="n">nu</span><span class="p">,</span> <span class="n">abs_coef</span> <span class="o">=</span> <span class="n">hapi</span><span class="o">.</span><span class="n">absorptionCoefficient_Voigt</span><span class="p">(</span><span class="n">SourceTables</span><span class="o">=</span><span class="s1">&#39;CO2&#39;</span><span class="p">,</span>
-                    <span class="n">Environment</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;T&#39;</span><span class="p">:</span><span class="n">temp</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span><span class="n">pres</span><span class="o">/</span><span class="n">pressure</span><span class="p">[</span><span class="mi">0</span><span class="p">]},</span>
-                    <span class="n">Diluent</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;air&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">}</span><span class="c1">#p in atm</span>
-                    <span class="p">)</span>
-    <span class="n">abs_coef_alt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abs_coef</span><span class="p">)</span>
-    <span class="n">abs_area</span> <span class="o">=</span> <span class="n">simpson</span><span class="p">(</span><span class="n">abs_coef</span><span class="p">,</span> <span class="n">nu</span><span class="p">,)</span>
-    <span class="n">integrals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">abs_area</span><span class="p">)</span>
-    
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">color_cycle</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">alt</span> <span class="ow">in</span> <span class="n">alts</span><span class="p">:</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">co2_optical_depth</span><span class="p">[</span><span class="s2">&quot;altitude&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">alt</span>
+    <span class="n">abs_coef</span> <span class="o">=</span> <span class="n">co2_optical_depth</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="s2">&quot;abs_coef&quot;</span><span class="p">]</span>
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">co2_optical_depth</span><span class="p">[</span><span class="n">mask</span><span class="p">][</span><span class="s2">&quot;wave_no&quot;</span><span class="p">]</span>
     <span class="n">plot</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">abs_coef</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
 
 <span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
-<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Altitude (m)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">635</span><span class="p">,</span><span class="mi">700</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">17</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Absorption Coefficient $(cm^2/molecule)$&#39;</span><span class="p">);</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Altitude (m)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">635</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">17</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber $(cm^{-1})$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Absorption Coefficient $(cm^2/molecule)$&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lorentzian_broadening_6_0.png" src="../_images/lorentzian_broadening_6_0.png" />
+<img alt="../_images/lorentzian_broadening_7_0.png" src="../_images/lorentzian_broadening_7_0.png" />
 </div>
 </div>
 </section>
@@ -667,42 +687,6 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[\tau(\nu, \Delta l, T, p) = \int_{l}^{l+\Delta l} n(z) dz \cdot k(\nu, T, p).\]</div>
 <p>Where n(z) is the number density per unit volume. Then we plot the optical depth, <span class="math notranslate nohighlight">\(I/I_0\)</span>, of each atmosphere block up to <span class="math notranslate nohighlight">\(30km\)</span>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_density</span><span class="p">(</span><span class="n">alt</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Returns Number of particles per m^3</span>
-<span class="sd">    assuming ideal gas.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        alt (float): Altitude in meters.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        float: n(alt) in molecules/m^3</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="n">mass_of_air</span> <span class="o">=</span> <span class="mf">28.9647</span> <span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">3</span><span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">N_A</span>  <span class="c1">#conver kg/m^3 to molecule/m^3</span>
-    <span class="k">return</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">alt</span><span class="p">)</span><span class="o">/</span><span class="n">mass_of_air</span>
-<span class="k">def</span> <span class="nf">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    returns number of particles per square meter</span>
-<span class="sd">    between two altitudes</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        alt_0 (float): altitude in meters</span>
-<span class="sd">        alt_1 (float): altitude in meters</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        float: </span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    <span class="k">return</span> <span class="n">quad</span><span class="p">(</span><span class="n">number_density</span><span class="p">,</span> <span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">optical_depth</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">,</span> <span class="n">ppm_conc</span><span class="p">,</span> <span class="n">abs_coef</span><span class="p">):</span>
-    <span class="n">particles</span> <span class="o">=</span> <span class="n">particle_per_sq_m</span><span class="p">(</span><span class="n">alt_0</span><span class="p">,</span> <span class="n">alt_1</span><span class="p">)</span><span class="o">*</span><span class="n">ppm_conc</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">particles</span><span class="o">*</span><span class="n">abs_coef</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="c1">#10^-4 factor from cm^2-&gt;m^2 conv</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="increasing-altitude-s-effect-on-absorption">
 <h1>Increasing Altitude’s effect on Absorption<a class="headerlink" href="#increasing-altitude-s-effect-on-absorption" title="Permalink to this headline">#</a></h1>
@@ -710,127 +694,31 @@ title="Print to PDF"
 <p>The figure below plots the ratio of spectral radiance transmitted over the outgoing longwave wavenumber spectrum. The lines are filled between their values and one, such that if no radiance is let through in a region <span class="math notranslate nohighlight">\(\Delta \nu\)</span>, it will be opaque. The colour bar shows the colour gradient associated with increasing altitude. The dark outlines around the pale areas indicate that temperature and pressure broadening with increased altitude corresponds to a narrowing. This effect can also be seen above plot of the absorption coefficient.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flux_ratios</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">optical_depths</span> <span class="o">=</span> <span class="p">[]</span> 
-<span class="n">relative_area</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="c1">#</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">alt</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">midpt_altitudes</span><span class="p">,</span><span class="n">abs_coef_alt</span><span class="p">)):</span>
-    <span class="n">o_d_const_coef</span> <span class="o">=</span> <span class="n">optical_depth</span><span class="p">(</span>
-        <span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
-        <span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
-        <span class="mi">400</span><span class="p">,</span>
-        <span class="n">abs_coef_alt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="p">)</span>
-    <span class="n">o_d</span> <span class="o">=</span> <span class="n">optical_depth</span><span class="p">(</span><span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">altitudes</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="mi">400</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
-    <span class="n">flux_ratios</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">o_d</span><span class="o">*</span><span class="n">alt_band_size</span><span class="p">),</span>
-                        <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">o_d_const_coef</span><span class="o">*</span><span class="n">alt_band_size</span><span class="p">)]</span>
-<span class="p">)</span>
-    <span class="n">optical_depths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o_d</span><span class="p">)</span>
-<span class="c1">#</span>
-<span class="k">for</span> <span class="n">f_r</span><span class="p">,</span> <span class="n">f_const</span> <span class="ow">in</span> <span class="n">flux_ratios</span><span class="p">:</span>
-    <span class="n">relative_area</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">simpson</span><span class="p">(</span><span class="n">f_r</span><span class="p">,</span> <span class="n">nu</span><span class="p">),</span> <span class="n">simpson</span><span class="p">(</span><span class="n">f_const</span><span class="p">,</span> <span class="n">nu</span><span class="p">)])</span>
-<span class="n">relative_area</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">relative_area</span><span class="p">)</span><span class="o">/</span><span class="n">simpson</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">nu</span><span class="p">),</span><span class="n">nu</span><span class="p">)</span>
-<span class="c1">#result</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">relative_area</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fraction of Total Flux Absorbed&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;Fraction of Total Flux Absorbed with Constant Absorption Coefficient&#39;</span><span class="p">],</span>
-    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">i</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">2</span><span class="si">}</span><span class="s1">km&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">midpt_altitudes</span><span class="p">]</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">od</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">flux_ratios</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">alt</span> <span class="ow">in</span> <span class="n">alts</span><span class="p">:</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">co2_optical_depth</span><span class="p">[</span><span class="s2">&quot;altitude&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">alt</span>
+    <span class="n">alt_od</span> <span class="o">=</span> <span class="n">co2_optical_depth</span><span class="p">[</span><span class="s2">&quot;optical_depth&quot;</span><span class="p">][</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">od</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alt_od</span><span class="p">)</span>
+    <span class="n">flux_ratios</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">alt_od</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Fraction of Total Flux Absorbed</th>
-      <th>Fraction of Total Flux Absorbed with Constant Absorption Coefficient</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0.5km</th>
-      <td>0.11</td>
-      <td>0.11</td>
-    </tr>
-    <tr>
-      <th>1.5km</th>
-      <td>0.10</td>
-      <td>0.11</td>
-    </tr>
-    <tr>
-      <th>2.5km</th>
-      <td>0.10</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>3.5km</th>
-      <td>0.09</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>4.5km</th>
-      <td>0.09</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>5.5km</th>
-      <td>0.08</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>6.5km</th>
-      <td>0.08</td>
-      <td>0.10</td>
-    </tr>
-    <tr>
-      <th>7.5km</th>
-      <td>0.08</td>
-      <td>0.09</td>
-    </tr>
-    <tr>
-      <th>8.5km</th>
-      <td>0.07</td>
-      <td>0.09</td>
-    </tr>
-    <tr>
-      <th>9.5km</th>
-      <td>0.07</td>
-      <td>0.09</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span>
-                           <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
-                           <span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">color_cycle</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">flux_ratio</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">flux_ratios</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;rocket&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">color_cycle</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">flux_ratio</span> <span class="ow">in</span> <span class="n">flux_ratios</span><span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">flux_ratio</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$I(z+1km)/I(z)$&#39;</span><span class="p">)</span>
-<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;z (Altitude)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber $(cm^{-1})$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$I(z+1km)/I(z)$&quot;</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;z (Altitude)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -850,14 +738,16 @@ title="Print to PDF"
 <span class="n">sm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span>
                            <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">30000</span><span class="p">)</span>
                            <span class="p">)</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">color_cycle</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">o_d</span> <span class="ow">in</span> <span class="n">optical_depths</span><span class="p">:</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span><span class="n">o_d</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">color_cycle</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">o_d</span> <span class="ow">in</span> <span class="n">od</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">o_d</span><span class="p">)</span>
 <span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">sm</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Wavenumber $(cm^{-1})$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Optical Thickness from CO$_2$ </span><span class="se">\n</span><span class="s1">  between $z, z+1km$ of Atmosphere&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">10</span><span class="o">**-</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span>
+    <span class="s1">&#39;Optical Thickness from CO$_2$ </span><span class="se">\n</span><span class="s1">  between $z, z+1km$ of Atmosphere&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="o">-</span><span class="mi">9</span><span class="p">)</span>
 <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;z (Altitude)&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -868,20 +758,8 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">particle_per_sq_m</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2005597838221947e+28
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">flux_ratios</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">flux_ratios</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;wavenumber $cm^{-1}$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Transmittance&#39;</span><span class="p">)</span>
 </pre></div>
@@ -891,7 +769,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Transmittance&#39;)
 </pre></div>
 </div>
-<img alt="../_images/lorentzian_broadening_15_1.png" src="../_images/lorentzian_broadening_15_1.png" />
+<img alt="../_images/lorentzian_broadening_14_1.png" src="../_images/lorentzian_broadening_14_1.png" />
 </div>
 </div>
 </section>
@@ -930,10 +808,10 @@ title="Print to PDF"
             <p class="prev-next-title">Radiation Modelling</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="radiative_transfer.html" title="next page">
+    <a class='right-next' id="next-link" href="../Bibliography.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Radiative transfer</p>
+        <p class="prev-next-title">Bibliography</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
