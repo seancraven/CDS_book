@@ -9,7 +9,7 @@ output_files/
 hapi_db/
 book/
 backend/__pycache__/
-absorption_coef_database_utitlites/optical_depth.db
-absorption_coef_database_utitlites/.vscode
-absorption_coef_database_utitlites/spectral_line.db/
+database_utitlites/optical_depth.db
+database_utitlites/.vscode
+database_utitlites/spectral_line.db/
 /.idea
