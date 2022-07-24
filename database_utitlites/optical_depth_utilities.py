@@ -6,7 +6,7 @@ from scipy.integrate import quad
 from scipy import constants
 
 
-def number_density(alt):
+def number_density(alt: float) -> float:
     """
     Returns number of particles per m^3
     assuming ideal gas.
@@ -23,14 +23,14 @@ def number_density(alt):
     return isa.get_density(alt) / mass_of_air
 
 
-def particle_per_sq_m(alt_0, alt_1):
+def particle_per_sq_m(alt_0: float, alt_1: float) -> float:
     """
     Returns number of particles per square meter
     between two altitudes
 
     Args:
-        alt_0 (float): altitude in meters
-        alt_1 (float): altitude in meters
+        alt_0 (float): altitude in meters.
+        alt_1 (float): altitude in meters.
 
     Returns:
         float:
@@ -38,7 +38,7 @@ def particle_per_sq_m(alt_0, alt_1):
     return quad(number_density, alt_0, alt_1)[0]
 
 
-def optical_depth(alt_0, alt_1, ppm_conc, abs_coef):
+def optical_depth(alt_0: float, alt_1: float, ppm_conc: float, abs_coef: Any) -> Any:
     """
     Calculates optical depth m^-1, between two altitudes.
     This quantity is often referred to symbolically as tau.

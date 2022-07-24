@@ -49,7 +49,7 @@ class Ghg:
     ids = {"CO2": 2, "CH4": 6, "N2O": 4, "H2O": 1}
 
 
-def ghg_lbl_download():
+def ghg_lbl_download() -> object:
     """
     Downloads and Stores Line by line Data for 4 most abundant ghg.
     If further gases are required add a name and HITRAN id to
@@ -207,7 +207,6 @@ def column_comparison_query(
 
 def main():
     ghg_lbl_download()
-    #
     conn = create_connection(r"./optical_depth.db")
     # Use sqlite3 PRAGMA for faster loading
     pragma(conn)
