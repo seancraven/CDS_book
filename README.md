@@ -80,9 +80,10 @@ Plan Possibly to change...
 - [x] Temperature Dependence and HITRAN-api
 - [ ] Radiation Balance 
 - [ ] Two Stream
+- [x] Implementation of absorbtion co-efficient db
 - [ ] Final Outgoing Model
 
-- [ ] Absorption
+- [x] Absorption
 
 Formating:
 - [ ] Hide Code Cells
