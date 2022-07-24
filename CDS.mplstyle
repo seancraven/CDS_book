@@ -331,7 +331,7 @@ mathtext.fontset: cm  # Should be 'dejavusans' (default),
 #axes.facecolor:     white   # axes background color
 #axes.edgecolor:     black   # axes edge color
 axes.linewidth:     2     # edge line width
-#axes.grid:          False   # display grid or not
+axes.grid:          False   # display grid or not
 #axes.grid.axis:     both    # which axis the grid should apply to
 #axes.grid.which:    major   # grid lines at {major, minor, both} ticks
 #axes.titlelocation: center  # alignment of the title: {left, right, center}
@@ -482,7 +482,7 @@ ytick.alignment:     center_baseline  # alignment of yticks
 #grid.color:     b0b0b0  # grid color
 #grid.linestyle: -       # solid
 #grid.linewidth: 0.8     # in points
-#grid.alpha:     1.0     # transparency, between 0.0 and 1.0
+grid.alpha:     0     # transparency, between 0.0 and 1.0
 
 
 ## ***************************************************************************
@@ -520,10 +520,10 @@ legend.fontsize:      18
 figure.titlesize:   26        # size of the figure title (``Figure.suptitle()``)
 #figure.titleweight: normal    # weight of the figure title
 figure.figsize:     10.0, 6.0 # figure size in inches
-#figure.dpi:         300       # figure dots per inch
-#figure.facecolor:   white     # figure face color
-#figure.edgecolor:   white     # figure edge color
-#figure.frameon:     True      # enable figure frame
+figure.dpi:         300       # figure dots per inch
+figure.facecolor:   white     # figure face color
+figure.edgecolor:   white     # figure edge color
+figure.frameon:     True      # enable figure frame
 #figure.max_open_warning: 20   # The maximum number of figures to open through
                                # the pyplot interface before emitting a warning.
                                # If less than one this feature is disabled.
@@ -639,10 +639,10 @@ scatter.marker: +         # The default marker type for scatter plots.
 ## The default savefig parameters can be different from the display parameters
 ## e.g., you may want a higher resolution, or to make the figure
 ## background white
-#savefig.dpi:       figure      # figure dots per inch or 'figure'
-#savefig.facecolor: auto        # figure face color when saving
-#savefig.edgecolor: auto        # figure edge color when saving
-#savefig.format:    png         # {png, ps, pdf, svg}
+savefig.dpi:       300      # figure dots per inch or 'figure'
+savefig.facecolor: auto        # figure face color when saving
+savefig.edgecolor: auto        # figure edge color when saving
+savefig.format:    png         # {png, ps, pdf, svg}
 #savefig.bbox:      standard    # {tight, standard}
                                 # 'tight' is incompatible with pipe-based animation
                                 # backends (e.g. 'ffmpeg') but will work with those
@@ -650,8 +650,9 @@ scatter.marker: +         # The default marker type for scatter plots.
 #savefig.pad_inches:   0.1      # Padding to be used when bbox is set to 'tight'
 #savefig.directory:    ~        # default directory in savefig dialog box,
                                 # leave empty to always use current working directory
-#savefig.transparent: False     # setting that controls whether figures are saved with a
-                                # transparent background by default
+savefig.transparent: False      # setting that controls whether figures are
+                                # saved with a transparent background by
+                                # default
 #savefig.orientation: portrait  # Orientation of saved figure
 
 ### tk backend params
