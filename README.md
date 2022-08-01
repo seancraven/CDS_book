@@ -1,6 +1,22 @@
 # Welcome
 Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an enviroment such that one can contribute to the book easily. 
 
+## Timetable
+Part 1
+
+Finish book in Current state: 
+ - [ ] Chapter 3 proofed and complete Friday 5th August.
+ - [ ] Chapter 2 proofed and complete Wednesday 10th August.
+
+Part 2 
+
+Improved accessibility:
+ - [ ] Jupyter book setup guide 12th August. 
+
+Week of 15th August:
+ - [ ] Glossary and topic links
+ - [ ] Improved python explanations
+ - [ ] Further depth on concepts. 
 ## Standards for the book
 Code cell line width: 75 Characters
 Black Formatter. 
@@ -32,6 +48,7 @@ Pages:
 - [x] Data Exploration
 - [x] Curve fitting
 - [x] Hypothesis Testing 
+  - [ ] More Heurisitics about chisq
 - [x] Conclusion And Questions
 
 Formating:
@@ -47,6 +64,7 @@ Formating:
 Using Bayesian methods podudce distributions on the probability of warming targets being crossed
 
 Pages:
+- [x] predictive modeling
 - [x] Global CO_2 example
     - [x] Discuss the limited scope of curve fitting. Explore the error quantification.
     - [x] Page one and solution to the previous question
