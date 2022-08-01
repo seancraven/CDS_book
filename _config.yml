@@ -11,7 +11,7 @@ execute:
   execute_notebooks: cache
   timeout: 6000
   exclude_patterns:
-    - book/*
+    - ./book/
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
@@ -42,12 +42,10 @@ parse:
     - colon_fence
     - dollarmath
     - deflist
-    - fieldlist
     - html_admonition
     - html_image
     - linkify
     - replacements
     - smartquotes
-    - strikethrough
     - substitution
     - tasklist

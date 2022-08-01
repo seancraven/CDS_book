@@ -23,7 +23,7 @@ parts:
     chapters:
     - file: Chapter_3/atmospheric_primer.md
     - file: Chapter_3/lorentzian_broadening.ipynb
-    - file: Chapter_3/radiative_transfer.md
+    - file: Chapter_3/radiative_transfer.ipynb
   - caption:
     chapters:
     - file: Bibliography
