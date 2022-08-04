@@ -199,6 +199,16 @@ const thebe_selector_output = ".output, .cell_output"
    The Variance of Absorption Spectra
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
+   HITRAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -418,9 +428,9 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#textrm-co-2-concentration-models">
+  <a class="reference internal nav-link" href="#textrm-co-1-concentration-models">
    <span class="math notranslate nohighlight">
-    \(\textrm{CO}_2\)
+    \(\textrm{CO}_1\)
    </span>
    Concentration Models
   </a>
@@ -462,9 +472,9 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#textrm-co-2-concentration-models">
+  <a class="reference internal nav-link" href="#textrm-co-1-concentration-models">
    <span class="math notranslate nohighlight">
-    \(\textrm{CO}_2\)
+    \(\textrm{CO}_1\)
    </span>
    Concentration Models
   </a>
@@ -519,7 +529,8 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">LSQUnivariateSpline</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../CDS.mplstyle&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -527,67 +538,99 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loading fits</span>
-<span class="n">model_fit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output_files/co2_model_parameters.csv&#39;</span><span class="p">,</span>
+<span class="n">model_fit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;../output_files/co2_model_parameters.csv&quot;</span><span class="p">,</span>
     <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
-<span class="n">model_error</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output_files/co2_model_parameters_errors.csv&#39;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+<span class="n">model_error</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;../output_files/co2_model_parameters_errors.csv&quot;</span><span class="p">,</span>
     <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
-<span class="c1">#select only polynomials</span>
-<span class="n">poly_fit</span> <span class="o">=</span> <span class="n">model_fit</span><span class="p">[[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;p_1&#39;</span><span class="p">,</span> <span class="s1">&#39;p_2&#39;</span><span class="p">,</span> <span class="s1">&#39;p_3&#39;</span><span class="p">]]</span>
-<span class="n">poly_error</span> <span class="o">=</span> <span class="n">model_error</span><span class="p">[[</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;p_1&#39;</span><span class="p">,</span> <span class="s1">&#39;p_2&#39;</span><span class="p">,</span> <span class="s1">&#39;p_3&#39;</span><span class="p">]]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+<span class="c1"># select only polynomials</span>
+<span class="n">poly_fit</span> <span class="o">=</span> <span class="n">model_fit</span><span class="p">[[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]]</span>
+<span class="n">poly_error</span> <span class="o">=</span> <span class="n">model_error</span><span class="p">[[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]]</span>
 <span class="c1"># Loading Moving average Data</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt&quot;</span>
-<span class="c1">#Formatting be data</span>
-<span class="n">colnames</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;5yearly_anomaly&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;5yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;10yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;10yearly_anomaly_unc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;20yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;20yearly_anomaly_unc&#39;</span>
-    <span class="p">]</span>
+<span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt&quot;</span>
+<span class="p">)</span>
+<span class="c1"># Formatting be data</span>
+<span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;year&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;month&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;monthly_anomaly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;monthly_anomaly_unc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;yearly_anomaly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;yearly_anomaly_unc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;5yearly_anomaly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;5yearly_anomaly_unc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;10yearly_anomaly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;10yearly_anomaly_unc&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;20yearly_anomaly&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;20yearly_anomaly_unc&quot;</span><span class="p">,</span>
+<span class="p">]</span>
 <span class="n">temp_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">34</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
-<span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">12</span> <span class="o">+</span> <span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span>
-<span class="c1">#remove be moving averages</span>
-<span class="n">temp_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;yearly_anomaly_unc&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;5yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;5yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;10yearly_anomaly&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;10yearly_anomaly_unc&#39;</span><span class="p">,</span> <span class="s1">&#39;20yearly_anomaly&#39;</span><span class="p">,</span> <span class="s1">&#39;20yearly_anomaly_unc&#39;</span><span class="p">],</span>
-    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
-    <span class="p">)</span>
+<span class="n">temp_data</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span> <span class="o">+</span> <span class="n">temp_data</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span>
+<span class="c1"># remove be moving averages</span>
+<span class="n">temp_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;yearly_anomaly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;yearly_anomaly_unc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;5yearly_anomaly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;5yearly_anomaly_unc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;10yearly_anomaly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;10yearly_anomaly_unc&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;20yearly_anomaly&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;20yearly_anomaly_unc&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="textrm-co-2-concentration-models">
-<h1><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> Concentration Models<a class="headerlink" href="#textrm-co-2-concentration-models" title="Permalink to this headline">#</a></h1>
-<p>In the final part of <a class="reference internal" href="../Chapter_1/Final_Model.html"><span class="doc std std-doc">Chapter 1</span></a>, a polynomial model with a trigonometric addition was developed to characterise the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, which closely follows the global average trend. Using the model without the trigonometric terms will be the basis for this section.</p>
+<section id="textrm-co-1-concentration-models">
+<h1><span class="math notranslate nohighlight">\(\textrm{CO}_1\)</span> Concentration Models<a class="headerlink" href="#textrm-co-1-concentration-models" title="Permalink to this headline">#</a></h1>
+<p>In the final partof[Chapter0](../ Chapter_1 / Final_Model.ipynb), a polynomial model with a trigonometric addition was developed to characterize the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_1\)</span> concentration, which closely follows the global average trend.Using the model without the trigonometric terms will be the basis for this section.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_climate_model</span><span class="p">(</span><span class="n">C</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">T_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="sd">&#39;&#39;&#39; Model fuction for Temperature and CO_2 relationship.&#39;&#39;&#39;</span>
-     <span class="c1">#Placeholder till I figure out what I am going to </span>
-    <span class="k">return</span> <span class="n">T_0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">C</span><span class="o">/</span><span class="n">C_0</span><span class="p">)</span><span class="o">*</span><span class="n">S</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">simple_climate_model</span><span class="p">(</span>
+    <span class="n">C</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">S</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">C_0</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">T_0</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Model fuction for Temperature and CO_2 relationship.&quot;&quot;&quot;</span>
+    <span class="c1"># Placeholder till I figure out what I am going to</span>
+    <span class="k">return</span> <span class="n">T_0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">C</span> <span class="o">/</span> <span class="n">C_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">S</span>
+
 
 <span class="c1"># Legacy Functions to have remove imput tag</span>
 <span class="k">def</span> <span class="nf">lb_ub</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="n">lb</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
-    <span class="n">ub</span> <span class="o">=</span> <span class="n">values</span> <span class="o">+</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
+    <span class="n">lb</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">factor</span>
+    <span class="n">ub</span> <span class="o">=</span> <span class="n">values</span> <span class="o">+</span> <span class="n">sigma</span> <span class="o">*</span> <span class="n">factor</span>
     <span class="k">return</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span>
-<span class="c1">#Models</span>
+
+
+<span class="c1"># Models</span>
 <span class="k">def</span> <span class="nf">a1t</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_2</span><span class="p">,</span> <span class="n">p_3</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="n">emissions_stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">translation</span> <span class="o">&gt;=</span> <span class="mi">2030</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">f_eval</span> <span class="o">=</span> <span class="n">p_0</span> <span class="o">+</span> <span class="n">p_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span>
-    <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]:]</span> <span class="o">=</span> <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">f_eval</span> <span class="o">=</span> <span class="n">p_0</span> <span class="o">+</span> <span class="n">p_1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+    <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">f_eval</span>
+
 
 <span class="k">def</span> <span class="nf">B1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_2</span><span class="p">,</span> <span class="n">p_3</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="n">emissions_stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">translation</span> <span class="o">&gt;=</span> <span class="mi">2030</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">f_eval</span> <span class="o">=</span> <span class="n">p_0</span> <span class="o">+</span> <span class="n">p_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span>
-    <span class="n">f_neg</span> <span class="o">=</span>  <span class="mi">2</span><span class="o">*</span><span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p_0</span> <span class="o">-</span> <span class="p">(</span><span class="n">p_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">f_neg</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">f_eval</span> <span class="o">=</span> <span class="n">p_0</span> <span class="o">+</span> <span class="n">p_1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+    <span class="n">f_neg</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">2</span> <span class="o">*</span> <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="o">-</span> <span class="n">p_0</span>
+        <span class="o">-</span> <span class="p">(</span><span class="n">p_1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">f_eval</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">f_neg</span><span class="p">[</span><span class="n">emissions_stop</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:]</span>
     <span class="k">return</span> <span class="n">f_eval</span>
 
-<span class="k">def</span> <span class="nf">P3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_2</span><span class="p">,</span> <span class="n">p_3</span><span class="p">):</span> <span class="c1"># A1M</span>
-    <span class="k">return</span> <span class="n">p_0</span> <span class="o">+</span> <span class="n">p_1</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span>
+
+<span class="k">def</span> <span class="nf">A1M</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_2</span><span class="p">,</span> <span class="n">p_3</span><span class="p">):</span>  <span class="c1"># A1M</span>
+    <span class="k">return</span> <span class="n">p_0</span> <span class="o">+</span> <span class="n">p_1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">p_2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p_3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
 </pre></div>
 </div>
 </div>
@@ -597,8 +640,8 @@ title="Print to PDF"
 <p>Problems arise when fitting polynomials of order greater than one, minor parameter tweaks to the higher powers’ constants cause large deviations in the value of the function. This can be seen below in the figure, where adjusting the fit parameters by one sigma provides a huge variance in the output of the function.  This problem is especially apparent as the data is rather linear, and thus there is a moderate uncertainty on the <span class="math notranslate nohighlight">\(x^2, x^3\)</span> terms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">poly_fit</span><span class="o">/</span><span class="n">poly_error</span><span class="p">))</span>
-<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fit_Value/Error&#39;</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">poly_fit</span> <span class="o">/</span> <span class="n">poly_error</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fit_Value/Error&quot;</span><span class="p">]</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -648,18 +691,21 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#time = np.linspace(temp_data[&#39;dt&#39;].iloc[-1], 2050, 1000)</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2050</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time = np.linspace(temp_data[&#39;dt&#39;].iloc[-1], 2050, 1000)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">lb_coef</span><span class="p">,</span> <span class="n">ub_coef</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">poly_fit</span><span class="p">,</span> <span class="n">poly_error</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">poly_fit</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">lb_coef</span><span class="p">),</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">ub_coef</span><span class="p">),</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\pm \sigma$ on polynomial coefficients&#39;</span>
-    <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm</span><span class="si">{CO}</span><span class="s1">_2$ (ppm)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">poly_fit</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">time</span><span class="p">,</span>
+    <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">lb_coef</span><span class="p">),</span>
+    <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">ub_coef</span><span class="p">),</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\pm \sigma$ on polynomial coefficients&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm</span><span class="si">{CO}</span><span class="s2">_2$ (ppm)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -680,59 +726,74 @@ Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T sc
 </aside>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#x values</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">-</span><span class="mi">2000</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x values</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2000</span>
 <span class="c1"># Loading CO2 moving averages caluclated previously</span>
-<span class="n">co2_ave</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output_files/co2_10_moving_average.csv&#39;</span><span class="p">,</span>
-    <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
-    <span class="p">)</span>
-<span class="n">co2_std</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;../output_files/co2_10_moving_std.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
-    <span class="p">)</span>
-<span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">co2_mov_cov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">P3</span><span class="p">,</span> <span class="n">co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span>
-    <span class="n">co2_ave</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span> <span class="n">sigma</span><span class="o">=</span><span class="n">co2_std</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
-    <span class="p">)</span>
+<span class="n">co2_ave</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;../output_files/co2_10_moving_average.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">co2_std</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">&quot;../output_files/co2_10_moving_std.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">co2_mov_cov</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span>
+    <span class="n">A1M</span><span class="p">,</span>
+    <span class="n">co2_ave</span><span class="p">[</span><span class="s2">&quot;decimal&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="n">co2_ave</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">co2_std</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+<span class="p">)</span>
 <span class="c1"># 2 sigma deviation from fit</span>
-<span class="n">co2_mov_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">co2_mov_cov</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="n">co2_mov_error</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">co2_mov_cov</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
 <span class="n">co2_lb_mov</span><span class="p">,</span> <span class="n">co2_ub_mov</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">co2_mov_error</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_ub_mov</span><span class="p">)</span> <span class="o">-</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">)</span>
-<span class="c1">#Plotting</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_ub_mov</span><span class="p">)</span> <span class="o">-</span> <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">)</span>
+<span class="c1"># Plotting</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="c1"># Models</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_lb_mov</span><span class="p">),</span> <span class="n">P3</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_ub_mov</span><span class="p">),</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">time</span><span class="p">,</span>
+    <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_lb_mov</span><span class="p">),</span>
+    <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_ub_mov</span><span class="p">),</span>
     <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;A1B&#39;</span>
-    <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">a1t</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">-</span> <span class="n">sigma</span><span class="p">,</span>
-    <span class="n">a1t</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span><span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;A1B&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">time</span><span class="p">,</span>
+    <span class="n">a1t</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">-</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">a1t</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;A1T&#39;</span>
-    <span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">B1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span><span class="o">-</span> <span class="n">sigma</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;A1T&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+    <span class="n">time</span><span class="p">,</span>
+    <span class="n">B1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">-</span> <span class="n">sigma</span><span class="p">,</span>
     <span class="n">B1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">co2_mov_fit</span><span class="p">,</span> <span class="n">translation</span><span class="o">=</span><span class="mi">2000</span><span class="p">)</span> <span class="o">+</span> <span class="n">sigma</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">pink</span><span class="p">,</span>
     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;B1&#39;</span>
-    <span class="p">)</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;B1&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="c1"># Data</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">2000</span><span class="p">,</span> <span class="n">co2_ave</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">co2_ave</span><span class="p">[</span><span class="s2">&quot;decimal&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="n">co2_ave</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span>
     <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
-    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\textrm{{CO}}_2$ Moving Average&#39;</span>
-    <span class="p">)</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\textrm{{CO}}_2$ Moving Average&quot;</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="c1"># Formatting</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">2060</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm{{CO}}_2$ (ppm)&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm{{CO}}_2$ (ppm)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3models_10_0.png" src="../_images/3models_10_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\textrm{{CO}}_2$ (ppm)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/3models_10_1.png" src="../_images/3models_10_1.png" />
 </div>
 </div>
 </section>
@@ -753,32 +814,41 @@ Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T sc
 <p>Typically order-<span class="math notranslate nohighlight">\(4\)</span> splines are used.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<span class="n">spline_knots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="mf">.4</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">spline_knots</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.4</span>
 <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
         <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="n">spline</span> <span class="o">=</span> <span class="n">LSQUnivariateSpline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">spline_knots</span><span class="p">,</span> 
-        <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
+        <span class="n">spline</span> <span class="o">=</span> <span class="n">LSQUnivariateSpline</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span>
+            <span class="n">y</span><span class="p">,</span>
+            <span class="n">t</span><span class="o">=</span><span class="n">spline_knots</span><span class="p">,</span>
+            <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">spline</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>  <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Order </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> Spline&#39;</span><span class="p">,</span>
-            <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">)</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">}</span><span class="s1">$\pi$&#39;</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
-        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span>
+            <span class="n">spline</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Order </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> Spline&quot;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="si">}</span><span class="s2">$\pi$&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">])</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">spline_knots</span><span class="p">:</span>
-            <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">l</span><span class="p">,</span><span class="n">l</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
-            <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
-            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
-            <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Knot&#39;</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">l</span><span class="p">,</span> <span class="n">l</span><span class="p">],</span>
+                <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Knot&quot;</span><span class="p">,</span>
             <span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;Knots&#39;</span><span class="p">],</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.59</span><span class="p">,</span> <span class="mf">.98</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;Knots&quot;</span><span class="p">],</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.59</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>

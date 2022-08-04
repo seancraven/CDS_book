@@ -199,6 +199,16 @@ const thebe_selector_output = ".output, .cell_output"
    The Variance of Absorption Spectra
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
+   HITRAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -490,47 +500,48 @@ title="Print to PDF"
 <p>One of the critical uses of data recorded in the past is to attempt to make inferences about the future. Making predictions about future events on time series data can be done by forming a model on historical data.</p>
 <p>An introductory example of the general methodology of data-driven predictions using partitioning data into; training, validation and testing sections is explored. These sections are used as follows; the data is used to derive a model from the training data. Next, this model is tested on available validation data. Finally, the model is applied to the testing data to predict its behaviour.</p>
 <p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(11)</a>. In this example, the free co-efficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from to avoid lacking generalisation while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
-<p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In such an example, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomaly. However, the modelling of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For linear regression, this constitutes determining the form of the function and evaluating the free coefficients.</p>
+<p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In such an example, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomalous change in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration. However, when modelling of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For least-squares fitting, this constitutes determining the form of the function and evaluating the free coefficients.</p>
 <p>Using this model, the validation data is then investigated. This must not overlap with the training data. In the global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
 <p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="../Chapter_1/Final_Model.html#equation-model">(11)</a> in 2020, then the presence of the pandemic can be shown.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">omega_0</span><span class="p">,</span> <span class="n">omega_1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span><span class="n">p_2</span><span class="p">,</span><span class="n">p_3</span><span class="p">):</span>
-    <span class="n">polynomial</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">p_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">p_2</span> <span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">p_3</span>
-    <span class="n">trig</span> <span class="o">=</span> <span class="n">a_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_0</span><span class="p">)</span> \
-        <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">omega_0</span><span class="p">,</span> <span class="n">omega_1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_2</span><span class="p">,</span> <span class="n">p_3</span><span class="p">):</span>
+    <span class="n">polynomial</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">p_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">p_3</span>
+    <span class="n">trig</span> <span class="o">=</span> <span class="n">a_0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">omega_0</span><span class="p">)</span> <span class="o">+</span> <span class="n">a_1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">omega_1</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">trig</span> <span class="o">+</span> <span class="n">polynomial</span>
+
 
 <span class="c1"># Training Set</span>
 <span class="n">test_years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)]</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">test_years</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="n">test_years</span><span class="p">)</span>
 <span class="n">train_co2_data</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="c1"># Validation Set</span>
 <span class="n">val_years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2020</span><span class="p">)]</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">val_years</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="n">val_years</span><span class="p">)</span>
 <span class="n">val_co2_data</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="c1"># Test Set</span>
 <span class="n">test_years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">)]</span>
-<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">],</span> <span class="n">test_years</span><span class="p">)</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">],</span> <span class="n">test_years</span><span class="p">)</span>
 <span class="n">test_co2_data</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="c1"># Fitting</span>
-<span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Inital Parameter Guess</span>
-    <span class="p">)</span>
-<span class="c1">#chisq</span>
-<span class="n">model_ml</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">model_fit</span><span class="p">)</span>
-<span class="n">model_residuals</span> <span class="o">=</span> <span class="n">model_ml</span> <span class="o">-</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
-<span class="n">chisq_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">model_residuals</span>
-    <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
-    <span class="p">)</span>
-<span class="n">nu_model</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_fit</span><span class="p">)</span>
-<span class="n">p_model</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_model</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
-<span class="n">chi_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
+<span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,],</span>  <span class="c1"># Inital Parameter Guess</span>
+<span class="p">)</span>
+<span class="c1"># chisq</span>
+<span class="n">model_ml</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span> <span class="o">*</span><span class="n">model_fit</span><span class="p">)</span>
+<span class="n">model_residuals</span> <span class="o">=</span> <span class="n">model_ml</span> <span class="o">-</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span>
+<span class="n">chisq_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">model_residuals</span> <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">nu_model</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_fit</span><span class="p">)</span>
+<span class="n">p_model</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_model</span><span class="p">,</span> <span class="n">nu_model</span><span class="p">)</span>
+<span class="n">chi_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">nu_model</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -542,10 +553,10 @@ title="Print to PDF"
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FittedModel</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">p0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fit_coefs</span><span class="o">=</span><span class="kc">None</span>
-        <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span>  <span class="o">=</span> <span class="n">fn</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fit_coefs</span><span class="o">=</span><span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">fn</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="o">=</span> <span class="n">sigma</span>
@@ -553,87 +564,90 @@ title="Print to PDF"
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="k">if</span> <span class="n">fit_coefs</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="n">fit_coefs</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="kc">None</span> 
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span> <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_cov</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-    
-    <span class="k">def</span> <span class="nf">get_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Applies scipy.optimize.curve_fit() to the passed args.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_cov</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_cov</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span>
 
-<span class="sd">        returns fit_coefs array, correlation_array  </span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
-            <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span>
-            <span class="n">p0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p0</span>
-            <span class="p">)</span>
+    <span class="k">def</span> <span class="nf">get_fit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Applies scipy.optimize.curve_fit() to the passed args.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">             fit_coefs array, correlation_array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="n">p0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">p0</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span>
-    
+
     <span class="k">def</span> <span class="nf">fit_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Returns the fitted function evaluated on x&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;Returns the fitted function evaluated on x&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">)</span>
-    
-    <span class="k">def</span> <span class="nf">get_chi2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;Returns the chi^2 value of the model&#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">get_chi2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the chi^2 value of the model&quot;&quot;&quot;</span>
         <span class="n">fit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_data</span><span class="p">()</span>
         <span class="n">residuals</span> <span class="o">=</span> <span class="n">fit</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">residuals</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">residuals</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">sigma</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No Uncertanity, Using Expectation&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Expectation of the values is: E(residuals)&#39;</span><span class="p">)</span> 
-            <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">residuals</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No uncertainty, using expectation.&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Expectation of the values is: E(residuals)&quot;</span><span class="p">)</span>
+            <span class="n">chi2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">residuals</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">residuals</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">chi2</span>
 
-    <span class="k">def</span> <span class="nf">get_nu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;Returns the degrees of freedom of the model&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">get_nu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the degrees of freedom of the model&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">)</span>
-    
+
     <span class="k">def</span> <span class="nf">get_sf</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&#39;&#39;&#39;Returns P(chi^2 &gt; chi^2_min)&#39;&#39;&#39;</span>
+        <span class="sd">&quot;&quot;&quot;Returns P(chi^2 &gt; chi^2_min)&quot;&quot;&quot;</span>
         <span class="n">chi_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span>
         <span class="n">nu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_nu</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chi_min</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span>
-    
+
     <span class="k">def</span> <span class="nf">print_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s1">&#39;Prints the models co-efficient</span><span class="se">\&#39;</span><span class="s1">s associated errors &#39;</span>
+        <span class="sd">&quot;&quot;&quot;Prints the model&#39;s coefficients associated errors&quot;&quot;&quot;</span>
         <span class="n">coef_names</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getfullargspec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">)</span>
+        <span class="p">):</span>
             <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">coef_names</span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1"> +_ </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s1">.1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">coef_names</span><span class="p">[</span><span class="mi">1</span><span class="o">+</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> +_ </span><span class="si">{</span><span class="n">error</span><span class="si">:</span><span class="s2">.1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No error. The model was fitted on other Data&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No error. The model was fitted on other Data&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span>  <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">sigma</span><span class="o">=</span><span class="n">train_co2_data</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Training Model&#39;</span>
-    <span class="p">)</span>
-<span class="n">test</span>  <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">test_co2_data</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">test_co2_data</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">sigma</span><span class="o">=</span><span class="n">test_co2_data</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Test Model&#39;</span><span class="p">,</span> 
-    <span class="n">fit_coefs</span><span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
-    <span class="p">)</span>
-<span class="n">val</span>  <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">val_co2_data</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">val_co2_data</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">sigma</span><span class="o">=</span><span class="n">val_co2_data</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Validation Model&#39;</span><span class="p">,</span>
-    <span class="n">fit_coefs</span><span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">get_fit</span><span class="p">()</span>
-    <span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">train_co2_data</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">train_co2_data</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">train_co2_data</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Training Model&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">test_co2_data</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">test_co2_data</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">test_co2_data</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Test Model&quot;</span><span class="p">,</span>
+    <span class="n">fit_coefs</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">get_fit</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="n">val</span> <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">val_co2_data</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">val_co2_data</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">val_co2_data</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Validation Model&quot;</span><span class="p">,</span>
+    <span class="n">fit_coefs</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">get_fit</span><span class="p">(),</span>
+<span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training Model Co-efficients&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Training Model Co-efficients&quot;</span><span class="p">)</span>
 <span class="n">train</span><span class="o">.</span><span class="n">print_errors</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -657,22 +671,22 @@ p_3 = 0.00026 +_ 2e-05
 <p>The error on both quantities is astronomically high, around 10%. Further, it can be shown that it is an inaccurate measurement. If one changes the starting position for these quantities, the <code class="docutils literal notranslate"><span class="pre">p0</span></code> <code class="docutils literal notranslate"><span class="pre">kwarg</span></code> for <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, the results do not oscillate around the obtained values indicating that the distribution of possible values is much tighter than the actual result. A better estimate of such errors can be determined by performing the fit with random start values centered around the obtained value.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficent:-2e+06 +_ 7e-10 
-P_1 coefficient:3e+03 +_ 5e-13
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficient:-2e+06 +_ 2e-10 
+P_1 coefficient:3.1e+03 +_ 9e-13
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_remove-imput docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#params</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a_0&#39;</span><span class="p">,</span> <span class="s1">&#39;a_1&#39;</span><span class="p">,</span> <span class="s1">&#39;omega_0&#39;</span><span class="p">,</span> <span class="s1">&#39;omega_1&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;p_1&#39;</span><span class="p">,</span> <span class="s1">&#39;p_2&#39;</span><span class="p">,</span> <span class="s1">&#39;p_3&#39;</span><span class="p">]</span>
-<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../output_files/co2_model_parameters.csv&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># params</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a_0&quot;</span><span class="p">,</span> <span class="s2">&quot;a_1&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_0&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_1&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]</span>
+<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters.csv&quot;</span>
 <span class="n">model_fit_params</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="c1">#errors</span>
+<span class="c1"># errors</span>
 <span class="n">model_cov_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s1">&#39;../output_files/co2_model_parameters_errors.csv&#39;</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters_errors.csv&quot;</span>
 
 <span class="n">model_cov_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 </pre></div>
@@ -683,10 +697,10 @@ P_1 coefficient:3e+03 +_ 5e-13
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">model_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;chi^2 = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="si">:</span><span class="s1">.4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;chi^2/nu = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="o">/</span><span class="n">model_</span><span class="o">.</span><span class="n">get_nu</span><span class="p">()</span><span class="si">:</span><span class="s1">.4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;P(chi^2 &gt; chi^2_min) = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_sf</span><span class="p">()</span><span class="si">:</span><span class="s1">.4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chi^2 = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chi^2/nu = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="o">/</span><span class="n">model_</span><span class="o">.</span><span class="n">get_nu</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(chi^2 &gt; chi^2_min) = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_sf</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -716,29 +730,34 @@ P(chi^2 &gt; chi^2_min) = 0.05423
 <p>In the testing regime, the <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.055\)</span>. This <span class="math notranslate nohighlight">\(P\)</span> value indicates that approximately 5% of the time, the random variable normalised residuals would be distributed in such a manner. This extrapolation is pushing the bounds of the model. In this case, there is insufficient evidence to say that there has been a noticeable downwards trend in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production over the year <span class="math notranslate nohighlight">\(2020\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>  <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
-<span class="n">dur_cycle</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span><span class="p">[</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
-    <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">]</span>
-    <span class="p">)</span>
+<span class="n">dur_cycle</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">]</span>
+<span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">model_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">]):</span>
-    <span class="c1">#Formatting</span>
-    
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years&#39;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm</span><span class="si">{CO}</span><span class="s1">_2$ (ppm)&#39;</span><span class="p">)</span>
+    <span class="c1"># Formatting</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm</span><span class="si">{CO}</span><span class="s2">_2$ (ppm)&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_prop_cycle</span><span class="p">(</span><span class="n">dur_cycle</span><span class="p">)</span>
-    <span class="c1">#Data</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">fit_data</span><span class="p">(),</span> <span class="n">label</span> <span class="o">=</span> <span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="c1"># Data</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">fit_data</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">2020</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span><span class="mi">2021</span><span class="p">,</span><span class="mi">2021</span><span class="p">]);</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2021</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/predictive_models_11_0.png" src="../_images/predictive_models_11_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.axis.XTick at 0x7fc6019882b0&gt;,
+ &lt;matplotlib.axis.XTick at 0x7fc601988280&gt;,
+ &lt;matplotlib.axis.XTick at 0x7fc601bbb040&gt;]
+</pre></div>
+</div>
+<img alt="../_images/predictive_models_11_1.png" src="../_images/predictive_models_11_1.png" />
 </div>
 </div>
 </section>

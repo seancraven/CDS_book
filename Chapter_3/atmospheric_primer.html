@@ -199,6 +199,16 @@ const thebe_selector_output = ".output, .cell_output"
    The Variance of Absorption Spectra
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using_HITRAN.html">
+   HITRAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -484,11 +494,10 @@ title="Print to PDF"
                 
   <section id="radiation-modelling">
 <h1>Radiation Modelling<a class="headerlink" href="#radiation-modelling" title="Permalink to this headline">#</a></h1>
-<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, these phenomena are highly interdependant. This interdependency does not lend them to simple models. However, this section is hopefully easily parsable. # Absorption Spectra</p>
+<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, these phenomena are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model.</p>
 <p>Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.</p>
-<p>Molecular absorption, if you have met it in early quantum mechanics courses, is often described as a discrete phenomenon. However, this is not the case. Despite the mechanism for their occurrence being quantised.</p>
-<p>Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy collide with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition’s probability. The different strength interactions provide differing intensities of line shapes.</p>
-<p>This section will not deal with photon molecule interactions as the photonic densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward.</p>
+<p>Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition’s probability. With different strength interactions provide differing intensities of line shapes.</p>
+<p>This section will not deal with photon-molecule interactions as photon densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>As an exercise, you may want to estimate the photon density per meter squared, given that the temperature of Earth is <span class="math notranslate nohighlight">\(\approx 300K\)</span>.
@@ -497,78 +506,93 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 <section id="electron-transitions">
 <h2>Electron Transitions<a class="headerlink" href="#electron-transitions" title="Permalink to this headline">#</a></h2>
 <p>One of the early achievements of quantum mechanics and the Bohr model was the prediction of Hydrogen’s emission lines. As a result from the electronic shell model. With the advent of the Schrodinger equation solutions to Hydrogen, which describes electron orbitals in terms of 3 quantum numbers of n, l, m the principle, angular momentum, and magnetic quantum numbers. The notation for a specific wavefunction denoting a state n, l, m</p>
-<div class="math notranslate nohighlight">
-\[\Phi_{n, l, m}(\textbm{r}, t) = R_{n, l}(r)Y_{l, m}(\theta, \phi)\exp(-i E_{n, l}t/\hbar).\]</div>
+<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-0">
+<span class="eqno">(13)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-0" title="Permalink to this equation">#</a></span>\[\Phi_{n, l, m}(\textbf{r}, t) = R_{n, l}(r)Y_{l, m}(\theta, \phi)\exp(-i E_{n, l}t/\hbar).\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Given, that the Earth’s balckbody emission spectra is peaked in the infra-red, it doesn’t glow in our visable spectrum, are electronic transistions with energies around <span class="math notranslate nohighlight">\(10ev\)</span>, driven by outgoing radiation, emitted by the earth?</p>
+</div>
+<p>The answer, to the question above is mainly no. The most prominent forms of transition driven in the atmosphere are rotational and vibrational mode excitations.</p>
 </section>
 <section id="vibrational-transition">
 <h2>Vibrational Transition<a class="headerlink" href="#vibrational-transition" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>[ ]qm primer of this</p></li>
+<li><p>[ ] qm primer of this</p></li>
+<li><p>[ ] Charles</p></li>
 </ul>
 </section>
 <section id="line-shapes">
 <h2>Line Shapes<a class="headerlink" href="#line-shapes" title="Permalink to this headline">#</a></h2>
-<p>Spectral lines may not have a finite width due to the uncertainty principle. Excited states have a defined lifetime <span class="math notranslate nohighlight">\( 2\tau\)</span>, corresponding to the characteristic decay time for the excited state. This time is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is <a class="reference external" href="http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf">derived</a> from ensuring equilibrium during stimulated emission.</p>
-<p>If the time component of the wavefunction of state b is <span class="math notranslate nohighlight">\(c_b(t) = \exp(-1/ 2\tau)\)</span>. This derivation is taken from<span id="id1">[<a class="reference internal" href="../Bibliography.html#id29" title="B.H. Bransden and C.J. Joachain. Quantum Mechanics. Prentice Hall, 2000. ISBN 9780582356917. URL: https://books.google.co.uk/books?id=e57kxQEACAAJ.">BJ00</a>]</span> <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a> .</p>
-<p>Now formulating the  equation for the stationary state</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-0">
-<span class="eqno">(13)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-0" title="Permalink to this equation">#</a></span>\[    i \hbar \frac{\partial}{\partial t}\phi_b(\textbf{r}, t) = E_b \phi_b(\textbf{r},t).\]</div>
+<p>Spectral lines have finite width due to the uncertainty principle, due to the excitations having a finite lifetime. Excited states have a defined lifetime <span class="math notranslate nohighlight">\( 2\tau\)</span>, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is <a class="reference external" href="http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf">derived</a> from ensuring equilibrium during stimulated emission.</p>
+<p>Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is <span class="math notranslate nohighlight">\(c_b(t) = \exp(-t/ 2\tau)\)</span>. <span class="math notranslate nohighlight">\(t\)</span> is only considered for <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
-<p>It is worth noting that eq.<a class="reference internal" href="#equation-psi">(14)</a> is not a Schrodinger equation. The system does not possess a real energy, and thus is not hermitian. This is due to it being in a decaying state.</p>
+<p>This derivation is taken from<span id="id1">[<a class="reference internal" href="../Bibliography.html#id29" title="B.H. Bransden and C.J. Joachain. Quantum Mechanics. Prentice Hall, 2000. ISBN 9780582356917. URL: https://books.google.co.uk/books?id=e57kxQEACAAJ.">BJ00</a>]</span> <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a> .</p>
 </aside>
-<p>When the spontaneous emission is taken into account, and coupling to the field is added. The time derivative of the equation for the non steady state <span class="math notranslate nohighlight">\(\Psi(\textbf{r},t) = \phi_b(\textbf{r},t) c_b(t)\)</span> is</p>
-<div class="math notranslate nohighlight" id="equation-psi">
-<span class="eqno">(14)<a class="headerlink" href="#equation-psi" title="Permalink to this equation">#</a></span>\[    i \hbar \frac{\partial}{\partial t}\Psi_b(\textbf{r}, t) = \left(E_b - i \frac{\hbar}{ 2\tau}\right)\Psi_b(\textbf{r},t).\]</div>
-<p>Thus the time component is;</p>
+<p>Considering the steady state equation of the excited state as a solution to the Schrodinger equation</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-1">
-<span class="eqno">(15)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-1" title="Permalink to this equation">#</a></span>\[\Psi_b(\textbf{r}, t) = \psi_b(\textbf{r}) \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\]</div>
-<p>Noting that this can be written as the Fourier transform of some function <span class="math notranslate nohighlight">\(a(E)\)</span>, which is a superposition of energy eigenstates;</p>
+<span class="eqno">(14)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-1" title="Permalink to this equation">#</a></span>\[    i \hbar \frac{\partial}{\partial t}\Phi_b(\textbf{r}, t) = E_b \Phi_b(\textbf{r},t).\]</div>
+<aside class="margin sidebar">
+<p class="sidebar-title"></p>
+<p>It is worth noting that eq.<a class="reference internal" href="#equation-psi">(15)</a> is not a Schrodinger equation. The system does not possess a real energy, and thus is not hermitian. This is due to it being in a decaying state.</p>
+</aside>
+<p>When the spontaneous emission is taken into account, and coupling to the field is added. The time derivative of the equation for the non-steady state <span class="math notranslate nohighlight">\(\Psi(\textbf{r},t) = \phi_b(\textbf{r},t) c_b(t)\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-psi">
+<span class="eqno">(15)<a class="headerlink" href="#equation-psi" title="Permalink to this equation">#</a></span>\[    i \hbar \frac{\partial}{\partial t}\Psi_b(\textbf{r}, t) = \left(E_b - i \frac{\hbar}{ 2\tau}\right)\Psi_b(\textbf{r},t).\]</div>
+<p>Thus the time component is;</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-2">
-<span class="eqno">(16)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-2" title="Permalink to this equation">#</a></span>\[ \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right] = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty} a(E')\exp(-iE't/\hbar)dE'.\]</div>
-<p>Inverting the transform solves for <span class="math notranslate nohighlight">\(a(E)\)</span> and bounding the function such that <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
+<span class="eqno">(16)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-2" title="Permalink to this equation">#</a></span>\[\Psi_b(\textbf{r}, t) = \psi_b(\textbf{r}) \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\]</div>
+<p>Noting that this can be written as the Fourier transform of some function <span class="math notranslate nohighlight">\(a(E)\)</span>, which is a superposition of energy eigenstates;</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-3">
-<span class="eqno">(17)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-3" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\exp(iEt/\hbar)dt.\]</div>
-<p>Thus,</p>
+<span class="eqno">(17)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-3" title="Permalink to this equation">#</a></span>\[ \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right] = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty} a(E')\exp(-iE't/\hbar)dE'.\]</div>
+<p>Inverting the transform solves for <span class="math notranslate nohighlight">\(a(E)\)</span> and bounding the function such that <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-4">
-<span class="eqno">(18)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-4" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2\tau}.\]</div>
+<span class="eqno">(18)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-4" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\exp(iEt/\hbar)dt.\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-5">
+<span class="eqno">(19)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-5" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2\tau}.\]</div>
 <p>Thus the PDF of finding the state in state <span class="math notranslate nohighlight">\(b\)</span> with some energy that is equal to <span class="math notranslate nohighlight">\(E = E_a + \hbar \omega\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-prop">
-<span class="eqno">(19)<a class="headerlink" href="#equation-prop" title="Permalink to this equation">#</a></span>\[|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4\tau^2}.\]</div>
-<p>This then determines the intensity distribution of a transistion down from <span class="math notranslate nohighlight">\(b \rightarrow a\)</span>. This is proportional to a Lorentzian distribution</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-5">
-<span class="eqno">(20)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-5" title="Permalink to this equation">#</a></span>\[f(\omega) = \frac{\Gamma^2/(4\hbar^2)}{(\omega-\omega_{ba})^2 + \Gamma^2/(4\hbar^2)}.\]</div>
+<span class="eqno">(20)<a class="headerlink" href="#equation-prop" title="Permalink to this equation">#</a></span>\[|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4\tau^2}.\]</div>
+<p>This then determines the intensity distribution of a transition down from <span class="math notranslate nohighlight">\(b \rightarrow a\)</span>. This is proportional to a Lorentzian distribution</p>
+<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-6">
+<span class="eqno">(21)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-6" title="Permalink to this equation">#</a></span>\[f(\omega) = \frac{\Gamma^2/(4\hbar^2)}{(\omega-\omega_{ba})^2 + \Gamma^2/(4\hbar^2)}.\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\Gamma = \hbar / \tau\)</span> and <span class="math notranslate nohighlight">\( \omega_{ba} = (E_b - E_a)/\hbar\)</span>. The parameter <span class="math notranslate nohighlight">\(\Gamma/\hbar\)</span> is the full width half maximum of the distribution.</p>
 </section>
 <section id="line-broadening-pressure">
 <h2>Line Broadening: Pressure<a class="headerlink" href="#line-broadening-pressure" title="Permalink to this headline">#</a></h2>
-<p>There is an additional component which increases the value of <span class="math notranslate nohighlight">\(\tau\)</span>. Transitions induce the broadening from pressure due to collisions with other neighbouring molecules. The rate of collisions is a function of the number density of the molecules(<span class="math notranslate nohighlight">\(n\)</span>), the molecule’s cross-section(<span class="math notranslate nohighlight">\(\sigma\)</span>), and the relative velocity(<span class="math notranslate nohighlight">\(v\)</span>).</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-6">
-<span class="eqno">(21)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-6" title="Permalink to this equation">#</a></span>\[W_c = \sigma vn.\]</div>
-<p>The rates are summed from both the natural decay and the collisions, and their reciprocal gives <span class="math notranslate nohighlight">\(\tau\)</span>. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. These are both still pressure-broadening phenomena.</p>
+<p>There is an additional significant component, which increases the value of <span class="math notranslate nohighlight">\(\tau\)</span>. Transitions due to collisions with other neighbouring molecules. Broadening from collisions occurs in much the same way as spontaneous emission as there is an associated rate of transition. With a transition rate there is an expected lifetime of a state, and thus uncertainity induced broadening. Consequently, if any de-excitation/excitation phenomena has a rate then it has a finite line width, to calculate the total rate of a transition the sum of the rates is taken.</p>
+<p>The rate of collisions is a function of the number density of the molecules(<span class="math notranslate nohighlight">\(n\)</span>), the molecule’s cross-section(<span class="math notranslate nohighlight">\(\sigma\)</span>), and the relative velocity(<span class="math notranslate nohighlight">\(v\)</span>).</p>
+<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-7">
+<span class="eqno">(22)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-7" title="Permalink to this equation">#</a></span>\[W_c = \sigma vn.\]</div>
+<p>The rates are summed from both the natural decay and the collisions, and their reciprocal gives <span class="math notranslate nohighlight">\(\tau\)</span>. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. These are both still pressure-broadening phenomena, In climate modelling air-broadening massively dominates.</p>
 </section>
 <section id="line-broadening-doppeler">
 <h2>Line Broadening: Doppeler<a class="headerlink" href="#line-broadening-doppeler" title="Permalink to this headline">#</a></h2>
-<p>The Doppler shift due to the relative motion of the atom and the photons additionally increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution. The derivation for this is also taken from <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a>.</p>
+<p>The Doppler shift due to the relative motion of the atom, and the photons additionally increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution of velocites.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The derivation for this is also taken from <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a>.</p>
+</div>
 <p>The Doppler shift in angular frequency is</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-7">
-<span class="eqno">(22)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-7" title="Permalink to this equation">#</a></span>\[\omega = \omega_0\left(1 \mp \frac{v}{c}\right).\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\omega_0\)</span> is the unshifted angular frequency and <span class="math notranslate nohighlight">\(v, c\)</span> are the particles and lights speed, respectively. The <span class="math notranslate nohighlight">\(+\)</span> case corresponds to an atom travelling away from the observer. Because the intensity in a region <span class="math notranslate nohighlight">\(\delta \omega \propto \delta N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> isnumber of with atoms with a given velocity given by the Boltzmann distribution</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-8">
-<span class="eqno">(23)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-8" title="Permalink to this equation">#</a></span>\[\frac{dN}{dv} = N_0 \exp(-Mv^2/2kT).\]</div>
-<p>The expression for the intensity as a function of <span class="math notranslate nohighlight">\(\omega\)</span>,</p>
+<span class="eqno">(23)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-8" title="Permalink to this equation">#</a></span>\[\omega = \omega_0\left(1 \mp \frac{v}{c}\right).\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\omega_0\)</span> is the un-shifted angular frequency and <span class="math notranslate nohighlight">\(v, c\)</span> are the particles and lights speed, respectively. The <span class="math notranslate nohighlight">\(+\)</span> case corresponds to an atom travelling away from the observer. Because the intensity in a region <span class="math notranslate nohighlight">\(\delta \omega \propto \delta N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> isnumber of with atoms with a given velocity given by the Boltzmann distribution</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-9">
-<span class="eqno">(24)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-9" title="Permalink to this equation">#</a></span>\[\mathcal{I}(\omega) = \mathcal{I}(\omega_0) \exp\left[\frac{-Mc^2}{2kT}\left(\frac{\omega - \omega_0}{\omega_0}\right)^2\right].\]</div>
+<span class="eqno">(24)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-9" title="Permalink to this equation">#</a></span>\[\frac{dN}{dv} = N_0 \exp(-Mv^2/2kT).\]</div>
+<p>The expression for the intensity as a function of <span class="math notranslate nohighlight">\(\omega\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-10">
+<span class="eqno">(25)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-10" title="Permalink to this equation">#</a></span>\[\mathcal{I}(\omega) = \mathcal{I}(\omega_0) \exp\left[\frac{-Mc^2}{2kT}\left(\frac{\omega - \omega_0}{\omega_0}\right)^2\right].\]</div>
 <p>Thus the intensity of the broadening due to the Doppler effect is of a gaussian form. In these expressions <span class="math notranslate nohighlight">\(M, K, T\)</span> are the atomic mass, Boltzmann’s constant, and temperature in <span class="math notranslate nohighlight">\(K\)</span>, respectively.</p>
 </section>
 <section id="the-voigt-profile">
 <h2>The Voigt Profile<a class="headerlink" href="#the-voigt-profile" title="Permalink to this headline">#</a></h2>
 <p>Because these broadening effects do not change the amount of emitted light, their area must stay constant. Thus the combination of the profiles is a convolution of Lorentzian and Gaussian distribution functions.</p>
-<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-10">
-<span class="eqno">(25)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-10" title="Permalink to this equation">#</a></span>\[[f_l(\omega; \Gamma) * f_g(\omega;\sigma)] (\omega; \Gamma, \sigma) = \frac{Re[w(z)]}{\sigma \sqrt{2\pi}}\]</div>
-<p>Where</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-11">
-<span class="eqno">(26)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-11" title="Permalink to this equation">#</a></span>\[w(z) = \frac{\omega -\omega_0 + i\Gamma}{\sigma \sqrt{2}}\]</div>
+<span class="eqno">(26)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-11" title="Permalink to this equation">#</a></span>\[[f_l(\omega; \Gamma) * f_g(\omega;\sigma)] (\omega; \Gamma, \sigma) = \frac{Re[w(z)]}{\sigma \sqrt{2\pi}}\]</div>
+<p>Where</p>
+<div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-12">
+<span class="eqno">(27)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-12" title="Permalink to this equation">#</a></span>\[w(z) = \frac{\omega -\omega_0 + i\Gamma}{\sigma \sqrt{2}}\]</div>
 <p>For the line widths <span class="math notranslate nohighlight">\(\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}\)</span>.</p>
 </section>
 <section id="using-hitran">
@@ -579,7 +603,7 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 <p>If you are not familiar with packages or package managers such as <a class="reference external" href="https://pypi.org/">pip</a> and <a class="reference external" href="https://pypi.org/https://docs.conda.io/projects/conda/en/latest/">conda</a>, it is worth getting used to them. It is a fast and easy way to utilise other peoples code.</p>
 </aside>
 <p>The Hitran-api provides a set of functions which compute the absorption spectra for the user. The package’s documentation can be found <a class="reference external" href="https://hitran.org/static/hapi/hapi_manual.pdf">here</a>.</p>
-<p>The rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model.</p>
+<p>Now, that the basic physics behind absorption has been covered The rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model.</p>
 </section>
 </section>
 

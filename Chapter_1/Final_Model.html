@@ -199,6 +199,16 @@ const thebe_selector_output = ".output, .cell_output"
    The Variance of Absorption Spectra
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
+   HITRAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
@@ -497,31 +507,32 @@ title="Print to PDF"
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#The factor of 1/2 is added to the definintons of the cosine functiond, due to this being part of the definition in the inverse transform</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The factor of 1/2 is added to the definintons of the cosine functiond, due to this being part of the definition in the inverse transform</span>
 <span class="k">def</span> <span class="nf">model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">omega_0</span><span class="p">,</span> <span class="n">omega_1</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">p_1</span><span class="p">,</span> <span class="n">p_2</span><span class="p">,</span> <span class="n">p_3</span><span class="p">):</span>
-    <span class="n">polynomial</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">p_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">p_2</span> <span class="o">+</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">*</span><span class="n">p_3</span>
-    <span class="n">trig</span> <span class="o">=</span> <span class="n">a_0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_0</span><span class="p">)</span> \
-        <span class="o">+</span> <span class="n">a_1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">omega_1</span><span class="p">)</span>
+    <span class="n">polynomial</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">p_1</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">p_2</span> <span class="o">+</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">p_3</span>
+    <span class="n">trig</span> <span class="o">=</span> <span class="n">a_0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">omega_0</span><span class="p">)</span> <span class="o">+</span> <span class="n">a_1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">omega_1</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="n">trig</span> <span class="o">+</span> <span class="n">polynomial</span>
 
-<span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">sigma</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Inital Parameter Guess</span>
-    <span class="p">)</span>
-<span class="c1">#chisq</span>
-<span class="n">model_ml</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span> <span class="o">*</span><span class="n">model_fit</span><span class="p">)</span>
-<span class="n">model_residuals</span> <span class="o">=</span> <span class="n">model_ml</span> <span class="o">-</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span>
-<span class="n">chisq_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">model_residuals</span>
-    <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span>
-    <span class="p">)</span>
-<span class="n">nu_model</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_fit</span><span class="p">)</span>
-<span class="n">p_model</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_model</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
-<span class="n">chi_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span><span class="n">nu_model</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;chi^2_crit:</span><span class="si">{</span><span class="n">chi_crit</span><span class="si">:</span><span class="s1">.4</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;chi^2_min:</span><span class="si">{</span><span class="n">chisq_model</span><span class="si">:</span><span class="s1">.5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s1">&#39;P(\chi^2 \geq \chi^2_</span><span class="se">{{</span><span class="s1">min</span><span class="se">}}</span><span class="s1">;</span><span class="si">{</span><span class="n">nu_model</span><span class="si">}</span><span class="s1">) = </span><span class="si">{</span><span class="n">p_model</span><span class="si">:</span><span class="s1">.3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">model_fit</span><span class="p">,</span> <span class="n">model_error</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>  <span class="c1"># Inital Parameter Guess</span>
+<span class="p">)</span>
+<span class="c1"># chisq</span>
+<span class="n">model_ml</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span> <span class="o">*</span><span class="n">model_fit</span><span class="p">)</span>
+<span class="n">model_residuals</span> <span class="o">=</span> <span class="n">model_ml</span> <span class="o">-</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span>
+<span class="n">chisq_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">model_residuals</span> <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">nu_model</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_fit</span><span class="p">)</span>
+<span class="n">p_model</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_model</span><span class="p">,</span> <span class="n">nu_model</span><span class="p">)</span>
+<span class="n">chi_crit</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">isf</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">nu_model</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;chi^2_crit:</span><span class="si">{</span><span class="n">chi_crit</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;chi^2_min:</span><span class="si">{</span><span class="n">chisq_model</span><span class="si">:</span><span class="s2">.5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;P(\chi^2 \geq \chi^2_</span><span class="se">{{</span><span class="s2">min</span><span class="se">}}</span><span class="s2">;</span><span class="si">{</span><span class="n">nu_model</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">p_model</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -535,37 +546,42 @@ P(\chi^2 \geq \chi^2_{min};568) = 8e-50
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
-<span class="n">gs</span> <span class="o">=</span> <span class="n">GridSpec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">hspace</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">GridSpec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">hspace</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="p">[</span><span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">gs</span><span class="p">]</span>
-<span class="c1">#Plotting</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
+<span class="c1"># Plotting</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
     <span class="n">model_ml</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;Model $\chi^2$:</span><span class="si">{</span><span class="n">chisq_model</span><span class="si">:</span><span class="s1">.5</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
-    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span>
-    <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Data&#39;</span><span class="p">,</span>
-    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
-    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">model_residuals</span><span class="p">,</span>
-    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;Model $\chi^2$:</span><span class="si">{</span><span class="n">chisq_model</span><span class="si">:</span><span class="s2">.5</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
     <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
-    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-    <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">]),</span>
-    <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span>
-    <span class="n">c</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span>
-    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">model_residuals</span><span class="p">,</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">]),</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">axes</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span> <span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm</span><span class="si">{CO}</span><span class="s1">_2$ (ppm)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Year&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">axes</span> <span class="ow">in</span> <span class="n">ax</span><span class="p">:</span>
+    <span class="n">axes</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm</span><span class="si">{CO}</span><span class="s2">_2$ (ppm)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -578,14 +594,14 @@ P(\chi^2 \geq \chi^2_{min};568) = 8e-50
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h1>
 <p>The null hypothesis proposed is that the growth in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> over the past few decades can be modelled by a function of the form eq. <a class="reference internal" href="#equation-model">(11)</a>,</p>
 <div class="math notranslate nohighlight">
-\[\mathcal{H}_0 : f(t).
-\mathcal{H}_1 : not f(t).\]</div>
+\[\begin{split}\mathcal{H}_0 : f(t). \\
+\mathcal{H}_1 : not f(t).\end{split}\]</div>
 <p>At a significance level of <span class="math notranslate nohighlight">\(5\%\)</span>, <span class="math notranslate nohighlight">\(\chi^2_{crit} = 624\)</span>. This value is much lower than <span class="math notranslate nohighlight">\(\chi^2_{min} = 1211\)</span>, obtained by the model. Thus the null hypothesis should be rejected.</p>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span> value of the model fit was substantially lower than that of previous just polynomial fits. This is reassuring as adding annual, biannual cycles in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> levels corresponds with seasonal increases in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> absorption by flora<span id="id1">[<a class="reference internal" href="../Bibliography.html#id14" title="H. D. Graven, R. F. Keeling, S. C. Piper, P. K. Patra, B. B. Stephens, S. C. Wofsy, L. R. Welp, C. Sweeney, P. P. Tans, J. J. Kelley, B. C. Daube, E. A. Kort, G. W. Santoni, and J. D. Bent. Enhanced seasonal exchange of co&lt;sub&gt;2&lt;/sub&gt; by northern ecosystems since 1960. Science, 341(6150):1085-1089, 2013. URL: https://www.science.org/doi/abs/10.1126/science.1239207, arXiv:https://www.science.org/doi/pdf/10.1126/science.1239207, doi:10.1126/science.1239207.">GKP+13</a>]</span>. This fit is clearly an improvement.</p>
 <p>On inspection of the model’s residuals, periods of increased and decreased <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production are clear over our model. Therefore, one could continue testing the residuals for further structure. However, they appear uncorrelated. There does not appear to be any low-order polynomial structure to the residual pattern. Further, significant increases in fit were not seen on the increase in degrees of freedom up to a P5. Reducing the degrees of freedom in the polynomial expansion produced sharp increases in the value of <span class="math notranslate nohighlight">\(\chi^2\)</span>.</p>
-<p>The dataset from Mauna Loa does not describe the variation in global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production expected in any given year. For example, large forest fires or volcanic eruptions will produce variance that can be measured accurately. Nonetheless, it is not described in any capacity by either the standard deviation on the measurements or the proposed model.</p>
+<p>The dataset from Mauna Loa does not describe the variation in global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production expected in any given year. For example, large forest fires or volcanic eruptions will produce variance that can be measured accurately. Nonetheless, it is not described in any capacity by either the standard deviation on the measurements or the proposed model. The inability for the model to describe such effects, which have substantial impact on the quality of the fit, and produce a large <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span>.</p>
 <p>Additionally, the question of whether the Covid pandemic can cause a deviation from the current model is an exercise left for the reader. However, it is broken down into multiple steps.</p>
 </section>
 </section>
