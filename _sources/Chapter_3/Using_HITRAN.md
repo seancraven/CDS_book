@@ -42,28 +42,11 @@ Where, the gas names are strings of their formulae, and the table names. This fu
 
 In the lineshape family, avalible shapes are Doppler(gaussian), Lorentz, Voight, and Hartmann-Trann a more computationally intensive, but improved shape{cite}`Hartmann-Trann`, which is beyond the scope for this book. 
 
-These are the basic functions used in obtaining line-shapes, with which to calculate optical depth.
+These are the basic functions used in obtaining line-shapes, with which to calculate optical depth. This provides the backbone for the SimpleTrans package built ontop of it which is used in the rest of the book as a resource for learning data handelling and radiatie transfer 
 
-## Using the SimpleTrans package
+## Excercises
+1. Use the Hitran API to compare the different broadening profiles and determine for the largest peak in $\textrm{CO}_2$ the residuals, at room temperature and pressure, with air as the medium.
+```{tip}
+You will most likely need to refer to the HITRAN API's documentation to do this excercise
+```
 
-The SimpleTrans package, which you will have installed if you clone the environment for the book or find it here, link to github.. discuss download. 
-
-before, diving into using the package, a high level overview of what it does is usefull. 
-After you have downloaded the package, it runs calculate_optical_depths_from_hitran.py. When this script is run in the `main()` function, the absorption spectra from hitran are downloaded. Then a relational database is created. 
-```{mermaid}
-erDiagram
-    gases 
-    gases{
-    int mol_id
-    string mol_name
-    float mol_ppm
-    }
-    
-    optical_depths{
-    int mol_id PK
-    float altitude PK
-    float wave_no PK
-    float optical_depth
-    float abs_coef
-    }
- ```
