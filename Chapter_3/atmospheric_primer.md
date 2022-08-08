@@ -1,10 +1,10 @@
 ## Radiation Modelling
 
-This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, these phenomena are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model.
+This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects. And simply models an average column of atmosphere. 
 
 Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.
 
-Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition's probability. With different strength interactions provide differing intensities of line shapes. 
+Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition's probability. With different strength interactions provide differing intensities of line-by-line spectra, the stronger the interaction the more likely it will occur and the increased magnitude of the absorption line. 
 
 This section will not deal with photon-molecule interactions as photon densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward. 
 ```{note}
@@ -137,4 +137,4 @@ If you are not familiar with packages or package managers such as [pip](https://
 ```
 The Hitran-api provides a set of functions which compute the absorption spectra for the user. The package's documentation can be found [here](https://hitran.org/static/hapi/hapi_manual.pdf). 
 
-Now, that the basic physics behind absorbtion has been coveredThe rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model. 
+Now, that the basic physics behind absorption has been covered The rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model. 
