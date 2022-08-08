@@ -1,5 +1,6 @@
 """
-    File to store basic functions for atmospheric calculations.
+    File to store basic functions for atmospheric calculations. Mostly
+    used in calculate_absorbtion_coef_ghg.py.
 """
 import isa
 from scipy.integrate import quad
@@ -38,7 +39,9 @@ def particle_per_sq_m(alt_0: float, alt_1: float) -> float:
     return quad(number_density, alt_0, alt_1)[0]
 
 
-def optical_depth(alt_0: float, alt_1: float, ppm_conc: float, abs_coef: Any) -> Any:
+def optical_depth(
+    alt_0: float, alt_1: float, ppm_conc: float, abs_coef: Any
+) -> Any:
     """
     Calculates optical depth m^-1, between two altitudes.
     This quantity is often referred to symbolically as tau.

@@ -1,4 +1,7 @@
 # %%
+"""
+This file uses the database built by the 
+"""
 import numpy as np
 import pandas as pd
 import matplotlib as mpl
@@ -133,12 +136,14 @@ class AtmosphereGrid:
         transmission_for_atm_block = (
             trans_all_alt * blackbody_grid
         )  # wavenumber grid has spacing 1 cm^(-1) such that no multiplication is needed
-        for i, _ in enumerate(transmission_for_atm_block[0, :]):
+        for i, _ in enumerate(transmission_for_atm_block.iloc[0, :]):
             if i != 0:
                 transmission_for_atm_block.iloc[
                     :, i
                 ] += transmission_for_atm_block.iloc[:, i - 1]
-        return
+        return pd.DataFrame(
+            transmission_for_atm_block, columns=self.od_df.columns
+        )
 
 
 def transmission_block(
@@ -165,9 +170,7 @@ def transmission_block(
 
 
 # %%
-conn = sqlite3.connect(
-    "/home/sean/Documents/Work/CDS_book/database_utitlites/optical_depth.db"
-)
+conn = sqlite3.connect("/database_utitlites/optical_depth.db")
 ag_test = AtmosphereGrid(
     (0, 10000),
     (200, 4000),
@@ -177,7 +180,8 @@ ag_test = AtmosphereGrid(
 
 
 # %%
-ag_test.flux_up()
 
-# %%
-tb = transmission_block(ag_test.od_df, 0, 10000)
+up_flux = ag_test.flux_up()
+for i in up_flux:
+    plt.plot(ag_test.wave_no_bins, up_flux[i])
+plt.show()
