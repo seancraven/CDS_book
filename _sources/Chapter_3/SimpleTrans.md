@@ -1,5 +1,5 @@
 # SimpleTrans
-The simple trans package is the result of walking through this chapter in building a radiative transfer model. However, really its aim is to provide a straightforward introduction to radiation modelling, and working with outside APIs and databases. 
+The simple trans package is the result of walking through this chapter in building a radiative transfer model. However, its aim is to provide a straightforward introduction to radiation modelling, and working with outside APIs and databases. 
 
 ## Using the SimpleTrans package
 
@@ -7,7 +7,7 @@ The SimpleTrans package, which you will have installed if you clone the environm
 
 ## Structure and Overview
 before, diving into using the package, a high level overview of what it does is useful.
-After you have downloaded the package, it runs calculate_optical_depths_from_hitran.py. When this script is the absorption spectra from hitran are downloaded. Then a [relational database](rd) is created. This database is populated, by calculating absorption coefficients$(molecules/cm^2)$ and optical depths, of blocks of atmosphere,
+After you have downloaded the package, it runs calculate_optical_depths_from_hitran.py. When this script is run the absorption spectra from HITRAN are downloaded. Then a [relational database](rd) is created. This database is populated, by calculating absorption coefficients$(molecules/cm^2)$ and optical depths, of blocks of atmosphere,
 \begin{equation}
 OD = k(\nu, T, P)\cdot [X],
 \end{equation}
@@ -18,7 +18,7 @@ Where h_i, is the start of the atmosphere block, n is the number density of the 
 
 To enable these calculations, there are files which contain functions to help calculate these quantities. isa.py implements the [standard atmosphere](./lorentzian_broadening.ipynb), to obtain temperature and pressures as a function of altitude and plank.py implements the plank function in a manner which has convenient default behaviour. 
 
-Finally, radiative_transfer.py implements a class called atmosphere grid. This models the atmosphere as a coarse altitude grid and a fine wavenumber grid of spacings, $1 km$ and $1 cm^{-1}$, respectively. The mean optical depth is calculated for the wavenumber bin and evaluated at th midpoint of the altitude block. The mean value and midpoint provide reasonable approximations to the quantities values in the region. 
+Finally, radiative_transfer.py implements a class called atmosphere grid. This models the atmosphere as a coarse altitude grid and a fine wavenumber grid of spacings, $1 km$ and $1 cm^{-1}$, respectively. The mean optical depth is calculated for the wavenumber bin and evaluated at the midpoint of the altitude block. The mean value and midpoint provide reasonable approximations to the quantities values in the region. 
 
 For these gridded values the [two stream equations](./radiative_transfer.ipynb) are solved for the upward and downward fluxes. This produces an output of a flux grid that models the transfer of radiation out of the atmosphere. 
 
@@ -27,16 +27,19 @@ For these gridded values the [two stream equations](./radiative_transfer.ipynb) 
 2. Using the provided database plot the difference of the absorption coefficient for $\textrm{CO}_2$ at $0 km$ and $1 km$ elevation in ISA atmosphere. 
 ```{tip}
 There are premade queries in the optical_depths_from_hitran.py file, which could be imported or copied and pasted.
+```
 
 (rd)=
 ### A very short introduction to relational databases
-A relational database, is a structured approach to storing data. It describes a group of tables, that are related together. The relationships enable a reduction in stored data duplication. Typically, these databases are interfaced and queried with using SQL. One of the few programming languages that has been in use for about 50 years.
+A relational database, is a structured approach to storing data. It describes a group of tables, that are related together. The relationships enable a reduction of data duplication. Typically, these databases are interfaced and queried with using SQL. One of the few programming languages that has been in use for about 50 years.
 ```{margin}
-Modern Datatbase applications are oftend distributed over a wide variety of nodes, individual computers, this has a much more complex backend to store partial databases. However, many of these formats have a SQL like interface that can be used to abstract away much of the complexity. [Apache Spark](https://spark.apache.org/sql/) is a great example of this. 
+Modern Datatbase applications are oftend distributed over a wide variety of nodes, individual computers, this has a much more complex backend to store partial databases. However, many of these formats have a SQL like interface that can be used to abstract away much of the complexity. [Apache Spark](https://spark.apache.org/sql/) is a great example of this.
+``` 
 ```{note}
 If you are interested in learning SQL, [this textbook](https://www.google.co.uk/books/edition/Learning_SQL/YqubAgAAQBAJ?hl=en&gbpv=0) is great.
 ```
-Relational databases' reduce duplication, by separating out repeated values, for example, If one was to store some data on a customer in a shop, one might store,
+Relational databases reduce duplication, by separating out repeated values, for example, If one was to store some data on a customer in a shop, one might store,
+
 ```{mermaid}
 :align: center
 erDiagram
@@ -51,7 +54,9 @@ erDiagram
     loyalty_card bool
     }
 ```
+
 It should be evident that storing all of these fields for each transaction would be wasteful if a customer regularly bought more than one item. When using a relational database the number of repeat entries can be cut down by linking one table that contains information about a customer to another table that contains information about transactions. This can be described in an entity relationship diagram depicted below.
+
 ```{mermaid}
 :align: center
 erDiagram 
@@ -61,12 +66,14 @@ erDiagram
     card_number int 
     loyalty_card bool 
     }
+    
     transaction }o--|| item : ""
     transaction{
     transaction_id int PK
     coustomer_id int FK
     item_id int FK
     }
+    
     item
     item{
     item_id int PK
@@ -76,6 +83,7 @@ erDiagram
     
     
 ```
+
 In the schema above, the values in the table boxes indicates the column name and type for each entry. The PK symbol in the last column of the tables indicates if that column corresponds to a primary key. A primary key is a unique entry or unique combination of entries, which identify a row in a table. This is often an integer or a fixed length string. This key can then be used to relate one table to another as a foreign key. The foreign key is the primary key of one table in another table, in our example customer Obi-wan has coustomer_id 1 and this will be the same in both the customer table and the transaction table.
 
 When the database is queried and asked for fields in two tables, for example a query for transactions price, item_name, and card number, for a given transaction id, the item_id and customer_id from the transaction can be used to "join" the tables rows and return all the relevant values, while not storing that data duplicated in one table. The space reduction assumes that an item is sold more than once and some customers buy more than one thing.
@@ -96,7 +104,6 @@ The database is definitely not necessary and one could achieve similar results w
 
 ```{mermaid}
 :align: center
-
 erDiagram
     gases ||--|{ optical_depths: ""
     gases{
