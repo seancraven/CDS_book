@@ -7,6 +7,10 @@
     Calculating the absorption coefficients once
     and building a database after that enables much faster
     atmospheric model calculations after initial setup.
+
+    The outputs are stored in a local SQLite database.
+    The schema for the database is straightforward, and can be found at:
+    weblink.
 """
 import os
 import sys
@@ -16,7 +20,7 @@ from sqlite3 import Error
 import numpy as np
 from tqdm import tqdm
 import isa
-from optical_depth_utilities import optical_depth
+from optical_depth_functions import optical_depth
 
 
 class HiddenPrints:
@@ -56,6 +60,9 @@ def ghg_lbl_download() -> object:
     molecule_id_dict. Data is collected from HITRAN.
 
     Assumes only most abundant isotopologue is required.
+
+    This additionally creates a local database. This database is queried
+    from in the ghg_od_calculate().
     """
     with HiddenPrints():
         hapi.db_begin("./spectral_line.db")
@@ -162,11 +169,13 @@ def insert_query(
     columns = columns[:-1] + ")"
     value_var = value_var[:-1] + ");"
     sql += columns + "VALUES" + value_var
-    cur = connection.cursor()
-    cur.execute(sql, list(values.values()))
-    connection.commit()
-
-    return cur.lastrowid
+    try:
+        cur = connection.cursor()
+        cur.execute(sql, list(values.values()))
+        connection.commit()
+        return cur.lastrowid
+    except Error as e:
+        print(e)
 
 
 def column_comparison_query(
@@ -198,11 +207,13 @@ def column_comparison_query(
         sql += f" {column} {operator} ?"
         vals.append(value)
     sql += ";"
-    cur = connection.cursor()
-    cur.execute(sql, vals)
-    query_result = cur.fetchall()
-
-    return query_result
+    try:
+        cur = connection.cursor()
+        cur.execute(sql, vals)
+        query_result = cur.fetchall()
+        return query_result
+    except Error as e:
+        print(e)
 
 
 def main():
@@ -264,11 +275,15 @@ def main():
                 wave_number, od, coef = ghg_od_calculate(gas, alt)
                 for nu, tau, coef in zip(wave_number, od, coef):
                     try:
-                        conn.execute(
-                            "INSERT INTO optical_depths VALUES(?,?,?,?,?)",
-                            (_id, alt, nu, tau, coef),
+                        insert_query(
+                            conn,
+                            "optical_depths",
+                            _id,
+                            alt,
+                            nu,
+                            tau,
+                            coef,
                         )
-                        conn.commit()
                     except sqlite3.IntegrityError:
                         query = column_comparison_query(
                             conn,
