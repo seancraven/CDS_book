@@ -1,11 +1,12 @@
 # Welcome
-Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an enviroment such that one can contribute to the book easily. 
+Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an environment such that one can contribute to the book easily. 
 
 ## Timetable
 Part 1
 
 Finish book in Current state: 
- - [ ] Chapter 3 proofed and complete Friday 5th August.
+ - [x] Chapter 3 proofed and complete Friday 5th August.
+   - Simple Trans needs some additional work the coupling and packing into a module is more complex than anticipated
  - [ ] Chapter 2 proofed and complete Wednesday 10th August.
 
 Part 2 
@@ -17,6 +18,7 @@ Week of 15th August:
  - [ ] Glossary and topic links
  - [ ] Improved python explanations
  - [ ] Further depth on concepts. 
+
 ## Standards for the book
 Code cell line width: 75 Characters
 Black Formatter. 
@@ -27,13 +29,12 @@ Writing style:
 ### Matplotlib Defaults:
 - Colours:
     - [x] Dur_utils module that contains colours.
-    - [ ] Decide on a gradient colour scheme for 3d/many line plots
+    - [x] Decide on a gradient colour scheme for 3d/many line plots: Rocket
 - [x] Consistent Figure sizes (10,6) for single depth Page Wide Plots
 - [x] Consistent Font size/style for figures and text 
 - [x] Consistent tick spacing 
     - [x] Edit RCparams
-- Make an environment.yml file that has packages and changes to matplolib 
-    - [ ] .yml
+- [x] Matplotlib Updates
 - [x] Fixed file tracking
 - Fix matplotlib latex use
 - fix durutils
@@ -80,27 +81,15 @@ Pages:
 - [ ] Comparison and evaluation of final model
 
 ### Chapter 3
-DUR_Rads: 
-- Much of the Pyrdas functionality is made obsolete by the HITRAN-api
-Now irrelevant parts:
-- gas.py
-- lorentzian.py
-- plank.py
-Conceptually Similar but implementations differ:
-- radiation.py
-- rayleigh.py
-** Implementation of radiation and rayleigh needs to be planned as the ap is slow to evaluate the crossections especially for multiple species of gas.**
 Pages:
-Plan Possibly to change...
 - [ ] Atmospheric Physics Primer
-    - [ ] Vibrational Transitions: Charles
-    - [x] Line Shapes 
+  - [ ] Black Body
+  - [ ] Vibrational Transitions: Charles
+  - [x] Line Shapes 
 - [x] Temperature Dependence and HITRAN-api
-- [ ] Radiation Balance 
 - [ ] Two Stream
 - [x] Implementation of absorbtion co-efficient db
-- [ ] Final Outgoing Model
-
+- [ ] Multigas
 - [x] Absorption
 
 Formating:
@@ -109,12 +98,17 @@ Formating:
  - [x] matplotlibrc edited
 - [ ] Initial Proof
 
-### Journal of Reading/ Personal Skills Development/ Implementation Challenges
-- 05.07.22: Bayesian Methods and bootstrapping covered in ESL
-- [x] 03.07.22: Figure out how to use the Berkly Earth Data.
+### Backend Chapters 
+Relational Database:
+  - [x] Short Introduction to ERD and SQL
+SimpleTrans:
+  - [ ] Brief Overview of Functionality. Partially Complete
+  - [ ] SimpleTrans Install Guide
+
 
 ### Notes About Setup
 - Currently, Jupyter Book uses a different kernel to execute the notebooks. The matplotlibrc file has to be copied into the specific directories where all of the 
+
 
 ### Important HITRAN links
 - Remember key gen 
