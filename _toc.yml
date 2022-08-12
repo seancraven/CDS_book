@@ -29,8 +29,8 @@ parts:
     - file: Chapter_3/radiative_transfer.ipynb
   - caption: Relational Database Introduction
     chapters:
-    - file: Database/Database_intro_1.md
-    - file: Database/Database_intro_2.md
+    - file: Database_Chapter/Database_intro_1.md
+    - file: Database_Chapter/Database_intro_2.md
   - caption: SimpleTrans
     chapters:
     - file: Chapter_SimpleTrans/SimpleTrans.md
