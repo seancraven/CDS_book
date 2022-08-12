@@ -1,5 +1,5 @@
 ## The Optical Depths Database
-The optical depths and other associated data is stored in a SQLite3 relational Database. There is a short [section](../SimpleTrans/SimpleTrans_1.md) on the advantage of this format. 
+The optical depths and other associated data is stored in a SQLite3 relational Database. There is a short [section](../Chapter_SimpleTrans/SimpleTrans_1.md) on the advantage of this format. 
 
 The database that is created, after the installing the package stores the optical depths and absorption coefficients of $\textrm{CO}_2$, $\textrm{CH}_4$, $\textrm{H}_2\textrm{O}$ and $\textrm{N}_2\textrm{O}$ in the optical depths table for altitudes in 1km spacings from $500 m$ to $30,500 m$, these values correspond to the midpoints of the altitude grid. The wavenumber range recorded is between $200 cm^{-1} and $4000 cm^{-1} this provides close to complete coverage of all longwave radiation outgoing from earth.
 
