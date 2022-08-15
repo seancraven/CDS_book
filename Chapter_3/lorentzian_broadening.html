@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -57,7 +57,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="HITRAN" href="Using_HITRAN.html" />
-    <link rel="prev" title="Radiation Modelling" href="atmospheric_primer.html" />
+    <link rel="prev" title="Incoming and Outgoing Radiation" href="blackbody.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -196,6 +196,11 @@ const thebe_selector_output = ".output, .cell_output"
    Radiation Modelling
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    The Variance of Absorption Spectra
@@ -207,8 +212,42 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="radiative_transfer.html">
    Radiative transfer
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Relational Database Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SimpleTrans
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
   </a>
  </li>
 </ul>
@@ -418,6 +457,16 @@ title="Print to PDF"
    </span>
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moving-forward">
+   Moving Forward
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#todo">
+   Todo
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -476,6 +525,16 @@ title="Print to PDF"
    </span>
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#moving-forward">
+   Moving Forward
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#todo">
+   Todo
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -498,9 +557,10 @@ title="Print to PDF"
 <p>The “US Standard Atmosphere, 1976”<span id="id1">[<a class="reference internal" href="../Bibliography.html#id30" title="United States. National Oceanic, Atmospheric Administration, United States. National Aeronautics, Space Administration, United States. Department of the Air Force, and United States Committee on Extension to the Standard Atmosphere. U.S. Standard Atmosphere: 1976. NOAA - SIT 76-1562. Department of Commerce, National Oceanic and Atmospheric Administration, 1976. URL: https://books.google.co.uk/books?id=5WdTAAAAMAAJ.">OAA+76</a>]</span> provides pressure, temperature, and density vertical profiles. The model takes values which are roughly representative of year-round mid-latitude conditions. The density profile is calculated using the temperature and pressure profiles through the ideal gas equation</p>
 <div class="math notranslate nohighlight">
 \[pV = n K_b T.\]</div>
-<p>Where, <span class="math notranslate nohighlight">\(p\)</span> is pressure, <span class="math notranslate nohighlight">\(V\)</span> volume and <span class="math notranslate nohighlight">\(T\)</span> temperature, n gives the number density of the gas and <span class="math notranslate nohighlight">\(K_b\)</span> is Boltzmann’s constant.</p>
-<p>An approximate atmospheric profile is used to calculate molecule concentrations and cross-section broadening. A reasonable assumption in the troposphere is that the relative fractional abundances stay the same. Thus the decrease in atmospheric density provides the main trail off for total absorption. However, the constant relative fraction of greenhouse gases assumption breaks down, particularly for water and ozone fractional abundances above the 10km mark. This is because water forms clouds and precipitates down, becoming much less abundant, and ozone is produced more rapidly at higher altitudes and its concentration peaks in the stratosphere.</p>
-<p>Despite falling density and pressure, there is an increase in temperature after <span class="math notranslate nohighlight">\(20 km\)</span>. This temperature increase is due primarily to Ozone absorbing Shortwave UV-radiation, which is incoming from the sun. This temperature increase is not accounted for in our model as we look at longwave radiation exiting the atmosphere.</p>
+<p>Where, <span class="math notranslate nohighlight">\(p\)</span> is pressure, <span class="math notranslate nohighlight">\(V\)</span> volume and <span class="math notranslate nohighlight">\(T\)</span> temperature, n gives the number density of the gas and <span class="math notranslate nohighlight">\(K_b\)</span> is Boltzmann’s constant. The profiles given by the standard atmosphere model are plotted below.</p>
+<p>As described in the section on <a class="reference internal" href="atmospheric_primer.html"><span class="doc std std-doc">line broadening</span></a> line shapes vary with atmospheric conditions. An empirical atmospheric profile is used to calculate molecule concentrations and cross-section broadening. This enables the assessment of the effects of broadening.</p>
+<p>In addition to the atmospheres’ pressure and temperature changing the concentration of GHGs can change. A reasonable assumption in the troposphere, below <span class="math notranslate nohighlight">\(10 km\)</span>, is that the relative fractional abundances stay the same. Thus, the decrease in atmospheric density provides the main trail off for total absorption. However, the constant relative fraction of greenhouse gases assumption breaks down, particularly for water and ozone fractional abundances above the 10km mark. This is because water forms clouds and precipitates down, becoming much less abundant, and ozone is produced more rapidly at higher altitudes and its concentration peaks in the stratosphere.</p>
+<p>Despite falling density and pressure, there is an increase in temperature after <span class="math notranslate nohighlight">\(20 km\)</span>. This temperature increase is due primarily to Ozone absorbing Shortwave UV-radiation, which is incoming from the sun. Such a temperature increase is not accounted for in our model as we look at longwave radiation exiting the atmosphere. Further encouraging us to limit the scope of the model to below <span class="math notranslate nohighlight">\(10 km\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atlittudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
@@ -530,17 +590,27 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/lorentzian_broadening_3_0.png" src="../_images/lorentzian_broadening_3_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [2],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">atlittudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">pressure</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_pressure</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">density</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_density</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;isa&#39; is not defined
+</pre></div>
+</div>
 </div>
 </div>
 </section>
 <section id="the-variation-of-the-absorbtion-cross-section-of-textrm-co-2">
 <h1>The Variation of the Absorbtion Cross-section of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span><a class="headerlink" href="#the-variation-of-the-absorbtion-cross-section-of-textrm-co-2" title="Permalink to this headline">#</a></h1>
 <p>The HITRAN Database provides the line-by-line intensities for more than 55 molecules. Using the IPCC reports data on the most potent greenhouse gases, the most impactful 3, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{N}_2 \textrm{O}\)</span>, and <span class="math notranslate nohighlight">\(\textrm{CH}_4\)</span>. Additionally, water plays a significant role in the greenhouse effect. However, the variance in its concentration due to anthropogenic factors does not significantly drive global temperature rise. However, it does provide a large amount of radiation scattering and should be included<span id="id2">[<a class="reference internal" href="../Bibliography.html#id31" title="IPCC Working Group I. Ipcc sixth assessment report (ar6): climate change 2021 - the physical science basis - summary for policymakers. Aug 2021. URL: https://policycommons.net/artifacts/1804182/ipcc_ar6_wgi_spm/.">I21</a>]</span>.</p>
-<p>Further, the changes in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s absorption profile can be used as a litmus test for simplifying assumptions and observing the effects of broadening and gas rarefaction.
+<p>The changes in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s absorption profile can be used as a litmus test for simplifying assumptions and observing the effects of broadening and gas rarefaction.
 Additionally, to temperature and pressure dependence on the broadening, there is a further temperature dependence on the line intensity due to the accessibility of a given transition. At low temperatures, high-energy transitions, those of low wavelength, are heavily suppressed as the molecules lack the energy to access either the excitation or vibrational mode. A Bose-Einstein distribution quantifies the availability of a transition. When the intensity of a transition is known for one temperature, the ratio of the probabilities gives the intensity</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-0">
-<span class="eqno">(29)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[S_{a \rightarrow b}(T) = S_{a \rightarrow b, T_ref}\frac{\exp(-h\nu_{a \rightarrow b} /cK_bT)}{exp(-h\nu_{a \rightarrow b} /cK_b T_{ref})} \frac(T_{ref}}{(T)}\]</div>
+<span class="eqno">(35)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-0" title="Permalink to this equation">#</a></span>\[S_{a \rightarrow b}(T) = S_{a \rightarrow b, T_ref}\frac{\exp(-h\nu_{a \rightarrow b} /cK_bT)}{exp(-h\nu_{a \rightarrow b} /cK_b T_{ref})} \frac{T_{ref}}{(T)}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T)\)</span> is the line intensity as a function of temperature for some transition <span class="math notranslate nohighlight">\(a \rightarrow b\)</span>, <span class="math notranslate nohighlight">\(\nu_{a \rightarrow b}\)</span> is the wavenumber for the transition, and <span class="math notranslate nohighlight">\(Q(T)\)</span> is the partition sum over all states. The values for <span class="math notranslate nohighlight">\(S_{a \rightarrow b}(T_{ref})\)</span> are recorded on the HITRAN database. <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>’s line intensity variation is plotted at 3 km intervals up to 10km using the ISA model, around the most significant absorption lines, around <span class="math notranslate nohighlight">\(650 cm^{-1}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -589,8 +659,8 @@ Additionally, to temperature and pressure dependence on the broadening, there is
 <h1>Optical Density of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span><a class="headerlink" href="#optical-density-of-textrm-co-2" title="Permalink to this headline">#</a></h1>
 <p>The absorption coefficient,<span class="math notranslate nohighlight">\(k\)</span>, is related to the optical depth at a wavenumber,<span class="math notranslate nohighlight">\(\nu\)</span>, by</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-lorentzian-broadening-1">
-<span class="eqno">(30)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-1" title="Permalink to this equation">#</a></span>\[\tau(\nu, \Delta l, T, p) = \int_{l}^{l+\Delta l} n(z) dz \cdot k(\nu, T, p).\]</div>
-<p>Where n(z) is the number density per unit volume. Then we plot the optical depth, <span class="math notranslate nohighlight">\(I/I_0\)</span>, of each atmosphere block up to <span class="math notranslate nohighlight">\(30km\)</span>.</p>
+<span class="eqno">(36)<a class="headerlink" href="#equation-chapter-3-lorentzian-broadening-1" title="Permalink to this equation">#</a></span>\[\tau(\nu, \Delta l, T, p) = \int_{l}^{l+\Delta l} n(h) dh \cdot k(\nu, T, p).\]</div>
+<p>Where n(h) is the number density per unit volume. Then we plot the optical depth, <span class="math notranslate nohighlight">\(I/I_0\)</span>, of each atmosphere block up to <span class="math notranslate nohighlight">\(30km\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">number_density</span><span class="p">(</span><span class="n">alt</span><span class="p">):</span>
@@ -678,7 +748,6 @@ Additionally, to temperature and pressure dependence on the broadening, there is
 <h1>Logarithmic Plot of Optical Depth, <span class="math notranslate nohighlight">\(\tau\)</span><a class="headerlink" href="#logarithmic-plot-of-optical-depth-tau" title="Permalink to this headline">#</a></h1>
 <p>The previous figure displays clear windows of opacity which decrease in size with increasing altitude. Plotting a semilog plot of the optical depth <span class="math notranslate nohighlight">\(\tau\)</span> shows the large range for which absorption coefficients can meaningfully impact flux transmitted through a block of atmosphere.</p>
 <p><span class="math notranslate nohighlight">\(\tau\)</span> values that appear to contribute, by eye, span a range <span class="math notranslate nohighlight">\([10^{-1}, 10^5]\)</span>. The range is raised because typical efforts to reduce the amount of computation, such as an absolute value cut off of the form <code class="docutils literal notranslate"><span class="pre">values[values&lt;</span> <span class="pre">max_value*0.001]</span> <span class="pre">=</span> <span class="pre">0</span></code>, would produce severe discrepancies in the output of the previous figure.</p>
-<p>A common technique used in radiation codes is to smooth the absorption lines and define windows of no absorption to reduce the computational cost.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cmap</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;rocket&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -703,6 +772,14 @@ Additionally, to temperature and pressure dependence on the broadening, there is
 <img alt="../_images/lorentzian_broadening_13_0.png" src="../_images/lorentzian_broadening_13_0.png" />
 </div>
 </div>
+</section>
+<section id="moving-forward">
+<h1>Moving Forward<a class="headerlink" href="#moving-forward" title="Permalink to this headline">#</a></h1>
+</section>
+<section id="todo">
+<h1>Todo<a class="headerlink" href="#todo" title="Permalink to this headline">#</a></h1>
+<p>area difference in the transmission</p>
+<p>Clearly, the large change in peak height with varying altitude means that we must account for the variance with transmission of the optical depth of the gases in our radiation transfer model. A common technique used in radiation codes is to smooth the absorption lines and define windows of no absorption to reduce the computational cost.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -732,11 +809,11 @@ Additionally, to temperature and pressure dependence on the broadening, there is
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="atmospheric_primer.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="blackbody.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Radiation Modelling</p>
+            <p class="prev-next-title">Incoming and Outgoing Radiation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Using_HITRAN.html" title="next page">

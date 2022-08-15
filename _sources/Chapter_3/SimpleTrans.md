@@ -13,7 +13,9 @@ OD = k(\nu, T, P)\cdot [X],
 \end{equation}
 where k is the absorption coefficient, $[X]$, is the path integral of molecular density over the block of atmosphere.
 \begin{equation}
-[X] = \int_h_i^h_{i+1} n(T,p)dh
+[X] = \int_{h_i}^{h_{i+1}} n(T,p)dh
+\end{equation}
+
 Where h_i, is the start of the atmosphere block, n is the number density of the molecule. This is repeated over every gas for every altitude for all wavenumbers. 
 
 To enable these calculations, there are files which contain functions to help calculate these quantities. isa.py implements the [standard atmosphere](./lorentzian_broadening.ipynb), to obtain temperature and pressures as a function of altitude and plank.py implements the plank function in a manner which has convenient default behaviour. 
@@ -39,11 +41,9 @@ Modern Datatbase applications are oftend distributed over a wide variety of node
 If you are interested in learning SQL, [this textbook](https://www.google.co.uk/books/edition/Learning_SQL/YqubAgAAQBAJ?hl=en&gbpv=0) is great.
 ```
 Relational databases reduce duplication, by separating out repeated values, for example, If one was to store some data on a customer in a shop, one might store,
-
 ```{mermaid}
-:align: center
+:caption: A table of important information associated with some transaction for a shop.
 erDiagram
-    transaction 
     transaction{
     transaction_id int
     coustomer_id int
@@ -56,32 +56,26 @@ erDiagram
 ```
 
 It should be evident that storing all of these fields for each transaction would be wasteful if a customer regularly bought more than one item. When using a relational database the number of repeat entries can be cut down by linking one table that contains information about a customer to another table that contains information about transactions. This can be described in an entity relationship diagram depicted below.
-
 ```{mermaid}
-:align: center
-erDiagram 
-    customer o|--|{transaction: ""
+:caption: A relational database alternative to transaction data storage, which provides reduced data duplication.
+erDiagram
+    customer o|--|{transaction_: ""
     customer{
     customer_id int PK
     card_number int 
     loyalty_card bool 
     }
-    
-    transaction }o--|| item : ""
-    transaction{
+    transaction_ }o--|| item : ""
+    transaction_{
     transaction_id int PK
     coustomer_id int FK
     item_id int FK
     }
-    
-    item
     item{
     item_id int PK
     price float
     item_name string 
-    }
-    
-    
+}
 ```
 
 In the schema above, the values in the table boxes indicates the column name and type for each entry. The PK symbol in the last column of the tables indicates if that column corresponds to a primary key. A primary key is a unique entry or unique combination of entries, which identify a row in a table. This is often an integer or a fixed length string. This key can then be used to relate one table to another as a foreign key. The foreign key is the primary key of one table in another table, in our example customer Obi-wan has coustomer_id 1 and this will be the same in both the customer table and the transaction table.
@@ -93,31 +87,5 @@ The links between the tables are denoted by [crow's foot notation](https://en.wi
 
 This leaves the question how does one build a database? Conveniently, python itself comes with a SQLite database implementation, and one can build databases, store data and retrieve data, without ever leaving a python script.
 
-## The Optical Depths Database
-The database that is created, after the installing the package stores the optical depths and absorption coefficients of $\textrm{CO}_2$, $\textrm{CH}_4$, $\textrm{H}_2\textrm{O}$ and $\textrm{N}_2\textrm{O}$ in the optical depths table for altitudes in 1km spacings from $500 m$ to $30,500 m$, these values correspond to the midpoints of the altitude grid. The wavenumber range recorded is between $200 cm^{-1} and $4000 cm^{-1} this provides close to complete coverage of all longwave radiation outgoing from earth.
 
-Each gas is stored with its formulae and ppm concentration. The need for all this data is explored more fully in the next section.
 
-This data is calculated and stored once, because it is computationally expensive to calculate the values each time one wants to calculate them. This does reduce flexibility because there is a defined number of datapoints one can access, however, the pre computation was decided on so that day to day functionality was optimized.
-
-The database is definitely not necessary and one could achieve similar results with a .txt file, however there are about 50 million rows, making it and unwieldy file. Further, the database provides the ability to work with small subsets of the data in a jupyter notebook or python file. Its schema is presented below.
-
-```{mermaid}
-:align: center
-erDiagram
-    gases ||--|{ optical_depths: ""
-    gases{
-    mol_id int PK
-    mol_name string
-    mol_ppm float
-    }
-    
-    optical_depths
-    optical_depths{
-    mol_id int PK "FK"
-    altitude float PK
-    wave_no float PK
-    optical_depth float
-    abs_coef float
-    }
-```

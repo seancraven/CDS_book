@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Incoming and Outgoing Radiation &#8212; Climate Data Science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Variance of Absorption Spectra" href="lorentzian_broadening.html" />
+    <link rel="prev" title="Radiation Modelling" href="atmospheric_primer.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../An_Aside_On_Python.html">
+   An Aside On Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Global Carbon Dioxide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Data_Exploration.html">
+   Global
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2 \)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Fitting.html">
+   Curve Fitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Hypothesis_Testing.html">
+   Hypothesis Testing And Goodness of Fit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_1/Final_Model.html">
+   Final Model
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Temperature Rise and Predictive Modelling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/predictive_models.html">
+   Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/temp_co2.html">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/3models.html">
+   Implementation of the Three SRES Approximation Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/bayesian_inference.html">
+   Using Bayesian Inference to Determine
+   <span class="math notranslate nohighlight">
+    \(S\)
+   </span>
+   Left as Work in progress
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Radiation Modelling
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lorentzian_broadening.html">
+   The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using_HITRAN.html">
+   HITRAN
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Relational Database Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SimpleTrans
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_3/blackbody.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter_3/blackbody.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#radiation-balance">
+   Radiation Balance
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Incoming and Outgoing Radiation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#radiation-balance">
+   Radiation Balance
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.constants</span> <span class="k">as</span> <span class="nn">cst</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">simpletrans.plank</span> <span class="kn">import</span> <span class="n">plank_nu</span><span class="p">,</span> <span class="n">plank</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+
+<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+
+  <span class="n">File</span> <span class="o">~/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Work</span><span class="o">/</span><span class="n">CDS_book</span><span class="o">/</span><span class="n">book</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.10</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">IPython</span><span class="o">/</span><span class="n">core</span><span class="o">/</span><span class="n">interactiveshell</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3398</span> <span class="ow">in</span> <span class="n">run_code</span>
+    <span class="n">exec</span><span class="p">(</span><span class="n">code_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_global_ns</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_ns</span><span class="p">)</span>
+
+  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">cell</span> <span class="n">line</span><span class="p">:</span> <span class="mi">4</span><span class="o">&gt;</span>
+    <span class="kn">from</span> <span class="nn">simpletrans.plank</span> <span class="kn">import</span> <span class="n">plank_nu</span><span class="p">,</span> <span class="n">plank</span>
+
+  <span class="n">File</span> <span class="o">~/</span><span class="n">Documents</span><span class="o">/</span><span class="n">Work</span><span class="o">/</span><span class="n">SimpleTrans</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">simpletrans</span><span class="o">/</span><span class="n">plank</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">93</span>
+    <span class="p">{</span>
+    <span class="o">^</span>
+<span class="ne">SyntaxError</span>: &#39;{&#39; was never closed
+</pre></div>
+</div>
+</div>
+</div>
+<section id="incoming-and-outgoing-radiation">
+<h1>Incoming and Outgoing Radiation<a class="headerlink" href="#incoming-and-outgoing-radiation" title="Permalink to this headline">#</a></h1>
+<p>In the previous section, the interaction of molecules with light was discussed. This page aims to give the reader an overview of energy balance and the physics behind radiation and radiative transfer.</p>
+<p>The Sun is tha main source of energy arriving at Earth. The mechanism for energy transfer is radiation, of photons. Photons travel through the vacuum of space with energy associated to their wavenumber,<span class="math notranslate nohighlight">\(\nu\)</span>,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-4e69bc04-3fee-4529-ae55-68c3b0ca657a">
+<span class="eqno">(29)<a class="headerlink" href="#equation-4e69bc04-3fee-4529-ae55-68c3b0ca657a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+E = h c \nu.
+\end{equation}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(h\)</span>, <span class="math notranslate nohighlight">\(c\)</span> are the usual constants.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For radiative transfer, wavenumber is convineient to work is as many of the absorbtion databases are in this quantity, it is also linearly proportional to frequency, and energy, thus can be easier to work with in one’s head than wavelength its reciprocal</p>
+</div>
+<p>Hot objects emit radiation dependent on their temperature, the idealized picture for this emitter is a black body. A black body is normal matter that absorbs radiation at all wavelengths that fall upon it. How close an object is to being a black body is measured by emissivity, which takes the range between zero and one. In most of the calculations that follow, the Earth and the sun are treated as black bodies, having emissivity one.</p>
+<p>When energy arrives at Earth, it is convenient to measure not the extensive quantity energy but an intensive one, that is also a function of time, thus flux is used. Flux, power per unit area, is such an intensive quantity. The flux produced by a black body at a given temperature is given by the Stefan-Boltzmann Law.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8f1df2af-6109-49ae-b62c-b4dd8f0ffc70">
+<span class="eqno">(30)<a class="headerlink" href="#equation-8f1df2af-6109-49ae-b62c-b4dd8f0ffc70" title="Permalink to this equation">#</a></span>\[\begin{equation}
+j = \sigma T^4
+\end{equation}\]</div>
+<p>Flux is in <span class="math notranslate nohighlight">\(W \cdot m^{-2}\)</span> and <span class="math notranslate nohighlight">\(\sigma = 5.670374419x0^{-8} W \cdot m^{-2}K^{-4}\)</span>.</p>
+<p>As mentioned previously the Sun can be very well approximated as a black body emitting at 5770k, which is the mean surface temperature of the Sun. Outgoing radiation from blackbodies is not uniform across all wavenumbers, different wavenumbers, have differing relative spectral radiance’s flux per wavenumber per solid angle. The solid angle dependence is important if the direction of the radiation is not isotropic. However, in much of the work that proceeds it is in an isotropic regime, and so the flux density can be used, which is <span class="math notranslate nohighlight">\(\pi \cdot \)</span>spectral radiance. Spectral radiance for a black body is governed by the plank function,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-6129dfa2-bdd6-44e7-90ce-8ecaa41b6363">
+<span class="eqno">(31)<a class="headerlink" href="#equation-6129dfa2-bdd6-44e7-90ce-8ecaa41b6363" title="Permalink to this equation">#</a></span>\[\begin{equation}
+B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})}.
+\end{equation}\]</div>
+<p>Where, the constants take their conventional definitions. The plank function at 5770k is plotted against photon energy, with wavenumber as the top axis. The top figure is a log-log plot, which highlights the vast energy differential between the total radiative output as the area enclosed is proportional to the power radiated, the second figure is the same plot with linear axes. The Black body spectrum for energy equilibrium temperature (252k) for Earth is also included in the top plot. Additionally, the range of the visual spectrum is indicated with the rainbow.</p>
+<p>Figure three is added for interest it depicts the photon density per wavenumber. The energy dependence of photons means that the most common wavelengths arriving at earth from the sun are dominated by near infrared wavelengths.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;xtick.top&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="c1">###Defining X axis for plots</span>
+<span class="n">plot_resolution</span> <span class="o">=</span> <span class="mi">100000</span>  <span class="c1"># um</span>
+<span class="n">nu_sun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">plot_resolution</span><span class="p">)</span>
+<span class="n">nu_to_E</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">c</span> <span class="o">*</span> <span class="n">cst</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.6</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**-</span><span class="mi">19</span><span class="p">)</span>
+<span class="n">E_sun</span> <span class="o">=</span> <span class="n">nu_sun</span> <span class="o">*</span> <span class="n">nu_to_E</span>
+<span class="n">max_E_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">plot_resolution</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">lambda_sun</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">plot_resolution</span><span class="p">)</span>
+<span class="c1">###Defining Y axis for plots</span>
+<span class="n">I_inc</span> <span class="o">=</span> <span class="n">plank_nu</span><span class="p">(</span>
+    <span class="n">nu_sun</span><span class="p">,</span>
+    <span class="mi">5770</span><span class="p">,</span>
+    <span class="n">flux</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="s2">&quot;um&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">I_out</span> <span class="o">=</span> <span class="n">plank_nu</span><span class="p">(</span>
+    <span class="n">nu_sun</span><span class="p">,</span>
+    <span class="mi">252</span><span class="p">,</span>
+    <span class="n">flux</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">units</span><span class="o">=</span><span class="s2">&quot;um&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">I_inc_lambda</span> <span class="o">=</span> <span class="n">plank</span><span class="p">(</span><span class="n">lambda_sun</span><span class="p">,</span> <span class="mi">5770</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s2">&quot;um&quot;</span><span class="p">)</span>
+<span class="n">I_inc_E</span> <span class="o">=</span> <span class="n">I_inc</span> <span class="o">*</span> <span class="n">nu_to_E</span>
+<span class="n">I_out_E</span> <span class="o">=</span> <span class="n">I_out</span> <span class="o">*</span> <span class="n">nu_to_E</span>
+
+<span class="c1">###Rainbow Colour</span>
+<span class="n">rgb_tup</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">127</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">46</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">43</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">95</span> <span class="o">/</span> <span class="mi">255</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">139</span> <span class="o">/</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="p">]</span>
+<span class="n">rainbow_nu</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="n">rainbow_E</span> <span class="o">=</span> <span class="n">rainbow_nu</span> <span class="o">*</span> <span class="mf">1.24</span>
+<span class="c1">###Plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span>
+    <span class="n">E_sun</span><span class="p">,</span> <span class="n">I_out_E</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T= 252 K&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+<span class="p">)</span>  <span class="c1">##Sun</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">E_sun</span><span class="p">,</span> <span class="n">I_inc_E</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;T = 5770 K&quot;</span><span class="p">)</span>  <span class="c1">##Earth</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">E_sun</span><span class="p">,</span> <span class="n">I_out_E</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">I_inc_E</span><span class="p">,</span> <span class="n">I_inc_E</span><span class="p">,</span> <span class="n">I_inc_E</span> <span class="o">/</span> <span class="n">E_sun</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">plot</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>  <span class="c1">###Rainbow</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nu_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_nu</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">nu_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_nu</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ax</span><span class="p">[</span><span class="n">plot</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+            <span class="n">E_sun</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">plot</span><span class="p">][</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">rgb_tup</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">plot</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ax</span><span class="p">[</span><span class="n">plot</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">E_sun</span><span class="p">[:</span><span class="n">max_E_index</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">plot</span><span class="p">][:</span><span class="n">max_E_index</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;black&quot;</span>
+            <span class="p">)</span>
+    <span class="n">sec</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="n">plot</span><span class="p">]</span><span class="o">.</span><span class="n">secondary_xaxis</span><span class="p">(</span>
+        <span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">functions</span><span class="o">=</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">nu_to_E</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">/</span> <span class="n">nu_to_E</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">sec</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wavenumber $(cm^{-1})$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.002</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;Spectral Radiance $(W\cdot m^{-2} \cdot str^{-1} \cdot eV^{-1})$&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;Spectral Radiance $(W\cdot m^{-2} \cdot str^{-1} \cdot eV^{-1})$&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span>
+    <span class="sa">r</span><span class="s2">&quot;Spectral Radiance / Photon Energy &quot;</span>
+    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">r</span><span class="s2">&quot;$(W\cdot m^{-2} \cdot str^{-1} \cdot eV^{-2})$&quot;</span>
+<span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Photon Energy $(eV)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Photon Energy $(eV)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Photon Energy $(eV)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;sci&quot;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;sci&quot;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/blackbody_3_0.png" src="../_images/blackbody_3_0.png" />
+</div>
+</div>
+<p>Further a plot of spectral radiance is shown against wavenumber, this can often be a misleading quantity when thinking about photon energy, because of the non-linear conversion, one might assume that the majority of the energy arriving from the sun is in the visible range however this is not the case as seen above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig1</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lambda_sun</span><span class="p">,</span><span class="n">I_inc_lambda</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">rainbow_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.7</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lambda_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_lambda</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">lambda_sun</span> <span class="o">&gt;</span> <span class="n">rainbow_lambda</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">lambda_sun</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">I_inc_lambda</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">],</span><span class="n">color</span> <span class="o">=</span><span class="n">rgb_tup</span><span class="p">[</span><span class="mi">7</span><span class="o">-</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span> <span class="p">)</span>
+<span class="c1">###Labels</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Wavelegth $(\mu m$)&quot;</span><span class="p">)</span>
+<span class="n">axs</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectral Radiance $(W\cdot m^{-2} \cdot \mu m^{-1})$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Spectral Radiance $(W\\cdot m^{-2} \\cdot \\mu m^{-1})$&#39;)
+</pre></div>
+</div>
+<img alt="../_images/blackbody_5_1.png" src="../_images/blackbody_5_1.png" />
+</div>
+</div>
+<p>Inspection of the two linear spectral radiance plots, shows that there is a discrepancy between the peak values, of the graphs. With the peaks being associated to different energy photons, <span class="math notranslate nohighlight">\(B_{max}(\lambda_{max},5770); 1E_{\lambda max} = 2.47 eV\)</span>  <span class="math notranslate nohighlight">\(B_{max}(\nu,5770); E_{\nu max} = 1.4 eV\)</span>. When the function is a distribution and the transformation between independent variables is non-linear, one must be careful about the conclusions one draws. To transform between the functions the product rule can be used</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f2b69f0a-9f0f-4ab6-a7ca-2a9e14f7943a">
+<span class="eqno">(32)<a class="headerlink" href="#equation-f2b69f0a-9f0f-4ab6-a7ca-2a9e14f7943a" title="Permalink to this equation">#</a></span>\[\begin{equation}
+B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda,
+\end{equation}\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-2864cb13-60be-4b0e-bf36-80f435fb0196">
+<span class="eqno">(33)<a class="headerlink" href="#equation-2864cb13-60be-4b0e-bf36-80f435fb0196" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\frac{d \lambda}{d\nu} = - \lambda^2.
+\end{equation}\]</div>
+<p>This adds to a common misconception that the photons arriving from the Sun is peaked in green wavelengths, this is where the spectral peak is. A can be seen in the third figure from the top, where the Y axis is proportional to the number of photons per second at a given wavenumber, this is peaked in the infrared. As an aside, The colour of the sun is white, because the relative magnitudes across the visible spectrum are close to zero.</p>
+</section>
+<section id="radiation-balance">
+<h1>Radiation Balance<a class="headerlink" href="#radiation-balance" title="Permalink to this headline">#</a></h1>
+<p>The first idea for a radiation model, is to treat the earth as if it lacked an atmosphere and was just a colourful rock. The concept of albedo is briefly introduces this is <span class="math notranslate nohighlight">\(1 - \textrm{emissivity}\)</span>, and takes into account the fact that earth is quite reflective and white.</p>
+<p>An approximate temperature for the Earths surface can be determined using the stefan-Boltzmann Law, equating the total power in to the total power out.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-77588c32-3cbb-4268-ad59-4c93a4aedf31">
+<span class="eqno">(34)<a class="headerlink" href="#equation-77588c32-3cbb-4268-ad59-4c93a4aedf31" title="Permalink to this equation">#</a></span>\[\begin{equation}
+ F = 4 \sigma T^4 = \pi \int^\infty _0 d \nu B_{\nu}(\nu, T)
+\end{equation}\]</div>
+<p>The Earth is not matte black it has an alebdo value which is mostly due to the clouds. This has an average value of 0.3</p>
+<ul class="simple">
+<li><p>Ratio of Flux arriving at earth:</p>
+<ul>
+<li><p>Radius of The Sun <span class="math notranslate nohighlight">\(R_{Sun} = 696340km\)</span></p></li>
+<li><p>Distance of Earth From Sun  <span class="math notranslate nohighlight">\(D_{es}= 151.56\cdot 10^6km\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\( R = \frac{R_{Sun}^2}{D_{es}^2}\)</span></p></li>
+</ul>
+</li>
+<li><p>Total Incident flux from Sun:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\( F_{incident} = \pi \int_0^\infty d\nu(B(\nu,5770k))\cdot R \)</span></p></li>
+</ul>
+</li>
+<li><p>Total Flux Incident:</p>
+<ul>
+<li><p>Albedo of Earth is <span class="math notranslate nohighlight">\(\approx 0.3\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F_{absorbed} = (1-A)*F_{incident}\)</span></p></li>
+</ul>
+</li>
+<li><p>Temperature of Earth</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(T_{Earth} = (\frac{F_{absorbed}}{4 \sigma})^{\frac{1}{4}}\)</span></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">R_Earth</span> <span class="o">=</span> <span class="mi">6371</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">R_Sun</span> <span class="o">=</span> <span class="mi">696340</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">3</span>
+<span class="n">D_Earth_Sun</span> <span class="o">=</span> <span class="mf">1.5154</span><span class="o">*</span><span class="mi">10</span><span class="o">**</span><span class="mi">11</span>
+<span class="n">Flat_Earth_Surface_Area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">R_Earth</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">5.67</span><span class="o">*</span><span class="mi">10</span><span class="o">**-</span><span class="mi">8</span>
+<span class="n">T_sun</span> <span class="o">=</span> <span class="mi">5770</span>
+<span class="n">Albedo</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">Flux_to_Earth</span> <span class="o">=</span> <span class="n">sigma</span><span class="o">*</span><span class="n">T_sun</span><span class="o">**</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">R_Sun</span><span class="o">/</span><span class="n">D_Earth_Sun</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">Power_to_earth</span> <span class="o">=</span> <span class="n">Flat_Earth_Surface_Area</span><span class="o">*</span><span class="n">Flux_to_Earth</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Albedo</span><span class="p">)</span>
+<span class="n">T_Earth</span> <span class="o">=</span> <span class="p">(</span><span class="n">Power_to_earth</span><span class="o">/</span><span class="n">Flat_Earth_Surface_Area</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span><span class="o">**</span><span class="mf">0.25</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Temperature of Earth in Kelvin: </span><span class="si">{</span><span class="n">T_Earth</span><span class="si">:</span><span class="s2">.3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Temperature of Earth in Kelvin: 2.53e+02
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our assumptions give us a temperature of <span class="math notranslate nohighlight">\(\approx -\)</span>20^\circ C<span class="math notranslate nohighlight">\(, which is clearly much colder than the Earth's measured mean temperature of \)</span>14^\circ C$. This leads us to the greenhouse effect, where, short wave radiation absorbed by the earth ,from the sun, is re emitted as long wave radiation from the Earth. It is re absorbed by gases in the atmosphere and ‘trapped’. Thus total Flux from the earth is Lower than that predicted.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "book"
+        },
+        kernelOptions: {
+            kernelName: "book",
+            path: "./Chapter_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'book'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="atmospheric_primer.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Radiation Modelling</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="lorentzian_broadening.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Variance of Absorption Spectra</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sean Craven<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Bibliography" href="../Bibliography.html" />
-    <link rel="prev" title="SimpleTrans" href="SimpleTrans.html" />
+    <link rel="next" title="A very short introduction to relational databases" href="../Database_Chapter/Database_intro_1.html" />
+    <link rel="prev" title="The Optical Depths Database" href="Optical_depth_db.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -197,6 +197,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="lorentzian_broadening.html">
    The Variance of Absorption Spectra
   </a>
@@ -207,13 +212,42 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="SimpleTrans.html">
-   SimpleTrans
+  <a class="reference internal" href="Optical_depth_db.html">
+   The Optical Depths Database
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Radiative transfer
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Relational Database Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SimpleTrans
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
   </a>
  </li>
 </ul>
@@ -437,42 +471,42 @@ title="Print to PDF"
 <h1>Radiative transfer<a class="headerlink" href="#radiative-transfer" title="Permalink to this headline">#</a></h1>
 <p>Radiation modelling, is a notorious challenging due to its highly coupled nature. It is important that the goals of our model are defined, such that when approximations are made to simply the problem, the sources of discrepancy can be understood. Throughout the book most of the effort in the chapters has been focused around <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>. Therefore, to continue this focus, the radiation model that is developed is focused on modelling the greenhouse effect caused by molecules re-radiating longwave radiation into the atmosphere. We take the only source of radiation to be black body radiation emitted by the earth, assuming it is a perfect black body, at some temperature <span class="math notranslate nohighlight">\(T\)</span> and wavenumber <span class="math notranslate nohighlight">\(\nu\)</span> the spectral radiance is</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-0">
-<span class="eqno">(32)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-0" title="Permalink to this equation">#</a></span>\[B(T, \nu) = 2hc^2 \nu^3 \frac{1}{e^{hc\nu/(k_bT) - 1}.\]</div>
+<span class="eqno">(37)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-0" title="Permalink to this equation">#</a></span>\[B(T, \nu) = 2hc^2 \nu^3 \frac{1}{e^{hc\nu/(k_bT) - 1}.\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The hitran convention for wavenumber is used wher it is denoted as <span class="math notranslate nohighlight">\(\nu\)</span> rather than <span class="math notranslate nohighlight">\(\tilde{\nu}\)</span> in many texts.</p>
 </div>
-<p>Additionally, because the effects of incoming solar radiation are not considered, which performs a substantial amount of heating in the stratosphere with absorption of UV by O2, limiting the model to only extend up to 10km enables the model to both avoid warming due to shortwave and relative gas concentration changes.</p>
+<p>Additionally, because the effects of incoming solar radiation are not considered, which performs a substantial amount of heating in the stratosphere with absorption of UV by O2, limiting the model to only extend up to 10km enables the model to both avoid warming due to shortwave and relative gas concentration changes as discussed in <a class="reference internal" href="lorentzian_broadening.html"><span class="doc std std-doc">Standard Atmosphere Model</span></a>.</p>
 <p>To start the simplest model of the atmosphere is that it is a single block of some height, from which an observer is looking down perpendicular to and radiation is emitted parallel to the surface. The Beer-Lambert Law describes this</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-1">
-<span class="eqno">(33)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-1" title="Permalink to this equation">#</a></span>\[-\frac{d}{d \tau_\nu} I(\tau, \hat{n}, \nu) = I(\tau, \hat{n}, \nu).\]</div>
+<span class="eqno">(38)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-1" title="Permalink to this equation">#</a></span>\[-\frac{d}{d OD_\nu} I(OD_\nu, \hat{n}, \nu) = I(OD_\nu, \hat{n}, \nu).\]</div>
 <p>The parameter <span class="math notranslate nohighlight">\(\tau\)</span> is the optical density of the medium. This equation, describes a radiation model that only models the amount of light, which is not scattered by the medium. This is solved by a simple exponential decay, which has decay length inversely proportional to the optical depth of the medium.</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-2">
-<span class="eqno">(34)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-2" title="Permalink to this equation">#</a></span>\[I = I_0 \exp (-\tau)\]</div>
+<span class="eqno">(39)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-2" title="Permalink to this equation">#</a></span>\[I = I_0 \exp (-OD)\]</div>
 <p>This is an insufficient model for our use case; firstly, a key behaviour of greenhouse gases is that they re-radiate isotropically, and secondly, they have differing optical depth depending on <a class="reference internal" href="lorentzian_broadening.html"><span class="doc std std-doc">wavenumber</span></a>.</p>
 <p>To include the isotropic re-radiation we iterate upon the Beer-Lambert law, with the Schwarzschild equation. The Schwarzschild equation adds a black body radiation term to the Beer-Lambert law, which is dependent on the optical depth of the medium. Further, it is assumed that the incident radiation is incident on the medium with a direction defined by a unit vector <span class="math notranslate nohighlight">\(\hat{n}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-3">
-<span class="eqno">(35)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-3" title="Permalink to this equation">#</a></span>\[\frac{d}{d \tau_nu} I(\tau_{\nu}, \hat{n}, \nu)= -\frac{1}{\cos\theta} [I(\tau_{\nu}, \hat{n}, \nu) - B(T(\tau_{\nu}), \nu)].\]</div>
+<span class="eqno">(40)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-3" title="Permalink to this equation">#</a></span>\[\frac{d}{d \tau_nu} I(OD_{\nu}, \hat{n}, \nu)= -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)].\]</div>
 <p>Where <span class="math notranslate nohighlight">\(\tau = k(\nu, p, T)u\)</span>, <span class="math notranslate nohighlight">\(u\)</span> is the column number density of absorbing species and <span class="math notranslate nohighlight">\(k(\nu, p, T)\)</span> is the absorption coefficient per molecule per unit length. The re-radiation term is the plank function <span class="math notranslate nohighlight">\(B(T(\tau_\nu), \nu)\)</span>. Additionally, the <span class="math notranslate nohighlight">\(\cos \theta\)</span> term comes from the distance through the medium of width <span class="math notranslate nohighlight">\(\delta \tau\)</span>, where , if the path of incoming radiation is at some angle <span class="math notranslate nohighlight">\(\theta\)</span> to the perpendicular from the surface, the distance the radiation travels is further <span class="math notranslate nohighlight">\(\delta \tau / \cos \theta\)</span>, as seen in the figure below from<span id="id1">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. This model is taken from sections of chapter 4 in <span class="math notranslate nohighlight">\(principles of planetary climate\)</span><span id="id2">[]</span>.</p>
 <img alt="../_images/Schwarzchild.png" class="align-center" src="../_images/Schwarzchild.png" />
 <p>If it is assumed that the radiation incoming and outgoing is isotropic as is emitted black body radiation, then the directional dependence of the equation is removed. The Solution can then be integrated over a hemisphere,and two separate ordinary differential equations for upward and downward propagating flux can be performed, assuming that <span class="math notranslate nohighlight">\(\cos \bar{\theta} = 1/2\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-5dbb3f6e-22b0-48f2-9fec-2b2751449060">
-<span class="eqno">(36)<a class="headerlink" href="#equation-5dbb3f6e-22b0-48f2-9fec-2b2751449060" title="Permalink to this equation">#</a></span>\[\begin{align}
-\int_0^{\pi/2}I(T(\tau_{\nu}),\nu) d\Omega &amp;= \int_0^{\pi/2} -\frac{1}{\cos\theta} [I(\tau_{\nu}, \hat{n}, \nu) - B(T(\tau_{\nu}), \nu)] d\Omega, \\
-\frac{d}{d \tau_{\nu}} I_+ &amp;= - I_+ + \pi B(T_{\nu}, \nu).
+<div class="amsmath math notranslate nohighlight" id="equation-38b35efc-a837-4ce6-a74d-7523600a2dd7">
+<span class="eqno">(41)<a class="headerlink" href="#equation-38b35efc-a837-4ce6-a74d-7523600a2dd7" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_0^{\pi/2}I(T(OD_{\nu}),\nu) d\Omega &amp;= \int_0^{\pi/2} -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)] d\Omega, \\
+\frac{d}{d OD_{\nu}} I_+ &amp;= - I_+ + \pi B(T_{\nu}, \nu).
 \end{align}\]</div>
 <p><span class="math notranslate nohighlight">\(I_+\)</span> is all the radiation in the upward direction from the block of atmosphere. In the downward direction <span class="math notranslate nohighlight">\(I_-\)</span>, the equation is similar</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f4df838e-26a3-4061-a0e9-3321b5053035">
-<span class="eqno">(37)<a class="headerlink" href="#equation-f4df838e-26a3-4061-a0e9-3321b5053035" title="Permalink to this equation">#</a></span>\[\begin{align}
-\int_{\pi/2}^{\pi}I(T(\tau_{\nu}), \nu) d\Omega &amp;= \int_{\pi/2}^{\pi} -\frac{1}{\cos\theta} [I(\tau_{\nu}, \hat{n}, \nu) - B(T(\tau_{\nu}), \nu)] d\Omega, \\
-\frac{d}{d \tau_{\nu}} I_- &amp;=  I_- - \pi B(T_{\nu}, \nu).
+<div class="amsmath math notranslate nohighlight" id="equation-c1ffed2f-5ae8-4837-be80-e4e09ee8ef7e">
+<span class="eqno">(42)<a class="headerlink" href="#equation-c1ffed2f-5ae8-4837-be80-e4e09ee8ef7e" title="Permalink to this equation">#</a></span>\[\begin{align}
+\int_{\pi/2}^{\pi}I(T(OD_{\nu}), \nu) d\Omega &amp;= \int_{\pi/2}^{\pi} -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)] d\Omega, \\
+\frac{d}{d OD_{\nu}} I_- &amp;=  I_- - \pi B(T_{\nu}, \nu).
 \end{align}\]</div>
-<p>As the temperature of the radiation block is a function of the atmosphere’s optical depth, Ideally it should be calculated, rather than taken from the ISA model. However, this is deceptively difficult. Often, atmospheres are not in just radiative equilibrium, because they are comprised of gases convection plays a key role in energy transfer as well, thus blocks of atmosphere may infect heat, and not be in radiative equilibrium with their surroundings. A model which includes, convection is much better approximated by an adiabatic atmosphere where warm blocks of air rise, expand and cool adiabatically. This, is typically the assumption for the lower atmosphere, <a class="reference external" href="https://ereader.cambridge.org/wr/viewer.html#book/95232efd-fe8e-4b72-ad9e-c3f22d2a0cda/ichap4/pos_1.4427424769341008">troposphere</a><span id="id3">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. For higher altitudes, convection is less important and radiative equilibrium provides a better approximation.</p>
+<p>As the temperature of the radiation block is a function of the atmosphere’s optical depth, Ideally it should be calculated, rather than taken from the ISA model. However, this is deceptively difficult. Often, atmospheres are not in just radiative equilibrium, because they are comprised of gases convection plays a key role in energy transfer as well, thus blocks of atmosphere may infect heat, and not be in thermal equilibrium with their surroundings. A model which includes, convection is much better approximated by an adiabatic atmosphere where warm blocks of air rise, expand and cool adiabatically. This, is typically the assumption for the lower atmosphere, <a class="reference external" href="https://ereader.cambridge.org/wr/viewer.html#book/95232efd-fe8e-4b72-ad9e-c3f22d2a0cda/ichap4/pos_1.4427424769341008">troposphere</a><span id="id3">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. For higher altitudes, convection is less important and radiative equilibrium provides a better approximation.</p>
 <p>Despite, it not being a good approximation, for the lower atmosphere, radiative equilibrium provides a more straightforward path to a solution. With this boundary condition two equations for the upwards and downward spectral radiance can be formed:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-752da615-548e-497c-9a4c-fc04cfdb4554">
-<span class="eqno">(38)<a class="headerlink" href="#equation-752da615-548e-497c-9a4c-fc04cfdb4554" title="Permalink to this equation">#</a></span>\[\begin{align}
-0 = \frac{d}{d \tau_{\nu}}I_+ - I_- &amp;= -(I_+ + I_-) + 2 \pi B(T(\tau_{\nu}, \nu), \\
- \frac{d}{d \tau_{\nu}}I_+ + I_- &amp;= -(I_+ - I_-).
+<div class="amsmath math notranslate nohighlight" id="equation-5f6d0acd-7860-4369-bb2a-0e22429749e7">
+<span class="eqno">(43)<a class="headerlink" href="#equation-5f6d0acd-7860-4369-bb2a-0e22429749e7" title="Permalink to this equation">#</a></span>\[\begin{align}
+0 = \frac{d}{d OD_{\nu}}I_+ - I_- &amp;= -(I_+ + I_-) + 2 \pi B(T(OD_{\nu}, \nu), \\
+ \frac{d}{d OD_{\nu}}I_+ + I_- &amp;= -(I_+ - I_-).
 \end{align}\]</div>
 <p>As an initial start point, a grey gas atmosphere is considered. This is where optical depth is independent of wavenumber.</p>
 </section>
@@ -480,50 +514,36 @@ title="Print to PDF"
 <h1>Grey Gas Model<a class="headerlink" href="#grey-gas-model" title="Permalink to this headline">#</a></h1>
 <p>With wavenumber independence, we can consider the total flux given by the integral over the integral over wavenumber and solid angle of the plank function which gives the Stephan-Boltzmann law</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-4">
-<span class="eqno">(39)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-4" title="Permalink to this equation">#</a></span>\[\sigma T^4 = \int \int d \Omega d \nu B(T,\nu).\]</div>
+<span class="eqno">(44)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-4" title="Permalink to this equation">#</a></span>\[\sigma T^4 = \int \int d \Omega d \nu B(T,\nu).\]</div>
 <p>With the solution to eq.<code class="xref eq docutils literal notranslate"><span class="pre">label</span></code> now,</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-5">
-<span class="eqno">(40)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-5" title="Permalink to this equation">#</a></span>\[I_+ - I_- = C,\]</div>
+<span class="eqno">(45)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-5" title="Permalink to this equation">#</a></span>\[I_+ - I_- = C,\]</div>
 <p>Thus</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-6">
-<span class="eqno">(41)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-6" title="Permalink to this equation">#</a></span>\[I_+ + I_- = -c \tau + c'\]</div>
+<span class="eqno">(46)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-6" title="Permalink to this equation">#</a></span>\[I_+ + I_- = -c OD + c'\]</div>
 <p>Using the boundary condition that the outgoing longwave radiation(OLR) at the top of the atmosphere is a constant <span class="math notranslate nohighlight">\(I_{OLR}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-specific-solution">
-<span class="eqno">(42)<a class="headerlink" href="#equation-specific-solution" title="Permalink to this equation">#</a></span>\[I_+ + I_- = c' - c\tau_{\infty} = I_{OLR},\]</div>
+<span class="eqno">(47)<a class="headerlink" href="#equation-specific-solution" title="Permalink to this equation">#</a></span>\[I_+ + I_- = c' - c OD_{\infty} = I_{OLR},\]</div>
 <p>Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-db284941-7bdd-49ee-8e2c-d52822166016">
-<span class="eqno">(43)<a class="headerlink" href="#equation-db284941-7bdd-49ee-8e2c-d52822166016" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b5524a34-332f-4a80-b82b-9e5eba2a6164">
+<span class="eqno">(48)<a class="headerlink" href="#equation-b5524a34-332f-4a80-b82b-9e5eba2a6164" title="Permalink to this equation">#</a></span>\[\begin{align}
 c &amp;= I_{OLR}, \\
-c' &amp;= I_{OLR}(\tau_{\infty} + 1).
+c' &amp;= I_{OLR}(OD_{\infty} + 1).
 \end{align}\]</div>
-<p>Finally, substituting into eq.<a class="reference internal" href="#equation-specific-solution">(42)</a></p>
+<p>Finally, substituting into eq.<a class="reference internal" href="#equation-specific-solution">(47)</a></p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-7">
-<span class="eqno">(44)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-7" title="Permalink to this equation">#</a></span>\[T = \left(\frac{(1 + \tau_{\infty} - \tau)I_{\infty}}{2 \sigma} \right)^{1/4}.\]</div>
+<span class="eqno">(49)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-7" title="Permalink to this equation">#</a></span>\[T = \left(\frac{(1 + OD_{\infty} - OD)I_{\infty}}{2 \sigma} \right)^{1/4}.\]</div>
 <p>This gives us the expression for the Grey Gas at zero altitude. A comparison between this and the surface temperature of the planet is plotted below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">isa</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">simpletrans</span> <span class="kn">import</span> <span class="n">isa</span>
 <span class="kn">import</span> <span class="nn">scipy.constants</span> <span class="k">as</span> <span class="nn">cst</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
 
 <span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
 </pre></div>
 </div>
 </div>
@@ -539,34 +559,34 @@ c' &amp;= I_{OLR}(\tau_{\infty} + 1).
 <span class="n">isa_temp_profile</span> <span class="o">=</span> <span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">altitudes</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">ground_gas_temp</span><span class="p">(</span><span class="n">tau_inf</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">ground_gas_temp</span><span class="p">(</span><span class="n">od_inf</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the ground temperature for a particular optical thickness of the</span>
 <span class="sd">    whole atmosphere tau_infinity.</span>
 <span class="sd">    Args:</span>
-<span class="sd">        tau_inf: The total optical Thickness of the atmosphere.</span>
+<span class="sd">        od_inf: The total optical Thickness of the atmosphere.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        t_ground</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">t_ground</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">tau_inf</span><span class="p">)</span> <span class="o">*</span> <span class="n">olr</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SBC</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.25</span>
+    <span class="n">t_ground</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">od_inf</span><span class="p">)</span> <span class="o">*</span> <span class="n">olr</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SBC</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.25</span>
     <span class="k">return</span> <span class="n">t_ground</span>
 
 
-<span class="k">def</span> <span class="nf">ground_temp</span><span class="p">(</span><span class="n">tau_inf</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">ground_temp</span><span class="p">(</span><span class="n">od_inf</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns The surface temperature of the planet assuming radiative equilibruim as a function of</span>
 <span class="sd">    Args:</span>
-<span class="sd">        tau_inf:</span>
+<span class="sd">        od_inf:</span>
 
 <span class="sd">    Returns:</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">t_ground</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">+</span> <span class="n">tau_inf</span><span class="p">)</span> <span class="o">*</span> <span class="n">olr</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SBC</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.25</span>
+    <span class="n">t_ground</span> <span class="o">=</span> <span class="p">((</span><span class="mi">2</span> <span class="o">+</span> <span class="n">od_inf</span><span class="p">)</span> <span class="o">*</span> <span class="n">olr</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SBC</span><span class="p">))</span> <span class="o">**</span> <span class="mf">0.25</span>
     <span class="k">return</span> <span class="n">t_ground</span>
 
-
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span>
     <span class="n">taus_inf</span><span class="p">,</span>
     <span class="n">ground_gas_temp</span><span class="p">(</span><span class="n">taus_inf</span><span class="p">),</span>
@@ -587,21 +607,20 @@ c' &amp;= I_{OLR}(\tau_{\infty} + 1).
     <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Earth Surface Temperature&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Total atmosphere optical thickness: $\tau_{\infty}$&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (K)&quot;</span><span class="p">)</span><span class="n">i</span><span class="p">;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Total atmosphere optical thickness: $OD_{\infty}$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Temperature (K)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Temperature (K)&#39;)
-</pre></div>
-</div>
-<img alt="../_images/radiative_transfer_2_1.png" src="../_images/radiative_transfer_2_1.png" />
+<img alt="../_images/radiative_transfer_2_0.png" src="../_images/radiative_transfer_2_0.png" />
 </div>
 </div>
 <p>As the optical thickness of the atmosphere increases the surface temperature and the Grey Gas surface temperature approach each other, reducing the need for convection.</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-radiative-transfer-8">
-<span class="eqno">(45)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-8" title="Permalink to this equation">#</a></span>\[T(0) = \left[\frac{(1 + \tau_{\infty})I_{OLR}}{2 \sigma} \right]^{1/4}\]</div>
+<span class="eqno">(50)<a class="headerlink" href="#equation-chapter-3-radiative-transfer-8" title="Permalink to this equation">#</a></span>\[T(0) = \left[\frac{(1 + \tau_{\infty})I_{OLR}}{2 \sigma} \right]^{1/4}\]</div>
+<p>This does highlight a problem at low altitudes, where the total optical thickness is low. There is a large differential between the surface temperature and the atmosphere temperature. This is clearly a poor model for Earth, as the ground is in equilibrium with the air at surface level. Clearly, this radiative equilibrium assumption is not close enough to be valid throughout the whole atmosphere for our purposes.</p>
+<p>An assumptions change is required. In the next page we assume being in a radiation and convection based equilibrium. This removes the boundary condition that each layer must have the same amount of flux in as it lets out. When convection is included, it is assumed that hot pockets of gas rise and adiabatically expand lowering their temperature, to maintain thermal equilibrium with their surroundings. This enables the model block atmosphere to transfer energy between atmosphere altitudes. For the models, these convection currents are not included, and so energy equilibrium consevation is assumend but flux conservation is not required.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -631,17 +650,17 @@ c' &amp;= I_{OLR}(\tau_{\infty} + 1).
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="SimpleTrans.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Optical_depth_db.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">SimpleTrans</p>
+            <p class="prev-next-title">The Optical Depths Database</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Bibliography.html" title="next page">
+    <a class='right-next' id="next-link" href="../Database_Chapter/Database_intro_1.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Bibliography</p>
+        <p class="prev-next-title">A very short introduction to relational databases</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

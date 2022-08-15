@@ -21,7 +21,7 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The Variance of Absorption Spectra" href="lorentzian_broadening.html" />
+    <link rel="next" title="Incoming and Outgoing Radiation" href="blackbody.html" />
     <link rel="prev" title="Using Bayesian Inference to Determine \(S\) Left as Work in progress" href="../Chapter_2/bayesian_inference.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -197,6 +197,11 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="lorentzian_broadening.html">
    The Variance of Absorption Spectra
   </a>
@@ -207,8 +212,42 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="radiative_transfer.html">
    Radiative transfer
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Relational Database Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SimpleTrans
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
   </a>
  </li>
 </ul>
@@ -451,9 +490,9 @@ title="Print to PDF"
                 
   <section id="radiation-modelling">
 <h1>Radiation Modelling<a class="headerlink" href="#radiation-modelling" title="Permalink to this headline">#</a></h1>
-<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, these phenomena are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model.</p>
+<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects. And simply models an average column of atmosphere.</p>
 <p>Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.</p>
-<p>Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition’s probability. With different strength interactions provide differing intensities of line shapes.</p>
+<p>Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition’s probability. With different strength interactions provide differing intensities of line-by-line spectra, the stronger the interaction the more likely it will occur and the increased magnitude of the absorption line.</p>
 <p>This section will not deal with photon-molecule interactions as photon densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -481,7 +520,7 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 <section id="line-shapes">
 <h2>Line Shapes<a class="headerlink" href="#line-shapes" title="Permalink to this headline">#</a></h2>
 <p>Spectral lines have finite width due to the uncertainty principle, due to the excitations having a finite lifetime. Excited states have a defined lifetime <span class="math notranslate nohighlight">\( 2\tau\)</span>, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is <a class="reference external" href="http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf">derived</a> from ensuring equilibrium during stimulated emission.</p>
-<p>Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is <span class="math notranslate nohighlight">\(c_b(t) = \exp(-t/ 2\tau)\)</span>. <span class="math notranslate nohighlight">\(t\)</span> is only considered for <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
+<p>Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is <span class="math notranslate nohighlight">\(c_b(t) = \exp(-t/ 2 OD)\)</span>. <span class="math notranslate nohighlight">\(t\)</span> is only considered for <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>This derivation is taken from<span id="id1">[<a class="reference internal" href="../Bibliography.html#id29" title="B.H. Bransden and C.J. Joachain. Quantum Mechanics. Prentice Hall, 2000. ISBN 9780582356917. URL: https://books.google.co.uk/books?id=e57kxQEACAAJ.">BJ00</a>]</span> <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a> .</p>
@@ -504,13 +543,13 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 <span class="eqno">(18)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-3" title="Permalink to this equation">#</a></span>\[ \exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right] = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty} a(E')\exp(-iE't/\hbar)dE'.\]</div>
 <p>Inverting the transform solves for <span class="math notranslate nohighlight">\(a(E)\)</span> and bounding the function such that <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-4">
-<span class="eqno">(19)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-4" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\exp(iEt/\hbar)dt.\]</div>
+<span class="eqno">(19)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-4" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2 OD}\right)/t\hbar\right]\exp(iEt/\hbar)dt.\]</div>
 <p>Thus,</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-5">
-<span class="eqno">(20)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-5" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2\tau}.\]</div>
+<span class="eqno">(20)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-5" title="Permalink to this equation">#</a></span>\[a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2 OD}.\]</div>
 <p>Thus the PDF of finding the state in state <span class="math notranslate nohighlight">\(b\)</span> with some energy that is equal to <span class="math notranslate nohighlight">\(E = E_a + \hbar \omega\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-prop">
-<span class="eqno">(21)<a class="headerlink" href="#equation-prop" title="Permalink to this equation">#</a></span>\[|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4\tau^2}.\]</div>
+<span class="eqno">(21)<a class="headerlink" href="#equation-prop" title="Permalink to this equation">#</a></span>\[|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4 OD^2}.\]</div>
 <p>This then determines the intensity distribution of a transition down from <span class="math notranslate nohighlight">\(b \rightarrow a\)</span>. This is proportional to a Lorentzian distribution</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-6">
 <span class="eqno">(22)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-6" title="Permalink to this equation">#</a></span>\[f(\omega) = \frac{\Gamma^2/(4\hbar^2)}{(\omega-\omega_{ba})^2 + \Gamma^2/(4\hbar^2)}.\]</div>
@@ -598,10 +637,10 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
             <p class="prev-next-title">Using Bayesian Inference to Determine <span class="math notranslate nohighlight">\(S\)</span> Left as Work in progress</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="lorentzian_broadening.html" title="next page">
+    <a class='right-next' id="next-link" href="blackbody.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Variance of Absorption Spectra</p>
+        <p class="prev-next-title">Incoming and Outgoing Radiation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
