@@ -8,10 +8,15 @@ It can be installed using pip separately however,
 ```shell
 pip install simpletrans
 ```
-From with this done you local database must be populated. This is done by running the main script 
+From with this done you local database must be populated. This is done by running the main script: 
 ```shell 
 simpletrans -m 
 ```
+This will ask you to select a local folder for the database to be installed into, this must exist. Currently with the default gases, it takes up 3Gb, and about an hour to install. 
+
+From here all the functions and classes can be accessed. For more information, each function is documented in their respective files in their docstring. 
+
+The [atmosphere_grid] page has exemplar implementations of the module. 
 
 ## Structure and Overview
 before, diving into using the package, a high level overview of what it does is useful.
@@ -30,7 +35,7 @@ To enable these calculations, there are files which contain functions to help ca
 
 Finally, radiative_transfer.py implements a class called atmosphere grid. This models the atmosphere as a coarse altitude grid and a fine wavenumber grid of spacings, $1 km$ and $1 cm^{-1}$, respectively. The mean optical depth is queried from the database for the wavenumber bin and evaluated at the midpoint of the altitude block. The mean value and midpoint provide reasonable approximations to the quantities values in the region. 
 
-The database solution was chosen to speed up the process of the caluclations, as doing them in real time can be very slow. 
+The database solution was chosen to speed up the process of the calculations, as doing them in real time can be very slow. 
 
 For these gridded values the [two stream equations](../Chapter_3/radiative_transfer.ipynb) are solved for the upward fluxes by the method AtmosphereGrid.up_flux(). This produces an output of a flux grid that models the transfer of radiation out of the atmosphere. 
 

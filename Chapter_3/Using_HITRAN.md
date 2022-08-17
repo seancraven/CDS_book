@@ -1,5 +1,16 @@
 # HITRAN
 The HITRAN database, an acronym for high-resolution transmission molecular absorption database, was initially intended as purely a database to store the infrared properties of the atmosphere, which is what we use it for. However, the scope has grown massively and the about page is quite [informative](https://hitran.org/about/).
+
+Further, The database is used extensively in research and industry for various atmospheric analyses, from climate models{cite}`FORUM, OCO, TEMPO` to extraterrestrial atmospheric composition{cite}`HELIOS, Exo_Transmit`. In addition, there is a python API{cite}`hapi`. The API uses SQL like queries to access the database. To install the API run:
+```{shell}
+pip install hitran-api
+```
+```{margin}
+If you are not familiar with packages or package managers such as [pip](https://pypi.org/) and [conda](https://pypi.org/https://docs.conda.io/projects/conda/en/latest/), it is worth getting used to them. It is a fast and easy way to utilise other peoples code. 
+```
+The Hitran-api provides a set of functions which compute the absorption spectra for the user. The package's documentation can be found [here](https://hitran.org/static/hapi/hapi_manual.pdf).
+
+Now, that the basic physics behind absorption has been covered The rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model. 
 ## Using the HITRAN-API
 ```{margin}
 An application programming interface(API) provides a method for two programmes to communicate. Typically they provide a way to obscure the inner workings of a program but enable a user to have a fixed interface that produces a fixed output. A good example is the c based arrays implemented by numpy. One doesn't need to know how the arrays are implemented assides that doing [vectorised](https://blog.paperspace.com/numpy-optimization-vectorization-and-broadcasting/) operations on them is really fast, and consistent. 

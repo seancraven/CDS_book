@@ -1,6 +1,6 @@
 ## Radiation Modelling
 
-This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects. And simply models an average column of atmosphere. 
+This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate  the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. This sections of the book, explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects. And simply models an average column of atmosphere. 
 
 Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.
 
@@ -29,7 +29,7 @@ The answer, to the question above is mainly no. The most prominent forms of tran
 
 Spectral lines have finite width due to the uncertainty principle, due to the excitations having a finite lifetime. Excited states have a defined lifetime $ 2\tau$, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is [derived](http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf) from ensuring equilibrium during stimulated emission.
 
-Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is $c_b(t) = \exp(-t/ 2\tau)$. $t$ is only considered for $t > 0$. 
+Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is $c_b(t) = \exp(-t/ 2 OD)$. $t$ is only considered for $t > 0$. 
 
 ```{margin}
 This derivation is taken from{cite:p}`qmbj` [Bransden & Joachain](https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE) .
@@ -60,17 +60,17 @@ Noting that this can be written as the Fourier transform of some function $a(E)$
 Inverting the transform solves for $a(E)$ and bounding the function such that $t > 0$.
 ```{math}
 :label:
-a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2\tau}\right)/t\hbar\right]\exp(iEt/\hbar)dt.
+a(E) = \frac{1}{\sqrt{2\pi\hbar}}\int_{-\infty}^{\infty}\exp\left[-i\left(E_b - i\frac{\hbar}{ 2 OD}\right)/t\hbar\right]\exp(iEt/\hbar)dt.
 ``` 
 Thus, 
 ```{math}
 :label:
-a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2\tau}.
+a(E) = \frac{1}{\sqrt{2\pi\hbar}}\frac{-i\hbar}{E_b - E - i\hbar/ 2 OD}.
 ```
 Thus the PDF of finding the state in state $b$ with some energy that is equal to $E = E_a + \hbar \omega$ is
 ```{math}
 :label: prop
-|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4\tau^2}.
+|a(E)|^2 = \frac{\hbar}{2\pi}\frac{1}{(E_b - E_a - \hbar \omega)^2 + \hbar^2/4 OD^2}.
 ```
 This then determines the intensity distribution of a transition down from $b \rightarrow a$. This is proportional to a Lorentzian distribution
 ```{math}
@@ -125,16 +125,6 @@ Where
 :label: 
 w(z) = \frac{\omega -\omega_0 + i\Gamma}{\sigma \sqrt{2}}
 ```
-For the line widths $\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}$. 
+For the line widths $\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}$. This expression is the voight profile which is the line shape used by the rest of the book. One can, use either a Lorentzian or Doppler profile and disregard an aspect of broadening, however, evaluation of the Voight profile is not substantially more computationally expensive, and contains some interesting physics and so it is retained. There are further evolutions of the Voight profile, for example the Heartmann-Tran profile{cite}`Hartmann-Tran`.  
 
-### Using HITRAN
-HITRAN is a database of molecular spectral data. The database is used extensively in research and industry for various atmospheric analyses, from climate models{cite}`FORUM, OCO, TEMPO` to extraterrestrial atmospheric composition{cite}`HELIOS, Exo_Transmit`. HITRAN provides a comprehensive selection of line-by-line data for atmospheric radiation modelling of spectral absorption. In addition, there is a python API{cite}`hapi`. The API uses SQL like queries to access the database. To install the API run:
-```{python3}
-pip install hitran-api
-```
-```{margin}
-If you are not familiar with packages or package managers such as [pip](https://pypi.org/) and [conda](https://pypi.org/https://docs.conda.io/projects/conda/en/latest/), it is worth getting used to them. It is a fast and easy way to utilise other peoples code. 
-```
-The Hitran-api provides a set of functions which compute the absorption spectra for the user. The package's documentation can be found [here](https://hitran.org/static/hapi/hapi_manual.pdf). 
-
-Now, that the basic physics behind absorption has been covered The rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model. 
+The next section in the book is a short refresh of the mechanics of black body radiation. 
