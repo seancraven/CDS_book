@@ -24,9 +24,9 @@ parts:
     - file: Chapter_3/atmospheric_primer.md
     - file: Chapter_3/blackbody.ipynb
     - file: Chapter_3/lorentzian_broadening.ipynb
+    - file: Chapter_3/radiative_transfer.ipynb
     - file: Chapter_3/Using_HITRAN.md
     - file: Chapter_3/Optical_depth_db.md
-    - file: Chapter_3/radiative_transfer.ipynb
   - caption: Relational Database Introduction
     chapters:
     - file: Database_Chapter/Database_intro_1.md
