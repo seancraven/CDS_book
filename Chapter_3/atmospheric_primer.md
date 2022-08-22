@@ -1,10 +1,10 @@
 ## Radiation Modelling
 
-This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate  the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. This sections of the book, explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects. And simply models an average column of atmosphere. 
+This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate  the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. This section of the book explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects and simply models an average column of atmosphere. 
 
 Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.
 
-Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition's probability. With different strength interactions provide differing intensities of line-by-line spectra, the stronger the interaction the more likely it will occur and the increased magnitude of the absorption line. 
+Line spectra arise from energy level transitions within atoms. For example, a transition can occur when sufficient energy photons interact with a molecule. The coupling of the states to the EM-field governs the transition's probability. With different strength interactions provide differing intensities of line-by-line spectra, the stronger the interaction, the more likely it will occur and the increased magnitude of the absorption line. 
 
 This section will not deal with photon-molecule interactions as photon densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward. 
 ```{note}
@@ -13,7 +13,7 @@ Hint: the plank functions units are $W/m^2$.
 ```
 ### Electron Transitions
 
-One of the early achievements of quantum mechanics and the Bohr model was the prediction of Hydrogen's emission lines. As a result from the electronic shell model. With the advent of the Schrodinger equation solutions to Hydrogen, which describes electron orbitals in terms of 3 quantum numbers of n, l, m the principle, angular momentum, and magnetic quantum numbers. The notation for a specific wavefunction denoting a state n, l, m 
+One of the early achievements of quantum mechanics and the Bohr model was the prediction of Hydrogen's emission lines. As a result of the electronic shell model. With the advent of the Schrodinger equation solutions to Hydrogen, which describes electron orbitals in terms of 3 quantum numbers of n, l, m the principle, angular momentum, and magnetic quantum numbers. The notation for a specific wavefunction denoting a state n, l, m 
 ```{math}
 :label:
 \Phi_{n, l, m}(\textbf{r}, t) = R_{n, l}(r)Y_{l, m}(\theta, \phi)\exp(-i E_{n, l}t/\hbar).
@@ -21,13 +21,13 @@ One of the early achievements of quantum mechanics and the Bohr model was the pr
 ```{note}
 Given, that the Earth's balckbody emission spectra is peaked in the infra-red, it doesn't glow in our visable spectrum, are electronic transistions with energies around $10ev$, driven by outgoing radiation, emitted by the earth? 
 ```
-The answer, to the question above is mainly no. The most prominent forms of transition driven in the atmosphere are rotational and vibrational mode excitations. 
+The answer, to the question above is mainly no. Rotational and vibrational mode excitations are the most prominent forms of transition driven in the atmosphere. 
 ### Vibrational Transition 
 - [ ] qm primer of this
 - [ ] Charles
 ### Line Shapes
 
-Spectral lines have finite width due to the uncertainty principle, due to the excitations having a finite lifetime. Excited states have a defined lifetime $ 2\tau$, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is [derived](http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf) from ensuring equilibrium during stimulated emission.
+Spectral lines have finite width due to the uncertainty principle and the excitations having a finite lifetime. Excited states have a defined lifetime $ 2\tau$, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is [derived](http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf) from ensuring equilibrium during stimulated emission.
 
 Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is $c_b(t) = \exp(-t/ 2 OD)$. $t$ is only considered for $t > 0$. 
 
@@ -80,19 +80,17 @@ f(\omega) = \frac{\Gamma^2/(4\hbar^2)}{(\omega-\omega_{ba})^2 + \Gamma^2/(4\hbar
 Where $\Gamma = \hbar / \tau$ and $ \omega_{ba} = (E_b - E_a)/\hbar$. The parameter $\Gamma/\hbar$ is the full width half maximum of the distribution.
 
 ### Line Broadening: Pressure
-
-There is an additional significant component, which increases the value of $\tau$. Transitions due to collisions with other neighbouring molecules. Broadening from collisions occurs in much the same way as spontaneous emission as there is an associated rate of transition. With a transition rate there is an expected lifetime of a state, and thus uncertainity induced broadening. Consequently, if any de-excitation/excitation phenomena has a rate then it has a finite line width, to calculate the total rate of a transition the sum of the rates is taken. 
+An additional significant component increases the value of $\tau$ when collisions induce transitions with other neighbouring molecules. Broadening from collisions occurs in much the same way as spontaneous emission, as there is an associated rate of transition. With a transition rate, there is an expected lifetime of a state, and thus uncertainty induced broadening. Consequently, if any de-excitation/excitation phenomena has a rate, then it has a finite line width. The sum of the rates is calculated to evaluate a transition's total rate. 
 
 The rate of collisions is a function of the number density of the molecules($n$), the molecule's cross-section($\sigma$), and the relative velocity($v$).
 ```{math}
 :label:
 W_c = \sigma vn.
 ```
-The rates are summed from both the natural decay and the collisions, and their reciprocal gives $\tau$. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. These are both still pressure-broadening phenomena, In climate modelling air-broadening massively dominates. 
+The rates are summed from both the natural decay and the collisions, and their reciprocal gives $\tau$. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. Although these are both still pressure-broadening phenomena, air-broadening dominates in climate modelling. 
 
 ### Line Broadening: Doppeler
-
-The Doppler shift due to the relative motion of the atom, and the photons additionally increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution of velocites. 
+The Doppler shift due to the atom's and the photon's relative motion also increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution of velocities. 
 ```{note}
 The derivation for this is also taken from [Bransden & Joachain](https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE).
 ```
@@ -101,7 +99,7 @@ The derivation for this is also taken from [Bransden & Joachain](https://www.abe
 :label:
 \omega = \omega_0\left(1 \mp \frac{v}{c}\right).
 ```
-Where $\omega_0$ is the un-shifted angular frequency and $v, c$ are the particles and lights speed, respectively. The $+$ case corresponds to an atom travelling away from the observer. Because the intensity in a region $\delta \omega \propto \delta N$, where $N$ isnumber of with atoms with a given velocity given by the Boltzmann distribution
+Where $\omega_0$ is the un-shifted angular frequency and $v, c$ are the particles and lights speed, respectively. The $+$ case corresponds to an atom travelling away from the observer. Because the intensity in a region $\delta \omega \propto \delta N$, where $N$ is number of with atoms with a given velocity given by the Boltzmann distribution
 ```{math}
 :label:
 \frac{dN}{dv} = N_0 \exp(-Mv^2/2kT).
@@ -111,7 +109,7 @@ The expression for the intensity as a function of $\omega$,
 :label:
 \mathcal{I}(\omega) = \mathcal{I}(\omega_0) \exp\left[\frac{-Mc^2}{2kT}\left(\frac{\omega - \omega_0}{\omega_0}\right)^2\right].
 ```
-Thus the intensity of the broadening due to the Doppler effect is of a gaussian form. In these expressions $M, K, T$ are the atomic mass, Boltzmann's constant, and temperature in $K$, respectively.
+Thus the intensity of the broadening due to the Doppler effect is of a gaussian form. In these expressions, $M, K, T$ are the atomic mass, Boltzmann's constant, and temperature in $K$, respectively.
 
 ### The Voigt Profile
 
@@ -125,6 +123,6 @@ Where
 :label: 
 w(z) = \frac{\omega -\omega_0 + i\Gamma}{\sigma \sqrt{2}}
 ```
-For the line widths $\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}$. This expression is the voight profile which is the line shape used by the rest of the book. One can, use either a Lorentzian or Doppler profile and disregard an aspect of broadening, however, evaluation of the Voight profile is not substantially more computationally expensive, and contains some interesting physics and so it is retained. There are further evolutions of the Voight profile, for example the Heartmann-Tran profile{cite}`Hartmann-Tran`.  
+For the line widths $\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}$. This expression is the voight profile, the line shape used by the rest of the book. One can, use either a Lorentzian or Doppler profile and disregard an aspect of broadening. However, evaluation of the Voight profile is not substantially more computationally expensive and contains some interesting physics so it is retained. There are further evolutions of the Voight profile, for example, the Heartmann-Tran profile{cite}`Hartmann-Tran`. 
 
-The next section in the book is a short refresh of the mechanics of black body radiation. 
+The book's next section briefly refreshes the mechanics of black body radiation. 

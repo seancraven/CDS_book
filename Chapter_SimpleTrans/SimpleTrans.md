@@ -1,9 +1,9 @@
 # SimpleTrans
-The simple trans package is the result of walking through this chapter in building a radiative transfer model. However, its aim is to provide a straightforward introduction to radiation modelling, and working with outside APIs and databases. 
+The simple trans package is the result of walking through Chapter 3 in building a radiative transfer model. However, its aim is to provide a straightforward introduction to radiation modelling, and working with outside APIs and databases. 
 
 ## Using the SimpleTrans package
 
-The SimpleTrans package, which you will have installed if you clone the environment for the book or find it here, link to pypi
+The SimpleTrans package, which you will have installed if you clone the environment for the book or find it [here](https://pypi.org/project/SimpleTrans/) 
 It can be installed using pip separately however, 
 ```shell
 pip install simpletrans
@@ -12,7 +12,7 @@ From with this done you local database must be populated. This is done by runnin
 ```shell 
 simpletrans -m 
 ```
-This will ask you to select a local folder for the database to be installed into, this must exist. Currently with the default gases, it takes up 3Gb, and about an hour to install. 
+This will ask you to select a local folder for the database to be installed into, this must alredy exist. Currently, with the default gases, it takes up 3Gb, and about an hour to install. 
 
 From here all the functions and classes can be accessed. For more information, each function is documented in their respective files in their docstring. 
 
@@ -38,6 +38,8 @@ Finally, radiative_transfer.py implements a class called atmosphere grid. This m
 The database solution was chosen to speed up the process of the calculations, as doing them in real time can be very slow. 
 
 For these gridded values the [two stream equations](../Chapter_3/radiative_transfer.ipynb) are solved for the upward fluxes by the method AtmosphereGrid.up_flux(). This produces an output of a flux grid that models the transfer of radiation out of the atmosphere. 
+
+For more detail on individual functions, Every functions is documented with a docstring. 
 
 ## Exercises
 1. Calculate the maximum standard deviation of the averages of the optical depths for $\textrm{CO}_2$, where the bins are $1 cm^{-1}$ wide and centred on the integer wavenumbers. Is the standard error large in comparison to the mean?
