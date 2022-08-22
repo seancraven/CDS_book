@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -590,7 +585,18 @@ title="Print to PDF"
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">p3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">a_2</span><span class="p">,</span> <span class="n">a_3</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In this code block, first two different polynomials are defined.</span>
+<span class="sd">The scipy curve fit package is used to fit the datapoints to the values.</span>
+<span class="sd">Then the residuals from these curves are used to evaluate the curves chi^2.</span>
+
+<span class="sd">The rs prefix is used to indicate a residual variable</span>
+<span class="sd">The y prefix indicates the values calculated  by the curve fit.</span>
+
+<span class="sd">The ml prefix is for mauna  loa data.</span>
+<span class="sd">The global prefix is for the global data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">p3</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a_0</span><span class="p">,</span> <span class="n">a_1</span><span class="p">,</span> <span class="n">a_2</span><span class="p">,</span> <span class="n">a_3</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a_0</span> <span class="o">+</span> <span class="n">a_1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a_2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">a_3</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span>
 
 
@@ -636,7 +642,7 @@ title="Print to PDF"
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
     <span class="n">sigma</span><span class="o">=</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
 <span class="p">)</span>
-<span class="c1"># chisq</span>
+
 <span class="n">y_p3_ml</span> <span class="o">=</span> <span class="n">p3</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span> <span class="o">*</span><span class="n">p3_ml_fit</span><span class="p">)</span>
 <span class="n">rs_ml_p3</span> <span class="o">=</span> <span class="n">y_p3_ml</span> <span class="o">-</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span>
 <span class="n">chisq_ml_p3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">rs_ml_p3</span><span class="p">)</span> <span class="o">/</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
@@ -648,7 +654,12 @@ title="Print to PDF"
 <h3>Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span><a class="headerlink" href="#calculating-p-chi-2-geq-chi-2-min-nu" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nu_p1_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1_ml_fit</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Here the scipy package is used to evaluate the probability that the</span>
+<span class="sd">residuals are not randomly distributed.</span>
+<span class="sd">This is done using the survival function chi2.sf, which is 1-cdf.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">nu_p1_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p1_ml_fit</span><span class="p">)</span>
 <span class="n">nu_p3_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">p3_ml_fit</span><span class="p">)</span>
 <span class="n">p_ml_p1</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_ml_p1</span><span class="p">,</span> <span class="n">nu_p1_ml</span><span class="p">)</span>
 <span class="n">p_ml_p3</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">chisq_ml_p3</span><span class="p">,</span> <span class="n">nu_p3_ml</span><span class="p">)</span>
@@ -666,7 +677,13 @@ P(\chi^2 \geq \chi^2_{min};573) = 0.0
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dur_cycle</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This plotting section unlike many is rather extensive, because both</span>
+<span class="sd">plots have residual sections below the actual figure, the implementation</span>
+<span class="sd">is splot into making the plot shape and populating the plot.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">dur_cycle</span> <span class="o">=</span> <span class="n">cycler</span><span class="p">(</span>
     <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">blue</span><span class="p">]</span>
 <span class="p">)</span>
 

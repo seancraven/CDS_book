@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -450,10 +445,10 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="simpletrans">
 <h1>SimpleTrans<a class="headerlink" href="#simpletrans" title="Permalink to this headline">#</a></h1>
-<p>The simple trans package is the result of walking through this chapter in building a radiative transfer model. However, its aim is to provide a straightforward introduction to radiation modelling, and working with outside APIs and databases.</p>
+<p>The simple trans package is the result of walking through Chapter 3 in building a radiative transfer model. However, its aim is to provide a straightforward introduction to radiation modelling, and working with outside APIs and databases.</p>
 <section id="using-the-simpletrans-package">
 <h2>Using the SimpleTrans package<a class="headerlink" href="#using-the-simpletrans-package" title="Permalink to this headline">#</a></h2>
-<p>The SimpleTrans package, which you will have installed if you clone the environment for the book or find it here, link to pypi
+<p>The SimpleTrans package, which you will have installed if you clone the environment for the book or find it <a class="reference external" href="https://pypi.org/project/SimpleTrans/">here</a>
 It can be installed using pip separately however,</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install simpletrans
 </pre></div>
@@ -462,7 +457,7 @@ It can be installed using pip separately however,</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>simpletrans -m 
 </pre></div>
 </div>
-<p>This will ask you to select a local folder for the database to be installed into, this must exist. Currently with the default gases, it takes up 3Gb, and about an hour to install.</p>
+<p>This will ask you to select a local folder for the database to be installed into, this must alredy exist. Currently, with the default gases, it takes up 3Gb, and about an hour to install.</p>
 <p>From here all the functions and classes can be accessed. For more information, each function is documented in their respective files in their docstring.</p>
 <p>The [atmosphere_grid] page has exemplar implementations of the module.</p>
 </section>
@@ -470,13 +465,13 @@ It can be installed using pip separately however,</p>
 <h2>Structure and Overview<a class="headerlink" href="#structure-and-overview" title="Permalink to this headline">#</a></h2>
 <p>before, diving into using the package, a high level overview of what it does is useful.
 After you have downloaded the package, one runs <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code>. When this script is run the absorption spectra from HITRAN are downloaded. Then a <a class="reference internal" href="../Database_Chapter/Database_intro_1.html#rd"><span class="std std-ref">relational database</span></a> is created. This database is populated, by calculating absorption coefficients<span class="math notranslate nohighlight">\((molecules/cm^2)\)</span> and optical depths, of blocks of atmosphere, given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d73127b2-a206-4751-b752-1a6dc129b807">
-<span class="eqno">(51)<a class="headerlink" href="#equation-d73127b2-a206-4751-b752-1a6dc129b807" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-55db1d86-ddf4-495f-ae9d-5722ddcf7fbd">
+<span class="eqno">(51)<a class="headerlink" href="#equation-55db1d86-ddf4-495f-ae9d-5722ddcf7fbd" title="Permalink to this equation">#</a></span>\[\begin{equation}
 OD = k(\nu, T, P)\cdot [X],
 \end{equation}\]</div>
 <p>where k is the absorption coefficient, <span class="math notranslate nohighlight">\([X]\)</span>, is the path integral of molecular density over the block of atmosphere</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9a8df8c2-6c1f-4cb8-819b-716b6560d52c">
-<span class="eqno">(52)<a class="headerlink" href="#equation-9a8df8c2-6c1f-4cb8-819b-716b6560d52c" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7c3d8553-6c55-4fab-982f-3944d83fc7b6">
+<span class="eqno">(52)<a class="headerlink" href="#equation-7c3d8553-6c55-4fab-982f-3944d83fc7b6" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [X] = \int_{h_i}^{h_{i+1}} n(T,p)dh.
 \end{equation}\]</div>
 <p>Where h_i, is the start of the atmosphere block, n is the number density of the molecule. This is repeated over every gas for every altitude for all wavenumbers.</p>
@@ -484,6 +479,7 @@ OD = k(\nu, T, P)\cdot [X],
 <p>Finally, radiative_transfer.py implements a class called atmosphere grid. This models the atmosphere as a coarse altitude grid and a fine wavenumber grid of spacings, <span class="math notranslate nohighlight">\(1 km\)</span> and <span class="math notranslate nohighlight">\(1 cm^{-1}\)</span>, respectively. The mean optical depth is queried from the database for the wavenumber bin and evaluated at the midpoint of the altitude block. The mean value and midpoint provide reasonable approximations to the quantities values in the region.</p>
 <p>The database solution was chosen to speed up the process of the calculations, as doing them in real time can be very slow.</p>
 <p>For these gridded values the <a class="reference internal" href="../Chapter_3/radiative_transfer.html"><span class="doc std std-doc">two stream equations</span></a> are solved for the upward fluxes by the method AtmosphereGrid.up_flux(). This produces an output of a flux grid that models the transfer of radiation out of the atmosphere.</p>
+<p>For more detail on individual functions, Every functions is documented with a docstring.</p>
 </section>
 <section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">#</a></h2>

@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Radiative transfer" href="radiative_transfer.html" />
-    <link rel="prev" title="HITRAN" href="Using_HITRAN.html" />
+    <link rel="next" title="A very short introduction to relational databases" href="../Database_Chapter/Database_intro_1.html" />
+    <link rel="prev" title="Radiative transfer" href="radiative_transfer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -393,11 +388,17 @@ title="Print to PDF"
                 
   <section id="the-optical-depths-database">
 <h1>The Optical Depths Database<a class="headerlink" href="#the-optical-depths-database" title="Permalink to this headline">#</a></h1>
-<p>The optical depths and other associated data is stored in a SQLite3 relational Database. There is a short <span class="xref myst">section</span> on the advantage of this format.</p>
-<p>The database that is created, after the installing the package stores the optical depths and absorption coefficients of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{CH}_4\)</span>, <span class="math notranslate nohighlight">\(\textrm{H}_2\textrm{O}\)</span> and <span class="math notranslate nohighlight">\(\textrm{N}_2\textrm{O}\)</span> in the optical depths table for altitudes in 1km spacings from <span class="math notranslate nohighlight">\(500 m\)</span> to <span class="math notranslate nohighlight">\(30,500 m\)</span>, these values correspond to the midpoints of the altitude grid. The wavenumber range recorded is between <span class="math notranslate nohighlight">\(200 cm^{-1} and \)</span>4000 cm^{-1} this provides close to complete coverage of all longwave radiation outgoing from earth.</p>
-<p>Each gas is stored with its formulae and ppm concentration. The need for all this data is explored more fully in the next section.</p>
-<p>This data is calculated and stored once, because it is computationally expensive to calculate the values each time one wants to calculate them. This does reduce flexibility because there is a defined number of datapoints one can access, however, the pre computation was decided on so that day to day functionality was optimized.</p>
-<p>The database is definitely not necessary and one could achieve similar results with a .txt file, however there are about 50 million rows, making it and unwieldy file. Further, the database provides the ability to work with small subsets of the data in a jupyter notebook or python file. Its schema is presented below.</p>
+<p>To understand why the data is pre-calculated it is worth looking at the orders of magnitude of the calculations and what they involve when implemented in python. As mentioned previously, The HITRAN database stores the spectral line intensity for many GHGs in our model. We include only four. However, each of these gases in the range <span class="math notranslate nohighlight">\([200,4000] cm^{-1}\)</span> has of the order 10,000 data points for the spectral line intensity. So when calculating the absorption coefficient and optical depth for each altitude on the grid, we store around 50 million rows. In each row an absorption coefficient, a wavenumber, an optical depth and a molecule id are stored.
+This is by no means a lot of data for modern hardware. However, doing the calculations on the fly is prohibitively expensive. Due to the nature of the broadening and conversion between spectral line intensity and absorption coefficient. This is the operation where the voight profile is applied and must be done on each entry in the array.</p>
+<p>Thus, precalculating all the values required for the model and storing them in a database was not only a good excuse to introduce databases but also means that the atmosphere profile can be very flexible and fast to use.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are not experienced with relational databases a short introduction is <a class="reference internal" href="../Database_Chapter/Database_intro_1.html"><span class="doc std std-doc">provided</span></a></p>
+</div>
+<p>The database and atmosphere model are handled by the SimpleTrans package, which is discussed in more detail in its own <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html"><span class="doc std std-doc">section</span></a>.</p>
+<p>The database that is created, after the, installing the package stores the optical depths and absorption coefficients of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{CH}_4\)</span>, <span class="math notranslate nohighlight">\(\textrm{H}_2\textrm{O}\)</span> and <span class="math notranslate nohighlight">\(\textrm{N}_2\textrm{O}\)</span> in the optical depths table. Each gas is recorded with altitudes in 1km spacings from <span class="math notranslate nohighlight">\(500 m\)</span> to <span class="math notranslate nohighlight">\(30,500 m\)</span>. These altitudes correspond to the midpoints of the altitude grid. The wavenumber range recorded is between <span class="math notranslate nohighlight">\(200 cm^{-1} and \)</span>4000 cm^{-1}. This wavenumber range provides nearly complete coverage of all longwave radiation outgoing from Earth.</p>
+<p>Each gas is stored with its formulae and ppm concentration.</p>
+<p>The database is definitely not absolutely necessary, and one could achieve similar results with a .txt file, however, with 50 million rows, it would be an unwieldy file, and dealing with less than all the data would be challenging. Further, the database provides the ability to work with small subsets of the data in a jupyter notebook or python file. Its schema is presented below. It is a straightforward solution; however, it solves the problem well.</p>
 <figure class="align-center" id="id1">
 <div class="mermaid">
             erDiagram
@@ -447,17 +448,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Using_HITRAN.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="radiative_transfer.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">HITRAN</p>
+            <p class="prev-next-title">Radiative transfer</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="radiative_transfer.html" title="next page">
+    <a class='right-next' id="next-link" href="../Database_Chapter/Database_intro_1.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Radiative transfer</p>
+        <p class="prev-next-title">A very short introduction to relational databases</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

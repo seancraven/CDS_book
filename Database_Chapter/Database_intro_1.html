@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The Relational Alternative" href="Database_intro_2.html" />
-    <link rel="prev" title="Radiative transfer" href="../Chapter_3/radiative_transfer.html" />
+    <link rel="prev" title="The Optical Depths Database" href="../Chapter_3/Optical_depth_db.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -205,18 +205,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -391,7 +386,7 @@ title="Print to PDF"
                 
   <section id="a-very-short-introduction-to-relational-databases">
 <h1>A very short introduction to relational databases<a class="headerlink" href="#a-very-short-introduction-to-relational-databases" title="Permalink to this headline">#</a></h1>
-<p>A relational database, is a structured approach to storing data. It describes a group of tables, that are related together. The relationships enable a reduction of data duplication. Typically, these databases are interfaced and queried with using SQL. One of the few programming languages that has been in use for about 50 years.</p>
+<p>A relational database is a structured approach to storing data. It describes a group of tables that are related together. The relationships enable a reduction of data duplication. Typically, these databases are interfaced and queried with using SQL. One of the few programming languages used for about 50 years.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>Modern Datatbase applications are oftend distributed over a wide variety of nodes, individual computers, this has a much more complex backend to store partial databases. However, many of these formats have a SQL like interface that can be used to abstract away much of the complexity. <a class="reference external" href="https://spark.apache.org/sql/">Apache Spark</a> is a great example of this.</p>
@@ -400,7 +395,7 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>If you are interested in learning SQL, <a class="reference external" href="https://www.google.co.uk/books/edition/Learning_SQL/YqubAgAAQBAJ?hl=en&amp;gbpv=0">this textbook</a> is great.</p>
 </div>
-<p>Relational databases reduce duplication, by separating out repeated values, for example, If one was to store some data on a customer in a shop, one might store a table as follows,</p>
+<p>Relational databases reduce duplication by separating out repeated values. For example, If one was to store some data on a customer in a shop, one might store a table as follows,</p>
 <figure class="align-center" id="id1">
 <div class="mermaid">
             erDiagram
@@ -417,7 +412,7 @@ title="Print to PDF"
 <p><span class="caption-number">Fig. 2 </span><span class="caption-text">A table of important information associated with some transaction for a shop.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>It should be evident that storing all of these fields for each transaction would be wasteful if a customer regularly bought more than one item. When using a relational database the number of repeat entries can be cut down by creating multiple tables, and linking one table that contains information about a customer to another table that contains information about transactions. This can be described in an entity relationship diagram depicted on the next page.</p>
+<p>It should be evident that storing all of these fields for each transaction would be wasteful if a customer regularly bought more than one item. When using a relational database, the number of repeat entries can be cut down by creating multiple tables and linking one table that contains information about a customer to another table that contains information about transactions. This can be described in an entity relationship diagram depicted on the next page.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -447,11 +442,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../Chapter_3/radiative_transfer.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../Chapter_3/Optical_depth_db.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Radiative transfer</p>
+            <p class="prev-next-title">The Optical Depths Database</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Database_intro_2.html" title="next page">

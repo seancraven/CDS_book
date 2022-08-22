@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -419,11 +414,6 @@ title="Print to PDF"
    The Voigt Profile
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-hitran">
-   Using HITRAN
-  </a>
- </li>
 </ul>
 
     </nav>
@@ -473,11 +463,6 @@ title="Print to PDF"
    The Voigt Profile
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#using-hitran">
-   Using HITRAN
-  </a>
- </li>
 </ul>
 
                         </nav>
@@ -490,9 +475,9 @@ title="Print to PDF"
                 
   <section id="radiation-modelling">
 <h1>Radiation Modelling<a class="headerlink" href="#radiation-modelling" title="Permalink to this headline">#</a></h1>
-<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate well the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. The first sections of this book, explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects. And simply models an average column of atmosphere.</p>
+<p>This section of the book differs from the previous section as it follows a longer form example in building a model of radiation absorption. Often treatment of the greenhouse effect is incredibly simple and uses Sankey diagrams, which illustrate  the effect that increased radiation retention produces warming. However, they lack any information on the mechanisms taking place. Unfortunately, the phenomena that drive the greenhouse effect and warming are highly interdependent. This interdependency does not lend them to simple models, which produce a convincing picture of the atmosphere. This section of the book explores building a simple radiative transfer model. This excludes any longitude or latitude variation, clouds and albedo effects and simply models an average column of atmosphere.</p>
 <p>Before we dive into atmospheric physics, we will look into absorption spectra, as absorption is one of the fundamental mechanisms that drive the greenhouse effect.</p>
-<p>Line spectra arise from energy level transitions within atoms. For example, when photons of sufficient energy interact with a molecule a transition can occur. The coupling of the states to the EM-field governs the transition’s probability. With different strength interactions provide differing intensities of line-by-line spectra, the stronger the interaction the more likely it will occur and the increased magnitude of the absorption line.</p>
+<p>Line spectra arise from energy level transitions within atoms. For example, a transition can occur when sufficient energy photons interact with a molecule. The coupling of the states to the EM-field governs the transition’s probability. With different strength interactions provide differing intensities of line-by-line spectra, the stronger the interaction, the more likely it will occur and the increased magnitude of the absorption line.</p>
 <p>This section will not deal with photon-molecule interactions as photon densities in systems like these are large enough that treating the coupling of atoms to a field is accurate enough and more straightforward.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -501,14 +486,14 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 </div>
 <section id="electron-transitions">
 <h2>Electron Transitions<a class="headerlink" href="#electron-transitions" title="Permalink to this headline">#</a></h2>
-<p>One of the early achievements of quantum mechanics and the Bohr model was the prediction of Hydrogen’s emission lines. As a result from the electronic shell model. With the advent of the Schrodinger equation solutions to Hydrogen, which describes electron orbitals in terms of 3 quantum numbers of n, l, m the principle, angular momentum, and magnetic quantum numbers. The notation for a specific wavefunction denoting a state n, l, m</p>
+<p>One of the early achievements of quantum mechanics and the Bohr model was the prediction of Hydrogen’s emission lines. As a result of the electronic shell model. With the advent of the Schrodinger equation solutions to Hydrogen, which describes electron orbitals in terms of 3 quantum numbers of n, l, m the principle, angular momentum, and magnetic quantum numbers. The notation for a specific wavefunction denoting a state n, l, m</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-0">
 <span class="eqno">(14)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-0" title="Permalink to this equation">#</a></span>\[\Phi_{n, l, m}(\textbf{r}, t) = R_{n, l}(r)Y_{l, m}(\theta, \phi)\exp(-i E_{n, l}t/\hbar).\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Given, that the Earth’s balckbody emission spectra is peaked in the infra-red, it doesn’t glow in our visable spectrum, are electronic transistions with energies around <span class="math notranslate nohighlight">\(10ev\)</span>, driven by outgoing radiation, emitted by the earth?</p>
 </div>
-<p>The answer, to the question above is mainly no. The most prominent forms of transition driven in the atmosphere are rotational and vibrational mode excitations.</p>
+<p>The answer, to the question above is mainly no. Rotational and vibrational mode excitations are the most prominent forms of transition driven in the atmosphere.</p>
 </section>
 <section id="vibrational-transition">
 <h2>Vibrational Transition<a class="headerlink" href="#vibrational-transition" title="Permalink to this headline">#</a></h2>
@@ -519,7 +504,7 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 </section>
 <section id="line-shapes">
 <h2>Line Shapes<a class="headerlink" href="#line-shapes" title="Permalink to this headline">#</a></h2>
-<p>Spectral lines have finite width due to the uncertainty principle, due to the excitations having a finite lifetime. Excited states have a defined lifetime <span class="math notranslate nohighlight">\( 2\tau\)</span>, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is <a class="reference external" href="http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf">derived</a> from ensuring equilibrium during stimulated emission.</p>
+<p>Spectral lines have finite width due to the uncertainty principle and the excitations having a finite lifetime. Excited states have a defined lifetime <span class="math notranslate nohighlight">\( 2\tau\)</span>, corresponding to the characteristic decay time for the excited state. This lifetime is given by the inverse of the Einstein-A coefficient(the rate of spontaneous emission), which is <a class="reference external" href="http://home.uchicago.edu/~tokmakoff/TDQMS/Notes/4.3.%20Spont%20Emission%205-19-05.pdf">derived</a> from ensuring equilibrium during stimulated emission.</p>
 <p>Now, if the lifetime of the state is decaying exponentially, the decay of state b, the excited state, is <span class="math notranslate nohighlight">\(c_b(t) = \exp(-t/ 2 OD)\)</span>. <span class="math notranslate nohighlight">\(t\)</span> is only considered for <span class="math notranslate nohighlight">\(t &gt; 0\)</span>.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
@@ -557,15 +542,15 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 </section>
 <section id="line-broadening-pressure">
 <h2>Line Broadening: Pressure<a class="headerlink" href="#line-broadening-pressure" title="Permalink to this headline">#</a></h2>
-<p>There is an additional significant component, which increases the value of <span class="math notranslate nohighlight">\(\tau\)</span>. Transitions due to collisions with other neighbouring molecules. Broadening from collisions occurs in much the same way as spontaneous emission as there is an associated rate of transition. With a transition rate there is an expected lifetime of a state, and thus uncertainity induced broadening. Consequently, if any de-excitation/excitation phenomena has a rate then it has a finite line width, to calculate the total rate of a transition the sum of the rates is taken.</p>
+<p>An additional significant component increases the value of <span class="math notranslate nohighlight">\(\tau\)</span> when collisions induce transitions with other neighbouring molecules. Broadening from collisions occurs in much the same way as spontaneous emission, as there is an associated rate of transition. With a transition rate, there is an expected lifetime of a state, and thus uncertainty induced broadening. Consequently, if any de-excitation/excitation phenomena has a rate, then it has a finite line width. The sum of the rates is calculated to evaluate a transition’s total rate.</p>
 <p>The rate of collisions is a function of the number density of the molecules(<span class="math notranslate nohighlight">\(n\)</span>), the molecule’s cross-section(<span class="math notranslate nohighlight">\(\sigma\)</span>), and the relative velocity(<span class="math notranslate nohighlight">\(v\)</span>).</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-7">
 <span class="eqno">(23)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-7" title="Permalink to this equation">#</a></span>\[W_c = \sigma vn.\]</div>
-<p>The rates are summed from both the natural decay and the collisions, and their reciprocal gives <span class="math notranslate nohighlight">\(\tau\)</span>. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. These are both still pressure-broadening phenomena, In climate modelling air-broadening massively dominates.</p>
+<p>The rates are summed from both the natural decay and the collisions, and their reciprocal gives <span class="math notranslate nohighlight">\(\tau\)</span>. In the HITRAN database, collision broadening is broken into self-broadening and air-broadening. Although these are both still pressure-broadening phenomena, air-broadening dominates in climate modelling.</p>
 </section>
 <section id="line-broadening-doppeler">
 <h2>Line Broadening: Doppeler<a class="headerlink" href="#line-broadening-doppeler" title="Permalink to this headline">#</a></h2>
-<p>The Doppler shift due to the relative motion of the atom, and the photons additionally increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution of velocites.</p>
+<p>The Doppler shift due to the atom’s and the photon’s relative motion also increases the spectral line width. This feature becomes more significant at higher temperatures due to the Boltzmann distribution of velocities.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The derivation for this is also taken from <a class="reference external" href="https://www.abebooks.co.uk/Quantum-Mechanics-Bransden-B.H-Prentice-Hall/31165015307/bd?cm_mmc=ggl-_-UK_Shopp_Textbookstandard-_-product_id=UK9780582356917USED-_-keyword=&amp;gclid=CjwKCAjwt7SWBhAnEiwAx8ZLasethl3WG5lF-ycCcq74SArq-uzsbxzhec94Zpl94v58wXKvQsvEdxoClEIQAvD_BwE">Bransden &amp; Joachain</a>.</p>
@@ -573,13 +558,13 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 <p>The Doppler shift in angular frequency is</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-8">
 <span class="eqno">(24)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-8" title="Permalink to this equation">#</a></span>\[\omega = \omega_0\left(1 \mp \frac{v}{c}\right).\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\omega_0\)</span> is the un-shifted angular frequency and <span class="math notranslate nohighlight">\(v, c\)</span> are the particles and lights speed, respectively. The <span class="math notranslate nohighlight">\(+\)</span> case corresponds to an atom travelling away from the observer. Because the intensity in a region <span class="math notranslate nohighlight">\(\delta \omega \propto \delta N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> isnumber of with atoms with a given velocity given by the Boltzmann distribution</p>
+<p>Where <span class="math notranslate nohighlight">\(\omega_0\)</span> is the un-shifted angular frequency and <span class="math notranslate nohighlight">\(v, c\)</span> are the particles and lights speed, respectively. The <span class="math notranslate nohighlight">\(+\)</span> case corresponds to an atom travelling away from the observer. Because the intensity in a region <span class="math notranslate nohighlight">\(\delta \omega \propto \delta N\)</span>, where <span class="math notranslate nohighlight">\(N\)</span> is number of with atoms with a given velocity given by the Boltzmann distribution</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-9">
 <span class="eqno">(25)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-9" title="Permalink to this equation">#</a></span>\[\frac{dN}{dv} = N_0 \exp(-Mv^2/2kT).\]</div>
 <p>The expression for the intensity as a function of <span class="math notranslate nohighlight">\(\omega\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-10">
 <span class="eqno">(26)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-10" title="Permalink to this equation">#</a></span>\[\mathcal{I}(\omega) = \mathcal{I}(\omega_0) \exp\left[\frac{-Mc^2}{2kT}\left(\frac{\omega - \omega_0}{\omega_0}\right)^2\right].\]</div>
-<p>Thus the intensity of the broadening due to the Doppler effect is of a gaussian form. In these expressions <span class="math notranslate nohighlight">\(M, K, T\)</span> are the atomic mass, Boltzmann’s constant, and temperature in <span class="math notranslate nohighlight">\(K\)</span>, respectively.</p>
+<p>Thus the intensity of the broadening due to the Doppler effect is of a gaussian form. In these expressions, <span class="math notranslate nohighlight">\(M, K, T\)</span> are the atomic mass, Boltzmann’s constant, and temperature in <span class="math notranslate nohighlight">\(K\)</span>, respectively.</p>
 </section>
 <section id="the-voigt-profile">
 <h2>The Voigt Profile<a class="headerlink" href="#the-voigt-profile" title="Permalink to this headline">#</a></h2>
@@ -589,17 +574,8 @@ Hint: the plank functions units are <span class="math notranslate nohighlight">\
 <p>Where</p>
 <div class="math notranslate nohighlight" id="equation-chapter-3-atmospheric-primer-12">
 <span class="eqno">(28)<a class="headerlink" href="#equation-chapter-3-atmospheric-primer-12" title="Permalink to this equation">#</a></span>\[w(z) = \frac{\omega -\omega_0 + i\Gamma}{\sigma \sqrt{2}}\]</div>
-<p>For the line widths <span class="math notranslate nohighlight">\(\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}\)</span>.</p>
-</section>
-<section id="using-hitran">
-<h2>Using HITRAN<a class="headerlink" href="#using-hitran" title="Permalink to this headline">#</a></h2>
-<p>HITRAN is a database of molecular spectral data. The database is used extensively in research and industry for various atmospheric analyses, from climate models<span id="id2">[<a class="reference internal" href="../Bibliography.html#id28" title="D Crisp, R.M Atlas, F.-M Breon, L.R Brown, J.P Burrows, P Ciais, B.J Connor, S.C Doney, I.Y Fung, D.J Jacob, C.E Miller, D O'Brien, S Pawson, J.T Randerson, P Rayner, R.J Salawitch, S.P Sander, B Sen, G.L Stephens, P.P Tans, G.C Toon, P.O Wennberg, S.C Wofsy, Y.L Yung, Z Kuang, B Chudasama, G Sprague, B Weiss, R Pollock, D Kenyon, and S Schroll. The orbiting carbon observatory (oco) mission. Advances in Space Research, 34(4):700-709, 2004. Trace Constituents in the Troposphere and Lower Stratosphere. URL: https://www.sciencedirect.com/science/article/pii/S0273117704003539, doi:https://doi.org/10.1016/j.asr.2003.08.062.">CAB+04</a>, <a class="reference internal" href="../Bibliography.html#id23" title="L. Palchetti, H. Brindley, R. Bantges, S. A. Buehler, C. Camy-Peyret, B. Carli, U. Cortesi, S. Del Bianco, G. Di Natale, B. M. Dinelli, D. Feldman, X. L. Huang, L. C.-Labonnote, Q. Libois, T. Maestri, M. G. Mlynczak, J. E. Murray, H. Oetjen, M. Ridolfi, M. Riese, J. Russell, R. Saunders, and C. Serio. Forum: unique far-infrared satellite observations to better understand how earth radiates energy to space. Bulletin of the American Meteorological Society, 101(12):E2030 - E2046, 2020. URL: https://journals.ametsoc.org/view/journals/bams/101/12/BAMS-D-19-0322.1.xml, doi:10.1175/BAMS-D-19-0322.1.">PBB+20</a>, <a class="reference internal" href="../Bibliography.html#id27" title="P. Zoogman, X. Liu, R.M. Suleiman, W.F. Pennington, D.E. Flittner, J.A. Al-Saadi, B.B. Hilton, D.K. Nicks, M.J. Newchurch, J.L. Carr, S.J. Janz, M.R. Andraschko, A. Arola, B.D. Baker, B.P. Canova, C. Chan Miller, R.C. Cohen, J.E. Davis, M.E. Dussault, D.P. Edwards, J. Fishman, A. Ghulam, G. González Abad, M. Grutter, J.R. Herman, J. Houck, D.J. Jacob, J. Joiner, B.J. Kerridge, J. Kim, N.A. Krotkov, L. Lamsal, C. Li, A. Lindfors, R.V. Martin, C.T. McElroy, C. McLinden, V. Natraj, D.O. Neil, C.R. Nowlan, E.J. O׳Sullivan, P.I. Palmer, R.B. Pierce, M.R. Pippin, A. Saiz-Lopez, R.J.D. Spurr, J.J. Szykman, O. Torres, J.P. Veefkind, B. Veihelmann, H. Wang, J. Wang, and K. Chance. Tropospheric emissions: monitoring of pollution (tempo). Journal of Quantitative Spectroscopy and Radiative Transfer, 186:17-39, 2017. Satellite Remote Sensing and Spectroscopy: Joint ACE-Odin Meeting, October 2015. URL: https://www.sciencedirect.com/science/article/pii/S0022407316300863, doi:https://doi.org/10.1016/j.jqsrt.2016.05.008.">ZLS+17</a>]</span> to extraterrestrial atmospheric composition<span id="id3">[<a class="reference internal" href="../Bibliography.html#id25" title="Simon L. Grimm, Matej Malik, Daniel Kitzmann, Andrea Guzmán-Mesa, H. Jens Hoeijmakers, Chloe Fisher, João M. Mendonça, Sergey N. Yurchenko, Jonathan Tennyson, Fabien Alesina, Nicolas Buchschacher, Julien Burnier, Damien Segransan, Robert L. Kurucz, and Kevin Heng. HELIOS-k 2.0 opacity calculator and open-source opacity database for exoplanetary atmospheres. The Astrophysical Journal Supplement Series, 253(1):30, mar 2021. URL: https://doi.org/10.3847/1538-4365/abd773, doi:10.3847/1538-4365/abd773.">GMK+21</a>, <a class="reference internal" href="../Bibliography.html#id26" title="Eliza M.-R. Kempton, Roxana Lupu, Albert Owusu-Asare, Patrick Slough, and Bryson Cale. Exo-transmit: an open-source code for calculating transmission spectra for exoplanet atmospheres of varied composition. Publications of the Astronomical Society of the Pacific, 129(974):044402, mar 2017. URL: https://doi.org/10.1088/1538-3873/aa61ef, doi:10.1088/1538-3873/aa61ef.">KLOA+17</a>]</span>. HITRAN provides a comprehensive selection of line-by-line data for atmospheric radiation modelling of spectral absorption. In addition, there is a python API<span id="id4">[<a class="reference internal" href="../Bibliography.html#id24" title="R.V. Kochanov, I.E. Gordon, L.S. Rothman, P. Wcisło, C. Hill, and J.S. Wilzewski. Hitran application programming interface (hapi): a comprehensive approach to working with spectroscopic data. Journal of Quantitative Spectroscopy and Radiative Transfer, 177:15-30, 2016. XVIIIth Symposium on High Resolution Molecular Spectroscopy (HighRus-2015), Tomsk, Russia. URL: https://www.sciencedirect.com/science/article/pii/S0022407315302466, doi:https://doi.org/10.1016/j.jqsrt.2016.03.005.">KGR+16</a>]</span>. The API uses SQL like queries to access the database. To install the API run:</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>If you are not familiar with packages or package managers such as <a class="reference external" href="https://pypi.org/">pip</a> and <a class="reference external" href="https://pypi.org/https://docs.conda.io/projects/conda/en/latest/">conda</a>, it is worth getting used to them. It is a fast and easy way to utilise other peoples code.</p>
-</aside>
-<p>The Hitran-api provides a set of functions which compute the absorption spectra for the user. The package’s documentation can be found <a class="reference external" href="https://hitran.org/static/hapi/hapi_manual.pdf">here</a>.</p>
-<p>Now, that the basic physics behind absorption has been covered The rest of this chapter will go through building higher-level methods and classes to build a small outgoing radiation model.</p>
+<p>For the line widths <span class="math notranslate nohighlight">\(\sigma = \omega_0 \sqrt{\frac{Mc^2}{kt}}\)</span>. This expression is the voight profile, the line shape used by the rest of the book. One can, use either a Lorentzian or Doppler profile and disregard an aspect of broadening. However, evaluation of the Voight profile is not substantially more computationally expensive and contains some interesting physics so it is retained. There are further evolutions of the Voight profile, for example, the Heartmann-Tran profile<span id="id2">[<a class="reference internal" href="../Bibliography.html#id33" title="N.H. Ngo, D. Lisak, H. Tran, and J.-M. Hartmann. An isolated line-shape model to go beyond the voigt profile in spectroscopic databases and radiative transfer codes. Journal of Quantitative Spectroscopy and Radiative Transfer, 129:89-100, 2013. URL: https://www.sciencedirect.com/science/article/pii/S0022407313002422, doi:https://doi.org/10.1016/j.jqsrt.2013.05.034.">NLTH13</a>]</span>.</p>
+<p>The book’s next section briefly refreshes the mechanics of black body radiation.</p>
 </section>
 </section>
 

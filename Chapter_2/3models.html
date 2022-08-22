@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -667,11 +662,11 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>c</th>
-      <td>8.701771e+15</td>
+      <td>2.175443e+15</td>
     </tr>
     <tr>
       <th>p_1</th>
-      <td>3.373409e+15</td>
+      <td>inf</td>
     </tr>
     <tr>
       <th>p_2</th>
@@ -715,8 +710,8 @@ title="Print to PDF"
 <p class="sidebar-title"></p>
 <p>The Plot on the left-hand side is a quantitive representation of the simplified SRES Scenarios detailed earlier. It shows three possible future pathways and the current 10-year moving average from which the A1B fit was performed. It should be noted that these are in no way linked to anything more than common sense. And the predictive power they bring to bear is incredibly small. The purpose of these plots is to aid in the Bayesian analysis.</p>
 <p>The shaded areas of the Graph correspond to two standard deviations of the fitting parameters. Assuming that the errors on the fits are normally distributed, each <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in future time can be characterized by a random variable <span class="math notranslate nohighlight">\(C\)</span> for the specific model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-725f8eab-c68b-4779-9a83-4ce715beb4a4">
-<span class="eqno">(13)<a class="headerlink" href="#equation-725f8eab-c68b-4779-9a83-4ce715beb4a4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-12bb358b-71f3-4f74-9af4-be7884ac5128">
+<span class="eqno">(13)<a class="headerlink" href="#equation-12bb358b-71f3-4f74-9af4-be7884ac5128" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_{A1T} \sim \mathcal{N}(A1T(T), \sigma_{A1T}(T)).
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T scenario function evaluated at some time <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\sigma_{A1T}(T)\)</span> is the associated error on the fit. By treating the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in the future as a random variable, we can use its PDF in conjunction with the PDF of S to perform Bayesian interference on how likely crossing a temperature Threshold is.</p>

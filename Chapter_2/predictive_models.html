@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -667,7 +662,7 @@ p_3 = 0.00026 +_ 2e-05
 <p>The error on both quantities is astronomically high, around 10%. Further, it can be shown that it is an inaccurate measurement. If one changes the starting position for these quantities, the <code class="docutils literal notranslate"><span class="pre">p0</span></code> <code class="docutils literal notranslate"><span class="pre">kwarg</span></code> for <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, the results do not oscillate around the obtained values indicating that the distribution of possible values is much tighter than the actual result. A better estimate of such errors can be determined by performing the fit with random start values centered around the obtained value.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficient:-2e+06 +_ 9e-10 
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficient:-2e+06 +_ 5e-10 
 P_1 coefficient:3e+03 +_ 0e+00
 </pre></div>
 </div>
@@ -748,9 +743,9 @@ P(chi^2 &gt; chi^2_min) = 0.05423
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.axis.XTick at 0x7f5ad145d870&gt;,
- &lt;matplotlib.axis.XTick at 0x7f5ad145d840&gt;,
- &lt;matplotlib.axis.XTick at 0x7f5ad145d720&gt;]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.axis.XTick at 0x7f8db1a394b0&gt;,
+ &lt;matplotlib.axis.XTick at 0x7f8db1a39480&gt;,
+ &lt;matplotlib.axis.XTick at 0x7f8db1a39360&gt;]
 </pre></div>
 </div>
 <img alt="../_images/predictive_models_11_1.png" src="../_images/predictive_models_11_1.png" />

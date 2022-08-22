@@ -207,18 +207,13 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Using_HITRAN.html">
-   HITRAN
+  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+   Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
    The Optical Depths Database
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
-   Radiative transfer
   </a>
  </li>
 </ul>
@@ -517,7 +512,11 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_global</span> <span class="o">=</span> <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Using pandas we load the required data from a text file via url.</span>
+<span class="sd">Then we sum the number of entries that are less than zero, or na.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">path_global</span> <span class="o">=</span> <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv&#39;</span>
 <span class="n">co2_data_global</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">path_global</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span>
     <span class="p">)</span>
@@ -695,7 +694,10 @@ Notably, none of the columns has units in their headers apart from years and mon
 <p>The same search for null and invalid values is performed on this dataset.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv&#39;</span>              
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The same import and null counting is applies as with the global data.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">path_ml</span> <span class="o">=</span>  <span class="s1">&#39;https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv&#39;</span>
 <span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_ml</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
 <span class="n">null_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">co2_data_ml</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">neg_sum</span> <span class="o">=</span> <span class="p">(</span><span class="n">co2_data_ml</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
@@ -796,7 +798,11 @@ Notably, none of the columns has units in their headers apart from years and mon
 <p>Finally, both data sets are plotted, for a quick informal check that they agree and that progressing with them makes sense.</p>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">invalid_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;&quot;</span>
+<span class="sd">The fraction of invalid values in the dataframe are evaluated.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">invalid_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">iv_fraction</span> <span class="o">=</span> <span class="n">invalid_values</span> <span class="o">/</span> <span class="n">co2_data_ml</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Number of discarded data points:&#39;</span><span class="p">,</span> <span class="n">invalid_values</span><span class="p">,</span>
     <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> Fraction of Total Values:&#39;</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">iv_fraction</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">&#39;</span>
