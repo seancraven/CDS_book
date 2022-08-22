@@ -1,24 +1,6 @@
 # Welcome
 Welcome to the readme.md of the CDS Book. Currently, this contains the plan for the project. However, I will write some short instructions on how to add pages etc and set up an environment such that one can contribute to the book easily. 
 
-## Timetable
-Part 1
-
-Finish book in Current state: 
- - [x] Chapter 3 proofed and complete Friday 5th August.
-   - Simple Trans needs some additional work the coupling and packing into a module is more complex than anticipated
- - [ ] Chapter 2 proofed and complete Wednesday 10th August.
-
-Part 2 
-
-Improved accessibility:
- - [ ] Jupyter book setup guide 12th August. 
-
-Week of 15th August:
- - [ ] Glossary and topic links
- - [ ] Improved python explanations
- - [ ] Further depth on concepts. 
-
 ## Standards for the book
 Code cell line width: 75 Characters
 Black Formatter. 
@@ -40,8 +22,9 @@ Writing style:
 - fix durutils
 
 ## Plan 
-### Landing Page
+### General Pages
 - [ ] Gallery of best visualisations
+- [ ] Glossary of Terms
 #### Chapter 1:
 - Global $\textrm{CO}_2$: Question Can we identify Global CO_2 change because of Pandemic 
 
@@ -57,6 +40,7 @@ Formating:
 - [x] Standardise
 - [x] Inital Proof
 - [ ] Have all inline math go as follows
+- [ ] code block introduction
 ```{math}
 :label:
 ```
@@ -82,28 +66,28 @@ Pages:
 
 ### Chapter 3
 Pages:
-- [ ] Atmospheric Physics Primer
-  - [ ] Black Body
+- [x] Atmospheric Physics Primer
+  - [x] Black Body
   - [ ] Vibrational Transitions: Charles
   - [x] Line Shapes 
 - [x] Temperature Dependence and HITRAN-api
-- [ ] Two Stream
+- [x] Two Stream
 - [x] Implementation of absorbtion co-efficient db
-- [ ] Multigas
 - [x] Absorption
+- [ ] Final Model implementation
+- [ ] Code Block introduction
 
 Formating:
 - [ ] Hide Code Cells
 - [ ] Standardise
- - [x] matplotlibrc edited
-- [ ] Initial Proof
+- [x] Initial Proof
 
 ### Backend Chapters 
 Relational Database:
   - [x] Short Introduction to ERD and SQL
 SimpleTrans:
-  - [ ] Brief Overview of Functionality. Partially Complete
-  - [ ] SimpleTrans Install Guide
+  - [x] Brief Overview of Functionality. Partially Complete
+  - [x] SimpleTrans Install Guide
 
 
 ### Notes About Setup
