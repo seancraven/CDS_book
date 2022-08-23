@@ -397,24 +397,17 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Final Model
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
    Conclusion
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#discussion">
-     Discussion
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#excercise">
    Excercise
   </a>
@@ -438,24 +431,17 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Final Model
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#conclusion">
    Conclusion
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#discussion">
-     Discussion
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discussion">
+   Discussion
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#excercise">
    Excercise
   </a>
@@ -470,15 +456,15 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="final-model">
+  <section class="tex2jax_ignore mathjax_ignore" id="final-model">
 <h1>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">#</a></h1>
 <p>With the main frequencies determined from the Fourier transforms, additional degrees of freedom can be added to the model. With precise guesses for the values of the trigonometric functions, lest-square fitting can be used. It now takes the form,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8d359316-cdc0-41fe-9254-175ddc6228b1">
-<span class="eqno">(14)<a class="headerlink" href="#equation-8d359316-cdc0-41fe-9254-175ddc6228b1" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="math notranslate nohighlight" id="equation-model">
+<span class="eqno">(14)<a class="headerlink" href="#equation-model" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{align}
     f(t) &amp;= f_{seasonal}(t) + f_{trend}(t). \\
     f_{seasonal}(t) &amp;= a_0\cos[(\omega_0+1/2) t] + a_1\cos[(\omega_1+1/2) t], \\
     f_{trend}(t) &amp;= p_1 t +p_2 t^2 +p_3 t^3 + c_0.
-\end{align}\]</div>
+\end{align}\end{split}\]</div>
 <p>All the parameters in the equation <span class="math notranslate nohighlight">\(f(t)\)</span> with subscripts are constants to be fitted by the least-squares method. The Model and its residuals are plotted below.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -552,7 +538,7 @@ P(\chi^2 \geq \chi^2_{min};569) = 2.53e-50
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
     <span class="n">model_residuals</span><span class="p">,</span>
     <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
-    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">purple</span><span class="p">,</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
     <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
 <span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
@@ -573,14 +559,14 @@ P(\chi^2 \geq \chi^2_{min};569) = 2.53e-50
 <img alt="../_images/Final_Model_4_0.png" src="../_images/Final_Model_4_0.png" />
 </div>
 </div>
-</section>
 <section id="conclusion">
-<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h1>
-<p>The null hypothesis proposed is that the growth in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> over the past few decades can be modelled by a function of the form eq. <code class="xref eq docutils literal notranslate"><span class="pre">model</span></code>,</p>
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h2>
+<p>The null hypothesis proposed is that the growth in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> over the past few decades can be modelled by a function of the form eq. <a class="reference internal" href="#equation-model">(14)</a>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathcal{H}_0 : f(t). \\
 \mathcal{H}_1 : not f(t).\end{split}\]</div>
 <p>At a significance level of <span class="math notranslate nohighlight">\(5\%\)</span>, <span class="math notranslate nohighlight">\(\chi^2_{crit} = 624\)</span>. This value is much lower than <span class="math notranslate nohighlight">\(\chi^2_{min} = 1211\)</span>, obtained by the model. Thus the null hypothesis should be rejected.</p>
+</section>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Permalink to this headline">#</a></h2>
 <p>The <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span> value of the model fit was substantially lower than that of previous just polynomial fits. This is reassuring as adding annual, biannual cycles in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> levels corresponds with seasonal increases in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> absorption by flora<span id="id1">[<a class="reference internal" href="../Bibliography.html#id14" title="H. D. Graven, R. F. Keeling, S. C. Piper, P. K. Patra, B. B. Stephens, S. C. Wofsy, L. R. Welp, C. Sweeney, P. P. Tans, J. J. Kelley, B. C. Daube, E. A. Kort, G. W. Santoni, and J. D. Bent. Enhanced seasonal exchange of co&lt;sub&gt;2&lt;/sub&gt; by northern ecosystems since 1960. Science, 341(6150):1085-1089, 2013. URL: https://www.science.org/doi/abs/10.1126/science.1239207, arXiv:https://www.science.org/doi/pdf/10.1126/science.1239207, doi:10.1126/science.1239207.">GKP+13</a>]</span>. This fit is clearly an improvement.</p>
@@ -588,14 +574,14 @@ P(\chi^2 \geq \chi^2_{min};569) = 2.53e-50
 <p>The dataset from Mauna Loa does not describe the variation in global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production expected in any given year. For example, large forest fires or volcanic eruptions will produce variance that can be measured accurately. Nonetheless, it is not described in any capacity by either the standard deviation on the measurements or the proposed model. The inability for the model to describe such effects, which have substantial impact on the quality of the fit, and produce a large <span class="math notranslate nohighlight">\(\chi^2_{min}\)</span>.</p>
 <p>Additionally, the question of whether the Covid pandemic can cause a deviation from the current model is an exercise left for the reader. However, it is broken down into multiple steps.</p>
 </section>
-</section>
 <section id="excercise">
-<h1>Excercise<a class="headerlink" href="#excercise" title="Permalink to this headline">#</a></h1>
+<h2>Excercise<a class="headerlink" href="#excercise" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Produce a model of a similar form to the current one displayed. On the data up to the end of 2018.</p></li>
 <li><p>Extend the model to the start of the year 2020. Discuss whether the model is valid in this region.</p></li>
 <li><p>If the model is deemed valid, extend it to the end of 2022. Then show weather wethere is a deviation due to covid.</p></li>
 </ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

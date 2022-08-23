@@ -398,15 +398,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problems-with-error-on-p-0-and-p-1">
-   Problems with error on
-   <span class="math notranslate nohighlight">
-    \(P_0\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(P_1\)
-   </span>
+  <a class="reference internal nav-link" href="#problems-with-error-on-polynomial-coefficients">
+   Problems with error on Polynomial Coefficients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -439,15 +432,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#problems-with-error-on-p-0-and-p-1">
-   Problems with error on
-   <span class="math notranslate nohighlight">
-    \(P_0\)
-   </span>
-   and
-   <span class="math notranslate nohighlight">
-    \(P_1\)
-   </span>
+  <a class="reference internal nav-link" href="#problems-with-error-on-polynomial-coefficients">
+   Problems with error on Polynomial Coefficients
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -474,10 +460,12 @@ title="Print to PDF"
 <h1>Predictive Modeling<a class="headerlink" href="#predictive-modeling" title="Permalink to this headline">#</a></h1>
 <p>One of the critical uses of data recorded in the past is to attempt to make inferences about the future. Making predictions about future events on time series data can be done by forming a model on historical data.</p>
 <p>An introductory example of the general methodology of data-driven predictions using partitioning data into; training, validation and testing sections is explored. These sections are used as follows; the data is used to derive a model from the training data. Next, this model is tested on available validation data. Finally, the model is applied to the testing data to predict its behaviour.</p>
-<p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<code class="xref eq docutils literal notranslate"><span class="pre">model</span></code>. In this example, the free coefficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from to avoid learning overly patterns unique to a few years, while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
-<p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In the example of detecting covid, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomalous change in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration. However, when modelling of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For least-squares fitting, this constitutes determining the form of the function and evaluating the free coefficients.</p>
-<p>Using the previously developed model, the validation data is then investigated. This must not overlap with the training data. In the global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
-<p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<code class="xref eq docutils literal notranslate"><span class="pre">model</span></code> in 2020, then the presence of the pandemic can be shown.</p>
+<p>A straightforward example of predictive modelling using linear regression is taken from the previous section and walked through. The question is to test if there is an observable drop-in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> from the pandemic. In the previous section, a model was derived using least-squares regression and Fourier series of the form eq.<a class="reference internal" href="Final_Model.html#equation-model">(14)</a>. In this example, the free coefficient of the model will be discerned from the period from 1980 up to 2018. This period gives a large window to learn from. Thus, it  avoids learning overly patterns unique to a few years, while also providing a good fit with the validation window of <span class="math notranslate nohighlight">\(2018, 2019\)</span>.</p>
+<p>When performing any supervised prediction task, a training data set is selected. A training set is data in which the independent and dependent variables are known. In the example of detecting covid, the form of the predicted quantity is slightly obscured, ie the occurrence of an anomalous change in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration.
+When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration and time are the dependent and independent variables, respectively. The model is then built from this data. For least-squares fitting, this constitutes determining the form of the function and evaluating the free coefficients.</p>
+<p>Using the previously developed model <a class="reference internal" href="Final_Model.html#equation-model">(14)</a>, the validation data is investigated. This should be independent to the training data. In the global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, using the years <span class="math notranslate nohighlight">\(2018, 2019\)</span> provides a period as similar as possible regime to the test window <span class="math notranslate nohighlight">\(2020, 2021\)</span> asides from the pandemic anomaly being tested for. The quality of the model is then assessed on the validation data. Because the actual value of the validation data is known(There were no pandemics), the model’s efficacy can be assessed here using the <span class="math notranslate nohighlight">\(\chi^2\)</span> metric.</p>
+<p>This test case is somewhat limited, as it would be encouraging to test if this technique could discern other known about pandemics in the validation stage, such that we are not just validating its ability to predict ‘normal’. However, pandemics of a similar severity to Covid-19 have not been very common in the past 50 years.</p>
+<p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="Final_Model.html#equation-model">(14)</a> in 2020, then the presence of the pandemic can be shown.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -530,7 +518,7 @@ title="Print to PDF"
 <p class="sidebar-title">Classes</p>
 <p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html">Classes</a> are the staple of Object oriented programming(OOP). An example is the <code class="docutils literal notranslate"><span class="pre">FittedModel</span></code> class. A class can be called and has methods and atributes. Methods are functions of the object. Atributes are values stored inside the class. A good example of a class is a list. It has multiple functions like <code class="docutils literal notranslate"><span class="pre">__len__()</span></code> which returns the instance of the classes length. The <code class="docutils literal notranslate"> <span class="pre">__init__()</span></code> dunder method initialises the class, creating an instance. The instance here is the specific object, a list of <code class="docutils literal notranslate"><span class="pre">[1,</span> <span class="pre">2,</span> <span class="pre">3]</span></code>.  The atributes of the list are its values. When implementing a class it is considered good practice to only have users interact with methods. Chapter 10 of <a class="reference external" href="https://www.google.co.uk/books/edition/Python_Programming/">Python Programming: An introduction to Computer Science</a> covers Classes well. However, there are many guides online to their implementation.</p>
 </aside>
-<div class="cell tag_hide-input docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FittedModel</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -662,34 +650,7 @@ p_3 = 0.00026 +_ 2e-05
 </div>
 </div>
 </div>
-<section id="problems-with-error-on-p-0-and-p-1">
-<h2>Problems with error on <span class="math notranslate nohighlight">\(P_0\)</span> and <span class="math notranslate nohighlight">\(P_1\)</span><a class="headerlink" href="#problems-with-error-on-p-0-and-p-1" title="Permalink to this headline">#</a></h2>
-<p>The error on both quantities is astronomically high, around 10%. Further, it can be shown that it is an inaccurate measurement. If one changes the starting position for these quantities, the <code class="docutils literal notranslate"><span class="pre">p0</span></code> <code class="docutils literal notranslate"><span class="pre">kwarg</span></code> for <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, the results do not oscillate around the obtained values indicating that the distribution of possible values is much tighter than the actual result. A better estimate of such errors can be determined by performing the fit with random start values centered around the obtained value.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C coefficient:-2e+06 +_ 5e-10 
-P_1 coefficient:3e+03 +_ 0e+00
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_remove-imput docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># params</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a_0&quot;</span><span class="p">,</span> <span class="s2">&quot;a_1&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_0&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_1&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]</span>
-<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters.csv&quot;</span>
-<span class="n">model_fit_params</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="c1"># errors</span>
-<span class="n">model_cov_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters_errors.csv&quot;</span>
-
-<span class="n">model_cov_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">model_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -719,6 +680,69 @@ P(chi^2 &gt; chi^2_min) = 0.05423
 </div>
 </div>
 </div>
+<section id="problems-with-error-on-polynomial-coefficients">
+<h2>Problems with error on Polynomial Coefficients<a class="headerlink" href="#problems-with-error-on-polynomial-coefficients" title="Permalink to this headline">#</a></h2>
+<p>The error on all the polynomial coefficients calculated by scipy is, around 10%. Further, it can be shown that it is an overestimate. If one changes the starting position for these quantities, the <code class="docutils literal notranslate"><span class="pre">p0</span></code> <code class="docutils literal notranslate"><span class="pre">kwarg</span></code> for <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, the results have a much lower standard deviation indicating that the distribution of possible values is much tighter than obtained using the correlation method implemented by <code class="docutils literal notranslate"><span class="pre">scipy</span></code>. A better estimate of such errors can be determined by performing the fit with random start values centered around the obtained value, and using the standard deviation as the error. A short analysis is done on the <span class="math notranslate nohighlight">\(c, p_1\)</span> coefficients, this could be extended to the others.</p>
+<p>From the results of the code block below we see a large reduction in the magnitude of the error, when estimating it through repetitions rather than using covariance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">In this code block we take the coefficients that appear to have unusually</span>
+<span class="sd">high fractional errors, and we train the model again with random start</span>
+<span class="sd">positions 1000 times, to provide an empirical estimate on the error of</span>
+<span class="sd">the fits. The standard deviations of the start positions are</span>
+<span class="sd">10% of the value of the coefficient, to be of the order of the error</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">c_mean</span><span class="p">,</span> <span class="n">p_mean</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="n">length</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">coef_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">length</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">coef_df</span><span class="p">):</span>
+    <span class="n">c_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">c_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">c_mean</span> <span class="o">/</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">p_1_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">p_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">p_mean</span> <span class="o">/</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">error_train</span> <span class="o">=</span> <span class="n">FittedModel</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">,</span>
+        <span class="n">train_co2_data</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">],</span>
+        <span class="n">train_co2_data</span><span class="p">[</span><span class="s2">&quot;average&quot;</span><span class="p">],</span>
+        <span class="n">sigma</span><span class="o">=</span><span class="n">train_co2_data</span><span class="p">[</span><span class="s2">&quot;sdev&quot;</span><span class="p">],</span>
+        <span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">c_0</span><span class="p">,</span> <span class="n">p_1_0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Training Model&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">coef_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span>
+        <span class="p">:,</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="n">error_train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="n">coef_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">coef_df</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">coef_ste</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">coef_df</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;c coefficient:</span><span class="si">{</span><span class="n">coef_mean</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> +_ </span><span class="si">{</span><span class="n">coef_ste</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1</span><span class="si">}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;P_1 coefficient:</span><span class="si">{</span><span class="n">coef_mean</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2</span><span class="si">}</span><span class="s2"> +_ </span><span class="si">{</span><span class="n">coef_ste</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+<span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">[[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span> <span class="o">=</span> <span class="n">coef_ste</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c coefficient:-1.9e+06 +_ 5e-10 
+P_1 coefficient:2.9e+03 +_ 5e-13
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># params</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a_0&quot;</span><span class="p">,</span> <span class="s2">&quot;a_1&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_0&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_1&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]</span>
+<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters.csv&quot;</span>
+<span class="n">model_fit_params</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+<span class="c1"># errors</span>
+<span class="n">model_cov_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
+<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters_errors.csv&quot;</span>
+
+<span class="n">model_cov_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="results">
 <h2>Results<a class="headerlink" href="#results" title="Permalink to this headline">#</a></h2>
@@ -743,17 +767,12 @@ P(chi^2 &gt; chi^2_min) = 0.05423
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">2020</span><span class="p">])</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2021</span><span class="p">])</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2021</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.axis.XTick at 0x7f83f4985450&gt;,
- &lt;matplotlib.axis.XTick at 0x7f83f4985420&gt;,
- &lt;matplotlib.axis.XTick at 0x7f83f4985300&gt;]
-</pre></div>
-</div>
-<img alt="../_images/predictive_models_11_1.png" src="../_images/predictive_models_11_1.png" />
+<img alt="../_images/predictive_models_11_0.png" src="../_images/predictive_models_11_0.png" />
 </div>
 </div>
 </section>

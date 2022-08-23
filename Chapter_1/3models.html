@@ -475,82 +475,14 @@ title="Print to PDF"
 <li><p>A1T) Net-zero by 2030, no further reductions.</p></li>
 <li><p>B1) Net-zero by 2030, and then reducing total atmospheric carbon at the same rate it is currently produced.</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">curve_fit</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">LSQUnivariateSpline</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="cell tag_remove-input docutils container">
 </div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">Again this code block is dedicated to loading the data, here it took a</span>
-<span class="sd">bit more effort to load it into a dataframe in a nice fashion, because of</span>
-<span class="sd">the fixed width text format used by Berkely.</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="c1"># Loading fits</span>
-<span class="n">model_fit</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="s2">&quot;../output_files/co2_model_parameters.csv&quot;</span><span class="p">,</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
-<span class="n">model_error</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="s2">&quot;../output_files/co2_model_parameters_errors.csv&quot;</span><span class="p">,</span>
-    <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-<span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
-<span class="c1"># select only polynomials</span>
-<span class="n">poly_fit</span> <span class="o">=</span> <span class="n">model_fit</span><span class="p">[[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]]</span>
-<span class="n">poly_error</span> <span class="o">=</span> <span class="n">model_error</span><span class="p">[[</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]]</span>
-<span class="c1"># Loading Moving average Data</span>
-<span class="n">path</span> <span class="o">=</span> <span class="p">(</span>
-    <span class="s2">&quot;http://berkeleyearth.lbl.gov/auto/Global/Complete_TAVG_complete.txt&quot;</span>
-<span class="p">)</span>
-<span class="c1"># Formatting be data</span>
-<span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;year&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;month&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;monthly_anomaly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;monthly_anomaly_unc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;yearly_anomaly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;yearly_anomaly_unc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;5yearly_anomaly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;5yearly_anomaly_unc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;10yearly_anomaly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;10yearly_anomaly_unc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;20yearly_anomaly&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;20yearly_anomaly_unc&quot;</span><span class="p">,</span>
-<span class="p">]</span>
-<span class="n">temp_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_fwf</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">34</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
-<span class="n">temp_data</span><span class="p">[</span><span class="s2">&quot;dt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span> <span class="o">+</span> <span class="n">temp_data</span><span class="p">[</span><span class="s2">&quot;year&quot;</span><span class="p">]</span>
-<span class="c1"># remove be moving averages</span>
-<span class="n">temp_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span>
-        <span class="s2">&quot;yearly_anomaly&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;yearly_anomaly_unc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;5yearly_anomaly&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;5yearly_anomaly_unc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;10yearly_anomaly&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;10yearly_anomaly_unc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20yearly_anomaly&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;20yearly_anomaly_unc&quot;</span><span class="p">,</span>
-    <span class="p">],</span>
-    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <section id="textrm-co-2-concentration-models">
 <h2><span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> Concentration Models<a class="headerlink" href="#textrm-co-2-concentration-models" title="Permalink to this headline">#</a></h2>
-<p>In the [section](…/ Chapter_1/Final_Model.ipynb), a polynomial model with a trigonometric addition was developed to characterize the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_1\)</span> concentration, which closely follows the global average trend.Using the model without the trigonometric terms will be the basis for this section.</p>
-<div class="cell docutils container">
+<p>In the <a class="reference internal" href="Final_Model.html"><span class="doc std std-doc">section</span></a>, a polynomial model, eq.<a class="reference internal" href="Final_Model.html#equation-model">(14)</a> with a trigonometric addition was developed to characterize the Mauna Loa <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration, which closely follows the global average trend. Using the model without the trigonometric terms will be the basis for this section.</p>
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This block defines the functions used to approximate the scenarios, and</span>
@@ -590,10 +522,14 @@ title="Print to PDF"
 </div>
 <section id="the-problem-with-polynomials">
 <h3>The Problem with Polynomials<a class="headerlink" href="#the-problem-with-polynomials" title="Permalink to this headline">#</a></h3>
-<p>Problems arise when fitting polynomials of order greater than one, minor parameter tweaks to the higher powers’ constants cause large deviations in the value of the function. This can be seen below in the figure. The figure plots the cubic fit <span class="math notranslate nohighlight">\(\pm 2\sigma\)</span>, where adjusting the fit parameters by one sigma provides a huge variance in the output of the function. The time axis is extended to show that it is a polynomial fit and not just a fill. This problem is especially apparent as the data, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration data, is rather linear, and thus there is a moderate uncertainty on the <span class="math notranslate nohighlight">\(x^2, x^3\)</span> terms.</p>
+<p>Problems arise when fitting polynomials of order greater than one, minor parameter tweaks to the higher powers’ constants cause large deviations in the value of the function. This can be seen below in the figure.
+The figure plots the cubic fit from eq.<a class="reference internal" href="Final_Model.html#equation-model">(14)</a> <span class="math notranslate nohighlight">\(\pm 2\sigma\)</span>. The time axis is extended to show that it is a polynomial fit and not just a fill. This problem is especially apparent as the data, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration data, is rather linear, and thus there is a moderate uncertainty on the <span class="math notranslate nohighlight">\(x^2, x^3\)</span> terms.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">poly_fit</span> <span class="o">/</span> <span class="n">poly_error</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Printing the fractional error on the fit coefficients.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">poly_fit</span> <span class="o">/</span> <span class="n">poly_error</span><span class="p">))</span>
 <span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Fit_Value/Error&quot;</span><span class="p">]</span>
 <span class="n">df</span>
 </pre></div>
@@ -628,7 +564,7 @@ title="Print to PDF"
     </tr>
     <tr>
       <th>p_1</th>
-      <td>6.746818e+15</td>
+      <td>3.373409e+15</td>
     </tr>
     <tr>
       <th>p_2</th>
@@ -642,10 +578,9 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># time = np.linspace(temp_data[&#39;dt&#39;].iloc[-1], 2050, 1000)</span>
-<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="n">lb_coef</span><span class="p">,</span> <span class="n">ub_coef</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">poly_fit</span><span class="p">,</span> <span class="n">poly_error</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">A1M</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">poly_fit</span><span class="p">))</span>
@@ -667,18 +602,18 @@ title="Print to PDF"
 </div>
 </div>
 <p>To solve this problem, the <span class="math notranslate nohighlight">\(x\)</span> values of the training data, years, can be translated so that they center about zero. Thus the deviations due to small parameter changes are not as large.</p>
-<p>Alternatively, a natural spline fit could be used, treating the extrapolation as linear, and thus the range of values inside the <span class="math notranslate nohighlight">\(2 \cdot \sigma\)</span> interval would not diverge as rapidly.</p>
+<p>Alternatively, a natural spline fit could be used, treating the extrapolation as linear, and thus the range of values inside the <span class="math notranslate nohighlight">\(2\sigma\)</span> interval would not diverge as rapidly.</p>
 <aside class="margin sidebar">
 <p class="sidebar-title"></p>
 <p>The Plot on the left-hand side is a quantitive representation of the simplified SRES Scenarios detailed earlier. It shows three possible future pathways and the current 10-year moving average from which the A1B fit was performed. It should be noted that these are in no way linked to anything more than common sense. And the predictive power they bring to bear is incredibly small. The purpose of these plots is to aid in the Bayesian analysis.</p>
 <p>The shaded areas of the Graph correspond to two standard deviations of the fitting parameters. Assuming that the errors on the fits are normally distributed, each <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in future time can be characterized by a random variable <span class="math notranslate nohighlight">\(C\)</span> for the specific model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c3d91407-9cff-4f97-aec0-50a2d00e60f4">
-<span class="eqno">(15)<a class="headerlink" href="#equation-c3d91407-9cff-4f97-aec0-50a2d00e60f4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e2a44b71-62b2-4d9c-9ab7-3c76bfe1d70d">
+<span class="eqno">(15)<a class="headerlink" href="#equation-e2a44b71-62b2-4d9c-9ab7-3c76bfe1d70d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_{A1T} \sim \mathcal{N}(A1T(T), \sigma_{A1T}(T)).
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T scenario function evaluated at some time <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\sigma_{A1T}(T)\)</span> is the associated error on the fit. By treating the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in the future as a random variable, we can use its PDF in conjunction with the PDF of S to perform Bayesian interference on how likely crossing a temperature Threshold is.</p>
 </aside>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># x values</span>
 <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">2050</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2000</span>
@@ -739,15 +674,12 @@ C_{A1T} \sim \mathcal{N}(A1T(T), \sigma_{A1T}(T)).
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">2060</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm{{CO}}_2$ (ppm)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm{{CO}}_2$ (ppm)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\textrm{{CO}}_2$ (ppm)&#39;)
-</pre></div>
-</div>
-<img alt="../_images/3models_10_1.png" src="../_images/3models_10_1.png" />
+<img alt="../_images/3models_10_0.png" src="../_images/3models_10_0.png" />
 </div>
 </div>
 </section>
@@ -766,7 +698,7 @@ C_{A1T} \sim \mathcal{N}(A1T(T), \sigma_{A1T}(T)).
     \end{aligned}\end{split}\]</div>
 <p>The implementation of the splines below is using a least-squares fitting method. A natural spline extension can be used if the spline fit is used as a predictive model for data in unseen regions. A natural spline has a first-degree polynomial applied to regions outside the training data range. These lines are continuous and have continuous first derivatives.</p>
 <p>Typically order-<span class="math notranslate nohighlight">\(4\)</span> splines are used.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Here we demonstrate using the spline fitting provided by scipy on a small</span>

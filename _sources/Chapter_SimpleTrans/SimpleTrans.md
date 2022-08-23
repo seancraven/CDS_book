@@ -8,7 +8,7 @@ It can be installed using pip separately however,
 ```shell
 pip install simpletrans
 ```
-From with this done you local database must be populated. This is done by running the main script: 
+With this done you local database must be populated. This is done by running the main script: 
 ```shell 
 simpletrans -m 
 ```
@@ -29,7 +29,7 @@ where k is the absorption coefficient, $[X]$, is the path integral of molecular 
 [X] = \int_{h_i}^{h_{i+1}} n(T,p)dh.
 \end{equation}
 
-Where h_i, is the start of the atmosphere block, n is the number density of the molecule. This is repeated over every gas for every altitude for all wavenumbers. 
+Where $h_i$, is the start of the atmosphere block, $n$ is the number density of the molecule. This is repeated over every gas for every altitude for all wavenumbers. 
 
 To enable these calculations, there are files which contain functions to help calculate these quantities. isa.py implements the [standard atmosphere](../Chapter_2/lorentzian_broadening.ipynb), to obtain temperature and pressures as a function of altitude and plank.py implements the plank function in a manner which has convenient default behaviour. 
 
@@ -45,7 +45,7 @@ For more detail on individual functions, Every functions is documented with a do
 1. Calculate the maximum standard deviation of the averages of the optical depths for $\textrm{CO}_2$, where the bins are $1 cm^{-1}$ wide and centred on the integer wavenumbers. Is the standard error large in comparison to the mean?
 2. Using the provided database plot the difference of the absorption coefficient for $\textrm{CO}_2$ at $0 km$ and $1 km$ elevation in ISA atmosphere. 
 ```{tip}
-There are premade queries in the optical_depths_from_hitran.py file, which could be imported or copied and pasted.
+There are premade database sql queries in the optical_depths_from_hitran.py file, which could be imported or copied and pasted.
 ```
 
 
