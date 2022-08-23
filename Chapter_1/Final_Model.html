@@ -489,8 +489,12 @@ title="Print to PDF"
   <section id="final-model">
 <h1>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">#</a></h1>
 <p>With the main frequencies determined from the Fourier transforms, additional degrees of freedom can be added to the model. With precise guesses for the values of the trigonometric functions, lest-square fitting can be used. It now takes the form,</p>
-<div class="math notranslate nohighlight" id="equation-model">
-<span class="eqno">(11)<a class="headerlink" href="#equation-model" title="Permalink to this equation">#</a></span>\[    f(t) = t_0\cos[(\omega_0+1/2) t] + t_1\cos[(\omega_1+1/2) t] + p_1 t +p_2 t^2 +p_3 t^3 + c_0.\]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-46c06d99-9d7a-4f9c-854d-18f313a20f80">
+<span class="eqno">(11)<a class="headerlink" href="#equation-46c06d99-9d7a-4f9c-854d-18f313a20f80" title="Permalink to this equation">#</a></span>\[\begin{align}
+    f(t) &amp;= f_{seasonal}(t) + f_{trend}(t). \\
+    f_{seasonal}(t) &amp;= a_0\cos[(\omega_0+1/2) t] + a_1\cos[(\omega_1+1/2) t], \\
+    f_{trend}(t) &amp;= p_1 t +p_2 t^2 +p_3 t^3 + c_0.
+\end{align}\]</div>
 <p>All the parameters in the equation <span class="math notranslate nohighlight">\(f(t)\)</span> with subscripts are constants to be fitted by the least-squares method. The Model and its residuals are plotted below.</p>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -588,7 +592,7 @@ P(\chi^2 \geq \chi^2_{min};569) = 2.53e-50
 </section>
 <section id="conclusion">
 <h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">#</a></h1>
-<p>The null hypothesis proposed is that the growth in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> over the past few decades can be modelled by a function of the form eq. <a class="reference internal" href="#equation-model">(11)</a>,</p>
+<p>The null hypothesis proposed is that the growth in <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> over the past few decades can be modelled by a function of the form eq. <code class="xref eq docutils literal notranslate"><span class="pre">model</span></code>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathcal{H}_0 : f(t). \\
 \mathcal{H}_1 : not f(t).\end{split}\]</div>
