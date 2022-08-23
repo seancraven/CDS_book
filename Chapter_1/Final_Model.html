@@ -56,7 +56,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Predictive Modeling" href="../Chapter_2/predictive_models.html" />
+    <link rel="next" title="Predictive Modeling" href="predictive_models.html" />
     <link rel="prev" title="Hypothesis Testing And Goodness of Fit" href="Hypothesis_Testing.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -126,7 +126,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Global Carbon Dioxide
+  Chapter 1, Global Carbon Dioxide
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -153,66 +153,50 @@ const thebe_selector_output = ".output, .cell_output"
    Final Model
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Temperature Rise and Predictive Modelling
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/predictive_models.html">
+  <a class="reference internal" href="predictive_models.html">
    Predictive Modeling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/temp_co2.html">
+  <a class="reference internal" href="temp_co2.html">
    Global Temperature Predictions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/3models.html">
-   Implementation of the Three SRES Approximation Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/bayesian_inference.html">
-   Using Bayesian Inference to Determine
-   <span class="math notranslate nohighlight">
-    \(S\)
-   </span>
-   Left as Work in progress
+  <a class="reference internal" href="3models.html">
+   Polynomial Prediction Problems
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Radiation Modelling
+  Chapter 2, Radiation Modelling
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/atmospheric_primer.html">
+  <a class="reference internal" href="../Chapter_2/atmospheric_primer.html">
    Radiation Modelling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/blackbody.html">
+  <a class="reference internal" href="../Chapter_2/blackbody.html">
    Incoming and Outgoing Radiation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/lorentzian_broadening.html">
+  <a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">
    The Variance of Absorption Spectra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/radiative_transfer.html">
+  <a class="reference internal" href="../Chapter_2/radiative_transfer.html">
    Radiative transfer
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_3/Optical_depth_db.html">
+  <a class="reference internal" href="../Chapter_2/Optical_depth_db.html">
    The Optical Depths Database
   </a>
  </li>
@@ -489,8 +473,8 @@ title="Print to PDF"
   <section id="final-model">
 <h1>Final Model<a class="headerlink" href="#final-model" title="Permalink to this headline">#</a></h1>
 <p>With the main frequencies determined from the Fourier transforms, additional degrees of freedom can be added to the model. With precise guesses for the values of the trigonometric functions, lest-square fitting can be used. It now takes the form,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e84420cd-3562-48f3-bf0d-6e23754da6f8">
-<span class="eqno">(14)<a class="headerlink" href="#equation-e84420cd-3562-48f3-bf0d-6e23754da6f8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-39f43999-2cbe-4a66-a6b5-ee13829b861d">
+<span class="eqno">(14)<a class="headerlink" href="#equation-39f43999-2cbe-4a66-a6b5-ee13829b861d" title="Permalink to this equation">#</a></span>\[\begin{align}
     f(t) &amp;= f_{seasonal}(t) + f_{trend}(t). \\
     f_{seasonal}(t) &amp;= a_0\cos[(\omega_0+1/2) t] + a_1\cos[(\omega_1+1/2) t], \\
     f_{trend}(t) &amp;= p_1 t +p_2 t^2 +p_3 t^3 + c_0.
@@ -648,7 +632,7 @@ P(\chi^2 \geq \chi^2_{min};569) = 2.53e-50
             <p class="prev-next-title">Hypothesis Testing And Goodness of Fit</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Chapter_2/predictive_models.html" title="next page">
+    <a class='right-next' id="next-link" href="predictive_models.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Predictive Modeling</p>

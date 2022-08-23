@@ -1,0 +1,818 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Global Temperature Predictions &#8212; Climate Data Science</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Polynomial Prediction Problems" href="3models.html" />
+    <link rel="prev" title="Predictive Modeling" href="predictive_models.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../An_Aside_On_Python.html">
+   An Aside On Python
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 1, Global Carbon Dioxide
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Data_Exploration.html">
+   Global
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2 \)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Fitting.html">
+   Curve Fitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hypothesis_Testing.html">
+   Hypothesis Testing And Goodness of Fit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Final_Model.html">
+   Final Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="predictive_models.html">
+   Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3models.html">
+   Polynomial Prediction Problems
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 2, Radiation Modelling
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">
+   The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Relational Database Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SimpleTrans
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
+  </a>
+ </li>
+</ul>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Bibliography.html">
+   Bibliography
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/temp_co2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter_1/temp_co2.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predictions">
+   Predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-warming-trend">
+   Current Warming trend
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Global Temperature Predictions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#predictions">
+   Predictions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#current-warming-trend">
+   Current Warming trend
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="global-temperature-predictions">
+<h1>Global Temperature Predictions<a class="headerlink" href="#global-temperature-predictions" title="Permalink to this headline">#</a></h1>
+<p>In the prvious few sections we have looked at the data from NOAA, and explored some statistical techniques. This section is a slight deviation as we look at a new data set on Global Temperatures.
+This section uses global temperature data combined with global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration and warming data provided by the IPCC to compare a simple model with Global warming estimates laid out in the Special Report on Emission Scenarios(SRES)<span id="id1">[<a class="reference internal" href="../Bibliography.html#id15">NAD+00</a>]</span>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">File ~/Documents/Work/CDS_book/book/lib/python3.10/site-packages/matplotlib/style/core.py:127,</span> in <span class="ni">use</span><span class="nt">(style)</span>
+<span class="g g-Whitespace">    </span><span class="mi">126</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">127</span>     <span class="n">rc</span> <span class="o">=</span> <span class="n">rc_params_from_file</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">use_default_template</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>     <span class="n">_apply_style</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/Work/CDS_book/book/lib/python3.10/site-packages/matplotlib/__init__.py:852,</span> in <span class="ni">rc_params_from_file</span><span class="nt">(fname, fail_on_error, use_default_template)</span>
+<span class="g g-Whitespace">    </span><span class="mi">838</span> <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">839</span><span class="sd"> Construct a `RcParams` from file *fname*.</span>
+<span class="g g-Whitespace">    </span><span class="mi">840</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="nn">    850     parameters specified</span> in <span class="ni">the file. </span><span class="nt">(Useful for updating dicts.)</span>
+<span class="g g-Whitespace">    </span><span class="mi">851</span><span class="sd"> &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">852</span> <span class="n">config_from_file</span> <span class="o">=</span> <span class="n">_rc_params_in_file</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">fail_on_error</span><span class="o">=</span><span class="n">fail_on_error</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">854</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">use_default_template</span><span class="p">:</span>
+
+<span class="nn">File ~/Documents/Work/CDS_book/book/lib/python3.10/site-packages/matplotlib/__init__.py:778,</span> in <span class="ni">_rc_params_in_file</span><span class="nt">(fname, transform, fail_on_error)</span>
+<span class="g g-Whitespace">    </span><span class="mi">777</span> <span class="n">rc_temp</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="ne">--&gt; </span><span class="mi">778</span> <span class="k">with</span> <span class="n">_open_file_or_url</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span> <span class="k">as</span> <span class="n">fd</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">779</span>     <span class="k">try</span><span class="p">:</span>
+
+<span class="nn">File /usr/lib/python3.10/contextlib.py:135,</span> in <span class="ni">_GeneratorContextManager.__enter__</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">    </span><span class="mi">134</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">135</span>     <span class="k">return</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gen</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">136</span> <span class="k">except</span> <span class="ne">StopIteration</span><span class="p">:</span>
+
+<span class="nn">File ~/Documents/Work/CDS_book/book/lib/python3.10/site-packages/matplotlib/__init__.py:755,</span> in <span class="ni">_open_file_or_url</span><span class="nt">(fname)</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span>     <span class="n">encoding</span> <span class="o">=</span> <span class="s2">&quot;utf-8&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">755</span> <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span>     <span class="k">yield</span> <span class="n">f</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;../matplotlibrc&#39;
+
+<span class="n">The</span> <span class="n">above</span> <span class="n">exception</span> <span class="n">was</span> <span class="n">the</span> <span class="n">direct</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">exception</span><span class="p">:</span>
+
+<span class="ne">OSError</span><span class="g g-Whitespace">                                   </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 9&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="ne">----&gt; </span><span class="mi">9</span> <span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;../matplotlibrc&#39;</span><span class="p">)</span>
+
+<span class="nn">File ~/Documents/Work/CDS_book/book/lib/python3.10/site-packages/matplotlib/style/core.py:130,</span> in <span class="ni">use</span><span class="nt">(style)</span>
+<span class="g g-Whitespace">    </span><span class="mi">128</span>     <span class="n">_apply_style</span><span class="p">(</span><span class="n">rc</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">129</span> <span class="k">except</span> <span class="ne">IOError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">130</span>     <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">131</span>         <span class="s2">&quot;</span><span class="si">{!r}</span><span class="s2"> not found in the style library and input is not a &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">132</span>         <span class="s2">&quot;valid URL or path; see `style.available` for list of &quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">133</span>         <span class="s2">&quot;available styles&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">style</span><span class="p">))</span> <span class="kn">from</span> <span class="nn">err</span>
+
+<span class="ne">OSError</span>: &#39;../matplotlibrc&#39; not found in the style library and input is not a valid URL or path; see `style.available` for list of available styles
+</pre></div>
+</div>
+</div>
+</div>
+<p>The global Temperature data is taken from <a class="reference external" href="http://berkeleyearth.org/data/">Berkley Earth</a>. The temperature data has missing fields as with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Further, the date is formatted awkwardly into a fixed width table format with commented-out headers. Finally, the global temperature data is seasonal. Thus some data cleaning and formatting is required.</p>
+<p>When ananlysing the data, a Fourier-based fit could be applied similarly to that performed in the section on Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data. Because this section is not looking for a functional form, an average is more straightforward to implement.</p>
+<p>After cleaning the data of null fields, a moving average can be used to remove the seasonal trends.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Number of Null Values</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>year</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>month</th>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>monthly_anomaly</th>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>monthly_anomaly_unc</th>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>dt</th>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Drop NA</span>
+<span class="n">temp_data</span> <span class="o">=</span> <span class="n">temp_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">WINDOW</span> <span class="o">=</span> <span class="mi">120</span>
+<span class="c1"># Sliding window weighted average:</span>
+<span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">temp_data</span><span class="p">,</span> <span class="n">WINDOW</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">time_midpoint</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">,:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">win_ave_temp</span> <span class="o">=</span> <span class="n">slv</span><span class="p">[:,</span><span class="mi">2</span><span class="p">,:]</span>
+<span class="n">win_ave_unc</span> <span class="o">=</span>  <span class="n">slv</span><span class="p">[:,</span><span class="mi">3</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span>  <span class="nf">moving_ave_frame</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="s1">&#39;Applies a moving average&#39;</span>
+    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ma_df</span>
+<span class="k">def</span>  <span class="nf">moving_std_frame</span><span class="p">(</span><span class="n">df</span><span class="p">:</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="s1">&#39;Applies a moving average&#39;</span>
+    <span class="n">slv</span> <span class="o">=</span> <span class="n">sliding_window_view</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">moving_averages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">slv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">ma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">moving_averages</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">ma_df</span>
+
+<span class="k">def</span> <span class="nf">lb_ub</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">lb</span> <span class="o">=</span> <span class="n">values</span> <span class="o">-</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
+    <span class="n">ub</span> <span class="o">=</span> <span class="n">values</span> <span class="o">+</span> <span class="n">sigma</span><span class="o">*</span><span class="n">factor</span>
+    <span class="k">return</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span>
+
+<span class="k">def</span> <span class="nf">P1</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a0</span><span class="p">,</span> <span class="n">a1</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a0</span> <span class="o">+</span> <span class="n">a1</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">ave_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">win_ave_temp</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ave_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">win_ave_unc</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">ave_temp</span><span class="p">,</span> <span class="n">ave_unc</span><span class="p">)</span>
+<span class="c1">#Plotting</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_midpoint</span><span class="p">,</span>
+    <span class="n">ave_temp</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time_midpoint</span><span class="p">,</span>
+    <span class="n">lb</span><span class="p">,</span>
+    <span class="n">ub</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Window Midpoint (Year)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;10 Year Moving Average of </span><span class="se">\n</span><span class="s1"> </span><span class="se">\</span>
+<span class="s1">    Land Average Temperature Anomaly $(^{\circ}C)$&#39;</span>
+    <span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/temp_co2_6_0.png" src="../_images/temp_co2_6_0.png" />
+</div>
+</div>
+</section>
+<section id="predictions">
+<h1>Predictions<a class="headerlink" href="#predictions" title="Permalink to this headline">#</a></h1>
+<p>Global temperatures provide an interesting case study for a further introduction to predictive modeling.</p>
+<p>There has already been substantial warming compared to the period from <span class="math notranslate nohighlight">\(1850-1900\)</span>. This period is set as a pre-industrial baseline<span id="id2">[<a class="reference internal" href="../Bibliography.html#id16" title="Andrew P Schurer, Michael E Mann, Ed Hawkins, Simon F B Tett, and Gabriele C Hegerl. Importance of the Pre-Industrial baseline in determining the likelihood of exceeding the paris limits. Nat Clim Chang, 7(8):563–567, July 2017.">SMH+17</a>]</span>. Further temperature rises will continue to increase the occurrence of extreme weather events and myriad other consequences, with an entire <a class="reference external" href="https://www.ipcc.ch/sr15/">IPCC</a> report dedicated to the consequences of warming over <span class="math notranslate nohighlight">\(1.5^\circ C\)</span>. The special report on emission scenarios(SRES)<span id="id3">[<a class="reference internal" href="../Bibliography.html#id15">NAD+00</a>]</span> produced by the IPCC in 2000, details multiple families of emission scenarios with their associated warming.</p>
+<p>These scenarios are developed using six independent models. Such models use economic driving forces and predict the consequences of changing macro-economic behavior, for example, the percentage of fossil fuel used compared to renewables.</p>
+<p>These highly detailed models are not suitable for this section. Using <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration, a simple model can be formed to determine the change in temperature over the next 30 years.
+The three scenarios that will be investigated are approximations of the A1 and B1 storylines described from page 247 onwards in the <a class="reference external" href="https://www.ipcc.ch/site/assets/uploads/2018/03/emissions_scenarios-1.pdf">SRES</a>.</p>
+<ul class="simple">
+<li><p>A1B) Continued growth in emission Rates. This scenario represents a growth-focused world with a balanced mix of energy sources.</p></li>
+<li><p>A1T) Net-zero by 2030, no further reductions. This scenario corresponds to a growth-focused world with renewable energy sources.</p></li>
+<li><p>B1) Net-zero by 2030, and then reducing total atmospheric carbon at the same rate it is currently produced. Corresponding to a global focus on emissions reduction.
+The relationship between <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration used is:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[T(C) = T_0 + S \log_2(C/C_0).\]</div>
+<p>Where <span class="math notranslate nohighlight">\(C\)</span> is the concentration of <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> and <span class="math notranslate nohighlight">\(S\)</span> is a fitted sensitivity factor.</p>
+</section>
+<section id="current-warming-trend">
+<h1>Current Warming trend<a class="headerlink" href="#current-warming-trend" title="Permalink to this headline">#</a></h1>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trend_data</span> <span class="o">=</span> <span class="n">temp_data</span><span class="p">[</span><span class="n">temp_data</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1960</span><span class="p">]</span>
+<span class="n">trend_ave</span> <span class="o">=</span> <span class="n">moving_ave_frame</span><span class="p">(</span><span class="n">trend_data</span><span class="p">,</span><span class="n">WINDOW</span><span class="p">)</span>
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
+    <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="n">trend_ave</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;../output_files/temperature_</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>\
+    <span class="s1">&#39;_moving_average.csv&#39;</span>
+    <span class="p">)</span>      
+<span class="n">trend_fit</span><span class="p">,</span> <span class="n">trend_error</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span>
+    <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="n">gradient_lb</span><span class="p">,</span> <span class="n">gradient_ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_fit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">trend_error</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> 
+<span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">lb_ub</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
+    <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly_unc&#39;</span><span class="p">]</span>
+    <span class="p">)</span>
+<span class="c1">#Plotting</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">2017.3</span><span class="p">,</span> <span class="mi">2055</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">trend_lb</span> <span class="o">=</span> <span class="n">trend_fit</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">trend_error</span><span class="p">)</span>
+<span class="n">trend_ub</span> <span class="o">=</span> <span class="n">trend_fit</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="n">trend_error</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">],</span>  <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">],</span>
+    <span class="n">c</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Moving Average&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">P1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">trend_fit</span><span class="p">),</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Linear Trend&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Window Midpoint (Year)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">WINDOW</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span><span class="si">}</span><span class="s1"> Year Moving Average of </span><span class="se">\n</span><span class="s1">&#39;</span> \
+    <span class="sa">r</span><span class="s1">&#39;Land Average Temperature Anomaly $(^{\circ}\textrm{{C}})$&#39;</span>
+    <span class="p">)</span>
+<span class="c1">#Warming Targets</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1960</span><span class="p">,</span><span class="mi">2055</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$1.5^\circ C$ Warming&#39;</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">red</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$2.0^\circ C$ Warming&#39;</span><span class="p">,</span>
+    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-.&#39;</span>
+    <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">P1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">trend_lb</span><span class="p">),</span><span class="n">P1</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">*</span><span class="n">trend_ub</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/temp_co2_9_0.png" src="../_images/temp_co2_9_0.png" />
+</div>
+</div>
+<p>With a simple linear extrapolation of the Berkeley Earth temperature data, one can see that if the current rate of warming persists, then keeping the Global Temperature anomaly below <span class="math notranslate nohighlight">\(1.5^\circ C\)</span> is unlikely, moving into the future. However, this simple model is just for getting a feeling of the data. By combining this dataset with the Global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data, the correlation of these datasets can be examined.  Both of the datasets’ moving averages are plotted below for a visual comparison. Further, the Pearson correlation co-efficient <span class="math notranslate nohighlight">\((r)\)</span> can be calculated for the datasets. <span class="math notranslate nohighlight">\(r\)</span> is given by,</p>
+<div class="math notranslate nohighlight">
+\[r(x,y) = \frac{\sum (x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum (x_i-\bar{x})^2 \sum (y_i-\bar{y})^2 }}.\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\bar{q}\)</span> indicates the mean of <span class="math notranslate nohighlight">\(q\)</span>. The <span class="math notranslate nohighlight">\(r\)</span> value can be calculated for the global <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> concentration and the temperature by taking both variables evaluated simultaneously in time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The error bars on the <span class="math notranslate nohighlight">\(\text{CO_2}\)</span> concentration are two times the standard error on the mean. However, the error bars on the temperature is the mean of the uncertainty over the window. This is because the uncertainty corresponds to 95% of recorded percentages.</p>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/temp_co2_11_0.png" src="../_images/temp_co2_11_0.png" />
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_slice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="mi">1985</span> <span class="o">&lt;</span> <span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">])</span> <span class="o">&amp;</span> \
+    <span class="p">(</span><span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2016</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">temp_slice</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="mi">1985</span> <span class="o">&lt;</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">])</span> <span class="o">&amp;</span> \
+    <span class="p">(</span><span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;dt&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">2016</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="n">bound_co2</span> <span class="o">=</span> <span class="n">trend_co2_ave</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">co2_slice</span><span class="p">]</span>
+<span class="n">bound_temp</span> <span class="o">=</span> <span class="n">trend_ave</span><span class="p">[</span><span class="s1">&#39;monthly_anomaly&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">temp_slice</span><span class="p">]</span>
+<span class="n">r_coef</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">bound_co2</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">bound_temp</span><span class="p">)[</span><span class="mi">1</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Pearson Correlation Coefficient:</span><span class="si">{</span><span class="n">r_coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pearson Correlation Coefficient:0.99
+</pre></div>
+</div>
+</div>
+</div>
+<p>As expected the two quantities are very strongly correlated. The Pearson correlation coefficient in this scenario is not particularly useful. The information it provides is redundant with the above graph. However, with high dimensional data, a correlation matrix can glean insight into the relationship of variables. A short medium article on correlation matrix plots can be found <a class="reference external" href="https://towardsdatascience.com/better-heatmaps-and-correlation-matrix-plots-in-python-41445d0f2bec">here</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Chapter_1"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="predictive_models.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Predictive Modeling</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="3models.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Polynomial Prediction Problems</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sean Craven<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

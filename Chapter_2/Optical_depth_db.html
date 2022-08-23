@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>A very short introduction to relational databases &#8212; Climate Data Science</title>
+    <title>The Optical Depths Database &#8212; Climate Data Science</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,12 +50,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The Relational Alternative" href="Database_intro_2.html" />
-    <link rel="prev" title="The Optical Depths Database" href="../Chapter_2/Optical_depth_db.html" />
+    <link rel="next" title="A very short introduction to relational databases" href="../Database_Chapter/Database_intro_1.html" />
+    <link rel="prev" title="Radiative transfer" href="radiative_transfer.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -172,29 +174,29 @@ const thebe_selector_output = ".output, .cell_output"
   Chapter 2, Radiation Modelling
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/atmospheric_primer.html">
+  <a class="reference internal" href="atmospheric_primer.html">
    Radiation Modelling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/blackbody.html">
+  <a class="reference internal" href="blackbody.html">
    Incoming and Outgoing Radiation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">
+  <a class="reference internal" href="lorentzian_broadening.html">
    The Variance of Absorption Spectra
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/radiative_transfer.html">
+  <a class="reference internal" href="radiative_transfer.html">
    Radiative transfer
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Chapter_2/Optical_depth_db.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    The Optical Depths Database
   </a>
  </li>
@@ -204,14 +206,14 @@ const thebe_selector_output = ".output, .cell_output"
   Relational Database Introduction
  </span>
 </p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
    A very short introduction to relational databases
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Database_intro_2.html">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
    The Relational Alternative
   </a>
  </li>
@@ -307,7 +309,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/Database_Chapter/Database_intro_1.md"
+        <a href="../_sources/Chapter_2/Optical_depth_db.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -356,7 +358,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>A very short introduction to relational databases</h1>
+                <h1>The Optical Depths Database</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -368,35 +370,39 @@ title="Print to PDF"
                 
               <div>
                 
-  <section id="a-very-short-introduction-to-relational-databases">
-<h1>A very short introduction to relational databases<a class="headerlink" href="#a-very-short-introduction-to-relational-databases" title="Permalink to this headline">#</a></h1>
-<p>A relational database is a structured approach to storing data. It describes a group of tables that are related together. The relationships enable a reduction of data duplication. Typically, these databases are interfaced and queried with using SQL. One of the few programming languages used for about 50 years.</p>
-<aside class="margin sidebar">
-<p class="sidebar-title"></p>
-<p>Modern Datatbase applications are oftend distributed over a wide variety of nodes, individual computers, this has a much more complex backend to store partial databases. However, many of these formats have a SQL like interface that can be used to abstract away much of the complexity. <a class="reference external" href="https://spark.apache.org/sql/">Apache Spark</a> is a great example of this.</p>
-</aside>
+  <section id="the-optical-depths-database">
+<h1>The Optical Depths Database<a class="headerlink" href="#the-optical-depths-database" title="Permalink to this headline">#</a></h1>
+<p>To understand why the data is pre-calculated it is worth looking at the orders of magnitude of the calculations and what they involve when implemented in python. As mentioned previously, The HITRAN database stores the spectral line intensity for many GHGs in our model. We include only four. However, each of these gases in the range <span class="math notranslate nohighlight">\([200,4000] cm^{-1}\)</span> has of the order 10,000 data points for the spectral line intensity. So when calculating the absorption coefficient and optical depth for each altitude on the grid, we store around 50 million rows. In each row an absorption coefficient, a wavenumber, an optical depth and a molecule id are stored.
+This is by no means a lot of data for modern hardware. However, doing the calculations on the fly is prohibitively expensive. Due to the nature of the broadening and conversion between spectral line intensity and absorption coefficient. This is the operation where the voight profile is applied and must be done on each entry in the array.</p>
+<p>Thus, precalculating all the values required for the model and storing them in a database was not only a good excuse to introduce databases but also means that the atmosphere profile can be very flexible and fast to use.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are interested in learning SQL, <a class="reference external" href="https://www.google.co.uk/books/edition/Learning_SQL/YqubAgAAQBAJ?hl=en&amp;gbpv=0">this textbook</a> is great.</p>
+<p>If you are not experienced with relational databases a short introduction is <a class="reference internal" href="../Database_Chapter/Database_intro_1.html"><span class="doc std std-doc">provided</span></a></p>
 </div>
-<p>Relational databases reduce duplication by separating out repeated values. For example, If one was to store some data on a customer in a shop, one might store a table as follows,</p>
+<p>The database and atmosphere model are handled by the SimpleTrans package, which is discussed in more detail in its own <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html"><span class="doc std std-doc">section</span></a>.</p>
+<p>The database that is created, after the, installing the package stores the optical depths and absorption coefficients of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, <span class="math notranslate nohighlight">\(\textrm{CH}_4\)</span>, <span class="math notranslate nohighlight">\(\textrm{H}_2\textrm{O}\)</span> and <span class="math notranslate nohighlight">\(\textrm{N}_2\textrm{O}\)</span> in the optical depths table. Each gas is recorded with altitudes in 1km spacings from <span class="math notranslate nohighlight">\(500 m\)</span> to <span class="math notranslate nohighlight">\(30,500 m\)</span>. These altitudes correspond to the midpoints of the altitude grid. The wavenumber range recorded is between <span class="math notranslate nohighlight">\(200 cm^{-1} and \)</span>4000 cm^{-1}. This wavenumber range provides nearly complete coverage of all longwave radiation outgoing from Earth.</p>
+<p>Each gas is stored with its formulae and ppm concentration.</p>
+<p>The database is definitely not absolutely necessary, and one could achieve similar results with a .txt file, however, with 50 million rows, it would be an unwieldy file, and dealing with less than all the data would be challenging. Further, the database provides the ability to work with small subsets of the data in a jupyter notebook or python file. Its schema is presented below. It is a straightforward solution; however, it solves the problem well.</p>
 <figure class="align-center" id="id1">
 <div class="mermaid">
             erDiagram
-    transaction{
-    transaction_id int
-    coustomer_id int
-    item_id int 
-    item_name string
-    price float
-    card_number int
-    loyalty_card bool
+    gases ||--|{optical_depths: &quot;&quot;
+    gases{
+    mol_id int PK
+    mol_name string
+    mol_ppm float
+    }
+    optical_depths{
+    mol_id int PK &quot;FK&quot;
+    altitude float PK
+    wave_no float PK
+    optical_depth float
+    abs_coef float
     }
         </div><figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">A table of important information associated with some transaction for a shop.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">the entity relationship diagram for the optical_depths.db sqlite3 database.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>It should be evident that storing all of these fields for each transaction would be wasteful if a customer regularly bought more than one item. When using a relational database, the number of repeat entries can be cut down by creating multiple tables and linking one table that contains information about a customer to another table that contains information about transactions. This can be described in an entity relationship diagram depicted on the next page.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -412,7 +418,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./Database_Chapter"
+            path: "./Chapter_2"
         },
         predefinedOutput: true
     }
@@ -426,17 +432,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../Chapter_2/Optical_depth_db.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="radiative_transfer.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">The Optical Depths Database</p>
+            <p class="prev-next-title">Radiative transfer</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Database_intro_2.html" title="next page">
+    <a class='right-next' id="next-link" href="../Database_Chapter/Database_intro_1.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The Relational Alternative</p>
+        <p class="prev-next-title">A very short introduction to relational databases</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
