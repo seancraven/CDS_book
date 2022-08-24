@@ -3,8 +3,8 @@ Deadlines,
 Work to read for Charles 5pm 23rd, Chapter 2, SimpleTrans, and Database
 All Current sections tied up by firday
 
-- [ ] Proof Chapter 2 
+- [x] Proof Chapter 2 
 - [ ] Proof Appendix
 - [ ] Final Page Chapter 3
-- [ ] how to book 
-- 
+- [ ] how to book
+- [ ] Proof Chapter 3

@@ -7,6 +7,7 @@ parts:
   - caption: 
     chapters:
     - file: An_Aside_On_Python
+    - file: editing_the_book.md
   - caption:  Chapter 1, Global Carbon Dioxide
     chapters:
     - file: Chapter_1/Data_Exploration.ipynb
