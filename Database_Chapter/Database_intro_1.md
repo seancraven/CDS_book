@@ -24,3 +24,6 @@ erDiagram
 ```
 
 It should be evident that storing all of these fields for each transaction would be wasteful if a customer regularly bought more than one item. When using a relational database, the number of repeat entries can be cut down by creating multiple tables and linking one table that contains information about a customer to another table that contains information about transactions. This can be described in an entity relationship diagram depicted on the next page.
+```{note}
+These two pages are split to avoid a bug with Jupyter-Book.
+``` 
