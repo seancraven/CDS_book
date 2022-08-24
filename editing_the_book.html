@@ -432,44 +432,99 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="editing-the-book">
 <h1>Editing The Book<a class="headerlink" href="#editing-the-book" title="Permalink to this headline">#</a></h1>
-<p>Hi, welcome this is a short guide on getting set up with the project if you would like to contribute.</p>
+<p>Hi, welcome this is a short guide on getting set up with the project if you would like to contribute. This is a brief guide, and you will need to read the documentation <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">provided</a></p>
 <p>Unfortunately the Jupyter Book project is in the early stages and only has provisional support for windows. However, Windows users can use Windows subsystem for Linux. This should avoid any windows related problems. You can find instructions to set up wsl <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a>.</p>
 <p>We have not tested Jupyter Book on Mac Os, so your mileage may vary. There is always the option of running a linux virtual machine.</p>
 <p>If you are new to Linux, The <a class="reference external" href="https://ubuntu.com/wsl">Ubuntu</a> distro, is very popular.</p>
 <p>With some form of Linux install you will need a python and pip.
-First check the system is up to date,</p>
+First check the system is up to date all these commands are run in the BASH,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
+</pre></div>
+</div>
 <p>Then install pip,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>
+</pre></div>
+</div>
 <p>You can check that this has installed correctly with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="o">--</span><span class="n">version</span>
+</pre></div>
+</div>
 <section id="setting-up-a-new-jupyter-book">
 <h2>Setting Up a New Jupyter Book<a class="headerlink" href="#setting-up-a-new-jupyter-book" title="Permalink to this headline">#</a></h2>
 <p>If you are looking to make a new project, then setting up ones own book is quite simple.
 First download the package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> 
+</pre></div>
+</div>
 <p>Now, I would recommend creating a virtual environment, this enables you to have a siloed version of python to work from, so that it does not affect your other work.
 Creating a folder to contain the project is sensible, navigate in the shell to this folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">my</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">folder</span><span class="o">/</span>
+</pre></div>
+</div>
 <p>from here create a virtual environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">virtualenv</span>
+</pre></div>
+</div>
 <p>Here you replace <code class="docutils literal notranslate"><span class="pre">the_name_of_the_environment</span></code>, with a name for your environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">the_name_of_the_environment</span>
+</pre></div>
+</div>
 <p>Now activate that environment, from the directory in which you created the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">./</span><span class="n">the_name_of_the_environment</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
 <p>We now create the book:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">create</span> <span class="n">mynewbook</span><span class="o">/</span> 
+</pre></div>
+</div>
 <p>This will create a new jupyter book with a <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> and a <code class="docutils literal notranslate"><span class="pre">.config.yml</span></code>.
 This template book can be edited. Full details on how to use the books are provided on the <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Jupyter Book</a></p>
 </section>
 <section id="editing-this-book">
 <h2>Editing This Book<a class="headerlink" href="#editing-this-book" title="Permalink to this headline">#</a></h2>
 <p>To edit this book we begin with cloning the GitHub repository. Before, this however git must be installed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">git</span> 
+</pre></div>
+</div>
 <p>Connect to your GitHub with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="s2">&quot;your github username&quot;</span>
+<span class="n">git</span> <span class="n">config</span> <span class="o">--</span><span class="k">global</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span> <span class="s2">&quot;your github emial&quot;</span>
+</pre></div>
+</div>
 <p>Now navigate to the folder in which you want to store the project from there
 perform a git clone:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">seancraven</span><span class="o">/</span><span class="n">CDS_book</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
 <p>In the cloned files, there is a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file, from which all the required packages can be installed, first we install the virtual environments package:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">virtualenv</span>
+</pre></div>
+</div>
 <p>Here you replace <code class="docutils literal notranslate"><span class="pre">the_name_of_the_environment</span></code>, with a name for your environment.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">the_name_of_the_environment</span>
+</pre></div>
+</div>
 <p>Now activate that environment, from the directory in which you created the environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">./</span><span class="n">the_name_of_the_environment</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
 <p>With the environment activated all the required packages can be installed,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
 <p>With the environment for the book set up it can be built.
 The build command is targeted at a directory with the <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>. If you have cloned the git repository these will be in the <code class="docutils literal notranslate"><span class="pre">CDS_book</span></code> directory. From here</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">build</span> <span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">book</span><span class="o">/</span>
+</pre></div>
+</div>
 <p>This will provide you with a HTML document that can be opened in a web browser.</p>
 </section>
 <section id="publishing-a-jupyter-book">
 <h2>Publishing a Jupyter Book<a class="headerlink" href="#publishing-a-jupyter-book" title="Permalink to this headline">#</a></h2>
 <p>Jupyter Book is integrated with GitHub pages, this makes it easy to publish updates to your book in one line from the terminal. The GitHub pages package can be obtained with a normal pip install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">ghp</span><span class="o">-</span><span class="kn">import</span>
+</pre></div>
+</div>
 <p>Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn’t maintain the repository it is better that new iterations clone and publish new cloned repos.
 This means that a new repo for the project should be made on <a class="reference external" href="https://github.com">GitHub</a>. When you make this repo do not initialise it with any files such as a readme or a licence.</p>
 <div class="admonition tip">
@@ -477,10 +532,23 @@ This means that a new repo for the project should be made on <a class="reference
 <p>When working with GitHub if you are asked for a password in the shell, this is not the website password but a gpg key that you can generate from your github page online. Instructions are found <a class="reference external" href="https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account">here</a></p>
 </div>
 <p>After you have done this you will have to rename the original remote:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">rename</span> <span class="n">origin</span> <span class="n">upstream</span>
+</pre></div>
+</div>
 <p>Add your GitHub remote:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">remote</span> <span class="n">add</span> <span class="n">origin</span>  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">account</span><span class="o">/</span><span class="n">your</span><span class="o">-</span><span class="n">repository</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
 <p>Finally we push the content to the repo:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span> 
+</pre></div>
+</div>
 <p>Now with the version control setup you can record changes with commits and store all the work on GitHub. Git can be hard to learn and making mistakes can be even harder to fix. Stackexchange is your friend as well as <a class="reference external" href="https://ohshitgit.com/">ohshitgit</a>.</p>
 <p>With a repo for the project the GitHub page can be setup easily. First navigate to the main directory where the <code class="docutils literal notranslate"><span class="pre">_build</span></code> folder of the book is located and run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="o">-</span><span class="n">n</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">f</span> <span class="n">_build</span><span class="o">/</span><span class="n">html</span>
+</pre></div>
+</div>
+<p>The website can then be found</p>
 </section>
 </section>
 
