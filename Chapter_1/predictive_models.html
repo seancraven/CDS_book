@@ -123,6 +123,11 @@ const thebe_selector_output = ".output, .cell_output"
    An Aside On Python
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../editing_the_book.html">
+   Editing The Book
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -598,7 +603,7 @@ When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Here we use the FittedModel class on our data. As you can see rather</span>
@@ -650,14 +655,13 @@ p_3 = 0.00026 +_ 2e-05
 </div>
 </div>
 </div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">model_</span> <span class="ow">in</span> <span class="p">[</span><span class="n">train</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">test</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chi^2 = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chi^2/nu = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="o">/</span><span class="n">model_</span><span class="o">.</span><span class="n">get_nu</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(chi^2 &gt; chi^2_min) = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_sf</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -666,12 +670,10 @@ p_3 = 0.00026 +_ 2e-05
 chi^2 = 1.005e+03
 chi^2/nu = 2.134
 P(chi^2 &gt; chi^2_min) = 7.862e-41
-
 Validation Model
 chi^2 = 13.67
 chi^2/nu = 0.8541
 P(chi^2 &gt; chi^2_min) = 0.6236
-
 Test Model
 chi^2 = 9.291
 chi^2/nu = 2.323
@@ -722,26 +724,12 @@ P(chi^2 &gt; chi^2_min) = 0.05423
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c coefficient:-1.9e+06 +_ 5e-10 
-P_1 coefficient:2.9e+03 +_ 5e-13
+P_1 coefficient:2.9e+03 +_ 9e-13
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># params</span>
-<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a_0&quot;</span><span class="p">,</span> <span class="s2">&quot;a_1&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_0&quot;</span><span class="p">,</span> <span class="s2">&quot;omega_1&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;p_1&quot;</span><span class="p">,</span> <span class="s2">&quot;p_2&quot;</span><span class="p">,</span> <span class="s2">&quot;p_3&quot;</span><span class="p">]</span>
-<span class="n">model_fit_params</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_coefs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters.csv&quot;</span>
-<span class="n">model_fit_params</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-<span class="c1"># errors</span>
-<span class="n">model_cov_frame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">fit_errs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">labels</span><span class="p">)</span>
-<span class="n">fname</span> <span class="o">=</span> <span class="s2">&quot;../output_files/co2_model_parameters_errors.csv&quot;</span>
-
-<span class="n">model_cov_frame</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 </section>
 <section id="results">

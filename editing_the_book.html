@@ -50,8 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Global \(\textrm{CO}_2 \)" href="Chapter_1/Data_Exploration.html" />
+    <link rel="prev" title="An Aside On Python" href="An_Aside_On_Python.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -111,16 +115,21 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="An_Aside_On_Python.html">
    An Aside On Python
   </a>
  </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Editing The Book
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Global Carbon Dioxide
+  Chapter 1, Global Carbon Dioxide
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -134,7 +143,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Chapter_1/Fitting.html">
-   Fitting
+   Curve Fitting
   </a>
  </li>
  <li class="toctree-l1">
@@ -147,47 +156,80 @@ const thebe_selector_output = ".output, .cell_output"
    Final Model
   </a>
  </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Temperature Rise and Predictive Modelling
- </span>
-</p>
-<ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="Chapter_2/predictive_models.html">
+  <a class="reference internal" href="Chapter_1/predictive_models.html">
    Predictive Modeling
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Chapter_2/temp_co2.html">
+  <a class="reference internal" href="Chapter_1/temp_co2.html">
    Global Temperature Predictions
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Chapter_2/3models.html">
-   Implementation of the Three SRES Approximation Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Chapter_2/bayesian_inference.html">
-   Using Bayesian Inference to Determine
-   <span class="math notranslate nohighlight">
-    \(S\)
-   </span>
-   Left as Work in progress
+  <a class="reference internal" href="Chapter_1/3models.html">
+   Polynomial Prediction Problems
   </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Radiation Modelling
+  Chapter 2, Radiation Modelling
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="Chapter_3/lorentzian_broadening.html">
+  <a class="reference internal" href="Chapter_2/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/lorentzian_broadening.html">
    The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_2/Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Relational Database Introduction
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  SimpleTrans
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
   </a>
  </li>
 </ul>
@@ -262,51 +304,6 @@ title="Fullscreen mode"
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/seancraven/CDS_book"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/seancraven/CDS_book/issues/new?title=Issue%20on%20page%20%2Fediting_the_book.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
       aria-label="Download this page">
@@ -352,12 +349,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-a-new-jupyter-book">
+   Setting Up a New Jupyter Book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#editing-this-book">
+   Editing This Book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publishing-a-jupyter-book">
+   Publishing a Jupyter Book
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -369,6 +400,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setting-up-a-new-jupyter-book">
+   Setting Up a New Jupyter Book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#editing-this-book">
+   Editing This Book
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publishing-a-jupyter-book">
+   Publishing a Jupyter Book
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -379,14 +433,55 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="editing-the-book">
 <h1>Editing The Book<a class="headerlink" href="#editing-the-book" title="Permalink to this headline">#</a></h1>
 <p>Hi, welcome this is a short guide on getting set up with the project if you would like to contribute.</p>
-<p>Firstly you will need to clone the Github repository. This can be found <a class="reference external" href="https://github.com/seancraven/CDS_book">here</a>. After these files are copied, I suggest you download Miniconda, if you don’t have it or Anaconda already.</p>
-<p>From here in a terminal, swap /path/to/ with your path:
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">create</span> <span class="pre">--file</span> <span class="pre">/path/to/CDSenv.yml</span></code>
-Then activate the environment.
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">CDS_310</span></code>
-From here to build the local Jupyter Book; navigate to the directory in which your book files are located(The ones you cloned from github). Then run
-<code class="docutils literal notranslate"><span class="pre">jb</span> <span class="pre">build</span> <span class="pre">./</span></code>
-you</p>
+<p>Unfortunately the Jupyter Book project is in the early stages and only has provisional support for windows. However, Windows users can use Windows subsystem for Linux. This should avoid any windows related problems. You can find instructions to set up wsl <a class="reference external" href="https://docs.microsoft.com/en-us/windows/wsl/install">here</a>.</p>
+<p>We have not tested Jupyter Book on Mac Os, so your mileage may vary. There is always the option of running a linux virtual machine.</p>
+<p>If you are new to Linux, The <a class="reference external" href="https://ubuntu.com/wsl">Ubuntu</a> distro, is very popular.</p>
+<p>With some form of Linux install you will need a python and pip.
+First check the system is up to date,</p>
+<p>Then install pip,</p>
+<p>You can check that this has installed correctly with:</p>
+<section id="setting-up-a-new-jupyter-book">
+<h2>Setting Up a New Jupyter Book<a class="headerlink" href="#setting-up-a-new-jupyter-book" title="Permalink to this headline">#</a></h2>
+<p>If you are looking to make a new project, then setting up ones own book is quite simple.
+First download the package:</p>
+<p>Now, I would recommend creating a virtual environment, this enables you to have a siloed version of python to work from, so that it does not affect your other work.
+Creating a folder to contain the project is sensible, navigate in the shell to this folder:</p>
+<p>from here create a virtual environment:</p>
+<p>Here you replace <code class="docutils literal notranslate"><span class="pre">the_name_of_the_environment</span></code>, with a name for your environment.</p>
+<p>Now activate that environment, from the directory in which you created the environment:</p>
+<p>We now create the book:</p>
+<p>This will create a new jupyter book with a <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> and a <code class="docutils literal notranslate"><span class="pre">.config.yml</span></code>.
+This template book can be edited. Full details on how to use the books are provided on the <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Jupyter Book</a></p>
+</section>
+<section id="editing-this-book">
+<h2>Editing This Book<a class="headerlink" href="#editing-this-book" title="Permalink to this headline">#</a></h2>
+<p>To edit this book we begin with cloning the GitHub repository. Before, this however git must be installed:</p>
+<p>Connect to your GitHub with:</p>
+<p>Now navigate to the folder in which you want to store the project from there
+perform a git clone:</p>
+<p>In the cloned files, there is a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file, from which all the required packages can be installed, first we install the virtual environments package:</p>
+<p>Here you replace <code class="docutils literal notranslate"><span class="pre">the_name_of_the_environment</span></code>, with a name for your environment.</p>
+<p>Now activate that environment, from the directory in which you created the environment:</p>
+<p>With the environment activated all the required packages can be installed,</p>
+<p>With the environment for the book set up it can be built.
+The build command is targeted at a directory with the <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> and <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code>. If you have cloned the git repository these will be in the <code class="docutils literal notranslate"><span class="pre">CDS_book</span></code> directory. From here</p>
+<p>This will provide you with a HTML document that can be opened in a web browser.</p>
+</section>
+<section id="publishing-a-jupyter-book">
+<h2>Publishing a Jupyter Book<a class="headerlink" href="#publishing-a-jupyter-book" title="Permalink to this headline">#</a></h2>
+<p>Jupyter Book is integrated with GitHub pages, this makes it easy to publish updates to your book in one line from the terminal. The GitHub pages package can be obtained with a normal pip install:</p>
+<p>Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn’t maintain the repository it is better that new iterations clone and publish new cloned repos.
+This means that a new repo for the project should be made on <a class="reference external" href="https://github.com">GitHub</a>. When you make this repo do not initialise it with any files such as a readme or a licence.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When working with GitHub if you are asked for a password in the shell, this is not the website password but a gpg key that you can generate from your github page online. Instructions are found <a class="reference external" href="https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account">here</a></p>
+</div>
+<p>After you have done this you will have to rename the original remote:</p>
+<p>Add your GitHub remote:</p>
+<p>Finally we push the content to the repo:</p>
+<p>Now with the version control setup you can record changes with commits and store all the work on GitHub. Git can be hard to learn and making mistakes can be even harder to fix. Stackexchange is your friend as well as <a class="reference external" href="https://ohshitgit.com/">ohshitgit</a>.</p>
+<p>With a repo for the project the GitHub page can be setup easily. First navigate to the main directory where the <code class="docutils literal notranslate"><span class="pre">_build</span></code> folder of the book is located and run</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -416,6 +511,20 @@ you</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="An_Aside_On_Python.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">An Aside On Python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Chapter_1/Data_Exploration.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Global <span class="math notranslate nohighlight">\(\textrm{CO}_2 \)</span></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

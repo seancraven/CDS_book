@@ -123,6 +123,11 @@ const thebe_selector_output = ".output, .cell_output"
    An Aside On Python
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../editing_the_book.html">
+   Editing The Book
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -524,7 +529,7 @@ title="Print to PDF"
 <h3>The Problem with Polynomials<a class="headerlink" href="#the-problem-with-polynomials" title="Permalink to this headline">#</a></h3>
 <p>Problems arise when fitting polynomials of order greater than one, minor parameter tweaks to the higher powers’ constants cause large deviations in the value of the function. This can be seen below in the figure.
 The figure plots the cubic fit from eq.<a class="reference internal" href="Final_Model.html#equation-model">(14)</a> <span class="math notranslate nohighlight">\(\pm 2\sigma\)</span>. The time axis is extended to show that it is a polynomial fit and not just a fill. This problem is especially apparent as the data, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration data, is rather linear, and thus there is a moderate uncertainty on the <span class="math notranslate nohighlight">\(x^2, x^3\)</span> terms.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Printing the fractional error on the fit coefficients.</span>
@@ -564,7 +569,7 @@ The figure plots the cubic fit from eq.<a class="reference internal" href="Final
     </tr>
     <tr>
       <th>p_1</th>
-      <td>3.373409e+15</td>
+      <td>6.746818e+15</td>
     </tr>
     <tr>
       <th>p_2</th>
@@ -607,8 +612,8 @@ The figure plots the cubic fit from eq.<a class="reference internal" href="Final
 <p class="sidebar-title"></p>
 <p>The Plot on the left-hand side is a quantitive representation of the simplified SRES Scenarios detailed earlier. It shows three possible future pathways and the current 10-year moving average from which the A1B fit was performed. It should be noted that these are in no way linked to anything more than common sense. And the predictive power they bring to bear is incredibly small. The purpose of these plots is to aid in the Bayesian analysis.</p>
 <p>The shaded areas of the Graph correspond to two standard deviations of the fitting parameters. Assuming that the errors on the fits are normally distributed, each <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in future time can be characterized by a random variable <span class="math notranslate nohighlight">\(C\)</span> for the specific model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e2a44b71-62b2-4d9c-9ab7-3c76bfe1d70d">
-<span class="eqno">(15)<a class="headerlink" href="#equation-e2a44b71-62b2-4d9c-9ab7-3c76bfe1d70d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-edad6ebe-4131-4fb3-8caa-77ee20979628">
+<span class="eqno">(15)<a class="headerlink" href="#equation-edad6ebe-4131-4fb3-8caa-77ee20979628" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_{A1T} \sim \mathcal{N}(A1T(T), \sigma_{A1T}(T)).
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T scenario function evaluated at some time <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\sigma_{A1T}(T)\)</span> is the associated error on the fit. By treating the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in the future as a random variable, we can use its PDF in conjunction with the PDF of S to perform Bayesian interference on how likely crossing a temperature Threshold is.</p>
