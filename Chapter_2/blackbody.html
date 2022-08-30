@@ -205,6 +205,11 @@ const thebe_selector_output = ".output, .cell_output"
    The Optical Depths Database
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="atmosphere_model.html">
+   Radiative Transfer Model
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -457,8 +462,8 @@ title="Print to PDF"
 <h1>Incoming and Outgoing Radiation<a class="headerlink" href="#incoming-and-outgoing-radiation" title="Permalink to this headline">#</a></h1>
 <p>In the previous section, the interaction of molecules with light was discussed. This page aims to give the reader an overview of energy balance and the physics behind radiation and radiative transfer.</p>
 <p>The Sun is the main source of energy arriving at Earth. The mechanism for energy transfer is the radiation of photons. Photons travel through the vacuum of space with energy associated with their wavenumber,<span class="math notranslate nohighlight">\(\nu\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e7449af8-20f1-4860-b8ac-5018afb34e47">
-<span class="eqno">(31)<a class="headerlink" href="#equation-e7449af8-20f1-4860-b8ac-5018afb34e47" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-72e5a116-b0bf-4c53-a2b2-5541157726d2">
+<span class="eqno">(31)<a class="headerlink" href="#equation-72e5a116-b0bf-4c53-a2b2-5541157726d2" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E = h c \nu.
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(h\)</span>, <span class="math notranslate nohighlight">\(c\)</span> are the usual constants.</p>
@@ -468,14 +473,14 @@ E = h c \nu.
 </div>
 <p>Hot objects emit radiation dependent on their temperature, the idealised picture for this emitter is a black body. A black body is normal matter that absorbs radiation at all wavelengths that fall upon it. Emissivity measures how close an object is to a black body, which takes the range between zero and one. In most of the following calculations, the Earth and the sun are treated as black bodies with emissivity one.</p>
 <p>When energy arrives at Earth, it is convenient to measure not the extensive quantity of energy but an intensive one, which is also a function of time, thus, flux is used. Flux, power per unit area, is such an intensive quantity. The Stefan-Boltzmann Law gives the flux produced by a black body at a given temperature.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2748b5f9-9bef-44c4-b278-faec954d0708">
-<span class="eqno">(32)<a class="headerlink" href="#equation-2748b5f9-9bef-44c4-b278-faec954d0708" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-6251ba96-a433-4aba-bc31-d6ddaf0d7093">
+<span class="eqno">(32)<a class="headerlink" href="#equation-6251ba96-a433-4aba-bc31-d6ddaf0d7093" title="Permalink to this equation">#</a></span>\[\begin{equation}
 j = \sigma T^4
 \end{equation}\]</div>
 <p>Flux is in <span class="math notranslate nohighlight">\(W \cdot m^{-2}\)</span> and <span class="math notranslate nohighlight">\(\sigma = 5.670374419x0^{-8} W \cdot m^{-2}K^{-4}\)</span>.</p>
 <p>As mentioned previously, the Sun can be very well approximated as a black body emitting at 5770k, which is the mean surface temperature of the Sun. Outgoing radiation from blackbodies is not uniform across all wavenumbers. Thus the plank function describes the emission of photons in spectral radiance, flux per wavenumber per solid angle. The solid angle dependence is important if the direction of the radiation is not isotropic. However, in much of the work that proceeds, it is in an isotropic regime, so the flux density can be used, which is <span class="math notranslate nohighlight">\(\pi \cdot \)</span>spectral radiance. Spectral radiance for a black body is governed by the plank function,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-68f2f0d2-4132-462c-bb45-47370a31ea25">
-<span class="eqno">(33)<a class="headerlink" href="#equation-68f2f0d2-4132-462c-bb45-47370a31ea25" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-fffeef0c-2e41-44a2-a4e5-8c0efadc1c3b">
+<span class="eqno">(33)<a class="headerlink" href="#equation-fffeef0c-2e41-44a2-a4e5-8c0efadc1c3b" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})}.
 \end{equation}\]</div>
 <p>Where the constants take their conventional definitions. The plank function at 5770k is plotted against photon energy, with wavenumber as the top axis. The top figure is a log-log plot, highlighting the vast energy differential between the total radiative output as the area enclosed is proportional to the power radiated. The second figure is the same plot with linear axes. The top plot also includes the black body spectrum for energy equilibrium temperature (252k) for Earth. Additionally, the range of the visual spectrum is indicated with the rainbow.</p>
@@ -587,12 +592,12 @@ B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})}.
 </div>
 </div>
 <p>Inspection of the two linear spectral radiance plots shows that there is a discrepancy between the peak values, of the graphs. With the peaks being associated to different energy photons, <span class="math notranslate nohighlight">\(B_{max}(\lambda_{max},5770); 1E_{\lambda max} = 2.47 eV\)</span>  <span class="math notranslate nohighlight">\(B_{max}(\nu,5770); E_{\nu max} = 1.4 eV\)</span>. To transform between the functions the product rule can be used</p>
-<div class="amsmath math notranslate nohighlight" id="equation-6e135780-0e92-44f0-900a-9941ff8b6141">
-<span class="eqno">(34)<a class="headerlink" href="#equation-6e135780-0e92-44f0-900a-9941ff8b6141" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7ca5b1e3-123c-4e06-9268-b2a9b8753717">
+<span class="eqno">(34)<a class="headerlink" href="#equation-7ca5b1e3-123c-4e06-9268-b2a9b8753717" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-2b6791a5-4b35-4b20-b165-fe433e4dcd14">
-<span class="eqno">(35)<a class="headerlink" href="#equation-2b6791a5-4b35-4b20-b165-fe433e4dcd14" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2db4da4f-1d45-44d4-8c77-75fa4b96b75e">
+<span class="eqno">(35)<a class="headerlink" href="#equation-2db4da4f-1d45-44d4-8c77-75fa4b96b75e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{d \lambda}{d\nu} = - \lambda^2.
 \end{equation}\]</div>
 <p>This adds to a common misconception that the number of photons arriving from the Sun is peaked in green wavelengths. This is where the spectral radiance peak is. It can be seen in the third figure from the top, where the Y axis is proportional to the number of photons per second at a given wavenumber, where photon number is peaked in the infrared.</p>
@@ -602,8 +607,8 @@ B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda,
 <h1>Radiation Balance<a class="headerlink" href="#radiation-balance" title="Permalink to this headline">#</a></h1>
 <p>The first idea for a radiation model, is to treat the earth as if it lacked an atmosphere and was just a colourful rock. The concept of albedo is briefly introduces this is <span class="math notranslate nohighlight">\(1 - \textrm{emissivity}\)</span>, and takes into account the fact that earth is quite reflective and white because of ice and clouds.</p>
 <p>An approximate temperature for the Earths surface can be determined using the stefan-Boltzmann Law, equating the total power in to the total power out.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a4b07cda-2fab-4297-bad5-a491d318f484">
-<span class="eqno">(36)<a class="headerlink" href="#equation-a4b07cda-2fab-4297-bad5-a491d318f484" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-c78365cf-1df1-4079-9b5a-83345015d3d1">
+<span class="eqno">(36)<a class="headerlink" href="#equation-c78365cf-1df1-4079-9b5a-83345015d3d1" title="Permalink to this equation">#</a></span>\[\begin{equation}
  F = 4 \sigma T^4 = \pi \int^\infty _0 d \nu B_{\nu}(\nu, T)
 \end{equation}\]</div>
 <p>The Earth is not matte black it has an albedo value which is mostly due to the clouds. This has an average value of 0.3</p>

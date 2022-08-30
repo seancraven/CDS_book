@@ -1,0 +1,48 @@
+Traceback (most recent call last):
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/sean/Documents/Work/CDS_book/book/lib/python3.10/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+## Full Atmosphere Model
+
+fig, ax = plt.subplots( figsize=(12,10))
+sm = plt.cm.ScalarMappable(
+    cmap="rocket", norm=plt.Normalize(vmin=0, vmax=10000)
+)
+ax[0].set_prop_cycle(color=sns.color_palette("rocket", 10))
+atm_grid = AtmosphereGrid((0,10000), (200, 2000), "H2O", "C)
+water_atm_flux = water_grid.flux_up()
+co2_atm_flux = co2_grid.flux_up()
+
+ax[0].plot(co2_grid.wave_no_bins, co2_atm_flux)
+ax[1].plot(water_grid.wave_no_bins, water_atm_flux)
+for axs in ax: axs.set_xlabel("Wavenumber $(cm^{-1})$")
+for axs in ax: axs.set_ylabel("Spectral Flux Density $(Wm^{-2} cm^{-1})$")
+
+cb_1 = fig.colorbar(sm, ax=ax[0])
+cb_2 = fig.colorbar(sm, ax=ax[1])
+cb_1.set_label("Altitude (m)")
+cb_2.set_label("Altitude (m)")
+------------------
+
+[0;36m  Input [0;32mIn [3][0;36m[0m
+[0;31m    atm_grid = AtmosphereGrid((0,10000), (200, 2000), "H2O", "C)[0m
+[0m                                                             ^[0m
+[0;31mSyntaxError[0m[0;31m:[0m unterminated string literal (detected at line 8)
+
+SyntaxError: unterminated string literal (detected at line 8) (1419789862.py, line 8)
+
