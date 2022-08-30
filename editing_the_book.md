@@ -1,15 +1,15 @@
 # Editing The Book
 
-Hi, welcome this is a short guide on getting set up with the project if you would like to contribute. This is a brief guide, and you will need to read the documentation [provided](https://jupyterbook.org/en/stable/start/your-first-book.html)
+Hi, welcome this is a short guide on getting set up with the project if you would like to contribute. This is a brief guide, and you will need to read the documentation [provided](https://jupyterbook.org/en/stable/start/your-first-book.html).
 
-Unfortunately the Jupyter Book project is in the early stages and only has provisional support for windows. However, Windows users can use Windows subsystem for Linux. This should avoid any windows related problems. You can find instructions to set up wsl [here]( https://docs.microsoft.com/en-us/windows/wsl/install). 
+Unfortunately the Jupyter Book project is in the early stages and only has provisional support for windows. However, Windows users can use Windows subsystem for Linux. This should avoid any windows related compatibility problems. You can find instructions to set up wsl [here]( https://docs.microsoft.com/en-us/windows/wsl/install). 
 
 We have not tested Jupyter Book on Mac Os, so your mileage may vary. There is always the option of running a linux virtual machine. 
 
 If you are new to Linux, The [Ubuntu](https://ubuntu.com/wsl) distro, is very popular.
 
 With some form of Linux install you will need a python and pip. 
-First check the system is up to date all these commands are run in the BASH,
+First check the system is up-to-date all these commands are run in the BASH,
 ```
 sudo apt update
 ```
@@ -102,15 +102,15 @@ This means that a new repo for the project should be made on [GitHub](https://gi
 ```{tip}
 When working with GitHub if you are asked for a password in the shell, this is not the website password but a gpg key that you can generate from your github page online. Instructions are found [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
 ```
-After you have done this you will have to rename the original remote:
+If you cloned the previous enviroment then you will have to rename the original remote, otherwise skip this command:
 ```
 git remote rename origin upstream
 ```
-Add your GitHub remote:
+Add your GitHub remote repo:
 ```
 git remote add origin  https://github.com/your-account/your-repository.git
 ```
-Finally we push the content to the repo:
+Finally, we push the content to the repo:
 ```
 git push origin main 
 ```
@@ -121,5 +121,5 @@ With a repo for the project the GitHub page can be setup easily. First navigate 
 ```
 ghp-import -n -p -f _build/html
 ```
-The website can then be found 
+The website can then be found through the pages section of your repository.  
  

@@ -28,9 +28,10 @@ With this transformation the upstream equation becomes
 I_+(h, \nu) = I_+(0) \mathcal{T}(h, 0) - \int_{h' = h}^0 \pi B(\nu, h)d \mathcal{T}(h, h`)
 \end{equation} 
 Where $ h = 0 $ is where the atmosphere meets the ground. This Expression might look analytically daunting, but the discrete transformation is straightforward. The integral becomes a sum over the $\mathcal{T}(h_m_i)$ and the plank function at that altitude and wavenumber. The up stream equation on the grid is 
-\begin{equation
+```{math}
+:label: grid_up_flux
 \I_+(h_m_i, \nu_j) = \prod_{h_m_k =0}^h_m_i \mathcal{T}(h_m_i) I_+(0) + \sum_{h_m_k= 0}^h_m_i \pi B(\nu_j, h_m_k) \mathcal{T}(h_m_k). 
-\end{equation} 
+```
 Where the sum and the product run over the height midpoints and the $\mathcal{T}(h_m_i) = \exp[-(OD_{h_{i+1}} - OD_h_i)].
 
 In the simple trans implementation, the $\mathcal{T}$ is calculated slightly differently, The difference in optical depths is  

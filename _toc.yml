@@ -4,7 +4,7 @@
 format: jb-book
 root: index
 parts:
-  - caption: 
+  - caption: Chapter_0, Intro
     chapters:
     - file: An_Aside_On_Python
     - file: editing_the_book.md
@@ -25,11 +25,12 @@ parts:
     - file: Chapter_2/radiative_transfer.ipynb
     - file: Chapter_2/Using_HITRAN.md
     - file: Chapter_2/Optical_depth_db.md
-  - caption: Relational Database Introduction
+    - file: Chapter_2/atmosphere_model.ipynb
+  - caption: Appendix, Relational Database Introduction
     chapters:
     - file: Database_Chapter/Database_intro_1.md
     - file: Database_Chapter/Database_intro_2.md
-  - caption: SimpleTrans
+  - caption: Appendix, SimpleTrans
     chapters:
     - file: Chapter_SimpleTrans/SimpleTrans.md
   - caption:
