@@ -121,5 +121,5 @@ With a repo for the project the GitHub page can be setup easily. First navigate 
 ```
 ghp-import -n -p -f _build/html
 ```
-The website can then be found 
+The website can then be found through the pages section of your repository.  
  

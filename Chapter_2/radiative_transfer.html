@@ -473,21 +473,21 @@ title="Print to PDF"
 <span class="eqno">(43)<a class="headerlink" href="#equation-chapter-2-radiative-transfer-3" title="Permalink to this equation">#</a></span>\[\frac{d}{d \tau_nu} I(OD_{\nu}, \hat{n}, \nu)= -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)].\]</div>
 <p>Where <span class="math notranslate nohighlight">\(OD = k(\nu, p, T)u\)</span>, <span class="math notranslate nohighlight">\(u\)</span> is the column number density of absorbing species and <span class="math notranslate nohighlight">\(k(\nu, p, T)\)</span> is the absorption coefficient per molecule per unit length. The re-radiation term is the plank function <span class="math notranslate nohighlight">\(B(T(OD_\nu), \nu)\)</span>. Additionally, the <span class="math notranslate nohighlight">\(\cos \theta\)</span> term comes from the distance through the medium of optical depth <span class="math notranslate nohighlight">\(\delta OD\)</span>, where, if the path of the incoming radiation is at some angle <span class="math notranslate nohighlight">\(\theta\)</span> to the perpendicular from the surface, the distance the radiation travels is further <span class="math notranslate nohighlight">\(\delta OD / \cos \theta\)</span>, as seen in the figure below from<span id="id1">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. This model is taken from sections of chapter 4 in <span class="math notranslate nohighlight">\(principles of planetary climate\)</span><span id="id2">[]</span>.</p>
 <p>If it is assumed that the incoming and outgoing radiation isotropic as it is emitted black body radiation, then the directional dependence of the equation is removed. The Solution can then be integrated over a hemisphere,and two separate ordinary differential equations for upward and downward propagating spectral radiance can be performed, assuming that <span class="math notranslate nohighlight">\(\cos \bar{\theta} = 1/2\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-ca96df43-8fde-4b5d-bbc4-82ae42abf319">
-<span class="eqno">(44)<a class="headerlink" href="#equation-ca96df43-8fde-4b5d-bbc4-82ae42abf319" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6d3dfa4f-a07c-4076-8c22-75baa4fbfed7">
+<span class="eqno">(44)<a class="headerlink" href="#equation-6d3dfa4f-a07c-4076-8c22-75baa4fbfed7" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_0^{\pi/2}I(T(OD_{\nu}),\nu) d\Omega &amp;= \int_0^{\pi/2} -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)] d\Omega, \\
 \frac{d}{d OD_{\nu}} I_+ &amp;= - I_+ + \pi B(T_{\nu}, \nu).
 \end{align}\]</div>
 <p><span class="math notranslate nohighlight">\(I_+\)</span> is all the radiation in the upward direction from the block of atmosphere. In the downward direction <span class="math notranslate nohighlight">\(I_-\)</span>, the equation is similar</p>
-<div class="amsmath math notranslate nohighlight" id="equation-eed6144c-7b19-47e6-8d9f-877afedba5ce">
-<span class="eqno">(45)<a class="headerlink" href="#equation-eed6144c-7b19-47e6-8d9f-877afedba5ce" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cdf95321-99e9-49f5-9675-6b939a0ef590">
+<span class="eqno">(45)<a class="headerlink" href="#equation-cdf95321-99e9-49f5-9675-6b939a0ef590" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{\pi/2}^{\pi}I(T(OD_{\nu}), \nu) d\Omega &amp;= \int_{\pi/2}^{\pi} -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)] d\Omega, \\
 \frac{d}{d OD_{\nu}} I_- &amp;=  I_- - \pi B(T_{\nu}, \nu).
 \end{align}\]</div>
 <p>As the temperature of the radiation block is a function of the atmosphere’s optical depth, Ideally, it should be calculated rather than taken from the ISA model. However, this isn’t easy. Often, atmospheres are not in just radiative equilibrium because they are comprised of gases. Convection plays a key role in energy transfer as well. Thus blocks of the atmosphere may infect heat and not be in thermal equilibrium with their surroundings. A model which includes convection is much better approximated by an adiabatic atmosphere where warm blocks of air rise, expand, and cool adiabatically. This, is typically the assumption for the lower atmosphere, <a class="reference external" href="https://ereader.cambridge.org/wr/viewer.html#book/95232efd-fe8e-4b72-ad9e-c3f22d2a0cda/ichap4/pos_1.4427424769341008">troposphere</a><span id="id3">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. For higher altitudes, convection is less important and radiative equilibrium provides a better approximation.</p>
 <p>Despite it not being a good approximation for the lower atmosphere, radiative equilibrium provides a more straightforward path to a solution. With this boundary condition two equations for the upwards and downward spectral radiance can be formed:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-a2907d52-428b-44b1-9721-d4217350892f">
-<span class="eqno">(46)<a class="headerlink" href="#equation-a2907d52-428b-44b1-9721-d4217350892f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-e066e6cb-dbfc-46e8-b112-8ef8f4b20610">
+<span class="eqno">(46)<a class="headerlink" href="#equation-e066e6cb-dbfc-46e8-b112-8ef8f4b20610" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 = \frac{d}{d OD_{\nu}}I_+ - I_- &amp;= -(I_+ + I_-) + 2 \pi B(T(OD_{\nu}, \nu), \\
  \frac{d}{d OD_{\nu}}I_+ + I_- &amp;= -(I_+ - I_-).
 \end{align}\]</div>
@@ -508,8 +508,8 @@ title="Print to PDF"
 <div class="math notranslate nohighlight" id="equation-specific-solution">
 <span class="eqno">(50)<a class="headerlink" href="#equation-specific-solution" title="Permalink to this equation">#</a></span>\[I_+ + I_- = c' - c OD_{\infty} = I_{OLR},\]</div>
 <p>Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-333081f9-0334-4372-8ba8-e9f40ff21afc">
-<span class="eqno">(51)<a class="headerlink" href="#equation-333081f9-0334-4372-8ba8-e9f40ff21afc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ac3ef9a0-aef3-4fe6-a76e-f31904af3132">
+<span class="eqno">(51)<a class="headerlink" href="#equation-ac3ef9a0-aef3-4fe6-a76e-f31904af3132" title="Permalink to this equation">#</a></span>\[\begin{align}
 c &amp;= I_{OLR}, \\
 c' &amp;= I_{OLR}(OD_{\infty} + 1).
 \end{align}\]</div>
@@ -517,21 +517,9 @@ c' &amp;= I_{OLR}(OD_{\infty} + 1).
 <div class="math notranslate nohighlight" id="equation-chapter-2-radiative-transfer-7">
 <span class="eqno">(52)<a class="headerlink" href="#equation-chapter-2-radiative-transfer-7" title="Permalink to this equation">#</a></span>\[T = \left(\frac{(1 + OD_{\infty} - OD)I_{\infty}}{2 \sigma} \right)^{1/4}.\]</div>
 <p>This gives us the expression for the Grey Gas at zero altitude. A comparison between this and the planet’s surface temperature is plotted below.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">simpletrans</span> <span class="kn">import</span> <span class="n">isa</span>
-<span class="kn">import</span> <span class="nn">scipy.constants</span> <span class="k">as</span> <span class="nn">cst</span>
-<span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
-
-<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
-</pre></div>
+<div class="cell tag_remove-input docutils container">
 </div>
-</div>
-</div>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_alt</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># Alt strat stop</span>
 <span class="n">SBC</span> <span class="o">=</span> <span class="n">cst</span><span class="o">.</span><span class="n">physical_constants</span><span class="p">[</span><span class="s2">&quot;Stefan-Boltzmann constant&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
