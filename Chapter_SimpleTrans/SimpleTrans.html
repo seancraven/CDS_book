@@ -117,7 +117,12 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter_0, Intro
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../An_Aside_On_Python.html">
    An Aside On Python
@@ -213,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Relational Database Introduction
+  Appendix, Relational Database Introduction
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -230,7 +235,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  SimpleTrans
+  Appendix, SimpleTrans
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -459,13 +464,13 @@ It can be installed using pip separately however,</p>
 <h2>Structure and Overview<a class="headerlink" href="#structure-and-overview" title="Permalink to this headline">#</a></h2>
 <p>before, diving into using the package, a high level overview of what it does is useful.
 After you have downloaded the package, one runs <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code>. When this script is run the absorption spectra from HITRAN are downloaded. Then a <a class="reference internal" href="../Database_Chapter/Database_intro_1.html#rd"><span class="std std-ref">relational database</span></a> is created. This database is populated, by calculating absorption coefficients<span class="math notranslate nohighlight">\((molecules/cm^2)\)</span> and optical depths, of blocks of atmosphere, given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ab0b6495-2e7b-4466-964c-8a71ebaf9a62">
-<span class="eqno">(53)<a class="headerlink" href="#equation-ab0b6495-2e7b-4466-964c-8a71ebaf9a62" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e7e9cbc7-19bf-497b-b267-7c44fb604bc4">
+<span class="eqno">(53)<a class="headerlink" href="#equation-e7e9cbc7-19bf-497b-b267-7c44fb604bc4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 OD = k(\nu, T, P)\cdot [X],
 \end{equation}\]</div>
 <p>where k is the absorption coefficient, <span class="math notranslate nohighlight">\([X]\)</span>, is the path integral of molecular density over the block of atmosphere</p>
-<div class="amsmath math notranslate nohighlight" id="equation-78efaedf-a80b-43c1-9890-e17363fa38c7">
-<span class="eqno">(54)<a class="headerlink" href="#equation-78efaedf-a80b-43c1-9890-e17363fa38c7" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-024eed4b-3ea3-4a4b-800b-91e27bab2104">
+<span class="eqno">(54)<a class="headerlink" href="#equation-024eed4b-3ea3-4a4b-800b-91e27bab2104" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [X] = \int_{h_i}^{h_{i+1}} n(T,p)dh.
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(h_i\)</span>, is the start of the atmosphere block, <span class="math notranslate nohighlight">\(n\)</span> is the number density of the molecule. This is repeated over every gas for every altitude for all wavenumbers.</p>

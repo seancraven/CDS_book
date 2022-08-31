@@ -117,7 +117,12 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter_0, Intro
+ </span>
+</p>
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../An_Aside_On_Python.html">
    An Aside On Python
@@ -213,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Relational Database Introduction
+  Appendix, Relational Database Introduction
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -230,7 +235,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  SimpleTrans
+  Appendix, SimpleTrans
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -570,11 +575,11 @@ The figure plots the cubic fit from eq.<a class="reference internal" href="Final
   <tbody>
     <tr>
       <th>c</th>
-      <td>4.350885e+15</td>
+      <td>2.900590e+15</td>
     </tr>
     <tr>
       <th>p_1</th>
-      <td>3.373409e+15</td>
+      <td>6.746818e+15</td>
     </tr>
     <tr>
       <th>p_2</th>
@@ -617,8 +622,8 @@ The figure plots the cubic fit from eq.<a class="reference internal" href="Final
 <p class="sidebar-title"></p>
 <p>The Plot on the left-hand side is a quantitive representation of the simplified SRES Scenarios detailed earlier. It shows three possible future pathways and the current 10-year moving average from which the A1B fit was performed. It should be noted that these are in no way linked to anything more than common sense. And the predictive power they bring to bear is incredibly small. The purpose of these plots is to aid in the Bayesian analysis.</p>
 <p>The shaded areas of the Graph correspond to two standard deviations of the fitting parameters. Assuming that the errors on the fits are normally distributed, each <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in future time can be characterized by a random variable <span class="math notranslate nohighlight">\(C\)</span> for the specific model,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e286ada9-2467-4630-9def-7a1e0ef38261">
-<span class="eqno">(15)<a class="headerlink" href="#equation-e286ada9-2467-4630-9def-7a1e0ef38261" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-61cafc07-ad9d-46f5-8678-ef613dc7e6e7">
+<span class="eqno">(15)<a class="headerlink" href="#equation-61cafc07-ad9d-46f5-8678-ef613dc7e6e7" title="Permalink to this equation">#</a></span>\[\begin{equation}
 C_{A1T} \sim \mathcal{N}(A1T(T), \sigma_{A1T}(T)).
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(A1T(T)\)</span> is the A1T scenario function evaluated at some time <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\sigma_{A1T}(T)\)</span> is the associated error on the fit. By treating the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration in the future as a random variable, we can use its PDF in conjunction with the PDF of S to perform Bayesian interference on how likely crossing a temperature Threshold is.</p>
