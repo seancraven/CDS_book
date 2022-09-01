@@ -2,7 +2,7 @@
 
 Hi, welcome this is a short guide on getting set up with the project if you would like to contribute. This is a brief guide, and you will need to read the documentation [provided](https://jupyterbook.org/en/stable/start/your-first-book.html).
 
-Unfortunately the Jupyter Book project is in the early stages and only has provisional support for windows. However, Windows users can use Windows subsystem for Linux(WSL). This should avoid any windows related compatibility problems. You can find instructions to set up WSL [here]( https://docs.microsoft.com/en-us/windows/wsl/install). 
+Unfortunately, the Jupyter Book project is in the early stages and only has provisional support for windows. However, Windows users can use Windows subsystem for Linux(WSL). This should avoid any windows related compatibility problems. You can find instructions to set up WSL [here]( https://docs.microsoft.com/en-us/windows/wsl/install). 
 
 We have not tested Jupyter Book on Mac Os, so your mileage may vary. There is always the option of running a linux virtual machine. 
 
@@ -137,7 +137,8 @@ Jupyter Book is integrated with GitHub pages, this makes it easy to publish upda
 pip install ghp-import
 ```
 Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn't maintain the repository it is better that new iterations clone and publish new cloned repos. 
-This means that a new repo for the project should be made on [GitHub](https://github.com). When you make this repo do not initialise it with any files such as a readme or a licence. 
+This means that a new repo for the project should be made on [GitHub](https://github.com). When you make this repo do not initialise it with any files such as a readme or a licence. The instructions on how to make a new repo are found [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).  
+
 ```{tip}
 When working with GitHub if you are asked for a password in the shell, this is not the website password but a gpg key that you can generate from your github page online. Instructions are found [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
 ```
