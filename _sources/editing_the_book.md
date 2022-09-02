@@ -139,13 +139,13 @@ pip install ghp-import
 ```
 Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn't maintain the repository it is better that new iterations clone and publish new cloned repos. This means a new project repo should be made on [GitHub](https://github.com). When you make this repo do not initialise it with any files such as a readme or a licence.
 Once you have logged into Github to make a new repo click the + button in the top right hand corner:
-[image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-02-37.pngrecent:///ceb14f3d5947249970285e8163109f6d)
+![image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-02-37.pngrecent:///ceb14f3d5947249970285e8163109f6d)
 From here set up an empty repository:
-[image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-04-28.png)
+![image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-04-28.png)
 Now you can follow the following prompts depending on what you are looking to do, clone or set up a new repo. 
 
 ```{tip}
-When working with GitHub if you are asked for a password in the shell, this is not the website password but a gpg key that you can generate from your github page online. Instructions are found [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
+When working with GitHub if you are asked for a password in the shell, this is not the website password but a pat key that you can generate from your github page online. Instructions are found [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
 ```
 If you cloned the previous environment, then you will have to rename the original remote, otherwise skip this command:
 ```
