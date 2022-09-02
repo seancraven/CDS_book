@@ -21,7 +21,7 @@
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
@@ -37,7 +37,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -117,7 +117,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Chapter_0, Intro
+  Chapter 0, Intro
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -457,20 +457,13 @@ title="Print to PDF"
 <section id="environments-and-packages">
 <h2>Environments and Packages<a class="headerlink" href="#environments-and-packages" title="Permalink to this headline">#</a></h2>
 <p>Environments are designed so that when code is run somewhere else or at a different time, it still functions. Further, they contain any dependency problems one might encounter with packages. A package is a third party library for Python. For example, Tensorflow’s compatibility with the newest version of Numpy is not guaranteed. To ensure that Numpy in other projects is up to date, but Tensorflow functions correctly. An environment can be made where the required version of both packages are kept, for said project.</p>
-<p>There are multiple different options for environments. However, this text recommends anacondas <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">envs</a>. For the exercises in this book, create a new environment from this ‘link here’ .yml file. Then, navigate to the file’s location in anaconda prompt(Windows) or your shell(Linux, Mac). Finally, run this command to create an environment with the dependencies.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">env</span> <span class="n">create</span> <span class="o">-</span><span class="n">f</span> <span class="n">cds_book</span><span class="o">.</span><span class="n">yml</span>
-</pre></div>
-</div>
-<p>To get python to run with these packages, to activate the environment. The enviroment name can be found in the first line of the .yml file.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">env_name</span>
-</pre></div>
-</div>
-<p>In an editor(VScode, Jypter,…), select the kernel with the same name as the environment. This is editor/IDE dependant, and should be in the respective guide.</p>
+<p>There are multiple different options for environments. However, this text recommends pip venvs for their compatibility with Jupyter Book. More can be read about setting up an environment like that in this book <a class="reference internal" href="editing_the_book.html"><span class="doc std std-doc">here</span></a></p>
 </section>
 <section id="readability-and-naming">
 <h2>Readability and Naming<a class="headerlink" href="#readability-and-naming" title="Permalink to this headline">#</a></h2>
-<p>The development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to <a class="reference external" href="https://peps.python.org/pep-0008/">PEP-8</a> and <a class="reference external" href="https://peps.python.org/pep-0484/">PEP-484</a>. In addition, the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a> guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such practices outlined in these documents will help the reader and future contributors collaborate and maintain
+<p>The development of readable maintainable code is not something often taught in an undergraduate Physics course. However, when working with others or on long projects, the veracity of ‘Code is read more than it is written’-Guido Van Rossum becomes evident. Becuase of this, the author would recommend that you are accustomed to <a class="reference external" href="https://peps.python.org/pep-0008/">PEP-8</a> and <a class="reference external" href="https://peps.python.org/pep-0484/">PEP-484</a>. In addition, the <a class="reference external" href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a> guide has some very prudent suggestions worth reading. This, in conjunction with good naming practices and reasonable amounts of comments, makes deciphering code a feasible task. Such procedures outlined in these documents will help the reader and future contributors collaborate and maintain
 this and other work.</p>
+<p>Further, because people are fallible and consistency in code makes for easier reading, coding auto formatters such as <a class="reference external" href="https://black.readthedocs.io/en/stable/">black</a> and <a class="reference external" href="https://github.com/google/yapf">yapf</a> are helpful, as they make formatting more consistent.</p>
 </section>
 <section id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
@@ -482,7 +475,7 @@ this and other work.</p>
 </section>
 <section id="git">
 <h2>Git<a class="headerlink" href="#git" title="Permalink to this headline">#</a></h2>
-<p>Git can be used to version control code, and is almost universally used when collaborating on code projects, so that multiple people’s changes do not ruin the existing codebase. In addition, websites like <a class="reference external" href="https://github.com/">GitHub</a> provide free code repository hosting and a wealth of features. For solo projects, there is no need to use Git. However, it can be useful to work on projects from any machine anywhere.</p>
+<p>Git can be used to version control code and is almost universally used when collaborating on code projects, so that multiple people’s changes do not ruin the existing codebase. In addition, websites like <a class="reference external" href="https://github.com/">GitHub</a> provide free code repository hosting and a wealth of features. For solo projects, there is no need to use Git. However, it can be useful to work on projects from any machine anywhere.</p>
 </section>
 </section>
 

@@ -130,14 +130,19 @@ jupyter-book build /path/to/book/
 ```
 This will provide you with a HTML document that can be opened in a web browser. 
 
+
 ## Publishing a Jupyter Book
 
 Jupyter Book is integrated with GitHub pages, this makes it easy to publish updates to your book in one line from the terminal. The GitHub pages package can be obtained with a normal pip install:
 ```
 pip install ghp-import
 ```
-Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn't maintain the repository it is better that new iterations clone and publish new cloned repos. 
-This means that a new repo for the project should be made on [GitHub](https://github.com). When you make this repo do not initialise it with any files such as a readme or a licence. The instructions on how to make a new repo are found [here](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).  
+Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn't maintain the repository it is better that new iterations clone and publish new cloned repos. This means a new project repo should be made on [GitHub](https://github.com). When you make this repo do not initialise it with any files such as a readme or a licence.
+Once you have logged into Github to make a new repo click the + button in the top right hand corner:
+[image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-02-37.pngrecent:///ceb14f3d5947249970285e8163109f6d)
+From here set up an empty repository:
+[image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-04-28.png)
+Now you can follow the following prompts depending on what you are looking to do, clone or set up a new repo. 
 
 ```{tip}
 When working with GitHub if you are asked for a password in the shell, this is not the website password but a gpg key that you can generate from your github page online. Instructions are found [here](https://docs.github.com/en/authentication/managing-commit-signature-verification/adding-a-gpg-key-to-your-github-account)
@@ -162,3 +167,5 @@ ghp-import -n -p -f _build/html
 ```
 The website can then be found through the pages section of your repository.  
  
+
+
