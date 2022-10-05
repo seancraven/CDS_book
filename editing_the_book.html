@@ -584,9 +584,9 @@ The build command is targeted at a directory with the <code class="docutils lite
 </div>
 <p>Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn’t maintain the repository it is better that new iterations clone and publish new cloned repos. This means a new project repo should be made on <a class="reference external" href="https://github.com">GitHub</a>. When you make this repo do not initialise it with any files such as a readme or a licence.
 Once you have logged into Github to make a new repo click the + button in the top right hand corner:
-![image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-02-37.pngrecent:///ceb14f3d5947249970285e8163109f6d)
+<img alt="image" src="_images/github_new_repo.png" />
 From here set up an empty repository:
-![image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-04-28.png)
+<img alt="image" src="_images/blank_repo_settings.png" />
 Now you can follow the following prompts depending on what you are looking to do, clone or set up a new repo.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -603,6 +603,14 @@ Now you can follow the following prompts depending on what you are looking to do
 <p>Finally, we push the content to the repo:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">main</span> 
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are setting a book up from scratch you will need to add some files to the main GitHub repository, before pushing. This is done by performing</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">filname</span></code></p>
+<p>then commit your changes:</p>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;first</span> <span class="pre">commit&quot;</span></code></p>
+<p>After this your can proceed with a push</p>
 </div>
 <p>Now with the version control setup, you can record changes with commits and store all the work on GitHub. Git can be hard to learn, and making mistakes can be even harder to fix. Stackexchange is your friend as well as <a class="reference external" href="https://ohshitgit.com/">ohshitgit</a>.</p>
 <p>The GitHub page can be set up easily with a repo for the project. First, navigate to the main directory where the <code class="docutils literal notranslate"><span class="pre">_build</span></code> folder of the book is located and run</p>

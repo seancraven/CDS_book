@@ -478,6 +478,18 @@ title="Print to PDF"
 <p>Fitting enables the identification of trends and behaviours in datasets. A fit describes a model of the data matched to the dataset. The fit produced can then be used to identify outliers or predict future behaviour. Much effort has been applied to modelling and exotic numerical techniques like neural networks and gradient trees are widely used today. This Section will focus on least-squares fitting of curves and goodness of fit metrics.</p>
 <p>In the context of the <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data, this chapter is interested in the behaviour of the year 2020 in comparison to previous years.</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;dur_utils&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -646,15 +658,12 @@ title="Print to PDF"
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">fit_extension</span><span class="p">[</span><span class="s2">&quot;decimal&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[::</span><span class="mi">4</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1985</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm{{CO}}_2$ (ppm)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\textrm{{CO}}_2$ (ppm)&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;$\\textrm{{CO}}_2$ (ppm)&#39;)
-</pre></div>
-</div>
-<img alt="../_images/Fitting_7_1.png" src="../_images/Fitting_7_1.png" />
+<img alt="../_images/Fitting_7_0.png" src="../_images/Fitting_7_0.png" />
 </div>
 </div>
 <p>Underfitting, shown in red in the above figure is characterised by a model with too few free parameters to characterise the data well. Underfitting results in poor model performance and a considerable value for the residuals.</p>

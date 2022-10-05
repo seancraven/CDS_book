@@ -535,7 +535,7 @@ title="Print to PDF"
 As described in the section on <a class="reference internal" href="atmospheric_primer.html"><span class="doc std std-doc">line broadening</span></a> line shapes vary with atmospheric conditions. Therefore, an empirical atmospheric profile is used to calculate molecule concentrations and cross-section broadening. This enables the assessment of the effects of broadening.</p>
 <p>In addition to the atmospheres’ pressure and temperature changing the concentration of GHGs can change. A reasonable assumption in the troposphere, below <span class="math notranslate nohighlight">\(10 km\)</span>, is that the relative fractional abundances stay the same. Thus, the decrease in atmospheric density provides the main trail off for total absorption. However, the constant relative fraction of greenhouse gases assumption breaks down, particularly for water and ozone fractional abundances above the 10km mark. This is because water forms clouds and precipitates down, becoming much less abundant, and ozone is produced more rapidly at higher altitudes and its concentration peaks in the stratosphere.</p>
 <p>Despite falling density and pressure, there is an increase in temperature after <span class="math notranslate nohighlight">\(20 km\)</span>. This temperature increase is due primarily to Ozone absorbing Shortwave UV-radiation, which is incoming from the sun. Such a temperature increase is not accounted for in our model as we look at longwave radiation exiting the atmosphere. Further, it encourages us to limit the model’s scope to below <span class="math notranslate nohighlight">\(10 km\)</span>.</p>
-<div class="cell docutils container">
+<div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">atlittudes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">temp</span> <span class="o">=</span> <span class="n">simpletrans</span><span class="o">.</span><span class="n">isa</span><span class="o">.</span><span class="n">get_temperature</span><span class="p">(</span><span class="n">atlittudes</span><span class="p">)</span>
@@ -633,8 +633,8 @@ The absorption coefficient,<span class="math notranslate nohighlight">\(k\)</spa
 <div class="math notranslate nohighlight" id="equation-chapter-2-lorentzian-broadening-1">
 <span class="eqno">(38)<a class="headerlink" href="#equation-chapter-2-lorentzian-broadening-1" title="Permalink to this equation">#</a></span>\[OD(\nu, \Delta l, T, p) = \int_{l}^{l+\Delta l} n(h) dh \cdot k(\nu, T, p).\]</div>
 <p>Where <span class="math notranslate nohighlight">\(n(h)\)</span> is the number density per unit volume. To assess, optical depth in isolation without the variable intensity provided by a black body we plot the transmission</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b44457f7-1b3b-442f-ad87-896b3c5ba4e5">
-<span class="eqno">(39)<a class="headerlink" href="#equation-b44457f7-1b3b-442f-ad87-896b3c5ba4e5" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-130f8bb2-dd2e-40b3-852e-06df5a3f5704">
+<span class="eqno">(39)<a class="headerlink" href="#equation-130f8bb2-dd2e-40b3-852e-06df5a3f5704" title="Permalink to this equation">#</a></span>\[\begin{equation}
 T(OD(\nu)) = I/I_0 =\exp(-OD(\nu)).
 \end{equation}\]</div>
 <p>The transmission illustrates clearly in which regions the gas is opaque, which is useful for assessing how the optical behaviour of the gas changes with altitude.</p>

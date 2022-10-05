@@ -464,17 +464,7 @@ title="Print to PDF"
 <p>From the Code, we see that the output is of the same shape as the optical depths frame, and is labeled by altitude. This consistency in using arrays and arraylike operations, enables the python code to avoid any large slowdowns.</p>
 <section id="using-the-atmosphere-grid">
 <h2>Using the Atmosphere Grid<a class="headerlink" href="#using-the-atmosphere-grid" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">simpletrans.radiative_transfer</span> <span class="kn">import</span> <span class="n">AtmosphereGrid</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="n">mpl</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;../CDS.mplstyle&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 </div>
 <p>First, using the <code class="docutils literal notranslate"><span class="pre">AtmosphereGrid</span></code> class we look at single gasses in isolation. Using the <code class="docutils literal notranslate"><span class="pre">AtmospherGrid</span></code> below we plot the spectral radiance of two gases. The spectral radiance density from the class is that of an observer looking down on the atmosphere. The plots below show the radiance at <span class="math notranslate nohighlight">\(1km\)</span> intervals from <span class="math notranslate nohighlight">\(500m\)</span>. The colour-bars indicate the altitude.  Both of the plots are of single gases, <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> and <span class="math notranslate nohighlight">\(\textrm{H}_2 \textrm{O}\)</span> above and below respectively. When the gas is largely opaque like water, the majority of the radiation is produced by blackbody radiation at each altitude, due to the atmosphere blocks temperature. In comparison with <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>, where the majority of the radiation  is transmitted, through the gas. The, transmission profile produced by the water implementation deviates largely from other models, such as <a class="reference external" href="http://modtran.spectral.com/modtran_home#help">modtran</a>. This is possibly due to the lack of scattering implementation. In addition, in the simpletrans implementation there is increased resolution, which will alter the output.</p>
 <div class="cell docutils container">

@@ -482,18 +482,6 @@ When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm
 <p>This test case is somewhat limited, as it would be encouraging to test if this technique could discern other known about pandemics in the validation stage, such that we are not just validating its ability to predict ‘normal’. However, pandemics of a similar severity to Covid-19 have not been very common in the past 50 years.</p>
 <p>If the model’s behaviour on the validation set is satisfactory. Then the model can be used to investigate the test case. If there was a significant deviation from eq.<a class="reference internal" href="Final_Model.html#equation-model">(14)</a> in 2020, then the presence of the pandemic can be shown.</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">scipy.optimize</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
@@ -663,6 +651,19 @@ When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Model Co-efficients
+a_0 = 2.9 +_ 0.04
+a_1 = 0.82 +_ 0.04
+omega_0 = 1.0 +_ 1e-06
+omega_1 = 2.0 +_ 4e-06
+c = -2e+06 +_ 2e+05
+p_1 = 3.1e+03 +_ 3e+02
+p_2 = -1.5 +_ 0.1
+p_3 = 0.00026 +_ 2e-05
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_hide-input docutils container">
 <div class="cell_input docutils container">
@@ -671,6 +672,22 @@ When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chi^2 = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;chi^2/nu = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_chi2</span><span class="p">()</span><span class="o">/</span><span class="n">model_</span><span class="o">.</span><span class="n">get_nu</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(chi^2 &gt; chi^2_min) = </span><span class="si">{</span><span class="n">model_</span><span class="o">.</span><span class="n">get_sf</span><span class="p">()</span><span class="si">:</span><span class="s2">.4</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training Model
+chi^2 = 1.005e+03
+chi^2/nu = 2.134
+P(chi^2 &gt; chi^2_min) = 7.862e-41
+Validation Model
+chi^2 = 13.67
+chi^2/nu = 0.8541
+P(chi^2 &gt; chi^2_min) = 0.6236
+Test Model
+chi^2 = 9.291
+chi^2/nu = 2.323
+P(chi^2 &gt; chi^2_min) = 0.05423
 </pre></div>
 </div>
 </div>
@@ -716,6 +733,12 @@ When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c coefficient:-1.9e+06 +_ 2e-10 
+P_1 coefficient:2.9e+03 +_ 0e+00
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell tag_remove-input docutils container">
 </div>
@@ -742,19 +765,14 @@ When modelling anomalies of <span class="math notranslate nohighlight">\(\textrm
     <span class="c1"># Data</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">fit_data</span><span class="p">(),</span> <span class="n">label</span><span class="o">=</span><span class="n">model_</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">model_</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">model_</span><span class="o">.</span><span class="n">sigma</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">2020</span><span class="p">])</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2021</span><span class="p">]);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.axis.XTick at 0x7fcf39325420&gt;,
- &lt;matplotlib.axis.XTick at 0x7fcf393253f0&gt;,
- &lt;matplotlib.axis.XTick at 0x7fcf393252d0&gt;]
-</pre></div>
-</div>
-<img alt="../_images/predictive_models_11_1.png" src="../_images/predictive_models_11_1.png" />
+<img alt="../_images/predictive_models_11_0.png" src="../_images/predictive_models_11_0.png" />
 </div>
 </div>
 </section>

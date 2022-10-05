@@ -1,7 +1,4 @@
 # Introduction 
-```{note}
-The book is currently being written. Most of the sections are not in their final form. 
-```
 
 Welcome to the Durham University Climate Data Science Project Book. This book aims to build a syllabus that uses the case study of climate science to teach data-intensive science skills.
 

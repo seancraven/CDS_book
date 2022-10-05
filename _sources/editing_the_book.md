@@ -139,9 +139,9 @@ pip install ghp-import
 ```
 Before the project can be published on a GitHub page it needs a GitHub repo. The first author of the book doesn't maintain the repository it is better that new iterations clone and publish new cloned repos. This means a new project repo should be made on [GitHub](https://github.com). When you make this repo do not initialise it with any files such as a readme or a licence.
 Once you have logged into Github to make a new repo click the + button in the top right hand corner:
-![image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-02-37.pngrecent:///ceb14f3d5947249970285e8163109f6d)
+![image](./Figures/github_new_repo.png)
 From here set up an empty repository:
-![image](/home/sean/Pictures/Screenshots/Screenshot from 2022-09-01 13-04-28.png)
+![image](./Figures/blank_repo_settings.png)
 Now you can follow the following prompts depending on what you are looking to do, clone or set up a new repo. 
 
 ```{tip}
@@ -158,6 +158,17 @@ git remote add origin  https://github.com/your-account/your-repository.git
 Finally, we push the content to the repo:
 ```
 git push origin main 
+```
+```{note}
+If you are setting a book up from scratch you will need to add some files to the main GitHub repository, before pushing. This is done by performing 
+
+`git add filname`
+
+then commit your changes:
+
+`git commit -m "first commit"`
+
+After this your can proceed with a push
 ```
 Now with the version control setup, you can record changes with commits and store all the work on GitHub. Git can be hard to learn, and making mistakes can be even harder to fix. Stackexchange is your friend as well as [ohshitgit](https://ohshitgit.com/).
 

@@ -522,22 +522,34 @@ title="Print to PDF"
               <div>
                 
   <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">scipy.optimize</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
+</pre></div>
+</div>
+</div>
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-goodness-of-fit">
 <h1>Hypothesis Testing And Goodness of Fit<a class="headerlink" href="#hypothesis-testing-and-goodness-of-fit" title="Permalink to this headline">#</a></h1>
 <p>The <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution describes how the sum of the square of independent standard normal random variables are distributed, ie <span class="math notranslate nohighlight">\(Q\)</span> the sum of the squares</p>
-<div class="amsmath math notranslate nohighlight" id="equation-cd81b2bb-7efa-4272-a192-69af23b878fd">
-<span class="eqno">(4)<a class="headerlink" href="#equation-cd81b2bb-7efa-4272-a192-69af23b878fd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e465457d-540f-42cf-8607-be0fbee0d3da">
+<span class="eqno">(4)<a class="headerlink" href="#equation-e465457d-540f-42cf-8607-be0fbee0d3da" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Q \sim \chi^2(k),
 \end{equation}\]</div>
 <p>if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-02acbac6-967e-4753-b1ec-e6eb19085c6e">
-<span class="eqno">(5)<a class="headerlink" href="#equation-02acbac6-967e-4753-b1ec-e6eb19085c6e" title="Permalink to this equation">#</a></span>\[\begin{equation}
-Q &amp;= \sum_{i = 1}^k Z_i^2,
+<div class="amsmath math notranslate nohighlight" id="equation-cfbcc0b2-a79a-4620-8cc7-c8ac1bc56f03">
+<span class="eqno">(5)<a class="headerlink" href="#equation-cfbcc0b2-a79a-4620-8cc7-c8ac1bc56f03" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Q = \sum_{i = 1}^k Z_i^2,
 \end{equation}\]</div>
 <p>and,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-19cf9545-0205-4d19-9125-46a0525a3ada">
-<span class="eqno">(6)<a class="headerlink" href="#equation-19cf9545-0205-4d19-9125-46a0525a3ada" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-e01c04f4-b2f9-4fe7-99d7-f4f718423a4e">
+<span class="eqno">(6)<a class="headerlink" href="#equation-e01c04f4-b2f9-4fe7-99d7-f4f718423a4e" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z_i \sim N(0,1).
 \end{equation}\]</div>
 <p>This is useful in error analysis as when we have a data point with an associated error, it can be treated as a randomly distributed normal variable, and the square residual, can be seen as a squared random variable. The residual can be standardized by dividing by the square of the error. Thus, we have a probability distribution that describes the sum of all the squared errors. This can then be used as a ‘goodness of fit metric’. On top of such a metric, hypothesis testing introduces a framework for deciding weather to accept or reject a model dependent on the <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>
@@ -570,15 +582,12 @@ Z_i \sim N(0,1).
     <span class="n">spt</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">spt</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$ X(\chi^2:\nu) $&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$ \int_{\chi^2_</span><span class="si">{min}</span><span class="s2">}^\infty X(\chi^2:\nu) d \chi^2 $&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$ \int_{\chi^2_</span><span class="si">{min}</span><span class="s2">}^\infty X(\chi^2:\nu) d \chi^2 $&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;$ \\int_{\\chi^2_{min}}^\\infty X(\\chi^2:\\nu) d \\chi^2 $&#39;)
-</pre></div>
-</div>
-<img alt="../_images/Hypothesis_Testing_2_1.png" src="../_images/Hypothesis_Testing_2_1.png" />
+<img alt="../_images/Hypothesis_Testing_2_0.png" src="../_images/Hypothesis_Testing_2_0.png" />
 </div>
 </div>
 <section id="hypothesis-testing">
@@ -684,8 +693,8 @@ Z_i \sim N(0,1).
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(\chi^2 \geq \chi^2_{min};575) = 0.0
-P(\chi^2 \geq \chi^2_{min};573) = 0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(\chi^2 \geq \chi^2_{min};574) = 0.0
+P(\chi^2 \geq \chi^2_{min};572) = 0.0
 </pre></div>
 </div>
 </div>
@@ -793,15 +802,12 @@ P(\chi^2 \geq \chi^2_{min};573) = 0.0
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mauna Loa&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Global Average&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Global Average&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Global Average&#39;)
-</pre></div>
-</div>
-<img alt="../_images/Hypothesis_Testing_8_1.png" src="../_images/Hypothesis_Testing_8_1.png" />
+<img alt="../_images/Hypothesis_Testing_8_0.png" src="../_images/Hypothesis_Testing_8_0.png" />
 </div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurement is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. With climate data of this sort, the measurement of the individual datapoints is very accurate, however due to variance in the systems such as volcanoes, wildfires or other carbon emitters or sinks mean having a trend that fits these across many years is unlikely. Nevertheless, the third order polynomial across both global and Mauna Loa data sets provides much better agreement. This will be the model taken forward.</p>
