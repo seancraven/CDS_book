@@ -1,45 +1,35 @@
 
-
 <!DOCTYPE html>
 
-
-<html >
-
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Hypothesis Testing And Goodness of Fit &#8212; Climate Data Science</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -47,12 +37,12 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -64,93 +54,61 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter_1/Hypothesis_Testing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Final Model" href="Final_Model.html" />
     <link rel="prev" title="Curve Fitting" href="Fitting.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -159,280 +117,431 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter_0, Intro</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 0, Intro
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../An_Aside_On_Python.html">An Aside On Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../editing_the_book.html">Editing The Book</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../An_Aside_On_Python.html">
+   An Aside On Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../editing_the_book.html">
+   Editing The Book
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter 1, Global Carbon Dioxide</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 1, Global Carbon Dioxide
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Data_Exploration.html">Global <span class="math notranslate nohighlight">\(\textrm{CO}_2 \)</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Curve Fitting</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis Testing And Goodness of Fit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Final_Model.html">Final Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predictive_models.html">Predictive Modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="temp_co2.html">Global Temperature Predictions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3models.html">Polynomial Prediction Problems</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Data_Exploration.html">
+   Global
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2 \)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Fitting.html">
+   Curve Fitting
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Hypothesis Testing And Goodness of Fit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Final_Model.html">
+   Final Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="predictive_models.html">
+   Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="temp_co2.html">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3models.html">
+   Polynomial Prediction Problems
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter 2, Radiation Modelling</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 2, Radiation Modelling
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/atmospheric_primer.html">Radiation Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/blackbody.html">Incoming and Outgoing Radiation</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">The Variance of Absorption Spectra</a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/radiative_transfer.html">Radiative transfer</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/Optical_depth_db.html">The Optical Depths Database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/atmosphere_model.html">Radiative Transfer Model</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">
+   The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/atmosphere_model.html">
+   Radiative Transfer Model
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix, Relational Database Introduction</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix, Relational Database Introduction
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Database_Chapter/Database_intro_1.html">A very short introduction to relational databases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Database_Chapter/Database_intro_2.html">The Relational Alternative</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix, SimpleTrans</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix, SimpleTrans
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">SimpleTrans</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Bibliography.html">Bibliography</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Bibliography.html">
+   Bibliography
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
 
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/Hypothesis_Testing.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/Hypothesis_Testing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
   
     <img src="../_static/images/logo_binder.svg">
   </span>
-<span class="btn__text-container">Binder</span>
+<span class="headerbtn__text-container">Binder</span>
 </a>
-</li>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/Chapter_1/Hypothesis_Testing.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
   </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter_1/Hypothesis_Testing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
   
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Hypothesis Testing And Goodness of Fit</h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">Hypothesis Testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-chi-2-testing-in-text-co-2-data">Implementing <span class="math notranslate nohighlight">\(\chi^2\)</span> testing in <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fourier-transforms">Fourier Transforms</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-of-the-dct">Application of The DCT</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
-                
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
-  <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 4&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span> <span class="nn">dur_utils</span> <span class="kn">import</span> <span class="n">colours</span>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-testing">
+   Hypothesis Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-chi-2-testing-in-text-co-2-data">
+   Implementing
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   testing in
+   <span class="math notranslate nohighlight">
+    \(\text{CO}_2\)
+   </span>
+   data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
+     Calculating
+     <span class="math notranslate nohighlight">
+      \(P(\chi^2 \geq \chi^2_{min};\nu)\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-transforms">
+   Fourier Transforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#application-of-the-dct">
+     Application of The DCT
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;seaborn&#39;
-</pre></div>
+    </nav>
 </div>
-</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hypothesis Testing And Goodness of Fit</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hypothesis-testing">
+   Hypothesis Testing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#implementing-chi-2-testing-in-text-co-2-data">
+   Implementing
+   <span class="math notranslate nohighlight">
+    \(\chi^2\)
+   </span>
+   testing in
+   <span class="math notranslate nohighlight">
+    \(\text{CO}_2\)
+   </span>
+   data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">
+     Calculating
+     <span class="math notranslate nohighlight">
+      \(P(\chi^2 \geq \chi^2_{min};\nu)\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-transforms">
+   Fourier Transforms
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#application-of-the-dct">
+     Application of The DCT
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell tag_remove-input docutils container">
 </div>
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-goodness-of-fit">
 <h1>Hypothesis Testing And Goodness of Fit<a class="headerlink" href="#hypothesis-testing-and-goodness-of-fit" title="Permalink to this headline">#</a></h1>
 <p>The <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution describes how the sum of the square of independent standard normal random variables are distributed, ie <span class="math notranslate nohighlight">\(Q\)</span> the sum of the squares</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8fe38666-febc-492d-8e28-0d7158f296c8">
-<span class="eqno">(4)<a class="headerlink" href="#equation-8fe38666-febc-492d-8e28-0d7158f296c8" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-67cb4175-520c-4045-bc54-42fe2035a1c4">
+<span class="eqno">(4)<a class="headerlink" href="#equation-67cb4175-520c-4045-bc54-42fe2035a1c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Q \sim \chi^2(k),
 \end{equation}\]</div>
 <p>if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-96a11ccb-9d72-46dd-9da5-9b9c46bcbc53">
-<span class="eqno">(5)<a class="headerlink" href="#equation-96a11ccb-9d72-46dd-9da5-9b9c46bcbc53" title="Permalink to this equation">#</a></span>\[\begin{equation}
-Q &amp;= \sum_{i = 1}^k Z_i^2,
+<div class="amsmath math notranslate nohighlight" id="equation-8c32ac61-6fe9-4fc2-8295-33cddfdfbe56">
+<span class="eqno">(5)<a class="headerlink" href="#equation-8c32ac61-6fe9-4fc2-8295-33cddfdfbe56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+Q = \sum_{i = 1}^k Z_i^2,
 \end{equation}\]</div>
 <p>and,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d7cf97c5-1847-4efa-af7c-6565f0274012">
-<span class="eqno">(6)<a class="headerlink" href="#equation-d7cf97c5-1847-4efa-af7c-6565f0274012" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-7fd98807-1e7a-48b7-acbb-dea7fd02135d">
+<span class="eqno">(6)<a class="headerlink" href="#equation-7fd98807-1e7a-48b7-acbb-dea7fd02135d" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z_i \sim N(0,1).
 \end{equation}\]</div>
 <p>This is useful in error analysis as when we have a data point with an associated error, it can be treated as a randomly distributed normal variable, and the square residual, can be seen as a squared random variable. The residual can be standardized by dividing by the square of the error. Thus, we have a probability distribution that describes the sum of all the squared errors. This can then be used as a ‘goodness of fit metric’. On top of such a metric, hypothesis testing introduces a framework for deciding weather to accept or reject a model dependent on the <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>
-<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id1">[]</span>. The statistic is defined for a model,<span class="math notranslate nohighlight">\(y'\)</span>, and data,<span class="math notranslate nohighlight">\(y\)</span>,! as,</p>
+<p>Hypothesis testing and <span class="math notranslate nohighlight">\(\chi^2\)</span> statistics tests quantify the validity and ‘goodness of fit’, respectively. Again a thorough treatment of the <span class="math notranslate nohighlight">\(\chi^2\)</span> statistic is presented in chapters 5 and 8 of ‘Measurements and Their Uncertainties’<span id="id1">[<a class="reference internal" href="../Bibliography.html#id10" title="Ifan Hughes and Thomas Hase. Measurements and Their Uncertainties : A Practical Guide to Modern Error Analysis. Oxford University Press, Incorporated, Oxford, UNITED KINGDOM, 2010. ISBN 9780191576560. URL: http://ebookcentral.proquest.com/lib/durham/detail.action?docID=584562.">HH10</a>]</span>. The statistic is defined for a model,<span class="math notranslate nohighlight">\(y'\)</span>, and data,<span class="math notranslate nohighlight">\(y\)</span>,! as,</p>
 <div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-0">
 <span class="eqno">(7)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-0" title="Permalink to this equation">#</a></span>\[    \chi^2 = \sum_{i=0}^N\left(\frac{y'(\vec{x_i},\vec{p})-y(\vec{x_i})}{\alpha_i}\right)^2.\]</div>
 <p>If each value in the residual sum is treated as an independent random variable. Then the sum of the values is distributed according to,</p>
@@ -445,11 +554,6 @@ Z_i \sim N(0,1).
 <span class="eqno">(9)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-2" title="Permalink to this equation">#</a></span>\[\chi^2_{\nu} = \chi^2/\nu\]</div>
 <p>Should be close to one for a good fit.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
 <span class="c1"># Plotting</span>
@@ -466,19 +570,18 @@ Z_i \sim N(0,1).
     <span class="n">spt</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
     <span class="n">spt</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$ X(\chi^2:\nu) $&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$ \int_{\chi^2_</span><span class="si">{min}</span><span class="s2">}^\infty X(\chi^2:\nu) d \chi^2 $&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$ \int_{\chi^2_</span><span class="si">{min}</span><span class="s2">}^\infty X(\chi^2:\nu) d \chi^2 $&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="../_images/12e737d75a3a1767109fabf78ccbe8fb5acd7e1a3f7bbca27766ae7e901e3666.png" src="../_images/12e737d75a3a1767109fabf78ccbe8fb5acd7e1a3f7bbca27766ae7e901e3666.png" />
+<img alt="../_images/Hypothesis_Testing_2_0.png" src="../_images/Hypothesis_Testing_2_0.png" />
 </div>
 </div>
 <section id="hypothesis-testing">
 <h2>Hypothesis Testing<a class="headerlink" href="#hypothesis-testing" title="Permalink to this headline">#</a></h2>
 <p>Hypothesis testing provides a systematic framework for deciding if a model fits set of data. The process for the Pearson <span class="math notranslate nohighlight">\(\chi^2\)</span> test is as follows. Given a null hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_0\)</span>, in which the model describes the data. Additionally, define an alternate hypothesis <span class="math notranslate nohighlight">\(\mathcal{H}_1\)</span></p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Determine the <span class="math notranslate nohighlight">\(\chi^2\)</span> value for the data</p></li>
 <li><p>Determine <span class="math notranslate nohighlight">\(\nu\)</span></p></li>
 <li><p>Select a confidence level and calculate <span class="math notranslate nohighlight">\(\chi^2_{crit}\)</span></p></li>
@@ -493,11 +596,6 @@ Z_i \sim N(0,1).
 <div class="cell tag_remove-input docutils container">
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">In this code block, first two different polynomials are defined.</span>
@@ -563,16 +661,10 @@ Z_i \sim N(0,1).
 </pre></div>
 </div>
 </div>
-</details>
 </div>
 <section id="calculating-p-chi-2-geq-chi-2-min-nu">
 <h3>Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span><a class="headerlink" href="#calculating-p-chi-2-geq-chi-2-min-nu" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Here the scipy package is used to evaluate the probability that the</span>
@@ -588,20 +680,14 @@ Z_i \sim N(0,1).
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(\chi^2 \geq \chi^2_{min};574) = 0.0
-P(\chi^2 \geq \chi^2_{min};572) = 0.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(\chi^2 \geq \chi^2_{min};582) = 0.0
+P(\chi^2 \geq \chi^2_{min};580) = 0.0
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">This plotting section unlike many is rather extensive, because both</span>
@@ -704,13 +790,12 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Years&quot;</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Mauna Loa&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Global Average&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Global Average&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="../_images/1b4b8509fbc3f216a13cc5536d3d41d31df71fe330486ac9be2d396be6232fe1.png" src="../_images/1b4b8509fbc3f216a13cc5536d3d41d31df71fe330486ac9be2d396be6232fe1.png" />
+<img alt="../_images/Hypothesis_Testing_8_0.png" src="../_images/Hypothesis_Testing_8_0.png" />
 </div>
 </div>
 <p>The <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu) = 0.0\)</span>, values are infact expected. On inspection, the error on each measurement is of the order <span class="math notranslate nohighlight">\(0.1\)</span> ppm. However, the magnitude of the residuals regularly is of the order <span class="math notranslate nohighlight">\(1\)</span> ppm. As such, the fit to the Mauna Loa Data should be poor. With climate data of this sort, the measurement of the individual datapoints is very accurate, however due to variance in the systems such as volcanoes, wildfires or other carbon emitters or sinks mean having a trend that fits these across many years is unlikely. Nevertheless, the third order polynomial across both global and Mauna Loa data sets provides much better agreement. This will be the model taken forward.</p>
@@ -728,14 +813,9 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 <div class="math notranslate nohighlight" id="equation-chapter-1-hypothesis-testing-4">
 <span class="eqno">(11)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-4" title="Permalink to this equation">#</a></span>\[\begin{split}    \mathcal{F}[f(t)](\omega) = \int_{-\infty}^{\infty}f(t)e^{-i\omega t}dt \\
     \mathcal{F^{-1}}[f(\omega)](t) = \int_{-\infty}^{\infty}f(\omega)e^{i\omega t}d\omega\end{split}\]</div>
-<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[]</span> was developed to perform these calculations efficiently. Additionally, a Discrete Cosine Transform(DCT)<span id="id3">[]</span> can be used because the data is real-valued, and sampled at a constant frequency.</p>
+<p>Clearly with, the discrete data provided by the residuals, such definitions must be adjusted. Due to problems of this form being common across many disciplines, the Fast Fourier transform(FFT)<span id="id2">[<a class="reference internal" href="../Bibliography.html#id12" title="J. Cooley, P. Lewis, and P. Welch. The finite fourier transform. IEEE Transactions on Audio and Electroacoustics, 17(2):77-85, 1969. doi:10.1109/TAU.1969.1162036.">CLW69</a>]</span> was developed to perform these calculations efficiently. Additionally, a Discrete Cosine Transform(DCT)<span id="id3">[<a class="reference internal" href="../Bibliography.html#id13" title="N. Ahmed, T. Natarajan, and K.R. Rao. Discrete cosine transform. IEEE Transactions on Computers, C-23(1):90-93, 1974. doi:10.1109/T-C.1974.223784.">ANR74</a>]</span> can be used because the data is real-valued, and sampled at a constant frequency.</p>
 <p>The DCT provides binned results. So our main frequencies generated by the DCT will be limited in precision. Thus The DCT results can be used to provide starting values for the least-squares method.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Show data is sampled at constant freq</span>
 <span class="n">timesteps</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="s2">&quot;decimal date&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span>
@@ -748,7 +828,6 @@ P(\chi^2 \geq \chi^2_{min};572) = 0.0
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constant frequncy of CO_2 measurment: True
 Timestep:0.083
@@ -766,11 +845,6 @@ Timestep:0.083
 <span class="eqno">(13)<a class="headerlink" href="#equation-chapter-1-hypothesis-testing-6" title="Permalink to this equation">#</a></span>\[    f = \frac{1}{2N*\Delta T}. \]</div>
 <p><span class="math notranslate nohighlight">\(\Delta T\)</span> is the time spacing between samples in the time series and <span class="math notranslate nohighlight">\(N\)</span> is the number of entires in the series. For different formulations of the transform the frequency of the bins is calculated from the argument of the cosine being equal to <span class="math notranslate nohighlight">\(2\pi fn\)</span>. The output spectra is plotted below.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">In this block we use the scipy fft package to evaluate the DCT of the</span>
@@ -787,9 +861,8 @@ Timestep:0.083
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="../_images/10e5f85a344aae6909ecadc922fcb330628e0237aac46f54c9028085fd4c8c63.png" src="../_images/10e5f85a344aae6909ecadc922fcb330628e0237aac46f54c9028085fd4c8c63.png" />
+<img alt="../_images/Hypothesis_Testing_13_0.png" src="../_images/Hypothesis_Testing_13_0.png" />
 </div>
 </div>
 <p>The result of the DCT is reassuring in that the most significant frequency component is the yearly component. However, the prominent peak of the first bin corresponds to the parabolic shape of the mean residuals and so should not be used. Additionally a Bi annual componenet is also seen. These two peaks are taken</p>
@@ -811,7 +884,7 @@ Timestep:0.083
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./Chapter_1"
         },
         predefinedOutput: true
@@ -819,107 +892,50 @@ Timestep:0.083
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-                <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="Fitting.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Curve Fitting</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Fitting.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Curve Fitting</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="Final_Model.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="Final_Model.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Final Model</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypothesis-testing">Hypothesis Testing</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementing-chi-2-testing-in-text-co-2-data">Implementing <span class="math notranslate nohighlight">\(\chi^2\)</span> testing in <span class="math notranslate nohighlight">\(\text{CO}_2\)</span> data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-p-chi-2-geq-chi-2-min-nu">Calculating <span class="math notranslate nohighlight">\(P(\chi^2 \geq \chi^2_{min};\nu)\)</span></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fourier-transforms">Fourier Transforms</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application-of-the-dct">Application of The DCT</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Sean Craven
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2022.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div></div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sean Craven<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>

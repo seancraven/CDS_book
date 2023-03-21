@@ -1,45 +1,35 @@
 
-
 <!DOCTYPE html>
 
-
-<html >
-
+<html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Global \(\textrm{CO}_2 \) &#8212; Climate Data Science</title>
-  
-  
-  
-  <script data-cfasync="false">
-    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
-  </script>
-  
+    
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
-  
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=12da95d707ffb74b382d" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
-  
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d" />
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -47,12 +37,12 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -64,93 +54,61 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
     <script>mermaid.initialize({startOnLoad:true});</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Chapter_1/Data_Exploration';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Curve Fitting" href="Fitting.html" />
     <link rel="prev" title="Editing The Book" href="../editing_the_book.html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <meta name="docsearch:language" content="None"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 
-  
-  
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__primary"
-          id="__primary"/>
-  <label class="overlay overlay-primary" for="__primary"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          name="__secondary"
-          id="__secondary"/>
-  <label class="overlay overlay-secondary" for="__secondary"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
-<form class="bd-search d-flex align-items-center"
-      action="../search.html"
-      method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         id="search-input"
-         placeholder="Search this book..."
-         aria-label="Search this book..."
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
-  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
-  
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    </nav>
-  
-  <div class="bd-container">
-    <div class="bd-container__inner bd-page-width">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
-      <div class="bd-sidebar-primary bd-sidebar">
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
         
-
-  
-  <div class="sidebar-header-items sidebar-primary__section">
-    
-    
-    
-    
-  </div>
-  
-    <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item">
-  
-
-<a class="navbar-brand logo" href="../index.html">
-  
-  
-  
-  
-    
-    
       
-    
-    
-    <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
-  
-  
-</a></div>
-        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item navbar-nav active">
+      
+      <img src="../_static/DurhamUniversityMasterLogo_RGB.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Climate Data Science</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -159,249 +117,363 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter_0, Intro</span></p>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 0, Intro
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../An_Aside_On_Python.html">An Aside On Python</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../editing_the_book.html">Editing The Book</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../An_Aside_On_Python.html">
+   An Aside On Python
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../editing_the_book.html">
+   Editing The Book
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter 1, Global Carbon Dioxide</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 1, Global Carbon Dioxide
+ </span>
+</p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Global <span class="math notranslate nohighlight">\(\textrm{CO}_2 \)</span></a></li>
-<li class="toctree-l1"><a class="reference internal" href="Fitting.html">Curve Fitting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Hypothesis_Testing.html">Hypothesis Testing And Goodness of Fit</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Final_Model.html">Final Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="predictive_models.html">Predictive Modeling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="temp_co2.html">Global Temperature Predictions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3models.html">Polynomial Prediction Problems</a></li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Global
+   <span class="math notranslate nohighlight">
+    \(\textrm{CO}_2 \)
+   </span>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Fitting.html">
+   Curve Fitting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Hypothesis_Testing.html">
+   Hypothesis Testing And Goodness of Fit
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Final_Model.html">
+   Final Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="predictive_models.html">
+   Predictive Modeling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="temp_co2.html">
+   Global Temperature Predictions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3models.html">
+   Polynomial Prediction Problems
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Chapter 2, Radiation Modelling</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Chapter 2, Radiation Modelling
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/atmospheric_primer.html">Radiation Modelling</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/blackbody.html">Incoming and Outgoing Radiation</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">The Variance of Absorption Spectra</a></li>
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/radiative_transfer.html">Radiative transfer</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/Optical_depth_db.html">The Optical Depths Database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_2/atmosphere_model.html">Radiative Transfer Model</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/atmospheric_primer.html">
+   Radiation Modelling
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/blackbody.html">
+   Incoming and Outgoing Radiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/lorentzian_broadening.html">
+   The Variance of Absorption Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/radiative_transfer.html">
+   Radiative transfer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/Optical_depth_db.html">
+   The Optical Depths Database
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_2/atmosphere_model.html">
+   Radiative Transfer Model
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix, Relational Database Introduction</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix, Relational Database Introduction
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Database_Chapter/Database_intro_1.html">A very short introduction to relational databases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Database_Chapter/Database_intro_2.html">The Relational Alternative</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_1.html">
+   A very short introduction to relational databases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Database_Chapter/Database_intro_2.html">
+   The Relational Alternative
+  </a>
+ </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix, SimpleTrans</span></p>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Appendix, SimpleTrans
+ </span>
+</p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">SimpleTrans</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Chapter_SimpleTrans/SimpleTrans.html">
+   SimpleTrans
+  </a>
+ </li>
 </ul>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Bibliography.html">Bibliography</a></li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Bibliography.html">
+   Bibliography
+  </a>
+ </li>
 </ul>
 
     </div>
 </nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
     </div>
-  
-  
-  <div class="sidebar-primary-items__end sidebar-primary__section">
-  </div>
-  
-  <div id="rtd-footer-container"></div>
+    <div id="rtd-footer-container"></div>
+</div>
 
 
-      </div>
-      
-      <main id="main-content" class="bd-main">
-        
-        
+          
 
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
 <div class="sbt-scroll-pixel-helper"></div>
-
-          <div class="bd-content">
-            <div class="bd-article-container">
-              
-              <div class="bd-header-article">
-<div class="header-article-items header-article__inner">
-  
-    <div class="header-article-items__start">
-      
-        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-  <span class="fa-solid fa-bars"></span>
-</label></div>
-      
-    </div>
-  
-  
-    <div class="header-article-items__end">
-      
-        <div class="header-article-item">
-
-<div class="article-header-buttons">
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
 
 
 
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/Data_Exploration.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onBinder"
-   data-bs-placement="left" data-bs-toggle="tooltip"
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/seancraven/CDS_book/master?urlpath=tree/docs/Chapter_1/Data_Exploration.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
   
     <img src="../_static/images/logo_binder.svg">
   </span>
-<span class="btn__text-container">Binder</span>
+<span class="headerbtn__text-container">Binder</span>
 </a>
-</li>
+
+      </li>
       
-  </ul>
+    </ul>
+  </div>
 </div>
-
-
-
-
-
-
-<div class="dropdown dropdown-download-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
-    <i class="fas fa-download"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="../_sources/Chapter_1/Data_Exploration.ipynb" target="_blank"
-   class="btn btn-sm btn-download-source-button dropdown-item"
-   title="Download source file"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="btn__text-container">.ipynb</span>
-</a>
-</li>
-      
-      
-      
-      
-      <li>
-<button onclick="window.print()"
-  class="btn btn-sm btn-download-pdf-button dropdown-item"
-  title="Print to PDF"
-  data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="btn__text-container">.pdf</span>
-</button>
-</li>
-      
-  </ul>
-</div>
-
-
-
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
-  title="Fullscreen mode"
-  data-bs-placement="bottom" data-bs-toggle="tooltip"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
 >
   
 
-<span class="btn__icon-container">
+<span class="headerbtn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-
-<script>
-document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
   </button>
-`);
-</script>
-
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
-</div></div>
-      
-    </div>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Chapter_1/Data_Exploration.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
   
-</div>
-</div>
-              
-              
 
-<div id="jb-print-docs-body" class="onlyprint">
-    <h1>Global \textrm{CO}_2 </h1>
-    <!-- Table of contents -->
-    <div id="print-main-content">
-        <div id="jb-print-toc">
-            
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data Exploration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
-</ul>
-</li>
-</ul>
-            </nav>
-        </div>
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-              
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-exploration">
+   Data Exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#next-steps">
+     Next steps
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Global \textrm{CO}_2 </h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-exploration">
+   Data Exploration
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#next-steps">
+     Next steps
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
                 
-<div id="searchbox"></div>
-                <article class="bd-article" role="main">
-                  
+              <div>
+                
   <section class="tex2jax_ignore mathjax_ignore" id="global-textrm-co-2">
 <h1>Global <span class="math notranslate nohighlight">\(\textrm{CO}_2 \)</span><a class="headerlink" href="#global-textrm-co-2" title="Permalink to this headline">#</a></h1>
-<p>The first chapter in this book follows a case study on the concentration of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> in the atmosphere. During the Covid-19 pandemic, many nations went into lockdown, reducing fossil fuel consumption. In turn, this precipitated a fall in global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production<span id="id1">[]</span>. This Chapter is a walk-through of answering the question; can this effect be detected using global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration data?</p>
+<p>The first chapter in this book follows a case study on the concentration of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> in the atmosphere. During the Covid-19 pandemic, many nations went into lockdown, reducing fossil fuel consumption. In turn, this precipitated a fall in global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> production<span id="id1">[<a class="reference internal" href="../Bibliography.html#id11" title="Zhu Liu, Philippe Ciais, Zhu Deng, Ruixue Lei, Steven J. Davis, Sha Feng, Bo Zheng, Duo Cui, Xinyu Dou, Biqing Zhu, Rui Guo, Piyu Ke, Taochun Sun, Chenxi Lu, Pan He, Yuan Wang, Xu Yue, Yilong Wang, Yadong Lei, Hao Zhou, Zhaonan Cai, Yuhui Wu, Runtao Guo, Tingxuan Han, Jinjun Xue, Olivier Boucher, Eulalie Boucher, Frédéric Chevallier, Katsumasa Tanaka, Yiming Wei, Haiwang Zhong, Chongqing Kang, Ning Zhang, Bin Chen, Fengming Xi, Miaomiao Liu, François-Marie Bréon, Yonglong Lu, Qiang Zhang, Dabo Guan, Peng Gong, Daniel M. Kammen, Kebin He, and Hans Joachim Schellnhuber. Near-real-time monitoring of global co2 emissions reveals the effects of the covid-19 pandemic. Nature Communications, 11(1):5172, Oct 2020. URL: https://doi.org/10.1038/s41467-020-18922-7, doi:10.1038/s41467-020-18922-7.">LCD+20</a>]</span>. This Chapter is a walk-through of answering the question; can this effect be detected using global <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration data?</p>
 <p>Almost half of the world’s population was in lockdown by March of 2020. Thus, the effect we are looking for is after this. Additionally, the effect should be cumulative, with the tail end of the year showing the most significant depression in emissions.</p>
 <section id="data-exploration">
 <h2>Data Exploration<a class="headerlink" href="#data-exploration" title="Permalink to this headline">#</a></h2>
 <p>Clearly, without data, one is unable to provide an answer to the question. Therefore, the first task is gathering data and convincing oneself that it is worth working off.</p>
 <p>Before starting any analysis, ask the questions below. With each data set the exact questions will differ. However, it is crucial that you can convince yourself of the validity of your conclusions and that you can convince your readers aswell.</p>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p>Is the data reliable enough to make predictions from?</p>
 <ul class="simple">
 <li><p>For example, are there quantified errors in the measurments, and are they suitably low? Is this the correct dataset? Is the source of the data reputable?</p></li>
@@ -413,7 +485,7 @@ document.write(`
 </ul>
 </li>
 </ol>
-<p>The first section will collect data from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id2">[]</span>. There are multiple sets of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data on the website; <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. For this problem, greater resolution in each point is a boon. Further, in ‘Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record’<span id="id3">[]</span>, the approximate upper bound for the variation between Global monthly <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is 0.5 ppm, across all measurements.</p>
+<p>The first section will collect data from the <a class="reference external" href="https://gml.noaa.gov/ccgg/trends/gl_data.html">NOAA/GML</a><span id="id2">[<a class="reference internal" href="../Bibliography.html#id6" title="Thomas J. Conway, Pieter P. Tans, Lee S. Waterman, Kirk W. Thoning, Duane R. Kitzis, Kenneth A. Masarie, and Ni Zhang. Evidence for interannual variability of the carbon cycle from the national oceanic and atmospheric administration/climate monitoring and diagnostics laboratory global air sampling network. Journal of Geophysical Research: Atmospheres, 99(D11):22831-22855, 1994. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951, doi:https://doi.org/10.1029/94JD01951.">CTW+94</a>, <a class="reference internal" href="../Bibliography.html#id7" title="Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. Journal of Geophysical Research: Atmospheres, 100(D6):11593-11610, 1995. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859, doi:https://doi.org/10.1029/95JD00859.">MT95</a>]</span>. There are multiple sets of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> data on the website; <a class="reference external" href="https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_gl.csv">mean monthly csv</a> was chosen. For this problem, greater resolution in each point is a boon. Further, in ‘Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record’<span id="id3">[<a class="reference internal" href="../Bibliography.html#id7" title="Kenneth A. Masarie and Pieter P. Tans. Extension and integration of atmospheric carbon dioxide data into a globally consistent measurement record. Journal of Geophysical Research: Atmospheres, 100(D6):11593-11610, 1995. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/95JD00859, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/95JD00859, doi:https://doi.org/10.1029/95JD00859.">MT95</a>]</span>, the approximate upper bound for the variation between Global monthly <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is 0.5 ppm, across all measurements.</p>
 <p>CSV or comma-separated variable files are a common way of storing tabular data. <a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html">Pandas</a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.loadtxt.html">Numpy</a> both have functions which read CSVs. Pandas is much faster.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 </pre></div>
@@ -620,11 +692,6 @@ Notably, none of the columns has units in their headers apart from years and mon
 </div></div></div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">co2_data_global</span><span class="p">[</span><span class="s1">&#39;decimal&#39;</span><span class="p">],</span>
@@ -641,22 +708,16 @@ Notably, none of the columns has units in their headers apart from years and mon
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="../_images/cb7adbfc59e82e779ab027ec11184afae41b95b6f8ad6ad1e0ff8396c862690b.png" src="../_images/cb7adbfc59e82e779ab027ec11184afae41b95b6f8ad6ad1e0ff8396c862690b.png" />
+<img alt="../_images/Data_Exploration_7_0.png" src="../_images/Data_Exploration_7_0.png" />
 </div>
 </div>
 <p>By plotting the monthly average against time and the trendline provided shows a consistent increase in the average concentration of <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> in the atmosphere over the last 40 years. In addition, a cyclical pattern over a shorter timescale is also observed. The data set is well populated over the time period for predictions on the few years scale.</p>
-<p>There is an additional data set from Mauna Loa <span id="id4">[]</span>, which is worth comparing to global averages. Notably, these data sets are not expected to correspond precisely as <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration is a function of altitude, latitude and longitude. Investigating another reputable data source can provide additional confidence in the quality of the data sets.</p>
-<p>In this case, we know that the surface average <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is taken from multiple sea-level sites. Each site is part of the Cooperative Global Air Sampling Network<span id="id5">[]</span>. These sites have been chosen to minimise the interference of local effects in the amount of atmospheric <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>.</p>
+<p>There is an additional data set from Mauna Loa <span id="id4">[<a class="reference internal" href="../Bibliography.html#id8" title="Kirk W. Thoning, Pieter P. Tans, and Walter D. Komhyr. Atmospheric carbon dioxide at mauna loa observatory: 2. analysis of the noaa gmcc data, 1974–1985. Journal of Geophysical Research: Atmospheres, 94(D6):8549-8565, 1989. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/JD094iD06p08549, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/JD094iD06p08549, doi:https://doi.org/10.1029/JD094iD06p08549.">TTK89</a>]</span>, which is worth comparing to global averages. Notably, these data sets are not expected to correspond precisely as <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> concentration is a function of altitude, latitude and longitude. Investigating another reputable data source can provide additional confidence in the quality of the data sets.</p>
+<p>In this case, we know that the surface average <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span> is taken from multiple sea-level sites. Each site is part of the Cooperative Global Air Sampling Network<span id="id5">[<a class="reference internal" href="../Bibliography.html#id6" title="Thomas J. Conway, Pieter P. Tans, Lee S. Waterman, Kirk W. Thoning, Duane R. Kitzis, Kenneth A. Masarie, and Ni Zhang. Evidence for interannual variability of the carbon cycle from the national oceanic and atmospheric administration/climate monitoring and diagnostics laboratory global air sampling network. Journal of Geophysical Research: Atmospheres, 99(D11):22831-22855, 1994. URL: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/94JD01951, arXiv:https://agupubs.onlinelibrary.wiley.com/doi/pdf/10.1029/94JD01951, doi:https://doi.org/10.1029/94JD01951.">CTW+94</a>]</span>. These sites have been chosen to minimise the interference of local effects in the amount of atmospheric <span class="math notranslate nohighlight">\(\textrm{CO}_2\)</span>.</p>
 <p>There can be no hard and fast rule for how many data sources are required to make predictions. However, with more independent sets of data, confidence in the generality of predictions can increase. Further, both of these datasets come from peer-reviewed sources. Thus their methodology has been independently certified. Additionally, when looking at these papers it is worth checking the number of citations they receive, for this example the data from the NOAA is widely cited and used notably in IPCC reports.</p>
 <p>The same search for null and invalid values is performed on this dataset.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">The same import and null counting is applies as with the global data.</span>
@@ -672,7 +733,6 @@ Notably, none of the columns has units in their headers apart from years and mon
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output text_html"><div>
 <style scoped>
@@ -742,11 +802,6 @@ Notably, none of the columns has units in their headers apart from years and mon
 </div></div></div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
@@ -760,70 +815,13 @@ Notably, none of the columns has units in their headers apart from years and mon
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
-<span class="nn">Input In [6],</span> in <span class="ni">&lt;cell line: 2&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;decimal date&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span>         <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span>         <span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;sdev&#39;</span><span class="p">],</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span>         <span class="n">c</span> <span class="o">=</span> <span class="n">colours</span><span class="o">.</span><span class="n">durham</span><span class="o">.</span><span class="n">ink</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span>         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span>         <span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">8</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\textrm{{CO}}_2$ (ppm)&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/matplotlib/pyplot.py:2492,</span> in <span class="ni">errorbar</span><span class="nt">(x, y, yerr, xerr, fmt, ecolor, elinewidth, capsize, barsabove, lolims, uplims, xlolims, xuplims, errorevery, capthick, data, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2486</span> <span class="nd">@_copy_docstring_and_deprecators</span><span class="p">(</span><span class="n">Axes</span><span class="o">.</span><span class="n">errorbar</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">2487</span> <span class="k">def</span> <span class="nf">errorbar</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2488</span>         <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2489</span>         <span class="n">elinewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">barsabove</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lolims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2490</span>         <span class="n">uplims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xlolims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xuplims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">errorevery</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2491</span>         <span class="n">capthick</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="ne">-&gt; </span><span class="mi">2492</span>     <span class="k">return</span> <span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">2493</span>         <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">yerr</span><span class="p">,</span> <span class="n">xerr</span><span class="o">=</span><span class="n">xerr</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span> <span class="n">ecolor</span><span class="o">=</span><span class="n">ecolor</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2494</span>         <span class="n">elinewidth</span><span class="o">=</span><span class="n">elinewidth</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="n">capsize</span><span class="p">,</span> <span class="n">barsabove</span><span class="o">=</span><span class="n">barsabove</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2495</span>         <span class="n">lolims</span><span class="o">=</span><span class="n">lolims</span><span class="p">,</span> <span class="n">uplims</span><span class="o">=</span><span class="n">uplims</span><span class="p">,</span> <span class="n">xlolims</span><span class="o">=</span><span class="n">xlolims</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2496</span>         <span class="n">xuplims</span><span class="o">=</span><span class="n">xuplims</span><span class="p">,</span> <span class="n">errorevery</span><span class="o">=</span><span class="n">errorevery</span><span class="p">,</span> <span class="n">capthick</span><span class="o">=</span><span class="n">capthick</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">2497</span>         <span class="o">**</span><span class="p">({</span><span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">}</span> <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/matplotlib/__init__.py:1423,</span> in <span class="ni">_preprocess_data.&lt;locals&gt;.inner</span><span class="nt">(ax, data, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1420</span> <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1421</span> <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1422</span>     <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1423</span>         <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">sanitize_sequence</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1425</span>     <span class="n">bound</span> <span class="o">=</span> <span class="n">new_sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1426</span>     <span class="n">auto_label</span> <span class="o">=</span> <span class="p">(</span><span class="n">bound</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label_namer</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1427</span>                   <span class="ow">or</span> <span class="n">bound</span><span class="o">.</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">label_namer</span><span class="p">))</span>
-
-<span class="nn">File ~/miniconda3/lib/python3.9/site-packages/matplotlib/axes/_axes.py:3595,</span> in <span class="ni">Axes.errorbar</span><span class="nt">(self, x, y, yerr, xerr, fmt, ecolor, elinewidth, capsize, barsabove, lolims, uplims, xlolims, xuplims, errorevery, capthick, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3592</span> <span class="n">res</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>  <span class="c1"># Default in case of nan</span>
-<span class="g g-Whitespace">   </span><span class="mi">3593</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">less</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="o">-</span><span class="n">err</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">res</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="p">(</span><span class="n">err</span> <span class="o">==</span> <span class="n">err</span><span class="p">))):</span>
-<span class="g g-Whitespace">   </span><span class="mi">3594</span>     <span class="c1"># like err&lt;0, but also works for timedelta and nan.</span>
-<span class="ne">-&gt; </span><span class="mi">3595</span>     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">3596</span>         <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">dep_axis</span><span class="si">}</span><span class="s2">err&#39; must not contain negative values&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3597</span> <span class="c1"># This is like</span>
-<span class="g g-Whitespace">   </span><span class="mi">3598</span> <span class="c1">#     elow, ehigh = np.broadcast_to(...)</span>
-<span class="g g-Whitespace">   </span><span class="mi">3599</span> <span class="c1">#     return dep - elow * ~lolims, dep + ehigh * ~uplims</span>
-<span class="g g-Whitespace">   </span><span class="mi">3600</span> <span class="c1"># except that broadcast_to would strip units.</span>
-<span class="g g-Whitespace">   </span><span class="mi">3601</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">dep</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">row_stack</span><span class="p">([</span><span class="o">-</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">lolims</span><span class="p">),</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">uplims</span><span class="p">])</span> <span class="o">*</span> <span class="n">err</span>
-
-<span class="ne">ValueError</span>: &#39;yerr&#39; must not contain negative values
-</pre></div>
-</div>
-<img alt="../_images/9977940574be8434e6381325e3a3f6b9c5155d374ff54c264a6a4fbe2df959be.png" src="../_images/9977940574be8434e6381325e3a3f6b9c5155d374ff54c264a6a4fbe2df959be.png" />
+<img alt="../_images/Data_Exploration_10_0.png" src="../_images/Data_Exploration_10_0.png" />
 </div>
 </div>
 <p>The weekly Mauna Loa data contains more fields than the global average data. However, the decimal format is still available. In this dataset, recordings before 1980 have unknown associated standard error. Not using these points in the model is an option rather than estimating their uncertainty as the number of timesteps needing to be predicted into the future are not particularly large, for investigating the effects of covid.</p>
 <p>Finally, both data sets are plotted, for a quick informal check that they agree and that progressing with them makes sense.</p>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;&quot;</span>
 <span class="sd">The fraction of invalid values in the dataframe are evaluated.</span>
@@ -837,7 +835,6 @@ Notably, none of the columns has units in their headers apart from years and mon
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Number of discarded data points: 196 
  Fraction of Total Values: 0.25
@@ -846,11 +843,6 @@ Notably, none of the columns has units in their headers apart from years and mon
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
-<summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
-</summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">co2_data_ml</span> <span class="o">=</span> <span class="n">co2_data_ml</span><span class="p">[</span><span class="n">co2_data_ml</span><span class="p">[</span><span class="s1">&#39;average&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> 
 <span class="c1">#Plotting</span>
@@ -870,9 +862,8 @@ Notably, none of the columns has units in their headers apart from years and mon
 </pre></div>
 </div>
 </div>
-</details>
 <div class="cell_output docutils container">
-<img alt="../_images/8b9fc5f2e35d214f802ce1b89ff5482a799cbf173b49036c1e359d911cb66e1a.png" src="../_images/8b9fc5f2e35d214f802ce1b89ff5482a799cbf173b49036c1e359d911cb66e1a.png" />
+<img alt="../_images/Data_Exploration_13_0.png" src="../_images/Data_Exploration_13_0.png" />
 </div>
 </div>
 <section id="next-steps">
@@ -896,7 +887,7 @@ Notably, none of the columns has units in their headers apart from years and mon
             mode: "python"
         },
         kernelOptions: {
-            name: "python3",
+            kernelName: "python3",
             path: "./Chapter_1"
         },
         predefinedOutput: true
@@ -904,102 +895,50 @@ Notably, none of the columns has units in their headers apart from years and mon
     </script>
     <script>kernelName = 'python3'</script>
 
-                </article>
+              </div>
               
-
-              
-              
-                <footer class="bd-footer-article">
-                  <!-- Previous / next buttons -->
-<div class="prev-next-area">
-    <a class="left-prev"
-       href="../editing_the_book.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Editing The Book</p>
-      </div>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../editing_the_book.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Editing The Book</p>
+        </div>
     </a>
-    <a class="right-next"
-       href="Fitting.html"
-       title="next page">
-      <div class="prev-next-info">
+    <a class='right-next' id="next-link" href="Fitting.html" title="next page">
+    <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Curve Fitting</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
-                </footer>
-              
-            </div>
-            
-            
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-exploration">Data Exploration</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next steps</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-</div></div>
-              
-            
-          </div>
-          <footer class="bd-footer-content">
-            <div class="bd-footer-content__inner">
-<div class="bd-footer-content__inner container">
-  
-  <div class="footer-item">
-    
-<p class="component-author">
-By Sean Craven
-</p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  <p class="copyright">
-    
-      © Copyright 2022.
-      <br/>
-    
-  </p>
-
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-  <div class="footer-item">
-    
-  </div>
-  
-</div></div>
-          </footer>
-        
-
-      </main>
+            </footer>
+        </div>
     </div>
-  </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Sean Craven<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=12da95d707ffb74b382d"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=12da95d707ffb74b382d"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  <footer class="bd-footer">
-  </footer>
+
   </body>
 </html>
