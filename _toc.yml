@@ -4,7 +4,7 @@
 format: jb-book
 root: index
 parts:
-  - caption: Chapter_0, Intro
+  - caption: Chapter 0, Intro
     chapters:
     - file: An_Aside_On_Python
     - file: editing_the_book.md
