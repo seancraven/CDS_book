@@ -483,21 +483,21 @@ title="Print to PDF"
 <span class="eqno">(43)<a class="headerlink" href="#equation-chapter-2-radiative-transfer-3" title="Permalink to this equation">#</a></span>\[\frac{d}{d \tau_nu} I(OD_{\nu}, \hat{n}, \nu)= -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)].\]</div>
 <p>Where <span class="math notranslate nohighlight">\(OD = k(\nu, p, T)u\)</span>, <span class="math notranslate nohighlight">\(u\)</span> is the column number density of absorbing species and <span class="math notranslate nohighlight">\(k(\nu, p, T)\)</span> is the absorption coefficient per molecule per unit length. The re-radiation term is the plank function <span class="math notranslate nohighlight">\(B(T(OD_\nu), \nu)\)</span>. Additionally, the <span class="math notranslate nohighlight">\(\cos \theta\)</span> term comes from the distance through the medium of optical depth <span class="math notranslate nohighlight">\(\delta OD\)</span>, where, if the path of the incoming radiation is at some angle <span class="math notranslate nohighlight">\(\theta\)</span> to the perpendicular from the surface, the distance the radiation travels is further <span class="math notranslate nohighlight">\(\delta OD / \cos \theta\)</span>, as seen in the figure below from<span id="id1">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. This model is taken from sections of chapter 4 in <span class="math notranslate nohighlight">\(principles of planetary climate\)</span><span id="id2">[]</span>.</p>
 <p>If it is assumed that the incoming and outgoing radiation isotropic as it is emitted black body radiation, then the directional dependence of the equation is removed. The Solution can then be integrated over a hemisphere,and two separate ordinary differential equations for upward and downward propagating spectral radiance can be performed, assuming that <span class="math notranslate nohighlight">\(\cos \bar{\theta} = 1/2\)</span></p>
-<div class="amsmath math notranslate nohighlight" id="equation-098f91e2-fea7-439b-9008-1f6528610165">
-<span class="eqno">(44)<a class="headerlink" href="#equation-098f91e2-fea7-439b-9008-1f6528610165" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-a35b2fc0-d744-453f-80a1-0267443e4362">
+<span class="eqno">(44)<a class="headerlink" href="#equation-a35b2fc0-d744-453f-80a1-0267443e4362" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_0^{\pi/2}I(T(OD_{\nu}),\nu) d\Omega &amp;= \int_0^{\pi/2} -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)] d\Omega, \\
 \frac{d}{d OD_{\nu}} I_+ &amp;= - I_+ + \pi B(T_{\nu}, \nu).
 \end{align}\]</div>
 <p><span class="math notranslate nohighlight">\(I_+\)</span> is all the radiation in the upward direction from the block of atmosphere. In the downward direction <span class="math notranslate nohighlight">\(I_-\)</span>, the equation is similar</p>
-<div class="amsmath math notranslate nohighlight" id="equation-72030880-b06e-4819-8651-3f2c25a5aedf">
-<span class="eqno">(45)<a class="headerlink" href="#equation-72030880-b06e-4819-8651-3f2c25a5aedf" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-22c91511-e81f-47a5-8465-74dc2b49966e">
+<span class="eqno">(45)<a class="headerlink" href="#equation-22c91511-e81f-47a5-8465-74dc2b49966e" title="Permalink to this equation">#</a></span>\[\begin{align}
 \int_{\pi/2}^{\pi}I(T(OD_{\nu}), \nu) d\Omega &amp;= \int_{\pi/2}^{\pi} -\frac{1}{\cos\theta} [I(OD_{\nu}, \hat{n}, \nu) - B(T(OD_{\nu}), \nu)] d\Omega, \\
 \frac{d}{d OD_{\nu}} I_- &amp;=  I_- - \pi B(T_{\nu}, \nu).
 \end{align}\]</div>
 <p>As the temperature of the radiation block is a function of the atmosphere’s optical depth, Ideally, it should be calculated rather than taken from the ISA model. However, this isn’t easy. Often, atmospheres are not in just radiative equilibrium because they are comprised of gases. Convection plays a key role in energy transfer as well. Thus blocks of the atmosphere may infect heat and not be in thermal equilibrium with their surroundings. A model which includes convection is much better approximated by an adiabatic atmosphere where warm blocks of air rise, expand, and cool adiabatically. This, is typically the assumption for the lower atmosphere, <a class="reference external" href="https://ereader.cambridge.org/wr/viewer.html#book/95232efd-fe8e-4b72-ad9e-c3f22d2a0cda/ichap4/pos_1.4427424769341008">troposphere</a><span id="id3">[<a class="reference internal" href="../Bibliography.html#id32" title="Raymond T. Pierrehumbert. Principles of Planetary Climate. Cambridge University Press, 2010. doi:10.1017/CBO9780511780783.">Pie10</a>]</span>. For higher altitudes, convection is less important and radiative equilibrium provides a better approximation.</p>
 <p>Despite it not being a good approximation for the lower atmosphere, radiative equilibrium provides a more straightforward path to a solution. With this boundary condition two equations for the upwards and downward spectral radiance can be formed:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f81f88c1-50c4-4828-8897-8bcb2f8f13f4">
-<span class="eqno">(46)<a class="headerlink" href="#equation-f81f88c1-50c4-4828-8897-8bcb2f8f13f4" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-76ec0f76-e2c1-47f3-a5bb-f9ac504c5041">
+<span class="eqno">(46)<a class="headerlink" href="#equation-76ec0f76-e2c1-47f3-a5bb-f9ac504c5041" title="Permalink to this equation">#</a></span>\[\begin{align}
 0 = \frac{d}{d OD_{\nu}}I_+ - I_- &amp;= -(I_+ + I_-) + 2 \pi B(T(OD_{\nu}, \nu), \\
  \frac{d}{d OD_{\nu}}I_+ + I_- &amp;= -(I_+ - I_-).
 \end{align}\]</div>
@@ -518,8 +518,8 @@ title="Print to PDF"
 <div class="math notranslate nohighlight" id="equation-specific-solution">
 <span class="eqno">(50)<a class="headerlink" href="#equation-specific-solution" title="Permalink to this equation">#</a></span>\[I_+ + I_- = c' - c OD_{\infty} = I_{OLR},\]</div>
 <p>Then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bf588d4f-fb4d-4a31-a25f-a07cf60469a5">
-<span class="eqno">(51)<a class="headerlink" href="#equation-bf588d4f-fb4d-4a31-a25f-a07cf60469a5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6ed22e0c-a16e-4f83-8264-adb7c40efa67">
+<span class="eqno">(51)<a class="headerlink" href="#equation-6ed22e0c-a16e-4f83-8264-adb7c40efa67" title="Permalink to this equation">#</a></span>\[\begin{align}
 c &amp;= I_{OLR}, \\
 c' &amp;= I_{OLR}(OD_{\infty} + 1).
 \end{align}\]</div>

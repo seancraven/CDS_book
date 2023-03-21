@@ -467,8 +467,8 @@ title="Print to PDF"
 <h1>Incoming and Outgoing Radiation<a class="headerlink" href="#incoming-and-outgoing-radiation" title="Permalink to this headline">#</a></h1>
 <p>In the previous section, the interaction of molecules with light was discussed. This page aims to give the reader an overview of energy balance and the physics behind radiation and radiative transfer.</p>
 <p>The Sun is the main source of energy arriving at Earth. The mechanism for energy transfer is the radiation of photons. Photons travel through the vacuum of space with energy associated with their wavenumber,<span class="math notranslate nohighlight">\(\nu\)</span>,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f82e710d-6adf-419e-af40-db2b03e0a06d">
-<span class="eqno">(31)<a class="headerlink" href="#equation-f82e710d-6adf-419e-af40-db2b03e0a06d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-2015244f-2147-466c-994e-27d91c545cdb">
+<span class="eqno">(31)<a class="headerlink" href="#equation-2015244f-2147-466c-994e-27d91c545cdb" title="Permalink to this equation">#</a></span>\[\begin{equation}
 E = h c \nu.
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(h\)</span>, <span class="math notranslate nohighlight">\(c\)</span> are the usual constants.</p>
@@ -478,15 +478,15 @@ E = h c \nu.
 </div>
 <p>Hot objects emit radiation dependent on their temperature, the idealised picture for this emitter is a black body. A black body is normal matter that absorbs radiation at all wavelengths that fall upon it. Emissivity measures how close an object is to a black body, which takes the range between zero and one. In most of the following calculations, the Earth and the sun are treated as black bodies with emissivity one.</p>
 <p>When energy arrives at Earth, it is convenient to measure not the extensive quantity of energy but an intensive one, which is also a function of time, thus, flux is used. Flux, power per unit area, is such an intensive quantity. The Stefan-Boltzmann Law gives the flux produced by a black body at a given temperature.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7323ec0e-2bd8-42de-b27c-22e6462da1ca">
-<span class="eqno">(32)<a class="headerlink" href="#equation-7323ec0e-2bd8-42de-b27c-22e6462da1ca" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-76c99091-f315-443d-baf8-f38fefdedf37">
+<span class="eqno">(32)<a class="headerlink" href="#equation-76c99091-f315-443d-baf8-f38fefdedf37" title="Permalink to this equation">#</a></span>\[\begin{equation}
 j = \sigma T^4
 \end{equation}\]</div>
 <p>Flux is in <span class="math notranslate nohighlight">\(W \cdot m^{-2}\)</span> and <span class="math notranslate nohighlight">\(\sigma = 5.670374419x0^{-8} W \cdot m^{-2}K^{-4}\)</span>.</p>
 <p>As mentioned previously, the Sun can be very well approximated as a black body emitting at 5770k, which is the mean surface temperature of the Sun. Outgoing radiation from blackbodies is not uniform across all wavenumbers. Thus the plank function describes the emission of photons in spectral radiance, flux per wavenumber per solid angle. The solid angle dependence is important if the direction of the radiation is not isotropic. However, in much of the work that proceeds, it is in an isotropic regime, so the flux density can be used, which is <span class="math notranslate nohighlight">\(\pi \cdot \)</span>spectral radiance. Spectral radiance for a black body is governed by the plank function,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c9dd6fdc-68da-4d42-a9fe-55dbfac8145b">
-<span class="eqno">(33)<a class="headerlink" href="#equation-c9dd6fdc-68da-4d42-a9fe-55dbfac8145b" title="Permalink to this equation">#</a></span>\[\begin{equation}
-B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})}.
+<div class="amsmath math notranslate nohighlight" id="equation-a01aa793-e275-4905-87f1-8923a4078827">
+<span class="eqno">(33)<a class="headerlink" href="#equation-a01aa793-e275-4905-87f1-8923a4078827" title="Permalink to this equation">#</a></span>\[\begin{equation}
+B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})-1}.
 \end{equation}\]</div>
 <p>Where the constants take their conventional definitions. The plank function at 5770k is plotted against photon energy, with wavenumber as the top axis. The top figure is a log-log plot, highlighting the vast energy differential between the total radiative output as the area enclosed is proportional to the power radiated. The second figure is the same plot with linear axes. The top plot also includes the black body spectrum for energy equilibrium temperature (252k) for Earth. Additionally, the range of the visual spectrum is indicated with the rainbow.</p>
 <p>Figure three is added for interest, depicting the photon density per wavenumber. The energy dependence of photons means that near infrared wavelengths dominate the most common wavelengths arriving at Earth from the sun.</p>
@@ -575,19 +575,7 @@ B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/sean/Documents/Work/SimpleTrans/src/simpletrans/plank.py:87: RuntimeWarning: invalid value encountered in divide
-  pifac
-/home/sean/Documents/Work/SimpleTrans/src/simpletrans/plank.py:54: RuntimeWarning: divide by zero encountered in divide
-  pifac
-/home/sean/Documents/Work/SimpleTrans/src/simpletrans/plank.py:57: RuntimeWarning: divide by zero encountered in divide
-  * (1 / (np.exp(c_2 / (wavelength * temperature)) - 1))
-/home/sean/Documents/Work/SimpleTrans/src/simpletrans/plank.py:57: RuntimeWarning: overflow encountered in exp
-  * (1 / (np.exp(c_2 / (wavelength * temperature)) - 1))
-/home/sean/Documents/Work/SimpleTrans/src/simpletrans/plank.py:54: RuntimeWarning: invalid value encountered in multiply
-  pifac
-</pre></div>
-</div>
-<img alt="../_images/blackbody_2_1.png" src="../_images/blackbody_2_1.png" />
+<img alt="../_images/blackbody_2_0.png" src="../_images/blackbody_2_0.png" />
 </div>
 </div>
 <p>Further, a plot of spectral radiance is shown against wavenumber, this can often be a misleading quantity when thinking about photon energy, because of the non-linear conversion, one might assume that the majority of the energy arriving from the sun is in the visible range however this is not the case as seen above.</p>
@@ -597,12 +585,12 @@ B(\nu,T) = {2hc^2\nu^3}\frac{1}{\exp(\frac{hc \nu}{K_bT})}.
 </div>
 </div>
 <p>Inspection of the two linear spectral radiance plots shows that there is a discrepancy between the peak values, of the graphs. With the peaks being associated to different energy photons, <span class="math notranslate nohighlight">\(B_{max}(\lambda_{max},5770); 1E_{\lambda max} = 2.47 eV\)</span>  <span class="math notranslate nohighlight">\(B_{max}(\nu,5770); E_{\nu max} = 1.4 eV\)</span>. To transform between the functions the product rule can be used</p>
-<div class="amsmath math notranslate nohighlight" id="equation-be805fe1-df68-44e6-8dc4-56dd0fd75a5f">
-<span class="eqno">(34)<a class="headerlink" href="#equation-be805fe1-df68-44e6-8dc4-56dd0fd75a5f" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ef4ec677-2e75-4dba-9698-0f0fae82fd21">
+<span class="eqno">(34)<a class="headerlink" href="#equation-ef4ec677-2e75-4dba-9698-0f0fae82fd21" title="Permalink to this equation">#</a></span>\[\begin{equation}
 B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda,
 \end{equation}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-2108f6e1-c1c4-4dcd-8ebe-a7f255b40362">
-<span class="eqno">(35)<a class="headerlink" href="#equation-2108f6e1-c1c4-4dcd-8ebe-a7f255b40362" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-34085d9b-0969-419a-b51b-38a56fc7be64">
+<span class="eqno">(35)<a class="headerlink" href="#equation-34085d9b-0969-419a-b51b-38a56fc7be64" title="Permalink to this equation">#</a></span>\[\begin{equation}
 \frac{d \lambda}{d\nu} = - \lambda^2.
 \end{equation}\]</div>
 <p>This adds to a common misconception that the number of photons arriving from the Sun is peaked in green wavelengths. This is where the spectral radiance peak is. It can be seen in the third figure from the top, where the Y axis is proportional to the number of photons per second at a given wavenumber, where photon number is peaked in the infrared.</p>
@@ -612,8 +600,8 @@ B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda,
 <h1>Radiation Balance<a class="headerlink" href="#radiation-balance" title="Permalink to this headline">#</a></h1>
 <p>The first idea for a radiation model, is to treat the earth as if it lacked an atmosphere and was just a colourful rock. The concept of albedo is briefly introduces this is <span class="math notranslate nohighlight">\(A = 1 - \textrm{emissivity}\)</span>, and takes into account the fact that earth is quite reflective and white because of ice and clouds.</p>
 <p>An approximate temperature for the Earths surface can be determined using the stefan-Boltzmann Law, equating the total power in to the total power out.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9b9ae2e7-d723-47f2-8568-fff70893edee">
-<span class="eqno">(36)<a class="headerlink" href="#equation-9b9ae2e7-d723-47f2-8568-fff70893edee" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-13fa059b-c1a4-4160-948b-1a2ddd94c721">
+<span class="eqno">(36)<a class="headerlink" href="#equation-13fa059b-c1a4-4160-948b-1a2ddd94c721" title="Permalink to this equation">#</a></span>\[\begin{equation}
  F = 4 \sigma T^4 = \pi \int^\infty _0 d \nu B_{\nu}(\nu, T)
 \end{equation}\]</div>
 <p>The Earth is not matte black it has an albedo value which is mostly due to the clouds. This has an average value of 0.3</p>
@@ -679,16 +667,16 @@ B(\nu,T)d \nu = B(\lambda,T)\frac{d \lambda}{d\nu} d \lambda,
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "book"
+            mode: "python"
         },
         kernelOptions: {
-            kernelName: "book",
+            kernelName: "python3",
             path: "./Chapter_2"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'book'</script>
+    <script>kernelName = 'python3'</script>
 
               </div>
               

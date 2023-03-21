@@ -526,18 +526,18 @@ title="Print to PDF"
 <section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing-and-goodness-of-fit">
 <h1>Hypothesis Testing And Goodness of Fit<a class="headerlink" href="#hypothesis-testing-and-goodness-of-fit" title="Permalink to this headline">#</a></h1>
 <p>The <span class="math notranslate nohighlight">\(\chi^2\)</span> distribution describes how the sum of the square of independent standard normal random variables are distributed, ie <span class="math notranslate nohighlight">\(Q\)</span> the sum of the squares</p>
-<div class="amsmath math notranslate nohighlight" id="equation-67cb4175-520c-4045-bc54-42fe2035a1c4">
-<span class="eqno">(4)<a class="headerlink" href="#equation-67cb4175-520c-4045-bc54-42fe2035a1c4" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-22eece15-21c8-4101-a645-6e56293edd8c">
+<span class="eqno">(4)<a class="headerlink" href="#equation-22eece15-21c8-4101-a645-6e56293edd8c" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Q \sim \chi^2(k),
 \end{equation}\]</div>
 <p>if</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8c32ac61-6fe9-4fc2-8295-33cddfdfbe56">
-<span class="eqno">(5)<a class="headerlink" href="#equation-8c32ac61-6fe9-4fc2-8295-33cddfdfbe56" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-ab3b9089-6a86-4a6e-ae62-d0520f89ae82">
+<span class="eqno">(5)<a class="headerlink" href="#equation-ab3b9089-6a86-4a6e-ae62-d0520f89ae82" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Q = \sum_{i = 1}^k Z_i^2,
 \end{equation}\]</div>
 <p>and,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7fd98807-1e7a-48b7-acbb-dea7fd02135d">
-<span class="eqno">(6)<a class="headerlink" href="#equation-7fd98807-1e7a-48b7-acbb-dea7fd02135d" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-064ec8a6-0a61-494f-9506-c038d8f2cc51">
+<span class="eqno">(6)<a class="headerlink" href="#equation-064ec8a6-0a61-494f-9506-c038d8f2cc51" title="Permalink to this equation">#</a></span>\[\begin{equation}
 Z_i \sim N(0,1).
 \end{equation}\]</div>
 <p>This is useful in error analysis as when we have a data point with an associated error, it can be treated as a randomly distributed normal variable, and the square residual, can be seen as a squared random variable. The residual can be standardized by dividing by the square of the error. Thus, we have a probability distribution that describes the sum of all the squared errors. This can then be used as a ‘goodness of fit metric’. On top of such a metric, hypothesis testing introduces a framework for deciding weather to accept or reject a model dependent on the <span class="math notranslate nohighlight">\(\chi^2\)</span> value.</p>

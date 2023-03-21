@@ -124,6 +124,9 @@ With the environment activated all the required packages can be installed,
 pip install -r requirements.txt
 ```
 With the environment for the book set up it can be built. 
+```{note}
+You may also have to install some packages into your base python environment because of how jb books work.
+```
 The build command is targeted at a directory with the `_config.yml` and `_toc.yml`. If you have cloned the git repositor, these will be in the `CDS_book` directory. From here
 ```
 jupyter-book build /path/to/book/

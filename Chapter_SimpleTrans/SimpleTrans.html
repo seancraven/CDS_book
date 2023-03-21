@@ -464,13 +464,13 @@ It can be installed using pip separately however,</p>
 <h2>Structure and Overview<a class="headerlink" href="#structure-and-overview" title="Permalink to this headline">#</a></h2>
 <p>before, diving into using the package, a high level overview of what it does is useful.
 After you have downloaded the package, one runs <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code>. When this script is run the absorption spectra from HITRAN are downloaded. Then a <a class="reference internal" href="../Database_Chapter/Database_intro_1.html#rd"><span class="std std-ref">relational database</span></a> is created. This database is populated, by calculating absorption coefficients<span class="math notranslate nohighlight">\((molecules/cm^2)\)</span> and optical depths, of blocks of atmosphere, given by:</p>
-<div class="amsmath math notranslate nohighlight" id="equation-9c8f400d-3c60-487e-bbe5-5c0ea0b6ee29">
-<span class="eqno">(53)<a class="headerlink" href="#equation-9c8f400d-3c60-487e-bbe5-5c0ea0b6ee29" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-39bb6a61-b883-474b-b539-f3d508bb24ed">
+<span class="eqno">(53)<a class="headerlink" href="#equation-39bb6a61-b883-474b-b539-f3d508bb24ed" title="Permalink to this equation">#</a></span>\[\begin{equation}
 OD = k(\nu, T, P)\cdot [X],
 \end{equation}\]</div>
 <p>where k is the absorption coefficient, <span class="math notranslate nohighlight">\([X]\)</span>, is the path integral of molecular density over the block of atmosphere</p>
-<div class="amsmath math notranslate nohighlight" id="equation-15f594f7-95fd-4777-9bc2-97163d8c7dfd">
-<span class="eqno">(54)<a class="headerlink" href="#equation-15f594f7-95fd-4777-9bc2-97163d8c7dfd" title="Permalink to this equation">#</a></span>\[\begin{equation}
+<div class="amsmath math notranslate nohighlight" id="equation-51a53a2b-3b68-479a-a8e9-65d63adb5b49">
+<span class="eqno">(54)<a class="headerlink" href="#equation-51a53a2b-3b68-479a-a8e9-65d63adb5b49" title="Permalink to this equation">#</a></span>\[\begin{equation}
 [X] = \int_{h_i}^{h_{i+1}} n(T,p)dh.
 \end{equation}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(h_i\)</span>, is the start of the atmosphere block, <span class="math notranslate nohighlight">\(n\)</span> is the number density of the molecule. This is repeated over every gas for every altitude for all wavenumbers.</p>
