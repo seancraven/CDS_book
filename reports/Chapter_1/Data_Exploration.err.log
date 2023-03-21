@@ -1,0 +1,81 @@
+Traceback (most recent call last):
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/sean/miniconda3/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/sean/miniconda3/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+plt.figure(figsize=(10, 6))
+plt.errorbar(co2_data_ml['decimal date'],
+        co2_data_ml['average'],
+        co2_data_ml['sdev'],
+        c = colours.durham.ink, linestyle='',
+        marker='o', markersize = 1
+        )
+plt.ylabel(r'$\textrm{{CO}}_2$ (ppm)')
+plt.xlabel('Year');
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+Input [0;32mIn [6][0m, in [0;36m<cell line: 2>[0;34m()[0m
+[1;32m      1[0m plt[38;5;241m.[39mfigure(figsize[38;5;241m=[39m([38;5;241m10[39m, [38;5;241m6[39m))
+[0;32m----> 2[0m [43mplt[49m[38;5;241;43m.[39;49m[43merrorbar[49m[43m([49m[43mco2_data_ml[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mdecimal date[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m
+[1;32m      3[0m [43m        [49m[43mco2_data_ml[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43maverage[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m
+[1;32m      4[0m [43m        [49m[43mco2_data_ml[49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43msdev[39;49m[38;5;124;43m'[39;49m[43m][49m[43m,[49m
+[1;32m      5[0m [43m        [49m[43mc[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[43mcolours[49m[38;5;241;43m.[39;49m[43mdurham[49m[38;5;241;43m.[39;49m[43mink[49m[43m,[49m[43m [49m[43mlinestyle[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43m'[39;49m[43m,[49m
+[1;32m      6[0m [43m        [49m[43mmarker[49m[38;5;241;43m=[39;49m[38;5;124;43m'[39;49m[38;5;124;43mo[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43mmarkersize[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[38;5;241;43m1[39;49m
+[1;32m      7[0m [43m        [49m[43m)[49m
+[1;32m      8[0m plt[38;5;241m.[39mylabel([38;5;124mr[39m[38;5;124m'[39m[38;5;124m$[39m[38;5;124m\[39m[38;5;124mtextrm[39m[38;5;124m{{[39m[38;5;124mCO}}_2$ (ppm)[39m[38;5;124m'[39m)
+[1;32m      9[0m plt[38;5;241m.[39mxlabel([38;5;124m'[39m[38;5;124mYear[39m[38;5;124m'[39m)
+
+File [0;32m~/miniconda3/lib/python3.9/site-packages/matplotlib/pyplot.py:2492[0m, in [0;36merrorbar[0;34m(x, y, yerr, xerr, fmt, ecolor, elinewidth, capsize, barsabove, lolims, uplims, xlolims, xuplims, errorevery, capthick, data, **kwargs)[0m
+[1;32m   2486[0m [38;5;129m@_copy_docstring_and_deprecators[39m(Axes[38;5;241m.[39merrorbar)
+[1;32m   2487[0m [38;5;28;01mdef[39;00m [38;5;21merrorbar[39m(
+[1;32m   2488[0m         x, y, yerr[38;5;241m=[39m[38;5;28;01mNone[39;00m, xerr[38;5;241m=[39m[38;5;28;01mNone[39;00m, fmt[38;5;241m=[39m[38;5;124m'[39m[38;5;124m'[39m, ecolor[38;5;241m=[39m[38;5;28;01mNone[39;00m,
+[1;32m   2489[0m         elinewidth[38;5;241m=[39m[38;5;28;01mNone[39;00m, capsize[38;5;241m=[39m[38;5;28;01mNone[39;00m, barsabove[38;5;241m=[39m[38;5;28;01mFalse[39;00m, lolims[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
+[1;32m   2490[0m         uplims[38;5;241m=[39m[38;5;28;01mFalse[39;00m, xlolims[38;5;241m=[39m[38;5;28;01mFalse[39;00m, xuplims[38;5;241m=[39m[38;5;28;01mFalse[39;00m, errorevery[38;5;241m=[39m[38;5;241m1[39m,
+[1;32m   2491[0m         capthick[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m, data[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[0;32m-> 2492[0m     [38;5;28;01mreturn[39;00m [43mgca[49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43merrorbar[49m[43m([49m
+[1;32m   2493[0m [43m        [49m[43mx[49m[43m,[49m[43m [49m[43my[49m[43m,[49m[43m [49m[43myerr[49m[38;5;241;43m=[39;49m[43myerr[49m[43m,[49m[43m [49m[43mxerr[49m[38;5;241;43m=[39;49m[43mxerr[49m[43m,[49m[43m [49m[43mfmt[49m[38;5;241;43m=[39;49m[43mfmt[49m[43m,[49m[43m [49m[43mecolor[49m[38;5;241;43m=[39;49m[43mecolor[49m[43m,[49m
+[1;32m   2494[0m [43m        [49m[43melinewidth[49m[38;5;241;43m=[39;49m[43melinewidth[49m[43m,[49m[43m [49m[43mcapsize[49m[38;5;241;43m=[39;49m[43mcapsize[49m[43m,[49m[43m [49m[43mbarsabove[49m[38;5;241;43m=[39;49m[43mbarsabove[49m[43m,[49m
+[1;32m   2495[0m [43m        [49m[43mlolims[49m[38;5;241;43m=[39;49m[43mlolims[49m[43m,[49m[43m [49m[43muplims[49m[38;5;241;43m=[39;49m[43muplims[49m[43m,[49m[43m [49m[43mxlolims[49m[38;5;241;43m=[39;49m[43mxlolims[49m[43m,[49m
+[1;32m   2496[0m [43m        [49m[43mxuplims[49m[38;5;241;43m=[39;49m[43mxuplims[49m[43m,[49m[43m [49m[43merrorevery[49m[38;5;241;43m=[39;49m[43merrorevery[49m[43m,[49m[43m [49m[43mcapthick[49m[38;5;241;43m=[39;49m[43mcapthick[49m[43m,[49m
+[1;32m   2497[0m [43m        [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43m([49m[43m{[49m[38;5;124;43m"[39;49m[38;5;124;43mdata[39;49m[38;5;124;43m"[39;49m[43m:[49m[43m [49m[43mdata[49m[43m}[49m[43m [49m[38;5;28;43;01mif[39;49;00m[43m [49m[43mdata[49m[43m [49m[38;5;129;43;01mis[39;49;00m[43m [49m[38;5;129;43;01mnot[39;49;00m[43m [49m[38;5;28;43;01mNone[39;49;00m[43m [49m[38;5;28;43;01melse[39;49;00m[43m [49m[43m{[49m[43m}[49m[43m)[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [0;32m~/miniconda3/lib/python3.9/site-packages/matplotlib/__init__.py:1423[0m, in [0;36m_preprocess_data.<locals>.inner[0;34m(ax, data, *args, **kwargs)[0m
+[1;32m   1420[0m [38;5;129m@functools[39m[38;5;241m.[39mwraps(func)
+[1;32m   1421[0m [38;5;28;01mdef[39;00m [38;5;21minner[39m(ax, [38;5;241m*[39margs, data[38;5;241m=[39m[38;5;28;01mNone[39;00m, [38;5;241m*[39m[38;5;241m*[39mkwargs):
+[1;32m   1422[0m     [38;5;28;01mif[39;00m data [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[0;32m-> 1423[0m         [38;5;28;01mreturn[39;00m [43mfunc[49m[43m([49m[43max[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;28;43mmap[39;49m[43m([49m[43msanitize_sequence[49m[43m,[49m[43m [49m[43margs[49m[43m)[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m   1425[0m     bound [38;5;241m=[39m new_sig[38;5;241m.[39mbind(ax, [38;5;241m*[39margs, [38;5;241m*[39m[38;5;241m*[39mkwargs)
+[1;32m   1426[0m     auto_label [38;5;241m=[39m (bound[38;5;241m.[39marguments[38;5;241m.[39mget(label_namer)
+[1;32m   1427[0m                   [38;5;129;01mor[39;00m bound[38;5;241m.[39mkwargs[38;5;241m.[39mget(label_namer))
+
+File [0;32m~/miniconda3/lib/python3.9/site-packages/matplotlib/axes/_axes.py:3595[0m, in [0;36mAxes.errorbar[0;34m(self, x, y, yerr, xerr, fmt, ecolor, elinewidth, capsize, barsabove, lolims, uplims, xlolims, xuplims, errorevery, capthick, **kwargs)[0m
+[1;32m   3592[0m res [38;5;241m=[39m np[38;5;241m.[39mzeros(err[38;5;241m.[39mshape, dtype[38;5;241m=[39m[38;5;28mbool[39m)  [38;5;66;03m# Default in case of nan[39;00m
+[1;32m   3593[0m [38;5;28;01mif[39;00m np[38;5;241m.[39many(np[38;5;241m.[39mless(err, [38;5;241m-[39merr, out[38;5;241m=[39mres, where[38;5;241m=[39m(err [38;5;241m==[39m err))):
+[1;32m   3594[0m     [38;5;66;03m# like err<0, but also works for timedelta and nan.[39;00m
+[0;32m-> 3595[0m     [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m   3596[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124m'[39m[38;5;132;01m{[39;00mdep_axis[38;5;132;01m}[39;00m[38;5;124merr[39m[38;5;124m'[39m[38;5;124m must not contain negative values[39m[38;5;124m"[39m)
+[1;32m   3597[0m [38;5;66;03m# This is like[39;00m
+[1;32m   3598[0m [38;5;66;03m#     elow, ehigh = np.broadcast_to(...)[39;00m
+[1;32m   3599[0m [38;5;66;03m#     return dep - elow * ~lolims, dep + ehigh * ~uplims[39;00m
+[1;32m   3600[0m [38;5;66;03m# except that broadcast_to would strip units.[39;00m
+[1;32m   3601[0m low, high [38;5;241m=[39m dep [38;5;241m+[39m np[38;5;241m.[39mrow_stack([[38;5;241m-[39m([38;5;241m1[39m [38;5;241m-[39m lolims), [38;5;241m1[39m [38;5;241m-[39m uplims]) [38;5;241m*[39m err
+
+[0;31mValueError[0m: 'yerr' must not contain negative values
+ValueError: 'yerr' must not contain negative values
+

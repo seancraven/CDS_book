@@ -1,8 +1,6 @@
 (rd)=
 ### A very short introduction to relational databases
-Relational databases have become ubiquitous in modern-day life, with logins and Airbnb being common uses. For this book we build our database and interact with the HITRAN database. 
-
-A relational database is a structured approach to storing data. It describes a group of tables that are related together. The relationships enable a reduction of data duplication. Typically, these databases are interfaced and queried with using [SQL](https://en.wikipedia.org/wiki/SQL). One of the few programming languages used for about 50 years.
+A relational database is a structured approach to storing data. It describes a group of tables that are related together. The relationships enable a reduction of data duplication. Typically, these databases are interfaced and queried with using SQL. One of the few programming languages used for about 50 years.
 ```{margin}
 Modern Datatbase applications are oftend distributed over a wide variety of nodes, individual computers, this has a much more complex backend to store partial databases. However, many of these formats have a SQL like interface that can be used to abstract away much of the complexity. [Apache Spark](https://spark.apache.org/sql/) is a great example of this.
 ``` 
